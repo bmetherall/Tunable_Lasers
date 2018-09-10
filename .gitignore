@@ -1,1 +1,6 @@
 /References
+*.log
+*.aux
+*.gnuploterrors
+*.gz
+/Paper/gnuplottex

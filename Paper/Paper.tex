@@ -1,0 +1,198 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{xcolor,graphicx}
+\usepackage[subfolder,cleanup]{gnuplottex}
+\usepackage{tikz}
+\usepackage{pgfplots}
+%\usepackage{amsthm}
+%\usepackage{enumitem}
+%\usepackage{wrapfig}
+%\usepackage{subcaption}
+%\usepackage{hyperref}
+
+\newcommand{\diff}[3][]{\frac{d^{#1}#2}{d{#3}^{#1}}}
+\newcommand{\pdiff}[3][]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}}
+\newcommand{\Es}{E_{sat}}
+\newcommand{\FT}[1]{\mathcal{F}\left\{ #1 \right\}}
+\newcommand{\FTi}[1]{\mathcal{F}^{-1}\left\{ #1 \right\}}
+
+\title{}
+\author{Brady Metherall}
+
+\newgeometry{margin=1in}
+\setlength\parindent{0pt}
+
+\begin{document}
+\maketitle
+
+\section{Model}
+Each component of the laser is treated separately and all processes will be composed to represent a single circuit of the laser.
+
+\subsection{Gain}
+As the pulse travels through the gain media the change in energy is
+\begin{align*}
+\diff{E}{z} &= \frac{g_0 E}{1 + E / \Es},
+\end{align*}
+where $g_0$ is a small signal gain, and $E_{sat}$ is the energy at which the gain starts to saturate \cite{silfvast}. For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain has saturated and so the energy grows linearly. The energy can be solved analytically by separating and integrating yielding
+\begin{align}
+\label{eq:energy}
+E(z) = \Es W_0 \left( \frac{E_0}{\Es} e^{E_0 / \Es} e^{g_0 z} \right),
+\end{align}
+where $W_0$ is the Lambert $W$ function. However, only the exiting energy is of interest, thus \eqref{eq:energy} can be written as
+\begin{align*}
+E' = \Es W_0 \left( \frac{E}{\Es} e^{E / \Es} e^{g_0 L_g} \right),
+\end{align*}
+where $E$ is the energy of the incoming pulse, and $E'$ is the energy after traveling through the length of the gain media. Since the energy can be expressed as
+\begin{align*}
+E &= \int_{-\infty}^{\infty} |A(T)|^2 dT,
+\end{align*}
+it can be shown that
+\begin{align*}
+\frac{E'}{E} &= \left( \frac{A'}{A} \right)^2,
+\end{align*}
+and so the gain in terms of the amplitude is given by
+\begin{align}
+\label{eq:gain}
+G(A) &= \left[ \frac{\Es}{E} W_0 \left( \frac{E}{\Es} e^{E / \Es} e^{g_0 L_g} \right) \right]^{1/2} A.
+\end{align}
+
+\subsection{Dispersion}
+Expressions for the amplitude as the pulse travels through the grating as well as the fibre can be derived from
+\begin{align}
+\label{eq:nlse}
+i \pdiff{A}{z} - \frac{1}{2} \beta_2 \pdiff[2]{A}{T} + \gamma |A|^2 A = 0,
+\end{align}
+the non-linear Schr\"{o}dinger equation \cite{ferreira}. In the case of the dispersive element $\gamma$ is assumed to be negligible. Thus, \eqref{eq:nlse} reduces to
+\begin{align*}
+i \pdiff{A}{z} - \frac{1}{2} \beta_2 \pdiff[2]{A}{T} &= 0,
+\end{align*}
+and after taking the Fourier transform
+\begin{align*}
+\pdiff{\FT{A}}{z} &= \frac{1}{2} i \beta_2 \omega^2 \FT{A}.
+\end{align*}
+The Fourier transform of $A$ can be found and evaluated at $z = L_d$ yielding
+\begin{align*}
+D(A) &= \FTi{e^{\frac{1}{2} i \beta_2 \omega^2 L_D} \FT{A}}
+\end{align*}
+as the effect of the dispersive element on the pulse.
+
+\subsection{Fibre}
+The effect of the fibre can also be found from \eqref{eq:nlse}, by assuming the dispersion of the fibre is negligible when compared to the dispersive element the non-linear Schr\"{o}dinger equation simplifies to
+\begin{align*}
+\pdiff{A}{z} - i \gamma |A|^2 A = 0,
+\end{align*}
+or after multiplying by the complex conjugate of $A$,
+\begin{align}
+\label{eq:fibre}
+\pdiff{A}{z}\bar{A} - i \gamma |A|^4 = 0.
+\end{align}
+Adding \eqref{eq:fibre} to its complex conjugate gives
+\begin{align}
+\label{eq:fibre2}
+\pdiff{|A|^2}{z} &= 0,
+\end{align}
+this suggests the envelope of the pulse does not change as it travels through the fibre, a solution of the form $A = A_0 e^{i \varphi}$ can be assumed. Substituting this expression into \eqref{eq:fibre2} gives $\varphi = \gamma |A|^2 z$ therefore
+\begin{align*}
+F(A) &= A e^{i \gamma |A|^2 L_f},
+\end{align*}
+where $L_f$ is the length of the fibre.
+
+\subsection{Loss}
+Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to the circuit. It will be assumed all loss occurs at a particular point in the circuit, however, the model can easily be modified to account for the optical loss between each component. The loss is then given as
+\begin{align*}
+L(A) &= C e^{- \alpha L}A,
+\end{align*}
+where $C$ is the loss due to the output coupler, and $\alpha$ is a characteristic loss per length of the fibre.
+
+\subsection{Modulation}
+Pick
+\begin{align*}
+M(A) &= e^{-T^2 / 2 T_M^2} A
+\end{align*}
+since its Fourier transform is itself
+
+\section{Non-Dimensionalization}
+
+\begin{align*}
+T = T_M \widetilde{T}, \quad E = \Es \widetilde{E}, \quad A = \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}, \quad \omega = \frac{\widetilde{\omega}}{T_M}
+\end{align*}
+
+
+
+
+\section{Results}
+
+\begin{align*}
+\left( \frac{W(a E e^E)}{E} \right)^{1/2} S(s) h = 1
+\end{align*}
+
+\begin{align*}
+E = \frac{S(s)^2 h^2}{1 - S(s)^2 h^2} \ln \left( a S(s)^2 h^2 \right)
+\end{align*}
+
+
+\begin{figure}[htbp]
+\centering
+\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
+f(x) = m * x + c
+fit [0.03:0.6] f(x) '../sdata.dat' u 1:(log($2)) via m, c
+set grid
+set ytics 0.1
+set xl '$s$'
+set yl 'Spread'
+plot '../sdata.dat' u 1:2 w p pt 7 ps 0.4 t 'Data', \
+exp(f(x)) t '$\exp(-0.513865s + 0.00203874)$'
+\end{gnuplot}
+\caption{}
+\label{fig:}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
+S(x) = exp(-0.5131 * x + 0.00174)
+E(x, y) = -y**2 * log(a * y**2 * S(x)**2) * S(x)**2 / (y**2 * S(x)**2 - 1)
+a = 30
+
+set grid
+
+set pm3d map
+
+set isosamples 100, 100
+set hidden3d
+
+set contour surface
+set cntrparam levels incremental 0, 0.1, 1.5
+
+set palette rgbformulae 22, 13, -31
+
+set ytics 0.1
+set xl '$s$'
+set yl rotate by 0 '$h$'
+set cbl rotate by 0 '$E$'
+set xr [0:0.5]
+set yr [0.3:0.6]
+
+unset clabel
+
+splot E(x, y) not
+
+\end{gnuplot}
+\caption{a=30}
+\label{fig:}
+\end{figure}
+
+
+\newpage
+\begin{thebibliography}{99}
+\bibitem{silfvast}
+Laser Fundamentals
+
+\bibitem{ferreira}
+Nonlinear Effects in Optical Fibers
+
+\end{thebibliography}
+\end{document}
