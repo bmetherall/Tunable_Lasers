@@ -4,3 +4,7 @@
 *.gnuploterrors
 *.gz
 /Paper/gnuplottex
+*.bbl
+*.bcf
+*.blg
+*.xml
