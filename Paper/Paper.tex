@@ -5,13 +5,15 @@
 \usepackage{geometry}
 \usepackage{xcolor,graphicx}
 \usepackage[subfolder,cleanup]{gnuplottex}
-\usepackage{tikz}
-\usepackage{pgfplots}
 %\usepackage{amsthm}
 %\usepackage{enumitem}
 %\usepackage{wrapfig}
 %\usepackage{subcaption}
 %\usepackage{hyperref}
+\usepackage{biblatex}
+
+
+\bibliography{Ref.bib}
 
 \newcommand{\diff}[3][]{\frac{d^{#1}#2}{d{#3}^{#1}}}
 \newcommand{\pdiff}[3][]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}}
@@ -120,7 +122,29 @@ since its Fourier transform is itself
 T = T_M \widetilde{T}, \quad E = \Es \widetilde{E}, \quad A = \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}, \quad \omega = \frac{\widetilde{\omega}}{T_M}
 \end{align*}
 
+\begin{align*}
+G(A) &= \left( \frac{W_0 \left( a E e^{E}\right)}{E} \right)^{1/2} A.
+\end{align*}
 
+\begin{align*}
+D(A) &= \FTi{e^{i s^2 \omega^2} \FT{A}}
+\end{align*}
+
+\begin{align*}
+F(A) &= A e^{i b |A|^2},
+\end{align*}
+
+\begin{align*}
+L(A) &= h A,
+\end{align*}
+
+\begin{align*}
+M(A) &= e^{-T^2 / 2} A
+\end{align*}
+
+\begin{align*}
+a = e^{g_0 L_g} \quad s^2 = \frac{\beta_2 L_D}{2 T_M^2}, \quad b = \gamma L_F \frac{\Es}{T_M}, \quad h = C e^{-\alpha L}
+\end{align*}
 
 
 \section{Results}
@@ -138,13 +162,13 @@ E = \frac{S(s)^2 h^2}{1 - S(s)^2 h^2} \ln \left( a S(s)^2 h^2 \right)
 \centering
 \begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
 f(x) = m * x + c
-fit [0.03:0.6] f(x) '../sdata.dat' u 1:(log($2)) via m, c
+fit f(x) '../sdata.dat' u 1:(log($2)) via m, c
 set grid
 set ytics 0.1
 set xl '$s$'
 set yl 'Spread'
 plot '../sdata.dat' u 1:2 w p pt 7 ps 0.4 t 'Data', \
-exp(f(x)) t '$\exp(-0.513865s + 0.00203874)$'
+exp(f(x)) t '$\exp(-0.521294s + 0.00365752)$'
 \end{gnuplot}
 \caption{}
 \label{fig:}
@@ -187,12 +211,25 @@ splot E(x, y) not
 
 
 \newpage
-\begin{thebibliography}{99}
-\bibitem{silfvast}
-Laser Fundamentals
+\appendix
+\section{Numbers}
 
-\bibitem{ferreira}
-Nonlinear Effects in Optical Fibers
+\begin{table}
+\begin{tabular}{|l|l|}
+\hline
+Parameter & Value \\
+\hline
+$\beta_2^g L_D$ & $10$--$2000 \text{ps}^2$ \\
+$g_0$ & $1$--$10 \text{m}^{-1}$ \\
+$\beta_2^f$ & $20$--$50 \text{ps}^2/ \text{km}$ \\
+$\gamma$ & $0.001$--$0.01 \text{W}^{-1} \text{m}^{-1}$ \\
+$\Es$ & $10^4 \text{pJ}$ \\
+$L_g$ & $3 \text{m}$ \\
+\hline
+\end{tabular}
+\end{table}
 
-\end{thebibliography}
+
+\newpage
+\printbibliography
 \end{document}
