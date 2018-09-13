@@ -30,7 +30,7 @@
 \maketitle
 
 \section{Model}
-The laser cavity is treated as the composition of five independent process---gain, nonlinearity, loss, dispersion, and modulation. Expressions for each component will be derived from the  generalized nonlinear Schr\"{o}dinger equation \cite{agrawal, ferreira, shtyrina, yarutkina},
+The laser cavity is treated as the composition of five independent process---gain, nonlinearity, loss, dispersion, and modulation. Expressions for each component will be derived from the  generalized nonlinear Schr\"{o}dinger equation \cite{agrawal2013, ferreira, shtyrina, yarutkina},
 \begin{align}
 \label{eq:nlse}
 \pdiff{A}{z} = - i \frac{1}{2} \beta_2 \pdiff[2]{A}{T} + \frac{1}{6} \beta_3 \pdiff[3]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A,
@@ -50,7 +50,7 @@ g(A) &= \frac{g_0}{1 + E / \Es},
 where $g_0$ is a small signal gain, $\Es$ is the energy at which the gain begins to saturate, and \begin{align*}
 E = \int_{-\infty}^\infty |A|^2 \, dT,
 \end{align*}
-is the energy of the pulse \cite{bohun, yarutkina}. We shall first transform \eqref{eq:gainde} into an equation in terms of the energy. Taking
+is the energy of the pulse \cite{bohun, burgoyne2014, shtyrina, silfvast, yarutkina}. We shall first transform \eqref{eq:gainde} into an equation in terms of the energy. Taking
 \begin{align*}
 \pdiff{A}{z} = \frac{1}{2} \cdot \frac{g_0 A}{1 + E / \Es},
 \end{align*}
@@ -94,27 +94,27 @@ F(A) &= A e^{i \gamma |A|^2 L_f},
 where $L_f$ is the length of the fiber.
 
 \subsection{Loss}
-Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to the circuit. It will be assumed all loss occurs at a particular point in the circuit because of the extremely high reflectivity of the fiber the optical loss is negligible compared to the output coupler loss ***cite. The loss is then given as
+Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to the circuit. The loss is then given as
 \begin{align*}
 L(A) &= C e^{- \alpha L}A,
 \end{align*}
 where $C$ is the loss due to the output coupler.
 
 \subsection{Dispersion}
-The dominant dispersion is due to the chirped fiber Bragg grating (CFBG)---the dispersion due to the fiber is negligible in comparison \cite{agrawalother}. The dispersive pieces of \eqref{eq:nlse} give
+The dominant dispersion is due to the chirped fiber Bragg grating (CFBG). The dispersion due to the fiber is negligible in comparison---a $10$cm chirped grating can provide as much dispersion as $300$km of fiber \cite{agrawal2002}. The dispersive terms of \eqref{eq:nlse} give
 \begin{align}
 \label{eq:disp}
 \pdiff{A}{z} = -i \frac{1}{2} \beta_2 \pdiff[2]{A}{T} + \frac{1}{6} \beta_3 \pdiff[3]{A}{T},
 \end{align}
-but, the third order effects of dispersion will be neglected ***cite. Although, under some circumstances they may need to be considered since the CFBG is highly dispersive \cite{litchinitser}. Taking the Fourier transform of \eqref{eq:disp} gives
+however, the third order effects of dispersion will be neglected \cite{agrawal2013, ferreira}. Although, under some circumstances they may need to be considered since the grating is highly dispersive \cite{agrawal2013, litchinitser}. Taking the Fourier transform of \eqref{eq:disp} gives
 \begin{align*}
 \pdiff{\FT{A}}{z} &= \frac{1}{2} i \beta_2 \omega^2 \FT{A}.
 \end{align*}
-The Fourier transform of $A$ can be found by integrating and
+The Fourier transform of $A$ can be found by integrating and thus,
 \begin{align*}
 D(A) &= \FTi{e^{i \frac{1}{2} \beta_2 \omega^2 L_D} \FT{A}}
 \end{align*}
-is the effect of the CFBG on the pulse.
+is the effect of the grating on the pulse.
 
 \subsection{Modulation}
 Pick a function that is bump-like, infinitely differentiable (I don't know how important that is), and has a maximum of $1$. We shall pick
