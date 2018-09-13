@@ -9,9 +9,8 @@
 %\usepackage{enumitem}
 %\usepackage{wrapfig}
 %\usepackage{subcaption}
-%\usepackage{hyperref}
+\usepackage{hyperref}
 \usepackage{biblatex}
-
 
 \bibliography{Ref.bib}
 
@@ -31,14 +30,39 @@
 \maketitle
 
 \section{Model}
-Each component of the laser is treated separately and all processes will be composed to represent a single circuit of the laser.
+The laser cavity is treated as the composition of five independent process---gain, nonlinearity, loss, dispersion, and modulation. Expressions for each component will be derived from the  generalized nonlinear Schr\"{o}dinger equation \cite{agrawal, ferreira, shtyrina, yarutkina},
+\begin{align}
+\label{eq:nlse}
+\pdiff{A}{z} = - i \frac{1}{2} \beta_2 \pdiff[2]{A}{T} + \frac{1}{6} \beta_3 \pdiff[3]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A,
+\end{align}
+where $A$ is the complex amplitude of the pulse, $\beta_2$ and $\beta_3$ are the second and third order dispersion coefficients respectively, $\gamma$ is the coefficient of nonlinearity, $g(A)$ is the gain, and $\alpha$ is the loss of the fiber.
 
 \subsection{Gain}
-As the pulse travels through the gain media the change in energy is
+Within the Er-doped gain fiber the other four processes are assumed to be negligible, and so \eqref{eq:nlse} reduces to
+\begin{align}
+\label{eq:gainde}
+\pdiff{A}{z} = \frac{1}{2} g(A) A
+\end{align}
+with
 \begin{align*}
-\diff{E}{z} &= \frac{g_0 E}{1 + E / \Es},
+g(A) &= \frac{g_0}{1 + E / \Es},
 \end{align*}
-where $g_0$ is a small signal gain, and $E_{sat}$ is the energy at which the gain starts to saturate \cite{silfvast}. For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain has saturated and so the energy grows linearly. The energy can be solved analytically by separating and integrating yielding
+where $g_0$ is a small signal gain, $\Es$ is the energy at which the gain begins to saturate, and \begin{align*}
+E = \int_{-\infty}^\infty |A|^2 \, dT,
+\end{align*}
+is the energy of the pulse \cite{bohun, yarutkina}. We shall first transform \eqref{eq:gainde} into an equation in terms of the energy. Taking
+\begin{align*}
+\pdiff{A}{z} = \frac{1}{2} \cdot \frac{g_0 A}{1 + E / \Es},
+\end{align*}
+multiplying by $\bar{A}$, the complex conjugate of $A$, and then adding the complex conjugate gives
+\begin{align*}
+\diff{|A|^2}{z} &= \frac{g_0 |A|^2}{1 + E / \Es},
+\end{align*}
+which after integrating becomes
+\begin{align*}
+\diff{E}{z} &= \frac{g_0 E}{1 + E / \Es}.
+\end{align*}
+For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain has saturated and so the energy grows linearly. A closed form of the energy can be found by separating and integrating yielding
 \begin{align}
 \label{eq:energy}
 E(z) = \Es W_0 \left( \frac{E_0}{\Es} e^{E_0 / \Es} e^{g_0 z} \right),
@@ -47,74 +71,65 @@ where $W_0$ is the Lambert $W$ function. However, only the exiting energy is of 
 \begin{align*}
 E' = \Es W_0 \left( \frac{E}{\Es} e^{E / \Es} e^{g_0 L_g} \right),
 \end{align*}
-where $E$ is the energy of the incoming pulse, and $E'$ is the energy after traveling through the length of the gain media. Since the energy can be expressed as
-\begin{align*}
-E &= \int_{-\infty}^{\infty} |A(T)|^2 dT,
-\end{align*}
-it can be shown that
-\begin{align*}
-\frac{E'}{E} &= \left( \frac{A'}{A} \right)^2,
-\end{align*}
-and so the gain in terms of the amplitude is given by
+where $E$ is the energy of the incoming pulse, and $E'$ is the energy after traveling through the length of the gain fiber. Since $E \sim |A|^2$ the gain in terms of the amplitude is given by
 \begin{align}
 \label{eq:gain}
 G(A) &= \left[ \frac{\Es}{E} W_0 \left( \frac{E}{\Es} e^{E / \Es} e^{g_0 L_g} \right) \right]^{1/2} A.
 \end{align}
 
-\subsection{Dispersion}
-Expressions for the amplitude as the pulse travels through the grating as well as the fibre can be derived from
-\begin{align}
-\label{eq:nlse}
-i \pdiff{A}{z} - \frac{1}{2} \beta_2 \pdiff[2]{A}{T} + \gamma |A|^2 A = 0,
-\end{align}
-the non-linear Schr\"{o}dinger equation \cite{ferreira}. In the case of the dispersive element $\gamma$ is assumed to be negligible. Thus, \eqref{eq:nlse} reduces to
-\begin{align*}
-i \pdiff{A}{z} - \frac{1}{2} \beta_2 \pdiff[2]{A}{T} &= 0,
-\end{align*}
-and after taking the Fourier transform
-\begin{align*}
-\pdiff{\FT{A}}{z} &= \frac{1}{2} i \beta_2 \omega^2 \FT{A}.
-\end{align*}
-The Fourier transform of $A$ can be found and evaluated at $z = L_d$ yielding
-\begin{align*}
-D(A) &= \FTi{e^{\frac{1}{2} i \beta_2 \omega^2 L_D} \FT{A}}
-\end{align*}
-as the effect of the dispersive element on the pulse.
-
-\subsection{Fibre}
-The effect of the fibre can also be found from \eqref{eq:nlse}, by assuming the dispersion of the fibre is negligible when compared to the dispersive element the non-linear Schr\"{o}dinger equation simplifies to
+\subsection{Nonlinearity of Fiber}
+The effect of the nonlinearity of the fiber can also be found from \eqref{eq:nlse}:
 \begin{align*}
 \pdiff{A}{z} - i \gamma |A|^2 A = 0,
 \end{align*}
-or after multiplying by the complex conjugate of $A$,
+which similarly to the gain, can be transformed by multiplying by the complex conjugate of $A$, and adding its complex conjugate gives
 \begin{align}
 \label{eq:fibre}
-\pdiff{A}{z}\bar{A} - i \gamma |A|^4 = 0.
+\pdiff{|A|^2}{z} &= 0.
 \end{align}
-Adding \eqref{eq:fibre} to its complex conjugate gives
-\begin{align}
-\label{eq:fibre2}
-\pdiff{|A|^2}{z} &= 0,
-\end{align}
-this suggests the envelope of the pulse does not change as it travels through the fibre, a solution of the form $A = A_0 e^{i \varphi}$ can be assumed. Substituting this expression into \eqref{eq:fibre2} gives $\varphi = \gamma |A|^2 z$ therefore
+This suggests the envelope of the pulse does not change as it travels through the fiber---a solution of the form $A = A_0 e^{i \varphi}$ can be assumed. Substituting this expression into \eqref{eq:fibre} gives $\varphi = \gamma |A|^2 z$ therefore
 \begin{align*}
 F(A) &= A e^{i \gamma |A|^2 L_f},
 \end{align*}
-where $L_f$ is the length of the fibre.
+where $L_f$ is the length of the fiber.
 
 \subsection{Loss}
-Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to the circuit. It will be assumed all loss occurs at a particular point in the circuit, however, the model can easily be modified to account for the optical loss between each component. The loss is then given as
+Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to the circuit. It will be assumed all loss occurs at a particular point in the circuit because of the extremely high reflectivity of the fiber the optical loss is negligible compared to the output coupler loss ***cite. The loss is then given as
 \begin{align*}
 L(A) &= C e^{- \alpha L}A,
 \end{align*}
-where $C$ is the loss due to the output coupler, and $\alpha$ is a characteristic loss per length of the fibre.
+where $C$ is the loss due to the output coupler.
+
+\subsection{Dispersion}
+The dominant dispersion is due to the chirped fiber Bragg grating (CFBG)---the dispersion due to the fiber is negligible in comparison \cite{agrawalother}. The dispersive pieces of \eqref{eq:nlse} give
+\begin{align}
+\label{eq:disp}
+\pdiff{A}{z} = -i \frac{1}{2} \beta_2 \pdiff[2]{A}{T} + \frac{1}{6} \beta_3 \pdiff[3]{A}{T},
+\end{align}
+but, the third order effects of dispersion will be neglected ***cite. Although, under some circumstances they may need to be considered since the CFBG is highly dispersive \cite{litchinitser}. Taking the Fourier transform of \eqref{eq:disp} gives
+\begin{align*}
+\pdiff{\FT{A}}{z} &= \frac{1}{2} i \beta_2 \omega^2 \FT{A}.
+\end{align*}
+The Fourier transform of $A$ can be found by integrating and
+\begin{align*}
+D(A) &= \FTi{e^{i \frac{1}{2} \beta_2 \omega^2 L_D} \FT{A}}
+\end{align*}
+is the effect of the CFBG on the pulse.
 
 \subsection{Modulation}
-Pick
+Pick a function that is bump-like, infinitely differentiable (I don't know how important that is), and has a maximum of $1$. We shall pick
 \begin{align*}
-M(A) &= e^{-T^2 / 2 T_M^2} A
+M(A) &= e^{-T^2 / 2 T_M^2} A,
 \end{align*}
-since its Fourier transform is itself
+where $T_M$ is a characteristic width of the modulation, since its Fourier transform is itself. ***I don't know how to write this.
+
+\subsection{Combining the Pieces}
+
+\begin{align*}
+\mathcal{L}(A) = M(D(L(F(G(A)))))
+\end{align*}
+
+A solution such that $|\mathcal{L}(A)|^2 = |A|^2$ is sought.
 
 \section{Non-Dimensionalization}
 
@@ -210,10 +225,6 @@ splot E(x, y) not
 \end{figure}
 
 
-\newpage
-\appendix
-\section{Numbers}
-
 \begin{table}
 \begin{tabular}{|l|l|}
 \hline
@@ -224,7 +235,7 @@ $g_0$ & $1$--$10 \text{m}^{-1}$ \\
 $\beta_2^f$ & $20$--$50 \text{ps}^2/ \text{km}$ \\
 $\gamma$ & $0.001$--$0.01 \text{W}^{-1} \text{m}^{-1}$ \\
 $\Es$ & $10^4 \text{pJ}$ \\
-$L_g$ & $3 \text{m}$ \\
+$L_G$ & $3 \text{m}$ \\
 \hline
 \end{tabular}
 \end{table}
