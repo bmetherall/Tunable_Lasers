@@ -123,6 +123,25 @@ M(A) &= e^{-T^2 / 2 T_M^2} A,
 \end{align*}
 where $T_M$ is a characteristic width of the modulation, since its Fourier transform is itself. ***I don't know how to write this.
 
+\subsection{Non-Dimensionalization}
+The structure of each process of the laser can be better understood by re-scaling the time, energy, and amplitude. Specifically, the time shall be scaled by the characteristic modulation time, the energy by the saturation energy, and the amplitude will be scaled so that it is consistent:
+\begin{align*}
+T = T_M \widetilde{T}, \quad E = \Es \widetilde{E}, \quad A = \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}.
+\end{align*}
+The new process maps, after dropping the tildes, become
+\begin{align*}
+G(A) &= \left( \frac{W_0 \left( a E e^{E}\right)}{E} \right)^{1/2} A, \\
+F(A) &= A e^{i b |A|^2}, \\
+L(A) &= h A, \\
+D(A) &= \FTi{e^{i s^2 \omega^2} \FT{A}}, \\
+M(A) &= e^{-T^2 / 2} A,
+\end{align*}
+with the dimensionless parameters
+\begin{align*}
+a = e^{g_0 L_g} \sim 30, \quad s = \sqrt{\frac{\beta_2 L_D}{2 T_M^2}} \sim 0.1, \quad b = \gamma L_F \frac{\Es}{T_M} \sim 0.1, \quad h = C e^{-\alpha L} \sim 0.25,
+\end{align*}
+which control the behaviour of the laser.
+
 \subsection{Combining the Pieces}
 
 \begin{align*}
@@ -131,45 +150,65 @@ where $T_M$ is a characteristic width of the modulation, since its Fourier trans
 
 A solution such that $|\mathcal{L}(A)|^2 = |A|^2$ is sought.
 
-\section{Non-Dimensionalization}
-
-\begin{align*}
-T = T_M \widetilde{T}, \quad E = \Es \widetilde{E}, \quad A = \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}, \quad \omega = \frac{\widetilde{\omega}}{T_M}
-\end{align*}
-
-\begin{align*}
-G(A) &= \left( \frac{W_0 \left( a E e^{E}\right)}{E} \right)^{1/2} A.
-\end{align*}
-
-\begin{align*}
-D(A) &= \FTi{e^{i s^2 \omega^2} \FT{A}}
-\end{align*}
-
-\begin{align*}
-F(A) &= A e^{i b |A|^2},
-\end{align*}
-
-\begin{align*}
-L(A) &= h A,
-\end{align*}
-
-\begin{align*}
-M(A) &= e^{-T^2 / 2} A
-\end{align*}
-
-\begin{align*}
-a = e^{g_0 L_g} \quad s^2 = \frac{\beta_2 L_D}{2 T_M^2}, \quad b = \gamma L_F \frac{\Es}{T_M}, \quad h = C e^{-\alpha L}
-\end{align*}
-
-
 \section{Results}
-
+\subsection{Linear Solution}
+Suppose an initial pulse with envelope
 \begin{align*}
-\left( \frac{W(a E e^E)}{E} \right)^{1/2} S(s) h = 1
+|A_0| = \sqrt{P} e^{-x^2 / 2 \sigma^2},
+\end{align*}
+the after passing through the gain and loss pieces, and neglecting the fibre nonlinearity, the envelope will be
+\begin{align*}
+|A| = \sqrt{P} g(E) h e^{-x^2 / 2 \sigma^2},
+\end{align*}
+where
+\begin{align*}
+g(E) = \left( \frac{W_0(a E e^E)}{E} \right)^{1/2}
+\end{align*}
+is the gain component. After the pulse travels through the grating, the envelope will maintain its Gaussian shape, however, it will have spread. This can be represented as
+\begin{align*}
+|A| = \sqrt{P} g(E) h \zeta(s, b) e^{-x^2 / 2 \tilde{\sigma}^2}
+\end{align*}
+where $\zeta(s, b)$ represents the decrease in the amplitude and $\widetilde{\sigma}^2$ is the new variance. Although, note that the dispersive element conserves energy, thus,
+\begin{align*}
+\int_{-\infty}^{\infty} P g(E)^2 h^2 e^{-x^2 / \sigma^2} \, dx = \int_{-\infty}^{\infty} P g(E)^2 h^2 \zeta^2(s, b) e^{-x^2 / \widetilde{\sigma}^2} \, dx,
+\end{align*}
+or more simply
+\begin{align*}
+\sigma = \zeta^2(s, b) \widetilde{\sigma}.
+\end{align*}
+Therefore, the envelope as the pulse exits the grating is
+\begin{align*}
+|A| = \sqrt{P} g(E) h \zeta(s, b) \exp \left( -\zeta^4(s, b) \frac{x^2}{2 \sigma^2} \right).
+\end{align*}
+Lastly, the pulse is modulated and so
+\begin{align*}
+|A| = \sqrt{P} g(E) h \zeta(s, b) \exp \left( -\zeta^4(s, b) \frac{x^2}{2 \sigma^2} - \frac{x^2}{2} \right).
+\end{align*}
+In equilibrium the envelope of the pulse is unchanged after passing through each element, in other words,
+\begin{align*}
+\sqrt{P} e^{-x^2 / 2 \sigma^2} =  \sqrt{P} g(E) h \zeta(s, b) \exp \left( -\zeta^4(s, b) \frac{x^2}{2 \sigma^2} - \frac{x^2}{2} \right).
+\end{align*}
+For this to be the case 
+\begin{align}
+\label{eq:energycond}
+\left( \frac{W_0(a E e^E)}{E} \right)^{1/2} h \zeta(s, b) = 1,
+\end{align}
+as well as
+\begin{align*}
+-x^2 / 2 \sigma^2 = -\zeta^4(s, b) \frac{x^2}{2 \sigma^2} - \frac{x^2}{2},
+\end{align*}
+which reduces to
+\begin{align*}
+\sigma = \sqrt{1 - \zeta^4(s, b)}.
 \end{align*}
 
 \begin{align*}
-E = \frac{S(s)^2 h^2}{1 - S(s)^2 h^2} \ln \left( a S(s)^2 h^2 \right)
+P = \frac{E}{\sqrt{\pi} \sigma}
+\end{align*}
+
+From \eqref{eq:energycond} the equilibrium energy is found to be
+\begin{align*}
+E = \frac{\zeta^2(s, b) h^2}{1 - \zeta^2(s, b) h^2} \ln \left( a \zeta^2(s, b) h^2 \right).
 \end{align*}
 
 
@@ -181,13 +220,15 @@ fit f(x) '../sdata.dat' u 1:(log($2)) via m, c
 set grid
 set ytics 0.1
 set xl '$s$'
-set yl 'Spread'
-plot '../sdata.dat' u 1:2 w p pt 7 ps 0.4 t 'Data', \
-exp(f(x)) t '$\exp(-0.521294s + 0.00365752)$'
+set yl rotate by 0 '$\zeta(s)$'
+plot '../sdata.dat' u 1:2 w p pt 7 ps 0.2 t 'Data', \
+exp(f(x)) dt 4 t '$\exp(-0.521294s + 0.00365752)$'
 \end{gnuplot}
 \caption{}
-\label{fig:}
+\label{fig:zeta}
 \end{figure}
+
+
 
 \begin{figure}[htbp]
 \centering
@@ -233,11 +274,12 @@ Parameter & Value \\
 $\beta_2^g L_D$ & $10$--$2000 \text{ps}^2$ \\
 $g_0$ & $1$--$10 \text{m}^{-1}$ \\
 $\beta_2^f$ & $20$--$50 \text{ps}^2/ \text{km}$ \\
-$\gamma$ & $0.001$--$0.01 \text{W}^{-1} \text{m}^{-1}$ \\
+$\gamma$ & $0.001$--$0.01 \text{W}^{-1} \text{m}^{-1}$ \cite{agrawal2013} \\
 $\Es$ & $10^4 \text{pJ}$ \\
-$L_G$ & $3 \text{m}$ \\
+$L_G$ & $2$--$3 \text{m}$ \cite{burgoyne2014, shtyrina, yarutkina} \\
 \hline
 \end{tabular}
+\caption{yes}
 \end{table}
 
 
