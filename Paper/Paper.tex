@@ -7,7 +7,7 @@
 \usepackage[subfolder,cleanup]{gnuplottex}
 %\usepackage{amsthm}
 %\usepackage{enumitem}
-%\usepackage{wrapfig}
+\usepackage{wrapfig}
 \usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{biblatex}
@@ -153,10 +153,10 @@ Figure~\ref{fig:average} shows a select set of possible waveforms in $(\epsilon,
 	\hat{A}_{\textrm{out}}(\omega) &= \hat{A}_{\textrm{in}}(\omega)\textrm{e}^{i\beta_2\omega^2/2},&
 	A_{\textrm{out}}(T) &= A_{\textrm{in}}(T)\textrm{e}^{-\epsilon T^2/2},
 \end{align}
-respectively where the dispersion is naturally defined in the frequency domain. Between the modules, the pulse is assumed to propagate according to the representation~(\ref{ansatz}) chosen to be consistent with the transfer functions. Details of this technique and its ability of predict a number of experimental effects can be found in~\cite{burgoyne2014}.
+respectively where the dispersion is naturally defined in the frequency domain. Between the modules, the pulse is assumed to propagate according to the representation~(\ref{ansatz}) chosen to be consistent with the transfer functions. Details of this technique and its ability to predict a number of experimental effects can be found in~\cite{burgoyne2014}.
 
 \section{A New Model}
-Rather than using a transfer function with a linear PDE, we instead return to generalized nonlinear Schr\"odinger equation~\cite{agrawal2013, ferreira, shtyrina, yarutkina} 
+Rather than using transfer functions with a linear PDE, we instead return to the generalized nonlinear Schr\"odinger equation~\cite{agrawal2013, ferreira, shtyrina, yarutkina} 
 \begin{align}
 \label{eq:nlse}
 \pdiff{A}{z} = - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \frac{\beta_3}{6}\pdiff[3]{A}{T} 
@@ -170,7 +170,7 @@ Considering the gain term as dominant as is expected with the the Er-doped gain 
 \label{eq:gainde}
 	\pdiff{A}{z} &= \frac{1}{2} g(A) A,& g(A) &= \frac{g_0}{1 + E / \Es},& E &= \int_{-\infty}^\infty |A|^2 \, \df T,
 \end{align}
-where $g_0$ is a small signal gain, $E$ is the energy of the pulse~\cite{bohun, burgoyne2014, shtyrina, silfvast, yarutkina} and $\Es$ is the energy at which the gain begins to saturate.
+where $g_0$ is a small signal gain, $E$ is the energy of the pulse and $\Es$ is the energy at which the gain begins to saturate~\cite{bohun, burgoyne2014, shtyrina, silfvast, yarutkina}.
 %We shall first transform \eqref{eq:gainde} into an equation in terms of the energy. 
 Multiplying~\eqref{eq:gainde} by $\bar{A}$, the complex conjugate of $A$, yields
 \begin{align*}
@@ -185,7 +185,7 @@ Adding this to its complex conjugate and integrating over $T$ gives
 \label{diffez}
 	\diff{E}{z} &= \frac{g_0 E}{1 + E / \Es}.
 \end{align}
-For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain has saturated and so the energy grows linearly. To obtain a closed form, integrate~(\ref{diffez}) over a gain fibre of length $z$ and assume the energy increases from $E$ to $E_{\textrm{out}}$ so that
+For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain has saturated and so the energy grows linearly. To obtain a closed form solution, integrate~(\ref{diffez}) over a gain fibre of length $z$ and assume the energy increases from $E$ to $E_{\textrm{out}}$ so that
 \[
 	g_0 z = \log\frac{E_{\textrm{out}}}{E} + \frac{E_{\textrm{out}}-E}{\Es}
 \]
@@ -229,19 +229,19 @@ Two sources of loss exist within the laser circuit: the loss due to the output c
 where $C$ is the percentage lost due to the output coupler, and $L$ is the length of the laser circuit.
 
 \subsection{Dispersion}
-Within the laser cavity, the dispersion is dominated by the chirped fibre Bragg grating (CFBG). In comparison, the dispersion due to the fibre is negligible.\footnote{A $10$ cm chirped grating can provide as much dispersion as $300$ km of fibre~\cite{agrawal2002}.} The dispersive terms of \eqref{eq:nlse} give
+Within the laser cavity, the dispersion is dominated by the chirped fibre Bragg grating (CFBG). In comparison, the dispersion due to the fibre is negligible\footnote{A $10$ cm chirped grating can provide as much dispersion as $300$ km of fibre~\cite{agrawal2002}.}. The dispersive terms of \eqref{eq:nlse} give
 \begin{align}
 \label{eq:disp}
 	\pdiff{A}{z} = -i \frac{\beta_2}{2} \pdiff[2]{A}{T} + \frac{\beta_3}{6} \pdiff[3]{A}{T}
 \end{align}
 and since dispersion acts in the frequency domain, it is convenient to use the Fourier transform of~\eqref{eq:disp}, giving the result that
 \begin{align*}
-	\pdiff{\FT{A}}{z} &= i\frac{\omega^2}{2}\left(\beta_2 + \frac{\beta_3}{3} \omega\right) \FT{A}.
+	\pdiff{}{z}\FT{A} &= i\frac{\omega^2}{2}\left(\beta_2 - \frac{\beta_3}{3} \omega\right) \FT{A}.
 \end{align*}
 The affect of dispersion is then
 \begin{align}
 \label{eq:dispersion}
-	D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D(\beta_2 + \beta_3 \omega/3)/2} \FT{A}}.
+	D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D(\beta_2 - \beta_3 \omega/3)/2} \FT{A}}.
 \end{align}
 For a highly dispersive media the third order effects may need to be considered~\cite{agrawal2013, litchinitser}. However, for simplicity in the basic model, the third order effect will be neglected so we set $\beta_3=0$ for the subsequent analysis~\cite{agrawal2013, ferreira}.
 
@@ -253,6 +253,26 @@ In the average model the amount of modulation is characterized by the parameter 
 where $T_M$ is a characteristic width of the modulation.\footnote{Taking the Fourier transform, $\FT{\textrm{e}^{-T^2/ 2 T_M^2}} = \frac{1}{\sqrt{2\pi}}T_M\textrm{e}^{-\omega^2T_M^2/2}$.}
 
 \subsection{Non-Dimensionalization}
+
+\begin{wraptable}{r}{0.45\textwidth}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Parameter & Value \\
+\hline
+$\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ \\
+$g_0$ & $1$--$10 \text{ m}^{-1}$ \\
+$\beta_2^f$ & $20$--$50 \text{ ps}^2/ \text{km}$ \\
+$\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ \cite{agrawal2013} \\
+$\Es$ & $10^4 \text{ pJ}$ \\
+$L_G$ & $2$--$3 \text{ m}$ \cite{burgoyne2014, shtyrina, yarutkina} \\
+\hline
+\end{tabular}
+\caption{Orders of magnitude of various parameters.}
+\label{tab:values}
+\end{center}
+\end{wraptable}
+
 The structure of each process of the laser can be better understood by re-scaling the time, energy, and amplitude. Specifically, the time shall be scaled by the characteristic modulation time, the energy by the saturation energy, and the amplitude will be scaled so that it is consistent:
 \begin{align*}
 	T &= T_M \widetilde{T},& E &= \Es \widetilde{E},& A &= \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}.
@@ -260,8 +280,8 @@ The structure of each process of the laser can be better understood by re-scalin
 The new process maps, after dropping the tildes, become
 \begin{align*}
 	G(A) &= \left(E^{-1} W_0 \left( a E e^{E}\right) \right)^{1/2} A,&
-	F(A) &= A \textrm{e}^{i b |A|^2},&
-	L(A) &= h A,\\
+	F(A) &= A \textrm{e}^{i b |A|^2}, \\
+	L(A) &= h A,&
 	D(A) &= \FTi{\textrm{e}^{i s^2 \omega^2} \FT{A}},&
 	M(A) &= \textrm{e}^{-T^2 / 2} A,
 \end{align*}
@@ -280,16 +300,33 @@ In this model the pulse is iteratively passed through each process, the order of
 where $\mathcal{L}$ is one loop of the circuit. A solution to this model is one in which the envelope is unchanged after traversing every component in the cavity, that is, such that $|\mathcal{L}(A)| = |A|$.
 
 \section{Results}
-The model described is solved numerically and somewhat surprisingly, its convergence as a function of the characteristic parameter groups is highly complex. To gain some insight into this process we consider an linear analysis that ignores the nonlinear fibre effects.
+The model described is solved numerically and somewhat surprisingly, its convergence as a function of the characteristic parameter groups is highly complex. To gain some insight into this process we consider a linear analysis that ignores the nonlinear fibre effects.
 
 \subsection{Linear Solution}
+\begin{wrapfigure}{r}{0.45\textwidth}
+\centering
+\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 3in,1.85in lw 3}]
+f(x) = m * x + c
+fit f(x) '../Zeta.dat' u 1:(log($2)) via m, c
+set grid
+set ytics 0.1
+set xl '$s$'
+set yl '$\zeta(s, 0)$'
+set yr [0.75:1.05]
+plot '../Zeta.dat' u 1:2 w l t 'Data', \
+exp(f(x)) dt 4 t 'Fit'
+\end{gnuplot}
+\caption{$\zeta(s, 0)$ is found empirically to be $\exp(-0.511444s + 0.00174128)$.}
+\label{fig:zeta}
+\end{wrapfigure}
+
 Since the pulse is modulated by a Gaussian, it is expected that the envelope will also converge to a Gaussian. Consider an initial pulse with envelope
 \begin{align*}
 	|A_0| = \sqrt{P} \textrm{e}^{-T^2 / 2 \sigma^2},
 \end{align*}
-after passing through the gain and loss pieces, and neglecting the fibre nonlinearity, the envelope will have the form
+after passing through the gain and loss pieces, and having neglected the fibre nonlinearity, the envelope will have the form
 \begin{align*}
-	|A| &= \sqrt{P} g(E) h \textrm{e}^{-T^2 / 2 \sigma^2},&
+	|A| &= \sqrt{P} g(E) h \textrm{e}^{-T^2 / 2 \sigma^2}, \\
 	g(E) &= \left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2},
 \end{align*}
 where $g(E)$ is the gain component. After the pulse travels through the grating, the envelope will maintain its Gaussian shape, however, it will have spread. This can be represented as
@@ -297,12 +334,12 @@ where $g(E)$ is the gain component. After the pulse travels through the grating,
 \label{linear1}
 	|A| = \sqrt{P} g(E) h \zeta(s, 0) \textrm{e}^{-T^2 / 2 \tilde{\sigma}^2}
 \end{align}
-where $\zeta(s, b)$ is the decrease in the amplitude and $\widetilde{\sigma}^2$ is the new variance. Because the dispersive element conserves energy,
+where $\zeta(s, b)$ is the decrease in the amplitude and $\widetilde{\sigma}^2$ is the new variance. However, since dispersion conserves energy
 \begin{align*}
 	\int_{-\infty}^{\infty} P g(E)^2 h^2 \textrm{e}^{-T^2 / \sigma^2} \, \df T = 
 	\int_{-\infty}^{\infty} P g(E)^2 h^2 \zeta^2(s, 0) \textrm{e}^{-T^2 / \widetilde{\sigma}^2} \, \df T,
 \end{align*}
-or more simply $\sigma = \zeta^2(s, 0) \widetilde{\sigma}$. Therefore, the envelope as the pulse exits the grating given by~(\ref{linear1}) is
+which reduces to $\sigma = \zeta^2(s, 0) \widetilde{\sigma}$. Therefore, the envelope as the pulse exits the grating given by~(\ref{linear1}) is
 \begin{align*}
 	|A| = \sqrt{P} g(E) h \zeta(s, 0) \exp \left( -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} \right).
 \end{align*}
@@ -317,7 +354,7 @@ In equilibrium the envelope of the pulse is unchanged after completing a full ci
 	\sqrt{P} \textrm{e}^{-T^2 / 2 \sigma^2} = 
 	\sqrt{P} g(E) h \zeta(s, 0) \exp \left( -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} - \frac{T^2}{2} \right),
 \end{align*}
-or more simply,
+or more explicitly,
 \begin{align}
 \label{eq:energycond}
 	\left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2} h \zeta(s, 0) &= 1,&
@@ -335,25 +372,6 @@ Furthermore, from~\eqref{eq:energycond} the equilibrium energy is found to be
 \begin{align*}
 	E = \frac{\zeta^2(s, 0) h^2}{1 - \zeta^2(s, 0) h^2} \ln \left( a \zeta^2(s, 0) h^2 \right).
 \end{align*}
-
-\begin{figure}[htbp]
-\centering
-\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
-f(x) = m * x + c
-fit f(x) '../Zeta.dat' u 1:(log($2)) via m, c
-set grid
-set ytics 0.1
-set xl '$s$'
-set yl '$\zeta(s, 0)$'
-set yr [0.75:1.05]
-plot '../Zeta.dat' u 1:2 w l t 'Data', \
-exp(f(x)) dt 4 t '$\exp(-0.511444s + 0.00174128)$'
-\end{gnuplot}
-\caption{}
-\label{fig:zeta}
-\end{figure}
-
-
 
 \begin{figure}[htbp]
 \centering
@@ -390,61 +408,43 @@ sp '../Zoom01.dat' using 1:2:3 w image not
 \end{gnuplot}
 \caption{}
 \end{subfigure}
-\caption{Error is calculated by $\displaystyle \frac{\|A(\text{iteration } 75) - A(\text{iteration } 74) \|_2}{\|A(\text{iteration } 74) \|_2}$}
+\caption{Error is calculated by $\displaystyle \frac{\|A(\text{iteration } 25) - A(\text{iteration } 24) \|_2}{\|A(\text{iteration } 24) \|_2}$}
 \label{fig:}
 \end{figure}
 
 
-\begin{figure}[htbp]
-\centering
-\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
-load '/home/brady/Templates/YGB.p'
-S(x) = exp(-0.511444 * x + 0.0017412)
-E(x, y) = -y**2 * log(a * y**2 * S(x)**2) * S(x)**2 / (y**2 * S(x)**2 - 1)
-a = 30
+%\begin{figure}[htbp]
+%\centering
+%\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
+%load '/home/brady/Templates/YGB.p'
+%S(x) = exp(-0.511444 * x + 0.0017412)
+%E(x, y) = -y**2 * log(a * y**2 * S(x)**2) * S(x)**2 / (y**2 * S(x)**2 - 1)
+%a = 30
+%
+%set grid
+%set pm3d map
+%set isosamples 100, 100
+%set hidden3d
+%set contour surface
+%set cntrparam levels incremental 0, 0.1, 1.5
+%
+%set ytics 0.1
+%set xl '$s$'
+%set yl rotate by 0 '$h$'
+%set cbl rotate by 0 '$E$'
+%set xr [0:0.5]
+%set yr [0.25:0.6]
+%set cbr [0:1.4]
+%
+%unset clabel
+%
+%splot E(x, y) not
+%\end{gnuplot}
+%\caption{Equation \eqref{eq:energycond} for $a = 30$}
+%\label{fig:}
+%\end{figure}
 
-set grid
-set pm3d map
-set isosamples 100, 100
-set hidden3d
-set contour surface
-set cntrparam levels incremental 0, 0.1, 1.5
 
-set ytics 0.1
-set xl '$s$'
-set yl rotate by 0 '$h$'
-set cbl rotate by 0 '$E$'
-set xr [0:0.5]
-set yr [0.25:0.6]
-set cbr [0:1.4]
-
-unset clabel
-
-splot E(x, y) not
-\end{gnuplot}
-\caption{Equation \eqref{eq:energycond} for $a = 30$}
-\label{fig:}
-\end{figure}
-
-
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|l|}
-\hline
-Parameter & Value \\
-\hline
-$\beta_2^g L_D$ & $10$--$2000 \text{ps}^2$ \\
-$g_0$ & $1$--$10 \text{m}^{-1}$ \\
-$\beta_2^f$ & $20$--$50 \text{ps}^2/ \text{km}$ \\
-$\gamma$ & $0.001$--$0.01 \text{W}^{-1} \text{m}^{-1}$ \cite{agrawal2013} \\
-$\Es$ & $10^4 \text{pJ}$ \\
-$L_G$ & $2$--$3 \text{m}$ \cite{burgoyne2014, shtyrina, yarutkina} \\
-\hline
-\end{tabular}
-\caption{}
-\label{tab:values}
-\end{center}
-\end{table}
 
 
 \newpage
