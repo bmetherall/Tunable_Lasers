@@ -23,6 +23,7 @@
 
 \providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sech}{sech}
 
 \title{}
 \author{Brady Metherall \& C.\ Sean Bohun}
@@ -34,7 +35,7 @@
 \maketitle
 
 \noindent
-To start off the discussion of the current modelling efforts for a tuneable laser, we begin with a review of the efforts to describe an `average' model. The idea is to capture some of the physical the elements in the waveform (dispersion, modulation and gain/loss) described by an effective PDE, the solution of which gives the amplitude of the wave packet.
+To start off the discussion of the current modelling efforts for a tuneable laser, we begin with a review of the efforts to describe an `average' model. The idea is to capture some of the physical elements in the waveform (dispersion, modulation, and gain/loss) described by an effective PDE, the solution of which gives the amplitude of the wave packet.
 
 \section{Average Model}
 The model for the amplitude in the `average' model is presupposed to have the form
@@ -139,9 +140,9 @@ unset table
 # Plot everything
 p 2 / x t 'Constant Gain' lc 1 dt 5, \
 for [g=1:5] 2 * g**2 / x not lc 1 dt 5, \
-0 t 'Constant Duration' lc 4 dt 5, \
-for [T=0:20:2] x / 2 * (T/10.0)**4 not lc 4 dt 5, \
-'curve.dat' w l t 'Constant Power' lw 2
+0 t 'Constant Duration' lc 7 dt 4, \
+for [T=0:20:2] x / 2 * (T/10.0)**4 not lc 7 dt 4, \
+'curve.dat' w l t 'Constant Power' lw 2 lc 3
 
 \end{gnuplot}
 \caption{}
@@ -221,7 +222,7 @@ so that $\frac{\partial}{\partial z} |A|^2 = 0$ suggesting that $A(T,z) = A_0(T)
 \end{align}
 
 \subsection{Loss}
-Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. Combining these two effect gives a loss that takes the form
+Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. Combining these two effects give a loss that takes the form
 \begin{align}
 \label{eq:fibreloss}
 	L(A) &= C e^{- \alpha L}A,
@@ -238,7 +239,7 @@ and since dispersion acts in the frequency domain, it is convenient to use the F
 \begin{align*}
 	\pdiff{}{z}\FT{A} &= i\frac{\omega^2}{2}\left(\beta_2 - \frac{\beta_3}{3} \omega\right) \FT{A}.
 \end{align*}
-The affect of dispersion is then
+The effect of dispersion is then
 \begin{align}
 \label{eq:dispersion}
 	D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D(\beta_2 - \beta_3 \omega/3)/2} \FT{A}}.
@@ -246,7 +247,7 @@ The affect of dispersion is then
 For a highly dispersive media the third order effects may need to be considered~\cite{agrawal2013, litchinitser}. However, for simplicity in the basic model, the third order effect will be neglected so we set $\beta_3=0$ for the subsequent analysis~\cite{agrawal2013, ferreira}.
 
 \subsection{Modulation}
-In the average model the amount of modulation is characterized by the parameter $\epsilon$ through the term $\frac{\epsilon}{2}T^2 A$. In the new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as a Gaussian pulse 
+In the average model, the amount of modulation is characterized by the parameter $\epsilon$ through the term $\frac{\epsilon}{2}T^2 A$. In the new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as a Gaussian pulse 
 \begin{align}
 	M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
 \end{align}
@@ -288,7 +289,7 @@ The new process maps, after dropping the tildes, become
 with four dimensionless parameter groups (see Table~\ref{tab:values})
 \begin{align*}
 	a &= \textrm{e}^{g_0 L_g} \sim 30,& s &= \sqrt{\frac{\beta_2 L_D}{2 T_M^2}} \sim 0.1,&
-	b &= \gamma L_F \frac{\Es}{T_M} \sim 0.1,& h &= C \textrm{e}^{-\alpha L} \sim 0.25,
+	b &= \gamma L_F \frac{\Es}{T_M} \sim 0.1,& h &= C \textrm{e}^{-\alpha L} \sim 0.6,
 \end{align*}
 which control the behaviour of the laser.
 
@@ -300,9 +301,6 @@ In this model the pulse is iteratively passed through each process, the order of
 where $\mathcal{L}$ is one loop of the circuit. A solution to this model is one in which the envelope is unchanged after traversing every component in the cavity, that is, such that $|\mathcal{L}(A)| = |A|$.
 
 \section{Results}
-The model described is solved numerically and somewhat surprisingly, its convergence as a function of the characteristic parameter groups is highly complex. To gain some insight into this process we consider a linear analysis that ignores the nonlinear fibre effects.
-
-\subsection{Linear Solution}
 \begin{wrapfigure}{r}{0.45\textwidth}
 \centering
 \begin{gnuplot}[terminal=epslatex, terminaloptions={color size 3in,1.85in lw 3}]
@@ -319,6 +317,12 @@ exp(f(x)) dt 4 t 'Fit'
 \caption{$\zeta(s, 0)$ is found empirically to be $\exp(-0.511444s + 0.00174128)$.}
 \label{fig:zeta}
 \end{wrapfigure}
+The model described is solved numerically and somewhat surprisingly, its convergence as a function of the characteristic parameter groups is highly complex. To gain some insight into this process we consider a linear analysis that ignores the nonlinear fibre effects.
+
+\subsection{Linear Solution}
+
+% gnuplot code for the four waveforms
+\input{Envelopes}
 
 Since the pulse is modulated by a Gaussian, it is expected that the envelope will also converge to a Gaussian. Consider an initial pulse with envelope
 \begin{align*}
@@ -326,7 +330,7 @@ Since the pulse is modulated by a Gaussian, it is expected that the envelope wil
 \end{align*}
 after passing through the gain and loss pieces, and having neglected the fibre nonlinearity, the envelope will have the form
 \begin{align*}
-	|A| &= \sqrt{P} g(E) h \textrm{e}^{-T^2 / 2 \sigma^2}, \\
+	|A| &= \sqrt{P} g(E) h \textrm{e}^{-T^2 / 2 \sigma^2},&
 	g(E) &= \left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2},
 \end{align*}
 where $g(E)$ is the gain component. After the pulse travels through the grating, the envelope will maintain its Gaussian shape, however, it will have spread. This can be represented as
@@ -349,7 +353,7 @@ Finally, the pulse is modulated and so that after one loop the total effect is g
 	|A| = \sqrt{P} g(E) h \zeta(s, 0) \exp \left( -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} - \frac{T^2}{2} \right).
 \end{align}
 
-In equilibrium the envelope of the pulse is unchanged after completing a full circuit, in other words,
+In equilibrium, the envelope of the pulse is unchanged after completing a full circuit, in other words,
 \begin{align*}
 	\sqrt{P} \textrm{e}^{-T^2 / 2 \sigma^2} = 
 	\sqrt{P} g(E) h \zeta(s, 0) \exp \left( -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} - \frac{T^2}{2} \right),
@@ -369,9 +373,21 @@ and the peak of the pulse can be found by integration to give
 	P = \frac{E}{\sqrt{\pi} \sigma}.
 \end{align*}
 Furthermore, from~\eqref{eq:energycond} the equilibrium energy is found to be
-\begin{align*}
+\begin{align}
 	E = \frac{\zeta^2(s, 0) h^2}{1 - \zeta^2(s, 0) h^2} \ln \left( a \zeta^2(s, 0) h^2 \right).
+	\label{eq:equilenergy}
+\end{align}
+
+\subsection{Nonlinear Solution}
+In the linear model, the pulse will converge to a Gaussian as long as $\zeta(s, 0) h > \sqrt a$ so that the equilibrium energy from \eqref{eq:equilenergy} is positive. However, this is not necessarily the case with the inclusion of the nonlinearity. The fibre adds a phase shift proportional to the power of the pulse, this in turn can inject higher frequency oscillations because of the Fourier transform which then reinforces the oscillations. These oscillations are then intensified with each trip around the laser until the envelope of the pulse becomes mangled. \\
+
+Figure \ref{fig:stable} shows that small oscillations in the envelope can become smoothed out leading to a Gaussian-esque waveform. Conversely, Figure \ref{fig:break} shows how the waveform evolves for a slightly different $b$ value. Notice the oscillations are more pronounced, this effect compounds resulting in the wave breaking. \\
+
+The breaking of the wave is not as predictable as one may expect---the structure of the boundary is quite rich. Note that in Figure \ref{fig:envelope} the wave breaks for the smaller of the two $b$ values. This structure is highlighted in Figure \ref{fig:DMmap} where the error is calculated by
+\begin{align*}
+\frac{\|A(\text{iteration } 25) - A(\text{iteration } 24) \|_2}{\|A(\text{iteration } 24) \|_2}.
 \end{align*}
+In the region $0.35 < s < 0.6$ the wave does not break regardless of $b$. This is because $b|A|^2$ is approximately constant for a particular $s$ value, and so the phase shift added by the nonlinearity is constant, thus the wave is stable.
 
 \begin{figure}[htbp]
 \centering
@@ -384,10 +400,60 @@ set cbl 'Error'
 set xr [0:1]
 set view map
 
-load '/home/brady/Templates/YGB.p'
+load '/home/brady/Templates/Blues.p'
 
 set cbr [0:0.75]
-sp '../On.dat' using 1:2:3 w image not
+sp '../30-06-01-DM.dat' using 1:2:3 w image not
+%'../ProductContours.dat' w l lc 'black' not
+\end{gnuplot}
+\caption{}
+\label{fig:DMZ}
+\end{subfigure}
+\begin{subfigure}[]{\textwidth}
+\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
+set grid
+set xl '$s$'
+set yl '$b$'
+set cbl 'Error'
+set xr [0:0.2]
+set view map
+
+load '/home/brady/Templates/Blues.p'
+
+set cbr [0:0.75]
+
+set cntrlabel start 1
+
+sp '../30-06-01-DM-Z.dat' using 1:2:3 w image not
+#'contours.dat' u ($1 / 2500):($2 / 250):($2 / 250 < 10 * $1 / 2500 + 0.17 ? 1 : 1/0) w l lc 'black' not
+\end{gnuplot}
+\caption{}
+\label{fig:DM}
+\end{subfigure}
+\caption{Regions of convergence in the $s$--$b$ parameter space for $a = 30$, $h = 0.6$, and $E_0 = 0.1$ with $A_0 = \Gamma \sech{(2T)} \textrm{e}^{i \pi / 4}$.}
+\label{fig:DMmap}
+\end{figure}
+
+\subsubsection{Ordering}
+Since some of the individual mappings are nonlinear they do not commute---thus changing the order of the components should lead to different results. The nonlinearity should still follow the gain component since that is where it is most dominant. Furthermore, the loss is a linear mapping and so it will commute with both dispersion and modulation. Therefore, the only other unique case to consider is if dispersion follows modulation. \\
+
+Figure \ref{fig:switch} shows the effect of switching these two components. Overall, the large scale structure is unchanged with the exception of $0.4 < s < 0.7$ and $20 < b$. In this region the waveform appears to have reached a period 2 equilibrium, that is, $|\mathcal{L}(\mathcal{L}(A))| = |A|$.
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[]{\textwidth}
+\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
+set grid
+set xl '$s$'
+set yl '$b$'
+set cbl 'Error'
+set xr [0:1]
+set view map
+
+load '/home/brady/Templates/Blues.p'
+
+set cbr [0:0.75]
+sp '../30-06-01-MD.dat' using 1:2:3 w image not
 \end{gnuplot}
 \caption{}
 \label{fig:}
@@ -401,17 +467,16 @@ set cbl 'Error'
 set xr [0:0.2]
 set view map
 
-load '/home/brady/Templates/YGB.p'
+load '/home/brady/Templates/Blues.p'
 
 set cbr [0:0.75]
-sp '../Zoom01.dat' using 1:2:3 w image not
+sp '../30-06-01-MD-Z.dat' using 1:2:3 w image not
 \end{gnuplot}
 \caption{}
 \end{subfigure}
-\caption{Error is calculated by $\displaystyle \frac{\|A(\text{iteration } 25) - A(\text{iteration } 24) \|_2}{\|A(\text{iteration } 24) \|_2}$}
-\label{fig:}
+\caption{Regions of convergence with modulation preceding dispersion, same parameters as Figure \ref{fig:DMmap}}
+\label{fig:switch}
 \end{figure}
-
 
 %\begin{figure}[htbp]
 %\centering
@@ -444,9 +509,5 @@ sp '../Zoom01.dat' using 1:2:3 w image not
 %\label{fig:}
 %\end{figure}
 
-
-
-
-\newpage
 \printbibliography
 \end{document}
