@@ -9,5 +9,11 @@
 *.blg
 *.xml
 *.out
+*.zip
 /Break
 /Stable
+/Preprint/*.eps
+/Preprint/*.tex
+/Preprint/*.pdf
+!/Preprint/ms.pdf
+!/Preprint/ms.tex
