@@ -14,19 +14,19 @@ def EE(a, s, h):
 	return r / (1 - r) * np.log(a * r)
 
 # Functions for each component
-def Gain(A, E, a = 30):
+def Gain(A, E, a = 8000):
 	return np.real(np.sqrt(W(a * E * np.exp(E)) / E)) * A
 
-def Loss(A, h = 0.4):
+def Loss(A, h = 0.04):
 	return h * A
 
 def Mod(A, T):
 	return np.exp(-T**2 / 2) * A
 
-def Fibre(A, b = 0.1):
+def Fibre(A, b = 0.25):
 	return np.exp(1j * b * np.real(np.abs(A)**2)) * A
 
-def Disp(A, T, s = 0.1):
+def Disp(A, T, s = 0.2):
 	F = np.fft.fft(A)
 	F = (np.abs(F) > 10**-4) * F
 	dw = np.pi / T[-1]
@@ -37,21 +37,25 @@ def Disp(A, T, s = 0.1):
 def Loop(A0, T, dx, s, b):
 	A = A0
 	A = Gain(A0, Energy(A0, dx))
-	A = Fibre(A, b)
-	A = Loss(A, 0.6)
+	#A = Fibre(A, b)
+	A = Loss(A)
+	#old = np.gradient(-np.gradient(np.angle(A), dx),dx)[len(A)/2]
 	A = Disp(A, T, s)
+	#new = np.gradient(-np.gradient(np.angle(A), dx),dx)[len(A)/2]
 	A = Mod(A, T)
+	#print old - new
 	return A
 
-N = 100 # Number of loops of the circuit
+N = 50 # Number of loops of the circuit
 p = 2**14 # Number of points in the discretization
-width = 64 # Size of window
-E0 = 0.1 # Initial energy
+width = 128 # Size of window
+E0 = 0.0001 # Initial energy
 
 # Initialization
 T = np.linspace(-width, width, p, endpoint = False)
 dx = T[1] - T[0]
-A0 = 1 / np.cosh(2 * T) * np.exp(1j * np.pi / 4)
+#A0 = 1 / np.cosh(2 * T) * np.exp(1j * np.pi / 4)
+A0 = np.exp(-(1+2.89005*1j)*T**2 / (2*0.938229**2))
 A0 = np.sqrt(E0 / Energy(A0, dx)) * A0 # Normalize
 E = np.zeros(N)
 data = np.zeros((2 * N, p))
@@ -66,9 +70,9 @@ w = np.fft.fftfreq(len(A)) * len(A) * dw
 plt.ion()
 fig = plt.figure()
 ax = fig.add_subplot(111)
-line1, = ax.plot(T, np.real(A), 'r-', label = 'Real')
-line2, = ax.plot(T, np.imag(A), 'b-', label = 'Imaginary')
-line3, = ax.plot(T, np.abs(A), 'g-', label = 'Magnitude')
+#line1, = ax.plot(T, np.real(A), 'r-', label = 'Real')
+#line2, = ax.plot(T, np.imag(A), 'b-', label = 'Imaginary')
+line3, = ax.plot(T, np.angle(A), 'g-', label = 'Magnitude')
 
 fig.canvas.draw()
 fig.canvas.flush_events()
@@ -78,29 +82,36 @@ plt.legend()
 #plt.ylim(0, 0.02)
 
 plt.xlim(-4, 4)
-plt.ylim(-0.5, 0.5)
+plt.ylim(-10, 10)
+
+dw = np.pi / T[-1]
+w = np.fft.fftfreq(len(A)) * len(A) * dw
 
 # N round trips of the laser
 for i in range(N):
 	# Animate the plot
 	#line1.set_ydata(np.real(np.fft.fft(A)))
 	#line2.set_ydata(np.imag(np.fft.fft(A)))
-	line3.set_ydata(np.abs(np.fft.fft(A)))
+	#line3.set_ydata(np.abs(np.fft.fft(A)))
 
-	line1.set_ydata(np.real(A))
-	line2.set_ydata(np.imag(A))
-	line3.set_ydata(np.abs(A))
+	#line1.set_ydata(np.real(A))
+	#line2.set_ydata(np.imag(A))
+	line3.set_ydata(np.gradient(-np.gradient(np.angle(A), dx), dx))
 	fig.canvas.draw()
 	fig.canvas.flush_events()
-	#time.sleep(0.25)
-	print i
+	time.sleep(1)
+	#print np.gradient(-np.gradient(np.angle(A), dx), dx)[len(A)/2]
 
-	A = Loop(A, T, dx, 0.4, 100)
+	A = Loop(A, T, dx, 1.0, 0)
 	E[i] = Energy(A, dx)
+
+	#np.savetxt('Envelope' + str(i) + '.dat', np.vstack((T, np.real(A), np.imag(A), np.abs(A), np.angle(A), w, np.abs(np.fft.fft(A)))).T)
 
 np.savetxt('E.dat', E)
 
 np.savetxt('Envelope.dat', np.vstack((T, np.real(A), np.imag(A), np.abs(A))).T)
+print np.abs(A[len(A)/2])
+print np.std(np.abs(A))
 
 ############################################
 '''
