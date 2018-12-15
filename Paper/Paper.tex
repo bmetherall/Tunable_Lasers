@@ -306,83 +306,82 @@ In this model the pulse is iteratively passed through each process, the order of
 where $\mathcal{L}$ is one loop of the laser. A solution to this model is one in which the envelope is unchanged after traversing every component in the cavity, that is, such that $|\mathcal{L}(A)|^2 = |A|^2$.
 
 \section{Results}
-\begin{wrapfigure}{r}{0.45\textwidth}
-\vspace{-11mm}
-\centering
-\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 3in,1.85in lw 3}]
-f(x) = m * x + c
-fit f(x) '../Zeta.dat' u 1:(log($2)) via m, c
-set grid
-set ytics 0.1
-set xl '$s$'
-set yl '$\zeta(s, 0)$'
-set yr [0.75:1.05]
-plot '../Zeta.dat' u 1:2 w l t 'Data', \
-exp(f(x)) dt 4 t 'Fit'
-\end{gnuplot}
-\caption{$\zeta(s, 0)$ is found empirically to be $\exp(-0.511444s + 0.00174128)$.}
-\label{fig:zeta}
-\end{wrapfigure}
-The model described is solved numerically, and somewhat surprisingly, its convergence as a function of the characteristic parameter groups is highly complex. To gain some insight into this process we first consider a linear analysis that ignores the nonlinear fibre effects.
+%\begin{wrapfigure}{r}{0.45\textwidth}
+%\vspace{-11mm}
+%\centering
+%\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 3in,1.85in lw 3}]
+%f(x) = m * x + c
+%fit f(x) '../Zeta.dat' u 1:(log($2)) via m, c
+%set grid
+%set ytics 0.1
+%set xl '$s$'
+%set yl '$\zeta(s, 0)$'
+%set yr [0.75:1.05]
+%plot '../Zeta.dat' u 1:2 w l t 'Data', \
+%exp(f(x)) dt 4 t 'Fit'
+%\end{gnuplot}
+%\caption{$\zeta(s, 0)$ is found empirically to be $\exp(-0.511444s + 0.00174128)$.}
+%\label{fig:zeta}
+%\end{wrapfigure}
+The linear version of the model described can be solved analytically , however, the full non-linear version must be solved numerically. Somewhat surprisingly, its convergence as a function of the characteristic parameter groups is highly complex. To gain some insight into this process we first consider the linear analysis that ignores the nonlinear fibre effects.
 
 \subsection{Linear Solution}
 
 % gnuplot code for the four waveforms
 \input{Envelopes}
 
-Since the pulse is modulated by a Gaussian, it is expected that the envelope will also converge to a Gaussian. Consider an initial pulse with envelope
+Since the pulse is modulated by a Gaussian, it is expected that the equilibrium envelope will also be a Gaussian. Consider the initial pulse
 \begin{align*}
-	|A_0| = \sqrt{P} \textrm{e}^{-T^2 / 2 \sigma^2},
+	A_0 = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right),
 \end{align*}
-after passing through the gain and loss pieces, and having neglected the fibre nonlinearity, the envelope will have the form
+where $C$ is the chirp. After passing through the gain and loss pieces---and having neglected the fibre nonlinearity---the pulse will have the form
 \begin{align*}
-	|A| &= \sqrt{P} g(E) h \textrm{e}^{-T^2 / 2 \sigma^2},&
-	g(E) &= \left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2},
+	A_2 &= \sqrt{P} g(E) h \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right),&
+	\text{where } g(E) &= \left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2}
 \end{align*}
-where $g(E)$ is the gain component. After the pulse travels through the grating, the envelope will maintain its Gaussian shape, however, it will have spread. This can be represented as
+is the gain component. After the pulse travels through the grating, the envelope will maintain its Gaussian shape, however, it will have spread \cite{agrawal2013}. This can be written as
 \begin{align}
 \label{linear1}
-	|A| = \sqrt{P} g(E) h \zeta(s, 0) \textrm{e}^{-T^2 / 2 \tilde{\sigma}^2}
+	A_3 = \sqrt{P} g(E) h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} \right),
 \end{align}
-where $\zeta(s, b)$ is the decrease in the amplitude and $\widetilde{\sigma}^2$ is the new variance. However, since dispersion conserves energy
-\begin{align*}
-	\int_{-\infty}^{\infty} P g(E)^2 h^2 \textrm{e}^{-T^2 / \sigma^2} \, \df T = 
-	\int_{-\infty}^{\infty} P g(E)^2 h^2 \zeta^2(s, 0) \textrm{e}^{-T^2 / \widetilde{\sigma}^2} \, \df T,
-\end{align*}
-which reduces to $\sigma = \zeta^2(s, 0) \widetilde{\sigma}$. Therefore, the envelope as the pulse exits the grating given by~(\ref{linear1}) is
-\begin{align*}
-	|A| = \sqrt{P} g(E) h \zeta(s, 0) \exp \left( -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} \right).
-\end{align*}
-Finally, the pulse is modulated and so that after one loop the total effect is given by
+where $\widetilde{\sigma}^2$ is the resulting variance, and $\widetilde{C}$ is the resulting chirp. Finally, the pulse is modulated---after one loop the total effect is given by
 \begin{align}
 \label{linear2}
-	|A| = \sqrt{P} g(E) h \zeta(s, 0) \exp \left( -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} - \frac{T^2}{2} \right).
+	A_4 = \sqrt{P} g(E) h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} - \frac{T^2}{2} \right).
 \end{align}
 
-In equilibrium, the envelope of the pulse is unchanged after completing a full circuit, in other words,
-\begin{align*}
-	\sqrt{P} \textrm{e}^{-T^2 / 2 \sigma^2} = 
-	\sqrt{P} g(E) h \zeta(s, 0) \exp \left( -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} - \frac{T^2}{2} \right),
-\end{align*}
-or more explicitly,
+In equilibrium, the envelope of the pulse as well as the chirp are unchanged after completing a full circuit, it must bet that $A_0 = A_4$.
+%\begin{align*}
+%	\sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) = 
+%	\sqrt{P} g(E) h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} - \frac{T^2}{2} \right).
+%\end{align*}
+More explicitly, this gives three conditions:
 \begin{align}
 \label{eq:energycond}
-	\left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2} h \zeta(s, 0) &= 1,&
-	-\frac{T^2}{2 \sigma^2} &= -\zeta^4(s, 0) \frac{T^2}{2 \sigma^2} - \frac{T^2}{2}.
+	\left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2} h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} &= 1, \qquad
+	\frac{1}{\sigma^2} = \frac{1}{\widetilde{\sigma}^2} + 1, \qquad
+	\frac{C}{\sigma^2} = \frac{\widetilde{C}}{\widetilde{\sigma}^2}.
 \end{align}
-The second condition simplifies to
+The out-coming variance and chirp are given by \cite{agrawal2013}
+\begin{align}
+\label{eq:tildes}
+	\widetilde{\sigma}^2 = \frac{\sigma^4 + 4 C s^2 \sigma^2 + 4 C^2 s^4 +4s^4}{\sigma^2}, \qquad
+	\widetilde{C} = C + \left( 1 + C^2 \right) \frac{2s^2}{\sigma^2}.
+\end{align}
+From \eqref{eq:energycond} and \eqref{eq:tildes} we find that the equilibrium variance reduces to the quartic
 \begin{align*}
-	\sigma = \sqrt{1 - \zeta^4(s, 0)}
+\left( \sigma^2 \right)^4 + 4 s^2 \left( \sigma^2 \right)^3 - 20 s^2 \left( \sigma^2 \right)^2 + 32 s^2 \left( \sigma^2 \right) - 16 s^2 = 0,
 \end{align*}
-and the peak of the pulse can be found by integration to give
+which has the solution
 \begin{align*}
-	P = \frac{E}{\sqrt{\pi} \sigma}.
+\sigma^2 = \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4}(1 + s^4) \right)^{1/2} - s^4 - s^2 \sqrt{4 + s^4}.
 \end{align*}
 Furthermore, from~\eqref{eq:energycond} the equilibrium energy is found to be
 \begin{align}
-	E = \frac{\zeta^2(s, 0) h^2}{1 - \zeta^2(s, 0) h^2} \ln \left( a \zeta^2(s, 0) h^2 \right).
 	\label{eq:equilenergy}
+	E = \frac{h^2 \zeta}{1 - h^2 \zeta} \ln \left( a h^2 \zeta \right),
 \end{align}
+by letting $\displaystyle \zeta \equiv \frac{\sigma}{\widetilde{\sigma}}$.
 
 \subsection{Nonlinear Solution}
 
@@ -431,7 +430,7 @@ sp '../8000-04-01-DM-Z.dat' using 1:2:3 w image not
 \label{fig:DMmap}
 \end{figure}
 
-In the linear model, the pulse will converge to a Gaussian as long as $\zeta(s, 0) h > \sqrt a$ so that the equilibrium energy from \eqref{eq:equilenergy} is positive. However, this is not necessarily the case with the inclusion of the nonlinearity. The fibre adds a phase shift proportional to the power of the pulse, this in turn can inject higher frequency oscillations due to the dispersion which then reinforces the oscillations. These oscillations are then intensified with each trip around the laser until the envelope of the pulse becomes mangled. \\
+In the linear model, the pulse will converge to a Gaussian as long as $a h^2 \zeta > 1$ so that the equilibrium energy from \eqref{eq:equilenergy} is positive. However, this is not necessarily the case with the inclusion of the nonlinearity. The fibre adds a phase shift proportional to the power of the pulse, this in turn can inject higher frequency oscillations due to the dispersion which then reinforces the oscillations. These oscillations are then intensified with each trip around the laser until the envelope of the pulse becomes mangled. \\
 
 Figure \ref{fig:pulse} shows the envelope, Fourier transform, and chirp for a stable wave as well as a broken wave. In the case of the stable wave the envelope and the Fourier transform are Gaussian-esque, and the chirp is a very smooth function. However, in the case of the broken wave the envelope and Fourier transform are oscillatory. Furthermore, the chirp is highly erratic. \\
 
@@ -452,7 +451,7 @@ load '/home/brady/Templates/Blues.p'
 set grid
 set xl '$s$'
 set yl '$b$'
-set cbl '$E \, (\times 10^3)$'
+set cbl '$E \, (\times 10^{-3})$'
 set view map
 set cbr [0:4]
 sp '../8000-04-01-DM-Z.dat' u 1:2:(1000*$4) w image not, \
