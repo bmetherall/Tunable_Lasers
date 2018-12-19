@@ -1,14 +1,14 @@
 \documentclass[oneside]{UOIT_Thesis}
 
+% Load tikz and libraries
 \usepackage{tikz}
 \usetikzlibrary{patterns,snakes}
-
+\usetikzlibrary{arrows.meta}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=Figures/]
 
 % Code Stuff
 \include{Listing}
-
 
 \providecommand{\df}{\textrm{d}}
 \newcommand{\diff}[3][]{\frac{\textrm{d}^{#1}#2}{\textrm{d}{#3}^{#1}}}
