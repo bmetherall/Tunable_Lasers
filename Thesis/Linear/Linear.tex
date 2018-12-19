@@ -1,0 +1,45 @@
+\chapter{Linear Solution}
+
+Since the pulse is modulated by a Gaussian, it is expected that the equilibrium envelope will also be a Gaussian. Consider the initial pulse
+\begin{align*}
+	A_0 = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right).
+\end{align*}
+After passing through the gain and loss pieces---and having neglected the fibre nonlinearity---the pulse will have the form
+\begin{align*}
+	A_2 &= \sqrt{P} g(E) h \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right),& \text{where } g(E) &= \left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2}
+\end{align*}
+is the gain component. After the pulse travels through the grating, the envelope will maintain its Gaussian shape, however, it will have spread \cite{agrawal2013}. This can be written as
+\begin{align}
+\label{linear1}
+	A_3 = \sqrt{P} g(E) h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} \right),
+\end{align}
+where $\widetilde{\sigma}^2$ denotes the resulting variance, and $\widetilde{C}$ denotes the resulting chirp. Finally, the pulse is modulated---after one loop the total affect is given by
+\begin{align}
+\label{linear2}
+	A_4 = \sqrt{P} g(E) h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} - \frac{T^2}{2} \right).
+\end{align}
+
+In equilibrium, it must be that $A_0 = A_4$. More explicitly, this gives three conditions:
+\begin{align}
+\label{eq:energycond}
+	\left( \frac{W_0(a E \textrm{e}^E)}{E} \right)^{1/2} h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} &= 1,& \frac{1}{\sigma^2} &= \frac{1}{\widetilde{\sigma}^2} + 1,& \frac{C}{\sigma^2} &= \frac{\widetilde{C}}{\widetilde{\sigma}^2}.
+\end{align}
+The out-coming variance and chirp are given by \cite{agrawal2013}
+\begin{align}
+\label{eq:variance}
+	\widetilde{\sigma}^2 &= \frac{\sigma^4 + 4 C s^2 \sigma^2 + 4 C^2 s^4 +4s^4}{\sigma^2},& \widetilde{C} &= C + \left( 1 + C^2 \right) \frac{2s^2}{\sigma^2}.
+\end{align}
+From (\ref{eq:varcond}--\ref{eq:chirp}) we find that the equilibrium variance reduces to the quartic
+\begin{align*}
+\left( \sigma^2 \right)^4 + 4 s^2 \left( \sigma^2 \right)^3 - 20 s^2 \left( \sigma^2 \right)^2 + 32 s^2 \left( \sigma^2 \right) - 16 s^2 = 0,
+\end{align*}
+which has the solution
+\begin{align*}
+\sigma^2 &= \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4}(1 + s^4) \right)^{1/2} - s^4 - s^2 \sqrt{4 + s^4}.
+\end{align*}
+Furthermore, from~\eqref{eq:energycond} the equilibrium energy is found to be
+\begin{align}
+	\label{eq:equilenergy}
+	E = \frac{h^2 \zeta}{1 - h^2 \zeta} \ln \left( a h^2 \zeta \right),
+\end{align}
+where $\displaystyle \zeta \equiv \frac{\sigma}{\widetilde{\sigma}}$.

@@ -1,0 +1,164 @@
+\chapter{A New Model}
+Rather than using transfer functions with a linear PDE, we instead return to the generalized nonlinear Schr\"odinger equation~\cite{agrawal2013, ferreira, shtyrina, yarutkina} 
+\begin{align}
+\label{eq:nlse}
+\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \frac{\beta_3}{6}\pdiff[3]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A,
+\end{align}
+to represent the waveform. In this expression, $\beta_3$ is the third order dispersion coefficient, $\gamma$ is the coefficient of nonlinearity or self-phase modulation, $g(A)$ is the gain, and $\alpha$ is the loss of the fibre. Using this expression as a starting point, the laser cavity is assumed to be composed of five independent processes---gain, nonlinearity, loss, dispersion, and modulation. Within each component of the laser cavity the other four processes are assumed to be negligible, that is, each process is dominant only within one part of the laser, just as with the discrete model, but embracing any nonlinearities.
+
+\section{Gain}
+Considering the gain term as dominant as is expected with the Er-doped gain fibre, equation~\eqref{eq:nlse} reduces to
+\begin{align}
+\label{eq:gainde}
+	\pdiff{A}{z} &= \frac{1}{2} \frac{g_0}{1 + E / \Es} A,& E &= \int_{-\infty}^\infty |A|^2 \, \df T,
+\end{align}
+where $g_0$ is a small signal gain, $E$ is the energy of the pulse and $\Es$ is the energy at which the gain begins to saturate~\cite{bohun, burgoyne2014, shtyrina, silfvast, yarutkina}.
+%We shall first transform \eqref{eq:gainde} into an equation in terms of the energy. 
+Multiplying~\eqref{eq:gainde} by $\bar{A}$, the complex conjugate of $A$, yields
+\begin{align*}
+	2\bar{A} \pdiff{A}{z} = \frac{g_0 |A|^2}{1 + E / \Es}.
+\end{align*}
+Adding this to its complex conjugate and integrating over $T$ gives
+%\begin{align*}
+%	\diff{|A|^2}{z} &= \frac{g_0 |A|^2}{1 + E / \Es}.
+%\end{align*}
+%After integrating this becomes
+\begin{align}
+\label{diffez}
+	\diff{E}{z} &= \frac{g_0 E}{1 + E / \Es}.
+\end{align}
+For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain has saturated and so the energy grows linearly. To obtain a closed form solution, \eqref{diffez} is integrated over a gain fibre of length $z$ and assume the energy increases from $E$ to $E_{\textrm{out}}$ so that
+\[
+	g_0 z = \log\frac{E_{\textrm{out}}}{E} + \frac{E_{\textrm{out}}-E}{\Es}
+\]
+and by exponentiating, rearranging, and applying $W_0$, the positive branch of the Lambert $W$ function,
+\[
+	 W_0\left(\frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z}\right) = 
+	 W_0\left(\frac{E_{\textrm{out}}}{\Es} \textrm{e}^{E_{\textrm{out}}/\Es}\right) = \frac{E_{\textrm{out}}}{\Es}.
+\]
+This results in the closed form expression
+\begin{align}
+\label{eq:energy}
+	E_{\textrm{out}}(z) = \Es W_0 \left( \frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z} \right)
+\end{align}
+with the desired property that $E_{\textrm{out}}(0)=E$. Since $E \sim |A|^2$, the gain in terms of the amplitude is given by
+\begin{align}
+	\label{eq:gain}
+	G(A;E) &= \left(\frac{E_{\textrm{out}}(L_g)}{E}\right)^{1/2}A = \left( \frac{\Es}{E} W_0 \left( \frac{E}{\Es} \textrm{e}^{E/\Es} 
+	\textrm{e}^{g_0 L_g} \right) \right)^{1/2} A,
+\end{align}
+where $L_g$ is the length of the gain fibre.
+
+\section{Fibre Nonlinearity}
+The nonlinearity of the fibre depends on the parameter $\gamma$. In regions where this affect is dominant expression~\eqref{eq:nlse} becomes
+\begin{align}
+\label{eq:fibrediff}
+	\pdiff{A}{z} - i \gamma |A|^2 A = 0,
+\end{align}
+so that $\frac{\partial}{\partial z} |A|^2 = 0$ suggesting that $A(T,z) = A_0(T) e^{i \phi(T,z)}$. Substituting this representation into~\eqref{eq:fibrediff} and setting $\phi(T,0)=0$ gives $\phi(T,z) = \gamma |A|^2 z$. For a fibre of length $L_f$ the effect of the nonlinearity is therefore
+\begin{align}
+\label{eq:fibre}
+	F(A) &= A e^{i \gamma |A|^2 L_f}.
+\end{align}
+
+\section{Loss}
+Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. Combining these two effects give a loss that takes the form
+\begin{align}
+\label{eq:fibreloss}
+	L(A) &= R e^{- \alpha L}A,
+\end{align}
+where $R$ is the reflectivity of the output coupler, and $L$ is the total length of the laser circuit.
+
+\section{Dispersion}
+Within the laser cavity, the dispersion is dominated by the chirped fibre Bragg grating (CFBG). In comparison, the dispersion due to the fibre is negligible\footnote{A $10$ cm chirped grating can provide as much dispersion as $300$ km of fibre~\cite{agrawal2002}.}. The dispersive terms of \eqref{eq:nlse} give
+\begin{align}
+\label{eq:disp}
+	\pdiff{A}{z} = -i \frac{\beta_2}{2} \pdiff[2]{A}{T} + \frac{\beta_3}{6} \pdiff[3]{A}{T}
+\end{align}
+and since dispersion acts in the frequency domain, it is convenient to use the Fourier transform of~\eqref{eq:disp}, giving the result that
+\begin{align*}
+	\pdiff{}{z}\FT{A} &= i\frac{\omega^2}{2}\left(\beta_2 - \frac{\beta_3}{3} \omega\right) \FT{A}.
+\end{align*}
+The effect of dispersion is then
+\begin{align}
+\label{eq:dispersion}
+	D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D(\beta_2 - \beta_3 \omega/3)/2} \FT{A}}.
+\end{align}
+For a highly dispersive media the third order effects may need to be considered~\cite{agrawal2013, litchinitser}. However, for simplicity in the basic model and because of the nature of the grating, the third order effect will be neglected so we set $\beta_3=0$ for the subsequent analysis~\cite{agrawal2013, ferreira}.
+
+\section{Modulation}
+In the average model, the amount of modulation is characterized by the parameter $\epsilon$ through the term $\frac{\epsilon}{2}T^2 A$. In the new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
+\begin{align}
+	M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
+\end{align}
+where $T_M$ is a characteristic width of the modulation.%\footnote{Taking the Fourier transform, $\FT{\textrm{e}^{-T^2/ 2 T_M^2}} = \frac{1}{\sqrt{2\pi}}T_M\textrm{e}^{-\omega^2T_M^2/2}$.}
+
+\section{Non-Dimensionalization}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Parameter & Value \\
+\hline
+$\Es$ & $10^3$--$10^4 \text{ pJ}$ \\
+$\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ \cite{agrawal2013} \\
+$g_0$ & $1$--$10 \text{ m}^{-1}$ \\
+$\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ \cite{burgoyne2014, agrawal2013, litchinitser} \\
+$\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ \cite{burgoyne2014, agrawal2013} \\
+$T_M$ & $15$--$150 \text{ ps}$ \cite{burgoyne2014} \\
+$L$ & $10$--$100 \text{ m}$ \\
+$L_g$ & $1$--$4 \text{ m}$ \cite{burgoyne2014, shtyrina, yarutkina} \\
+$L_f$ & $0.15$--$1 \text{ m}$ \\
+\hline
+\end{tabular}
+\caption{Orders of magnitude of various parameters.}
+\label{tab:values}
+\end{center}
+\end{table}
+
+%\begin{figure}[tbp]
+%\centering
+%\begin{subfigure}[]{\columnwidth}
+%\input{Shape}
+%\caption{Envelope}
+%\label{fig:envelope}
+%\end{subfigure} \\
+%\begin{subfigure}[]{\columnwidth}
+%\input{Transform}
+%\caption{Fourier Transform}
+%\label{fig:fourier}
+%\end{subfigure} \\
+%\begin{subfigure}[]{\columnwidth}
+%\input{Chirp}
+%\caption{Chirp}
+%\end{subfigure}
+%\caption{Simulation with $s = 0.09$, $a = 8 \times 10^3$, $h = 0.04$, and $E_0 = 0.1$ with $A_0 = \Gamma \sech{(2T)} \textrm{e}^{i \pi / 4}$. $\Gamma$ is chosen such that $\int_{-\infty}^\infty |A|^2 \, \textrm{d}T = E_0$, and hyperbolic secant is chosen since it is a common soliton. In the stable case $b = 1.32$, whereas for the broken case $b = 1.25$. The pulses are shown after 25 iterations.}
+%\label{fig:pulse}
+%\end{figure}
+
+The structure of each process of the laser can be better understood by re-scaling the time, energy, and amplitude. Specifically, the time shall be scaled by the characteristic modulation time which is proportional to the pulse duration, the energy by the saturation energy, and the amplitude will be scaled so that it is consistent:
+\begin{align*}
+	T &= T_M \widetilde{T},& E &= \Es \widetilde{E},& A &= \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}.
+\end{align*}
+The new process maps, after dropping the tildes, become
+\begin{align*}
+	G(A) &= \left(E^{-1} W_0 \left( a E \textrm{e}^{E}\right) \right)^{1/2} A,&
+	F(A) &= A \textrm{e}^{i b |A|^2},&
+	M(A) &= \textrm{e}^{-T^2 / 2} A, \\
+	D(A) &= \FTi{\textrm{e}^{i s^2 \omega^2} \FT{A}},&
+	L(A) &= h A,
+\end{align*}
+with four dimensionless parameter groups (see Table~\ref{tab:values})
+\begin{align*}
+	a &= \textrm{e}^{g_0 L_g} \sim 8 \times 10^3,& s &= \sqrt{\frac{\beta_2 L_D}{2 T_M^2}} \sim 0.2,&
+	b &= \gamma L_f \frac{\Es}{T_M} \sim 1,& h &= R \textrm{e}^{-\alpha L} \sim 0.04,
+\end{align*}
+which control the behaviour of the laser.
+
+\section{Combining the Effects}
+In this model the pulse is iteratively passed through each process, the order of which is now important. In this first realization, the pulse is first amplified by the gain fibre, then since the pulse's magnitude is greatest the nonlinearity needs to be considered. The pulse is then tapped off by the output coupler, and then passes through the grating and is modulated. The pulse after one complete circuit of the laser cavity is then passed back in to restart the process. Functionally this can be denoted as
+\begin{align*}
+	\mathcal{L}(A) = M(D(L(F(G(A))))),
+\end{align*}
+where $\mathcal{L}$ is one loop of the laser. A solution to this model is one in which the envelope and chirp are unchanged after traversing every component in the cavity, that is, such that $\mathcal{L}(A) = A$---potentially with a constant phase shift.

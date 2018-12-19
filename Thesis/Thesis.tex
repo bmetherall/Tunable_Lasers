@@ -1,0 +1,70 @@
+\documentclass[oneside]{UOIT_Thesis}
+
+\usepackage{tikz}
+\usetikzlibrary{patterns,snakes}
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=Figures/]
+
+% Code Stuff
+\include{Listing}
+
+
+\providecommand{\df}{\textrm{d}}
+\newcommand{\diff}[3][]{\frac{\textrm{d}^{#1}#2}{\textrm{d}{#3}^{#1}}}
+\newcommand{\pdiff}[3][]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}}
+\newcommand{\Es}{E_{\textrm{sat}}}
+\newcommand{\FT}[1]{\mathcal{F}\left\{ #1 \right\}}
+\newcommand{\FTi}[1]{\mathcal{F}^{-1}\left\{ #1 \right\}}
+
+\providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sech}{sech}
+
+\title{A Nonlinear Model for Dispersion-Tuned Actively Mode-Locked Lasers}
+\author{Brady Metherall}
+\degree{Master of Science}
+\faculty{Science}
+\program{Modelling and Computational Science}
+
+\begin{document}
+
+\frontmatter
+\pagenumbering{roman} 
+\maketitle
+
+\makeabstract{
+A new nonlinear model is proposed for tuneable lasers. Using the generalized non-linear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each component in the cavity. These transformations are then composed to give the overall effect of one trip around the cavity. The linear version of this model is solved analytically, and the nonlinear version numerically. A consequence of this model being nonlinear is that it is able to exhibit wave breaking which prior models could not. We highlight the rich structure of the boundary of stability for a particular plane of the parameter space.
+}
+
+\makeacknowledgements{
+Thank some people that you like here.
+}
+
+\makedeclaration
+
+\maketableofcontents
+
+\mainmatter
+
+\pagenumbering{arabic}
+\doublespacing
+
+%Red light faster than blue
+
+\include{./Intro/Introduction}
+\include{./Model/Model}
+\include{./Linear/Linear}
+\include{./Nonlinear/Nonlinear}
+
+\phantomsection 
+\addcontentsline{toc}{chapter}{References} 
+\bibliography{Ref}
+
+\appendix
+
+\chapter{Code}
+
+\lstinputlisting[language=Python, lastline=60]{../Lasers.py}
+
+\end{document}
