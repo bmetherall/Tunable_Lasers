@@ -1,3 +1,5 @@
+% !TeX root = ../Thesis.tex
+
 \chapter{A New Model}
 Rather than using transfer functions with a linear PDE, we instead return to the generalized nonlinear Schr\"odinger equation~\cite{agrawal2013, ferreira, shtyrina, yarutkina} 
 \begin{align}
@@ -97,19 +99,18 @@ where $T_M$ is a characteristic width of the modulation.%\footnote{Taking the Fo
 
 \begin{table}
 \begin{center}
-\begin{tabular}{|l|l|}
-\hline
-Parameter & Value \\
-\hline
-$\Es$ & $10^3$--$10^4 \text{ pJ}$ \\
-$\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ \cite{agrawal2013} \\
-$g_0$ & $1$--$10 \text{ m}^{-1}$ \\
-$\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ \cite{burgoyne2014, agrawal2013, litchinitser} \\
-$\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ \cite{burgoyne2014, agrawal2013} \\
-$T_M$ & $15$--$150 \text{ ps}$ \cite{burgoyne2014} \\
-$L$ & $10$--$100 \text{ m}$ \\
-$L_g$ & $1$--$4 \text{ m}$ \cite{burgoyne2014, shtyrina, yarutkina} \\
-$L_f$ & $0.15$--$1 \text{ m}$ \\
+\begin{tabular}{lclc}
+Parameter & Symbol & Value & Source \\
+\noalign{\global\arrayrulewidth=1.5pt}\hline
+Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ & \cite{burgoyneemail} \\
+Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ & \cite{agrawal2013} \\
+Small Signal Gain & $g_0$ & $1$--$10 \text{ m}^{-1}$ & \cite{burgoyneemail} \\
+Grating Dispersion & $\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ & \cite{burgoyne2014, agrawal2013, litchinitser} \\
+Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ & \cite{burgoyne2014, agrawal2013} \\
+Modulation Time & $T_M$ & $15$--$150 \text{ ps}$ & \cite{burgoyne2014, burgoyneemail} \\
+Length of Cavity & $L$ & $10$--$100 \text{ m}$ & \cite{burgoyneemail} \\
+Length of Gain Fibre & $L_g$ & $1$--$4 \text{ m}$ & \cite{burgoyne2014, shtyrina, yarutkina} \\
+Length of Fibre & $L_f$ & $0.15$--$1 \text{ m}$ & \cite{burgoyneemail} \\
 \hline
 \end{tabular}
 \caption{Orders of magnitude of various parameters.}
