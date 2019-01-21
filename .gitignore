@@ -22,6 +22,8 @@
 /Stable
 /Preprint/*
 /Thesis/Figures/*.pdf
+/Thesis/Figures/*.eps
+/Thesis/Figures/*.tex
 !/Preprint/ms.pdf
 !/Preprint/ms.tex
 Coat*
