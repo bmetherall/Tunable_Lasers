@@ -1,8 +1,54 @@
 % !TeX root = ../Thesis.tex
 
-\chapter{Nonlinear Solution}
+\chapter{Solution of the Nonlinear Model}
 
-In the linear model, the pulse will converge to a Gaussian as long as $a h^2 \zeta > 1$ so that the equilibrium energy from \eqref{eq:equilenergy} is positive. However, this is not necessarily the case with the inclusion of the nonlinearity. The fibre adds a phase shift proportional to the power of the pulse, this in turn can inject higher frequency oscillations due to the dispersion which then reinforces the oscillations. These oscillations are then intensified with each trip around the laser until the envelope of the pulse becomes mangled. \\
+\begin{figure}[htbp]
+\centering
+\input{./Figures/Variance}
+\caption{Simulation and analytic equilibrium standard deviation as a function of $s$.}
+\label{fig:}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+\input{./Figures/LinearPlot}
+\caption{Equilibrium energy and peak power of the pulse as a function of $s$.}
+\label{fig:}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+\input{./Figures/Stability}
+\caption{}
+\label{fig:}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\input{./Figures/StabilityZoom}
+\caption{}
+\label{fig:}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\input{./Figures/StabilitySwitch}
+\caption{}
+\label{fig:}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\input{./Figures/StabilitySwitchZoom}
+\caption{}
+\label{fig:}
+\end{figure}
+
+In the linear model, the pulse converges to a Gaussian as long as $a h^2 \zeta > 1$ so that the equilibrium energy from \eqref{eq:equilenergy} is positive. However, this is not necessarily the case with the inclusion of the nonlinearity. The fibre adds a phase shift proportional to the power of the pulse, this in turn can inject higher frequency oscillations due to the dispersion which then reinforces the oscillations. These oscillations are then intensified with each trip around the cavity until the envelope of the pulse becomes mangled. \\
 
 Figure \ref{fig:pulse} shows the envelope, Fourier transform, and chirp for a stable wave as well as a broken wave. In the case of the stable wave the envelope and the Fourier transform are Gaussian-esque, and the chirp is a very smooth function in close agreement with \cite{chen}. However, in the case of the broken wave the envelope and Fourier transform are oscillatory. Furthermore, the chirp is highly erratic. \\
 

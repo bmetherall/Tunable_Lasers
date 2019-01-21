@@ -43,18 +43,17 @@ Thank some people that you like here.
 
 \makedeclaration
 
+{\hypersetup{linkcolor=black}
 \maketableofcontents
+}
 
 \mainmatter
 
 \pagenumbering{arabic}
 \doublespacing
 
-%Red light faster than blue
-
 \include{./Intro/Introduction}
 \include{./Model/Model}
-\include{./Linear/Linear}
 \include{./Nonlinear/Nonlinear}
 
 \phantomsection 
@@ -63,8 +62,10 @@ Thank some people that you like here.
 
 \appendix
 
-\chapter{Code}
+\include{./Appendices/Lambert}
+\include{./Appendices/Dispersion}
 
-\lstinputlisting[language=Python, lastline=60]{../Lasers.py}
+\chapter{Code}
+\lstinputlisting[language=Python]{../Lasers.py}
 
 \end{document}

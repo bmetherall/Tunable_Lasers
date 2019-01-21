@@ -1,20 +1,22 @@
 % !TeX root = ../Thesis.tex
 
 \chapter{A New Model}
-Rather than using transfer functions with a linear PDE, we instead return to the generalized nonlinear Schr\"odinger equation~\cite{agrawal2013, ferreira, shtyrina, yarutkina} 
+Rather than using transfer functions with a linear PDE, we instead return to the generalized nonlinear Schr\"odinger equation~\cite{agrawal2013, ferreira, shtyrina, yarutkina, burgoyne2007, peng} 
 \begin{align}
 \label{eq:nlse}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \frac{\beta_3}{6}\pdiff[3]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A,
 \end{align}
 to represent the waveform. In this expression, $\beta_3$ is the third order dispersion coefficient, $\gamma$ is the coefficient of nonlinearity or self-phase modulation, $g(A)$ is the gain, and $\alpha$ is the loss of the fibre. Using this expression as a starting point, the laser cavity is assumed to be composed of five independent processes---gain, nonlinearity, loss, dispersion, and modulation. Within each component of the laser cavity the other four processes are assumed to be negligible, that is, each process is dominant only within one part of the laser, just as with the discrete model, but embracing any nonlinearities.
 
-\section{Gain}
+\section{Components}
+
+\subsection{Gain}
 Considering the gain term as dominant as is expected with the Er-doped gain fibre, equation~\eqref{eq:nlse} reduces to
 \begin{align}
 \label{eq:gainde}
 	\pdiff{A}{z} &= \frac{1}{2} \frac{g_0}{1 + E / \Es} A,& E &= \int_{-\infty}^\infty |A|^2 \, \df T,
 \end{align}
-where $g_0$ is a small signal gain, $E$ is the energy of the pulse and $\Es$ is the energy at which the gain begins to saturate~\cite{bohun, burgoyne2014, shtyrina, silfvast, yarutkina}.
+where $g_0$ is a small signal gain, $E$ is the energy of the pulse and $\Es$ is the energy at which the gain begins to saturate~\cite{bohun, burgoyne2014, shtyrina, silfvast, yarutkina, peng}.
 %We shall first transform \eqref{eq:gainde} into an equation in terms of the energy. 
 Multiplying~\eqref{eq:gainde} by $\bar{A}$, the complex conjugate of $A$, yields
 \begin{align*}
@@ -33,25 +35,25 @@ For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain
 \[
 	g_0 z = \log\frac{E_{\textrm{out}}}{E} + \frac{E_{\textrm{out}}-E}{\Es}
 \]
-and by exponentiating, rearranging, and applying $W_0$, the positive branch of the Lambert $W$ function,
+and by exponentiating, rearranging, and applying $W$, the Lambert $W$ function (See Appendix \ref{chap:lambertw}),
 \[
-	 W_0\left(\frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z}\right) = 
-	 W_0\left(\frac{E_{\textrm{out}}}{\Es} \textrm{e}^{E_{\textrm{out}}/\Es}\right) = \frac{E_{\textrm{out}}}{\Es}.
+	 W\left(\frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z}\right) = 
+	 W\left(\frac{E_{\textrm{out}}}{\Es} \textrm{e}^{E_{\textrm{out}}/\Es}\right) = \frac{E_{\textrm{out}}}{\Es}.
 \]
 This results in the closed form expression
 \begin{align}
 \label{eq:energy}
-	E_{\textrm{out}}(z) = \Es W_0 \left( \frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z} \right)
+	E_{\textrm{out}}(z) = \Es W \left( \frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z} \right)
 \end{align}
 with the desired property that $E_{\textrm{out}}(0)=E$. Since $E \sim |A|^2$, the gain in terms of the amplitude is given by
 \begin{align}
 	\label{eq:gain}
-	G(A;E) &= \left(\frac{E_{\textrm{out}}(L_g)}{E}\right)^{1/2}A = \left( \frac{\Es}{E} W_0 \left( \frac{E}{\Es} \textrm{e}^{E/\Es} 
+	G(A;E) &= \left(\frac{E_{\textrm{out}}(L_g)}{E}\right)^{1/2}A = \left( \frac{\Es}{E} W \left( \frac{E}{\Es} \textrm{e}^{E/\Es} 
 	\textrm{e}^{g_0 L_g} \right) \right)^{1/2} A,
 \end{align}
 where $L_g$ is the length of the gain fibre.
 
-\section{Fibre Nonlinearity}
+\subsection{Fibre Nonlinearity}
 The nonlinearity of the fibre depends on the parameter $\gamma$. In regions where this affect is dominant expression~\eqref{eq:nlse} becomes
 \begin{align}
 \label{eq:fibrediff}
@@ -63,7 +65,7 @@ so that $\frac{\partial}{\partial z} |A|^2 = 0$ suggesting that $A(T,z) = A_0(T)
 	F(A) &= A e^{i \gamma |A|^2 L_f}.
 \end{align}
 
-\section{Loss}
+\subsection{Loss}
 Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. Combining these two effects give a loss that takes the form
 \begin{align}
 \label{eq:fibreloss}
@@ -71,7 +73,7 @@ Two sources of loss exist within the laser circuit: the loss due to the output c
 \end{align}
 where $R$ is the reflectivity of the output coupler, and $L$ is the total length of the laser circuit.
 
-\section{Dispersion}
+\subsection{Dispersion}
 Within the laser cavity, the dispersion is dominated by the chirped fibre Bragg grating (CFBG). In comparison, the dispersion due to the fibre is negligible\footnote{A $10$ cm chirped grating can provide as much dispersion as $300$ km of fibre~\cite{agrawal2002}.}. The dispersive terms of \eqref{eq:nlse} give
 \begin{align}
 \label{eq:disp}
@@ -88,7 +90,7 @@ The effect of dispersion is then
 \end{align}
 For a highly dispersive media the third order effects may need to be considered~\cite{agrawal2013, litchinitser}. However, for simplicity in the basic model and because of the nature of the grating, the third order effect will be neglected so we set $\beta_3=0$ for the subsequent analysis~\cite{agrawal2013, ferreira}.
 
-\section{Modulation}
+\subsection{Modulation}
 In the average model, the amount of modulation is characterized by the parameter $\epsilon$ through the term $\frac{\epsilon}{2}T^2 A$. In the new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
 \begin{align}
 	M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
@@ -100,17 +102,19 @@ where $T_M$ is a characteristic width of the modulation.%\footnote{Taking the Fo
 \begin{table}
 \begin{center}
 \begin{tabular}{lclc}
-Parameter & Symbol & Value & Source \\
+Parameter & Symbol & Value & Sources \\
 \noalign{\global\arrayrulewidth=1.5pt}\hline
-Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ & \cite{burgoyneemail} \\
-Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ & \cite{agrawal2013} \\
-Small Signal Gain & $g_0$ & $1$--$10 \text{ m}^{-1}$ & \cite{burgoyneemail} \\
-Grating Dispersion & $\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ & \cite{burgoyne2014, agrawal2013, litchinitser} \\
-Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ & \cite{burgoyne2014, agrawal2013} \\
-Modulation Time & $T_M$ & $15$--$150 \text{ ps}$ & \cite{burgoyne2014, burgoyneemail} \\
-Length of Cavity & $L$ & $10$--$100 \text{ m}$ & \cite{burgoyneemail} \\
-Length of Gain Fibre & $L_g$ & $1$--$4 \text{ m}$ & \cite{burgoyne2014, shtyrina, yarutkina} \\
+Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ & \cite{burgoyneemail, yarutkina} \\
+Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ & \cite{agrawal2013, yarutkina} \\
+Small Signal Gain & $g_0$ & $1$--$10 \text{ m}^{-1}$ & \cite{burgoyneemail, yarutkina} \\
+Grating Dispersion & $\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ & \cite{burgoyne2014, agrawal2013, shenping, agrawal2002} \\
+Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ & \cite{burgoyne2014, agrawal2013, yarutkina, litchinitser, peng} \\
+Modulation Time & $T_M$ & $15$--$150 \text{ ps}$ & \cite{burgoyne2014, burgoyneemail, bohun} \\
+Length of Cavity & $L$ & $10$--$100 \text{ m}$ & \cite{burgoyneemail, peng} \\
+Length of Gain Fibre & $L_g$ & $2$--$3 \text{ m}$ & \cite{burgoyne2014, shtyrina, yarutkina, peng} \\
 Length of Fibre & $L_f$ & $0.15$--$1 \text{ m}$ & \cite{burgoyneemail} \\
+Reflectivity of Optical Coupler & $R$ & $0.1$--$0.9$ & \cite{burgoyneemail, peng} \\
+Absorption of Fibre & $\alpha$ & $0.01$--$0.3\text{ m}^{-1}$  & \cite{burgoyneemail, yarutkina, shtyrina} \\
 \hline
 \end{tabular}
 \caption{Orders of magnitude of various parameters.}
@@ -144,7 +148,7 @@ The structure of each process of the laser can be better understood by re-scalin
 \end{align*}
 The new process maps, after dropping the tildes, become
 \begin{align*}
-	G(A) &= \left(E^{-1} W_0 \left( a E \textrm{e}^{E}\right) \right)^{1/2} A,&
+	G(A) &= \left(E^{-1} W \left( a E \textrm{e}^{E}\right) \right)^{1/2} A,&
 	F(A) &= A \textrm{e}^{i b |A|^2},&
 	M(A) &= \textrm{e}^{-T^2 / 2} A, \\
 	D(A) &= \FTi{\textrm{e}^{i s^2 \omega^2} \FT{A}},&
@@ -153,13 +157,138 @@ The new process maps, after dropping the tildes, become
 with four dimensionless parameter groups (see Table~\ref{tab:values})
 \begin{align*}
 	a &= \textrm{e}^{g_0 L_g} \sim 8 \times 10^3,& s &= \sqrt{\frac{\beta_2 L_D}{2 T_M^2}} \sim 0.2,&
-	b &= \gamma L_f \frac{\Es}{T_M} \sim 1,& h &= R \textrm{e}^{-\alpha L} \sim 0.04,
+	b &= \gamma L_f \frac{\Es}{T_M} \sim 1,& h &= (1 - R) \textrm{e}^{-\alpha L} \sim 0.04,
 \end{align*}
 which control the behaviour of the laser.
 
 \section{Combining the Effects}
-In this model the pulse is iteratively passed through each process, the order of which is now important. In this first realization, the pulse is first amplified by the gain fibre, then since the pulse's magnitude is greatest the nonlinearity needs to be considered. The pulse is then tapped off by the output coupler, and then passes through the grating and is modulated. The pulse after one complete circuit of the laser cavity is then passed back in to restart the process. Functionally this can be denoted as
+In this model the pulse is iteratively passed through each process, the order of which is now important. We are most interested in the output of the laser cavity, and so we shall start with the loss component---what enters the optical coupler. Next the pulse is passed though the CFBG, as well as the modulator. Finally, the pulse travels through the gain fibre to be amplified, and then we consider the effect of the nonlinearity since this is the region where the power is maximized. The pulse after one complete circuit of the laser cavity is then passed back in to restart the process. Functionally this can be denoted as
 \begin{align*}
-	\mathcal{L}(A) = M(D(L(F(G(A))))),
+	\mathcal{L}(A) = F(G(M(D(L(A))))),
 \end{align*}
 where $\mathcal{L}$ is one loop of the laser. A solution to this model is one in which the envelope and chirp are unchanged after traversing every component in the cavity, that is, such that $\mathcal{L}(A) = A$---potentially with a constant phase shift.
+
+\section{Solution to the Linear Model}
+Since the pulse is modulated by a Gaussian, it is expected that the equilibrium envelope will also be a Gaussian. Consider the initial pulse
+\begin{align*}
+	A_0 = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right),
+\end{align*}
+where $P$ is the peak power. After passing though the optical coupler the pulse will simply decay, $A_1 = h A_0$. The pulse then enters the CFBG, where it will maintain its Gaussian shape, however, it will spread \cite{agrawal2013}. This can be written as
+\begin{align*}
+A_2 = \sqrt{P} h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} \right),
+\end{align*}
+where $\widetilde{\sigma}^2$ denotes the resulting variance, and $\widetilde{C}$ denotes the resulting chirp. Next, the pulse is modulated:
+\begin{align*}
+A_3 = \sqrt{P} h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} - \frac{T^2}{2} \right).
+\end{align*}
+Finally, the pulse travels though the gain fibre where it is amplified to
+\begin{align*}
+A_4 = \sqrt{P} \left( \frac{W(a E \textrm{e}^E)}{E} \right)^{1/2} h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2} \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} - \frac{T^2}{2} \right),
+\end{align*}
+with $E$ the energy of the pulse as it enters the gain fibre.
+
+In equilibrium, it must be that $A_0 = A_4 \textrm{e}^{i \varphi}$, for some $\varphi$. More explicitly, this gives three conditions:
+\begin{subequations}
+\begin{align}
+\label{eq:energycond}
+1 &= \left( \frac{W(a E \textrm{e}^E)}{E} \right)^{1/2} h \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2}, \\
+\label{eq:varcond}
+\frac{1}{\sigma^2} &= \frac{1}{\widetilde{\sigma}^2} + 1, \\
+\label{eq:chirpcond}
+\frac{C}{\sigma^2} &= \frac{\widetilde{C}}{\widetilde{\sigma}^2}.
+\end{align}
+\end{subequations}
+
+\subsection{Equilibrium Shape}
+After dispersion, the out-going variance $\widetilde{\sigma}$ can be found by computing the effect of dispersion given by ***. In the case of a Gaussian pulse \cite{agrawal2013} we have
+\begin{align*}
+\left( \frac{T_1}{T_0} \right)^2 &= \left( 1 + \frac{C \beta_2 z}{T_0^2} \right)^2 + \left( \frac{ \beta_2 z}{T_0^2} \right)^2,&
+\widetilde{C} &= C + (1+C^2) \frac{\beta_2 z}{T_0^2}
+\end{align*}
+where $T_0 = \sigma T_M$, $T_1 = \widetilde{\sigma} T_M$, $z = L_D$, and $\beta_2 z T_0^{-2} = 2s^2\sigma^{-2}$ within our non-dimensionalization. Making these substitutions yields the relations
+\begin{subequations}
+\begin{align}
+\label{eq:varout}
+\widetilde{\sigma}^2 \sigma^2 &= \left( \sigma^2 + 2 C s^2 \right)^2 + 4s^4, \\
+\label{eq:chirpout}
+\widetilde{C} &= C + (1+C^2) \frac{2 s^2}{\sigma^2},
+\end{align}
+\end{subequations}
+for the variance and chirp after the dispersive element. Now, the out-going variance and chirp can be eliminated from this system of equations using \eqref{eq:varcond} and \eqref{eq:chirpcond}:
+\begin{align*}
+\widetilde{\sigma}^2 &= \frac{\sigma^2}{1 - \sigma^2}, \\
+\widetilde{C} &= C \frac{1}{1 - \sigma^2}.
+\end{align*}
+Combining this first expression with \eqref{eq:varout} and expanding, we have that
+\begin{align*}
+\frac{\sigma^4}{1 - \sigma^2} = \sigma^4 + 4 C^2 s^4 + 4 C s^2 \sigma^2 + 4s^4,
+\end{align*}
+or written as a polynomial in $\sigma$,
+\begin{align*}
+0 = \sigma^6 + 4 C s^2 \sigma^4 + \left( 4s^4 (C^2 + 1) - 4 C s^2 \right) \sigma^2 - 4s^4 (C^2 + 1).
+\end{align*}
+The chirp can now be eliminated using \eqref{eq:chirpout}, the $1+C^2$ can be reduced in order by noticing that
+\begin{align*}
+C \frac{1}{1 - \sigma^2} &= C + (1 + C^2) \frac{2s^2}{\sigma^2} \\
+1 + C^2 &= \frac{\sigma^4}{2s^2(1 - \sigma^2)} C.
+\end{align*}
+Furthermore, the chirp can be completely eliminated since
+\begin{align}
+\nonumber
+C &= \frac{\sigma^4}{2s^2(1 - \sigma^2)} \pm \sqrt{\frac{\sigma^8}{16s^4(1 - \sigma^2)^2} - 1}, \\
+\label{eq:equilchirp}
+&= \frac{\sigma^4 \pm \sqrt{\sigma^8 - 16s^4(1 - \sigma^2)^2}}{4s^2(1 - \sigma^2)}.
+\end{align}
+After simplifying algebraically, we arrive at
+\begin{align*}
+0 &= \sigma^6 \pm \sqrt{\sigma^8 - 16s^4(1 - \sigma^2)^2}(2 - \sigma^2), \\
+\frac{\sigma^6}{2 - \sigma^2} &= \mp \sqrt{\sigma^8 - 16s^4(1 - \sigma^2)^2}.
+\end{align*}
+Notice that the left hand side of this expression is strictly positive ($\sigma$ is strictly less than $1$ at equilibrium), therefore, only the negative root of \eqref{eq:equilchirp} will yield a solution. After squaring each side of this expression we obtain
+\begin{align*}
+\sigma^{12} = \sigma^8 (2 - \sigma^2)^2 - 16s^4 (1 - \sigma^2)^2 (2 - \sigma^2)^2,
+\end{align*}
+which once fully simplified, yields the biquartic equation
+\begin{align*}
+\left( \sigma^2 \right)^4 + 4 s^4 \left( \sigma^2 \right)^3 - 20 s^4 \left( \sigma^2 \right)^2 + 32 s^4 \left( \sigma^2 \right) - 16 s^4 = 0.
+\end{align*}
+Since this is a quartic in $\sigma^2$ this can be solved analytically; the (positive) solution is
+\begin{align}
+\label{eq:equilvar}
+\sigma^2 &= \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4}(1 + s^4) \right)^{1/2} - s^4 - s^2 \sqrt{4 + s^4}.
+\end{align}
+
+\subsection{Equilibrium Energy}
+From~\eqref{eq:energycond} the equilibrium energy can be found, as well as the equilibrium peak power. This relation can be simplified by squaring both sides and rearranging to give
+\begin{align*}
+\frac{1}{h^2 \zeta} E = W \left( a E \textrm{e}^E \right),
+\end{align*}
+where $\displaystyle \zeta \equiv \frac{\sigma}{\widetilde{\sigma}} = \sqrt{1 - \sigma^2}$. Then, by taking the exponential of each side, and multiplying by the original expression, we obtain
+\begin{align*}
+\frac{1}{h^2 \zeta} E \exp \left(\frac{1}{h^2 \zeta} E \right) &= W \left( a E \textrm{e}^E \right) \exp \left( W \left( a E \textrm{e}^E \right) \right) \\
+&= a E \textrm{e}^E,
+\end{align*}
+by \eqref{eq:lambertw}. Now, this can be written as 
+\begin{align*}
+a h^2 \zeta &= \exp \left( \frac{1}{h^2 \zeta}E - E \right), \\
+\log \left( a h^2 \zeta \right) &= E \left( \frac{1}{h^2 \zeta} - 1 \right).
+\end{align*}
+The energy of the pulse entering the gain fibre at equilibrium is thus
+\begin{align*}
+E = \frac{h^2 \zeta}{1 - h^2 \zeta} \log \left( a h^2 \zeta \right).
+\end{align*}
+***the pulse will converge if the argument of the log is greater than 1***
+The energy of the pulses as it enters the optical coupler can now be found, recall from \eqref{eq:gainde} that the energy is defined as
+\begin{align*}
+E = \int_{-\infty}^\infty |A|^2 \, \df T;
+\end{align*}
+the energy entering the optical coupler is then
+\begin{align}
+\nonumber E_* &= \int_{-\infty}^\infty |G(A)|^2 \, \df T, \\
+\nonumber &= \frac{W(a E \textrm{e}^E)}{E} \int_{-\infty}^\infty |A|^2 \, \df T, \\
+&= W(a E \textrm{e}^E).
+\end{align}
+Since we have previously found the equilibrium shape, we can now find the amplitude of the pulse as well. Again, from \eqref{eq:gainde}, it must be that $E_* = P \sigma \sqrt{\pi}$, or,
+\begin{align}
+P = \frac{W(a E \textrm{e}^E)}{\sigma \sqrt{\pi}}.
+\end{align}
