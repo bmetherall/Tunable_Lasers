@@ -1,0 +1,35 @@
+% !TeX root = ../Thesis.tex
+
+\chapter{The Lambert $W$ Function}
+\label{chap:lambertw}
+The Lambert $W$ function is defined to be the inverse of the function $f(x) = x \textrm{e}^x$ and its graph is shown in Figure \ref{fig:lambertw}. In other words, if $z = x \textrm{e}^x$ then $x = W(z)$. Notice that by combining these relations we obtain the identities
+\begin{align}
+\label{eq:lambertw}
+z &= W(z) \textrm{e}^{W(z)}, & x &= W(x \textrm{e}^x).
+\end{align}
+This function is called the Lambert $W$ function because it is the logarithm of a special instance of Lambert's series---the letter $W$ is used because of the work done by E. M. Wright \cite{lambertw}.
+
+Notice that the original function, $f(x) = x \textrm{e}^x$, is \emph{not} injective, and as a consequence, the $W$ function is multi-valued on the interval $[-1/\textrm{e},0)$. To alleviate this, sometimes the branch $W(x) \geq -1$ is denoted $W_0$ and is called the upper or principal branch, whereas the branch $W(x) < -1$ is denoted $W_{-1}$ and is called the lower branch. However, in this work the $W$ function will only take positive real values and so this distinction is not needed.
+
+\begin{figure}[htbp]
+\centering
+\input{./Figures/LambertPlot}
+\caption{The two branches of the Lambert $W$ function.}
+\label{fig:lambertw}
+\end{figure}
+
+The Lambert $W$ function has applications in various areas of math and physics \cite{lambertw} including:
+\begin{itemize}
+\item Jet fuel problems
+\item Combustion problems
+\item Enzyme kinetics problems
+\item Linear constant coefficient differential delay equations
+\item Volterra equations.
+\end{itemize}
+Primarily, the $W$ function is used when solving iterated exponentiation, and solving certain algebraic equations. For example, consider the equation $z = x^x$. By taking the logarithm of each side we have
+\begin{align*}
+\log z &= x \log x, \\
+&= \log x \textrm{e}^{\log x},
+\end{align*}
+which after applying the $W$ function reduces to $W(\log z) = \log x$ by \eqref{eq:lambertw}. Finally, the answer can be written as $x = \exp(W(\log z))$.
+
