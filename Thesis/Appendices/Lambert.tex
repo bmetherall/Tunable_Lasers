@@ -9,7 +9,7 @@ z &= W(z) \textrm{e}^{W(z)}, & x &= W(x \textrm{e}^x).
 \end{align}
 This function is called the Lambert $W$ function because it is the logarithm of a special instance of Lambert's series---the letter $W$ is used because of the work done by E. M. Wright \cite{lambertw}.
 
-Notice that the original function, $f(x) = x \textrm{e}^x$, is \emph{not} injective, and as a consequence, the $W$ function is multi-valued on the interval $[-1/\textrm{e},0)$. To alleviate this, sometimes the branch $W(x) \geq -1$ is denoted $W_0$ and is called the upper or principal branch, whereas the branch $W(x) < -1$ is denoted $W_{-1}$ and is called the lower branch. However, in this work the $W$ function will only take positive real values and so this distinction is not needed.
+Notice that the original function, $f(x) = x \textrm{e}^x$, is \emph{not} injective, and as a consequence, the $W$ function is multi-valued on the interval $[-1/\textrm{e},0)$. To alleviate this, occasionally the branch $W(x) \geq -1$ is denoted $W_0$ and is called the principal or upper branch, whereas the branch $W(x) < -1$ is denoted $W_{-1}$ and is called the lower branch. However, in this work the $W$ function will only take positive real values and so this distinction is not needed.
 
 \begin{figure}[htbp]
 \centering
@@ -26,10 +26,10 @@ The Lambert $W$ function has applications in various areas of math and physics \
 \item Linear constant coefficient differential delay equations
 \item Volterra equations.
 \end{itemize}
-Primarily, the $W$ function is used when solving iterated exponentiation, and solving certain algebraic equations. For example, consider the equation $z = x^x$. By taking the logarithm of each side we have
+Primarily, the $W$ function arises when solving iterated exponentiation or certain algebraic equations. For example, consider the equation $z = x^x$. By taking the logarithm of each side we have
 \begin{align*}
 \log z &= x \log x, \\
 &= \log x \textrm{e}^{\log x},
 \end{align*}
-which after applying the $W$ function reduces to $W(\log z) = \log x$ by \eqref{eq:lambertw}. Finally, the answer can be written as $x = \exp(W(\log z))$.
+which after applying the $W$ function reduces to $W(\log z) = \log x$ by \eqref{eq:lambertw}. Finally, $x$ as a function of $z$ can be written as $x = \exp(W(\log z))$.
 

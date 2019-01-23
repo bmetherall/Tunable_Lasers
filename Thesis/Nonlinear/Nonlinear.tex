@@ -1,11 +1,18 @@
 % !TeX root = ../Thesis.tex
 
 \chapter{Solution of the Nonlinear Model}
+\section{Code}
+With the inclusion of the nonlinearity ($b > 0$) the model becomes too difficult to solve analytically, and we must resort to solving it numerically. 
+
+Appendix \ref{chap:code}
+
+\subsection{Validation}
+The code can be validated by comparing to the results of the linear model.
 
 \begin{figure}[htbp]
 \centering
 \input{./Figures/Variance}
-\caption{Simulation and analytic equilibrium standard deviation as a function of $s$.}
+\caption{Simulation and analytic equilibrium variance, chirp, and phase shift as a function of $s$.}
 \label{fig:}
 \end{figure}
 
@@ -18,6 +25,7 @@
 \label{fig:}
 \end{figure}
 
+\section{Nonlinear Model}
 
 
 \begin{figure}[htbp]
