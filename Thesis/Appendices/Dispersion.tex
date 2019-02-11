@@ -3,11 +3,11 @@
 \chapter{Spread Due to Dispersion}
 \label{chap:disp}
 
-The effect of dispersion can be computed analytically for several input pulses using ***. In the case of a Gaussian pulse, we make use of the transforms \cite{integrals}
+The effect of dispersion can be computed analytically for several input pulses using \eqref{eq:disp}. In the case of a Gaussian pulse, we make use of the transforms \cite{gradshteyn}
 \begin{align*}
 \FT{\textrm{e}^{-\eta T^2}} &= (2 \eta)^{-1/2}\textrm{e}^{-\omega^2/4\eta},& \FTi{\textrm{e}^{-\eta \omega^2}} &= (2 \eta)^{-1/2}\textrm{e}^{-T^2/4\eta}.
 \end{align*}
-From *** we have that
+From \eqref{eq:disp} we have that
 \begin{align*}
 D \left( \textrm{e}^{-\eta T^2} \right) &=\FTi{\textrm{e}^{i s^2 \omega^2} \FT{\textrm{e}^{-\eta T^2}}}, \\
 &= (2 \eta)^{-1/2} \FTi{\exp \left( -\omega^2 \left( \frac{1}{4\eta} - i s^2 \right) \right)}, \\
@@ -15,20 +15,20 @@ D \left( \textrm{e}^{-\eta T^2} \right) &=\FTi{\textrm{e}^{i s^2 \omega^2} \FT{\
 \end{align*}
 For us, $\displaystyle \eta = \frac{1}{2} \frac{1 + i C}{\sigma^2}$; making this substitution yields
 \begin{align*}
-D \left( \Gamma \right) &= \left( 1 + \frac{2C s^2}{\sigma^2} - \frac{2s^2}{\sigma^2}i \right)^{-1/2} \exp \left( -T^2 \frac{1 + i C}{2\sigma^2 - 4 i s^2 (1 + i C)} \right),
+D(A_1) &= \left( 1 + \frac{2C s^2}{\sigma^2} - \frac{2s^2}{\sigma^2}i \right)^{-1/2} \exp \left( -T^2 \frac{1 + i C}{2\sigma^2 - 4 i s^2 (1 + i C)} \right).
 \end{align*}
-where $\displaystyle \Gamma = \exp \left( -T^2 \frac{1 + iC}{2 \sigma^2} \right)$. This can be greatly simplified by first rationalizing the denominators to give
+This can be greatly simplified by first rationalizing the denominators to give
 \begin{align*}
-D \left( \Gamma \right) &= \left( \frac{1 + \frac{2C s^2}{\sigma^2} + \frac{2s^2}{\sigma^2}i}{\left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2} \right)^{1/2} \exp \left( -T^2 \frac{(1 + i C)(2\sigma^2 + 4 C s^2 + 4 i s^2)}{(2\sigma^2 + 4C s^2)^2 + 16s^4} \right),
+D(A_1) &= \left( \frac{1 + \frac{2C s^2}{\sigma^2} + \frac{2s^2}{\sigma^2}i}{\left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2} \right)^{1/2} \exp \left( -T^2 \frac{(1 + i C)(2\sigma^2 + 4 C s^2 + 4 i s^2)}{(2\sigma^2 + 4C s^2)^2 + 16s^4} \right),
 \end{align*}
 and then by writing in polar / rectangular coordinates:
 \begin{multline*}
-D \left( \Gamma \right) = \left( \left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2 \right)^{-1/4} \exp \left( \frac{1}{2} i \arctan \left( \frac{\frac{2s^2}{\sigma^2}}{1 + \frac{2C s^2}{\sigma^2}} \right) \right) \\
+D(A_1) = \left( \left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2 \right)^{-1/4} \exp \left( \frac{1}{2} i \arctan \left( \frac{\frac{2s^2}{\sigma^2}}{1 + \frac{2C s^2}{\sigma^2}} \right) \right) \\
 \times \exp \left( -T^2 \frac{\sigma^2 \left[ 1 + i \left( C + (1 + C^2) \frac{2s^2}{\sigma^2} \right) \right]}{2 \left[ (\sigma^2 + 2C s^2)^2 + 4s^4 \right]} \right).
 \end{multline*}
 Finally, this can be simplified further to
 \begin{multline*}
-D \left( \Gamma \right) = \sigma \left( \left( \sigma^2 + 2C s^2 \right)^2 + 4s^4 \right)^{-1/4} \exp \left( \frac{1}{2} i \arctan \left( \frac{2s^2}{\sigma^2 + 2C s^2} \right) \right) \\
+D(A_1) = \sigma \left( \left( \sigma^2 + 2C s^2 \right)^2 + 4s^4 \right)^{-1/4} \exp \left( \frac{1}{2} i \arctan \left( \frac{2s^2}{\sigma^2 + 2C s^2} \right) \right) \\
 \times \exp \left( -T^2 \frac{\sigma^2 \left[ 1 + i \left( C + (1 + C^2) \frac{2s^2}{\sigma^2} \right) \right]}{2 \left[ (\sigma^2 + 2C s^2)^2 + 4s^4 \right]} \right).
 \end{multline*}
 From this expression it is clear that at equilibrium
@@ -39,7 +39,7 @@ From this expression it is clear that at equilibrium
 \zeta &= \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2}.
 \end{align*}
 
-The expressions for the chirp and variance can be verified with the well known relations \cite{agrawal2013, silfvast, ferreira}
+The expressions for the chirp and variance can be verified with the well known relations \cite{agrawal2013, ferreira, silfvast}
 \begin{align*}
 \left( \frac{T_1}{T_0} \right)^2 &= \left( 1 + \frac{C \beta_2 z}{T_0^2} \right)^2 + \left( \frac{ \beta_2 z}{T_0^2} \right)^2,&
 \widetilde{C} &= C + (1+C^2) \frac{\beta_2 z}{T_0^2}.
@@ -48,7 +48,7 @@ Where, within our non-dimensionalization, $T_0 = \sigma T_M$, $T_1 = \widetilde{
 \begin{align*}
 \int_{-\infty}^\infty |A_1|^2 \, \df T &= \int_{-\infty}^\infty |A_2|^2 \, \df T.
 \end{align*}
-Which, after substituted the expressions from Section \ref{sec:linear}, reduces to
+Which, after substituting the expressions from Section \ref{sec:linear}, reduces to
 \begin{align*}
 h^2 P \int_{-\infty}^\infty \textrm{e}^{-T^2/\sigma^2} \, \df T &= h^2 P \zeta \int_{-\infty}^\infty \textrm{e}^{-T^2/\widetilde{\sigma}^2} \, \df T.
 \end{align*}
