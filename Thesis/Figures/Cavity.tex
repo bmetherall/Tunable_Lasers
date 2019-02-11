@@ -13,13 +13,12 @@
 \filldraw[fill=white, draw=black] (-1.6,1.5) rectangle ++(1.2,1) node [midway] {Pump};
 
 % Coupler and output
-\draw[-{Latex[length=2.5mm]}] (4.5,4) -- (4.5,5.5) node [pos=0.75,anchor=west,xshift=0.25cm] {Laser Output};
+\draw[-stealth] (4.5,4) -- (4.5,5.5) node [pos=0.75,anchor=west,xshift=0.25cm] {Laser Output};
 \draw[densely dashdotted] (4,3.5) -- (5,4.5) node [pos=1,anchor=north,yshift=-0.75cm,align=center] {Optical \\ Coupler};
 
 % Circulator
 \filldraw[fill=white, draw=black] (9,2) circle (0.5cm) node [anchor=west,xshift=0.5cm,align=center] {Optical \\ Circulator};
-\draw (9,2.5) arc (0:-90:0.5cm);
-\draw (9,1.5) arc (0:90:0.5cm);
+\draw[->,>=stealth] (9,2.325) arc (90:360:0.325cm);
 
 % Grating
 \draw (8.5,2) -- (6.5,2) node [pos=0.5,anchor=south,yshift=0.25cm,xshift=-0.15cm] {CFBG};
@@ -27,12 +26,10 @@
   \draw (6.5 + \i*\i/100,1.75) -- (6.5 + \i*\i/100,2.25);
 
 % Arrows
-\draw[-{Latex[length=2.5mm]}] (2.16,0) -- (2.15,0);
-\draw[-{Latex[length=2.5mm]}] (2.39,4) -- (2.4,4);
-\draw[-{Latex[length=2.5mm]}] (6.76,0) -- (6.75,0);
-\draw[-{Latex[length=2.5mm]}] (7.09,4) -- (7.1,4);
-\draw[-{Latex[length=2.5mm]}] (-0.649,0) -- (-0.65,0);
-\draw[-{Latex[length=2.5mm]}] (-0.351,4) -- (-0.35,4);
-\draw[-{Latex[length=2.5mm]}] (8.807,2.11) -- (8.8,2.1);
-\draw[-{Latex[length=2.5mm]}] (8.96,1.712) -- (8.97,1.7);
+\draw[-stealth] (2.16,0) -- (2.15,0);
+\draw[-stealth] (2.39,4) -- (2.4,4);
+\draw[-stealth] (6.76,0) -- (6.75,0);
+\draw[-stealth] (7.09,4) -- (7.1,4);
+\draw[-stealth] (-0.649,0) -- (-0.65,0);
+\draw[-stealth] (-0.351,4) -- (-0.35,4);H
 \end{tikzpicture}

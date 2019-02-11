@@ -1,0 +1,25 @@
+% !TeX root = ../Thesis.tex
+
+\begin{tikzpicture}
+\draw[pattern=north east lines, pattern color=blue] (-4,0.5) rectangle (4,1); % Top Insulation
+\draw[pattern=north west lines, pattern color=blue] (-4,-0.5) rectangle (4,-1); % Bottom Insulation
+\draw[pattern=mydots, pattern color=OliveGreen] (-4,-0.5) rectangle (4,0.5); % Core
+\draw[fill=black] (-2,1.5) rectangle (2,1.75); % Phase Mask top
+
+\foreach \i in {0,...,7}
+  \draw[magenta, thick] (-1.75 + \i/2,5) -- (-1.75 + \i/2,1.5);
+
+\foreach \i in {0,...,3}{
+  % Phase mask teeth
+  \draw[fill=black] (-2 + \i,1.25) rectangle (-1.75 + \i,1.5); 
+  \draw[fill=black] (-1.25 + \i,1.25) rectangle (-1 + \i,1.5);
+  % Rays
+  \draw[->, >=stealth, magenta, thick] (-1.75 + \i,1.5) -- (-1.25 + \i,-1.5);
+  \draw[->, >=stealth, magenta, thick] (-1.25 + \i,1.5) -- (-1.75 + \i,-1.5);
+}
+% Labels
+\draw[->, >=stealth, thick] (3,-1.5) -- (2,0) node[pos=-0.2] {Ge Doped Core};
+\draw[->, >=stealth, thick] (-3,-1.5) -- (-2,-0.75) node[pos=-0.3] {Cladding};
+\draw[->, >=stealth, thick] (-3,2.5) -- (-1.75,2) node[pos=-0.4] {UV Light};
+\draw[->, >=stealth, thick] (3,2.5) -- (2,1.5) node[pos=-0.2] {Phase-Mask};
+\end{tikzpicture}

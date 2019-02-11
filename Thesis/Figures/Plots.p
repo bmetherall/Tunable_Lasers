@@ -1,3 +1,22 @@
+set terminal epslatex color size 3in,2.7in lw 3
+
+# Chirp
+set xr [-3:3]
+set grid
+set ytics 0.5
+set xtics 2
+set samples 10000
+
+set output './Figures/Unchirped.tex'
+p exp(-x**2/2)*sin(3*pi*x) not
+set out
+
+set output './Figures/Chirped.tex'
+p exp(-x**2/2)*sin(2*(x-pi)**2) not
+set out
+
+reset
+
 set terminal epslatex color size 6in,3.7in lw 3
 
 # Lambert W function
@@ -23,10 +42,12 @@ set key bottom left
 
 set output './Figures/Variance.tex'
 set grid
-p '../LinearAnalytic.dat' u 1:4 t 'Analytic $\sigma$' w l, \
+p '../LinearAnalytic.dat' u 1:($4**2) t 'Analytic Variance' w l, \
 '../LinearAnalytic.dat' u 1:5 t 'Analytic Chirp' w l lc 2 dt 5, \
-'../Linear.dat' u 1:4 t 'Sim $\sigma$' pt 7 lc 1, \
-'../Linear.dat' u 1:5 t 'Sim Chirp' pt 7 lc 2
+'../LinearAnalytic.dat' u 1:6 t 'Analytic Phase Shift' w l lc 3 dt 4, \
+'../Linear.dat' u 1:($4**2) t 'Simulation Variance' pt 7 lc 1, \
+'../Linear.dat' u 1:5 t 'Simulation Chirp' pt 7 lc 2, \
+'../Linear.dat' u 1:6 t 'Simulation Phase Shift' pt 7 lc 3
 set out
 
 reset
