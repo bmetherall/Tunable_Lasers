@@ -1,11 +1,22 @@
 \documentclass[oneside]{UOIT_Thesis}
 
+\usepackage{wrapfig}
+\usepackage{lipsum}
+
 % Load tikz and libraries
 \usepackage{tikz}
-\usetikzlibrary{patterns,snakes}
+\usetikzlibrary{patterns,decorations.pathreplacing}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=Figures/]
+
+% New dots
+\pgfdeclarepatternformonly{mydots}{\pgfqpoint{-1pt}{-1pt}}{\pgfqpoint{5pt}{5pt}}{\pgfqpoint{6pt}{6pt}}%
+{
+    \pgfpathcircle{\pgfqpoint{0pt}{0pt}}{.5pt}
+    \pgfpathcircle{\pgfqpoint{3pt}{3pt}}{.5pt}
+    \pgfusepath{fill}
+}
 
 % Code Stuff
 \include{Listing}
