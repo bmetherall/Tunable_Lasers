@@ -2,6 +2,7 @@
 
 \usepackage{wrapfig}
 \usepackage{lipsum}
+\usepackage{amsthm}
 
 % Load tikz and libraries
 \usepackage{tikz}
@@ -21,22 +22,35 @@
 % Code Stuff
 \include{Listing}
 
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
 \providecommand{\df}{\textrm{d}}
 \newcommand{\diff}[3][]{\frac{\textrm{d}^{#1}#2}{\textrm{d}{#3}^{#1}}}
 \newcommand{\pdiff}[3][]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}}
 \newcommand{\Es}{E_{\textrm{sat}}}
 \newcommand{\FT}[1]{\mathcal{F}\left\{ #1 \right\}}
 \newcommand{\FTi}[1]{\mathcal{F}^{-1}\left\{ #1 \right\}}
+\newcommand{\Her}[2]{\widetilde{H}_{#1} \left( #2 \right)}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\rect}[1]{\textrm{rect}\left( #1 \right)}
 
 \providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\sech}{sech}
 
-\title{A Nonlinear Model for Dispersion-Tuned Actively Mode-Locked Lasers}
+\newtheorem{theorem}{Theorem}[chapter]
+
+\title{A New Method of Modelling Tuneable Lasers with Functional Composition}
 \author{Brady Metherall}
 \degree{Master of Science}
 \faculty{Science}
 \program{Modelling and Computational Science}
+
+%\let\originalcite\cite
+%\renewcommand{\cite}[1]{\mbox{\originalcite{#1}}}
 
 \begin{document}
 
@@ -45,7 +59,7 @@
 \maketitle
 
 \makeabstract{
-A new nonlinear model is proposed for tuneable lasers. Using the generalized non-linear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each component in the cavity. These transformations are then composed to give the overall effect of one trip around the cavity. The linear version of this model is solved analytically, and the nonlinear version numerically. A consequence of this model being nonlinear is that it is able to exhibit wave breaking which prior models could not. We highlight the rich structure of the boundary of stability for a particular plane of the parameter space.
+A new nonlinear model is proposed for tuneable lasers. Using the generalized nonlinear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each component in the cavity. These transformations are then composed to give the overall effect of one trip around the cavity. The linear version of this model is solved analytically, and the nonlinear version numerically. A consequence of this model being nonlinear is that it is able to exhibit wave breaking which prior models could not. We highlight the rich structure of the boundary of stability for a particular plane of the parameter space.
 }
 
 \makeacknowledgements{
@@ -64,8 +78,10 @@ Thank some people that you like here.
 \doublespacing
 
 \include{./Intro/Introduction}
+\include{./Previous_Models/Previous}
 \include{./Model/Model}
 \include{./Nonlinear/Nonlinear}
+\include{./Conclusion/Conclusion}
 
 \phantomsection 
 \addcontentsline{toc}{chapter}{References} 
@@ -75,9 +91,14 @@ Thank some people that you like here.
 
 \include{./Appendices/Lambert}
 \include{./Appendices/Dispersion}
+\include{./Appendices/Asymptotics}
+\include{./Appendices/Hermite}
 
 \chapter{Code}
 \label{chap:code}
 \lstinputlisting[language=Python]{../Lasers.py}
+
+% Cite collections so they show up in the references
+\nocite{abramowitz, gowers, hernandez}
 
 \end{document}
