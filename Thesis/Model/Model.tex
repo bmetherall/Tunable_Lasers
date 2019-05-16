@@ -1,15 +1,20 @@
 % !TeX root = ../Thesis.tex
 
 \chapter{A New Model}
-\section{Components}
+\label{chap:linear}
+In this chapter we shall derive our new model and solve it analytically in the linear case. To accomplish this we shall use the ideas of the previous functional models \cite{cutler, siegman, kuizenga1970a, kuizenga1970b, kuizenga1970, martinez1984, martinez1985, burgoyne2014}. To alleviate some of the pitfalls mentioned in the previous chapter, we shall include all five processes involved in the modification of the pulse within the laser cavity (gain, nonlinearity, loss, dispersion, and modulation). In addition to this, the functional operations associated with each component will be derived from \eqref{eq:nlse}, with the exception of the modulation in which we consider the exact functional form to be determined by the laser operator. \\
 
+We shall start our analysis with the derivation of the functional operators for the five components. \\
+
+\section{Components}
 \subsection{Gain}
+\label{chap:gain}
 Within the Er-doped gain fibre, the gain term is dominant, and equation~\eqref{eq:nlse} reduces to
 \begin{align}
 \label{eq:gainde}
 \pdiff{A}{z} &= \frac{1}{2} g(A),
 \end{align}
-where $g(A)$ takes the form \cite{bohun, burgoyne2014, peng, shtyrina, silfvast, yarutkina}
+where $g(A)$ takes the form \cite{bohun, burgoyne2014, hausbook, haus1975, haus1991, haus1992, haus2000, peng, shtyrina, silfvast, usechak, yarutkina}
 \begin{align}
 \label{eq:energy}
 	g(A) &= \frac{g_0}{1 + E / \Es} A,& E &= \int_{-\infty}^\infty |A|^2 \, \df T,
@@ -34,7 +39,7 @@ For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain
 \end{align*}
 and by exponentiating, rearranging, and applying $W$, the Lambert $W$ function\footnote{see Appendix \ref{chap:lambertw}},
 \begin{align*}
-W\left(\frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z}\right) &= W\left(\frac{E_{\textrm{out}}}{\Es} \textrm{e}^{E_{\textrm{out}}/\Es}\right) \\
+W \left(\frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 z}\right) &= W\left(\frac{E_{\textrm{out}}}{\Es} \textrm{e}^{E_{\textrm{out}}/\Es}\right) \\
 &= \frac{E_{\textrm{out}}}{\Es},
 \end{align*}
 by \eqref{eq:lambertw}. This results in the closed form expression
@@ -56,13 +61,18 @@ The nonlinearity of the fibre arises from the parameter $\gamma$; in regions whe
 \end{align}
 This expression can be manipulated in a similar manner to the gain to show $\frac{\partial}{\partial z} |A|^2 = 0$, suggesting that $A(T,z) = A_0(T) e^{i \varphi(T,z)}$. Substituting this representation into~\eqref{eq:fibrediff} and setting $\varphi(T,0)=0$ gives $\varphi(T,z) = \gamma |A|^2 z$. For a fibre of length $L_f$ the effect of the nonlinearity is thus
 \begin{align*}
-F(A) &= A e^{i \gamma |A|^2 L_f}.
+F(A) &= A \textrm{e}^{i \gamma |A|^2 L_f},
 \end{align*}
+this is also frequently called the Kerr nonlinearity or Kerr effect after John Kerr who discovered it in 1875. As we shall see in Section \ref{chap:energy}, this is what is responsible for self-phase modulation and ultimately the degradation of the pulse \cite{desurvire, dunlop, martinez1984, tamura}.
 
 \subsection{Loss}
-Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. Combining these two effects give a loss that takes the form
+Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. The first case is simply a scalar multiplication depending on the reflectivity of the output coupler. The loss due to absorption and scattering can be derived from \eqref{eq:nlse},
 \begin{align*}
-L(A) &= (1 - R) e^{- \alpha L}A,
+\pdiff{A}{z} = - \alpha A.
+\end{align*}
+Combining these two effects give a loss that takes the form
+\begin{align*}
+L(A) &= (1 - R) \textrm{e}^{- \alpha L}A,
 \end{align*}
 where $R$ is the reflectivity of the output coupler, and $L$ is the total length of the laser circuit.
 
@@ -72,7 +82,7 @@ Within the laser cavity, the dispersion is dominated by the CFBG. In comparison,
 \label{eq:dispde}
 	\pdiff{A}{z} = -i \frac{\beta_2}{2} \pdiff[2]{A}{T} + \frac{\beta_3}{6} \pdiff[3]{A}{T},
 \end{align}
-and since dispersion acts in the frequency domain it is convenient to take the Fourier transform of~\eqref{eq:dispde} \cite{gradshteyn}, giving
+and since dispersion acts in the frequency domain it is convenient to take the Fourier transform of~\eqref{eq:dispde} \cite{debnath, gradshteyn}, giving
 \begin{align*}
 	\pdiff{}{z}\FT{A} &= i\frac{\omega^2}{2}\left(\beta_2 - \frac{\beta_3}{3} \omega\right) \FT{A}.
 \end{align*}
@@ -83,11 +93,13 @@ D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D(\beta_2 - \beta_3 \omega/3)/2} \FT{A}}.
 For a highly dispersive media the third order effects may need to be considered~\cite{agrawal2013, litchinitser}. However, for simplicity and because of the nature of the grating, the third order effects will be neglected \cite{agrawal2013, ferreira}---we set $\beta_3=0$ for the subsequent analysis.
 
 \subsection{Modulation}
-In the average model, the amount of modulation is characterized by the parameter $\epsilon$ through the term $\frac{\epsilon}{2}T^2 A$. In this new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
+In the average model, the amount of modulation is characterized by the parameter $M_s$ through the term $\frac{M_s}{2}T^2 A$. In this new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
 \begin{align*}
 M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
 \end{align*}
-where $T_M$ is a characteristic width of the modulation.
+where $T_M$ is a characteristic width of the modulation. \\
+
+Despite assuming a Gaussian modulation the following solution can be generalized to any modulation function in $L^2$ since Gaussians in fact span $L^2$ as shown in Appendix \ref{chap:gauss}. \\
 
 \section{Non-Dimensionalization}
 
@@ -96,16 +108,16 @@ where $T_M$ is a characteristic width of the modulation.
 \begin{tabular}{lclc}
 Parameter & Symbol & Value & Sources \\
 \noalign{\global\arrayrulewidth=1.5pt}\hline
-Absorption of Fibre & $\alpha$ & $0.01$--$0.3\text{ m}^{-1}$  & \cite{burgoyneemail, shtyrina, yarutkina} \\
-Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ & \cite{agrawal2013, burgoyne2014, litchinitser, peng, yarutkina} \\
-Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ & \cite{agrawal2013, yarutkina} \\
+Absorption of Fibre & $\alpha$ & $0.01$--$0.3\text{ m}^{-1}$  & \cite{burgoyneemail, shtyrina, usechak, yarutkina} \\
+Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ & \cite{agrawal2002, agrawal2013, burgoyne2014, litchinitser, peng, yarutkina} \\
+Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ & \cite{agrawal2013, usechak, yarutkina} \\
 Grating Dispersion & $\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ & \cite{agrawal2002, agrawal2013, burgoyne2014, li} \\
 Length of Cavity & $L$ & $10$--$100 \text{ m}$ & \cite{burgoyneemail, peng} \\
 Length of Fibre & $L_f$ & $0.15$--$1 \text{ m}$ & \cite{burgoyneemail} \\
 Length of Gain Fibre & $L_g$ & $2$--$3 \text{ m}$ & \cite{burgoyne2014, peng, shtyrina, yarutkina} \\
 Modulation Time & $T_M$ & $15$--$150 \text{ ps}$ & \cite{bohun, burgoyne2014, burgoyneemail} \\
 Reflectivity of Optical Coupler & $R$ & $0.1$--$0.9$ & \cite{burgoyneemail, peng} \\
-Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ & \cite{burgoyneemail, yarutkina} \\
+Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ & \cite{burgoyneemail, usechak, yarutkina} \\
 Small Signal Gain & $g_0$ & $1$--$10 \text{ m}^{-1}$ & \cite{burgoyneemail, yarutkina} \\
 \hline
 \end{tabular}
@@ -140,6 +152,7 @@ The structure of each process of the laser can be better understood by re-scalin
 \end{align*}
 The new process maps, after dropping the tildes, become
 \begin{subequations}
+\label{eq:effects}
 \begin{align}
 \label{eq:gain}
 G(A) &= \left(E^{-1} W \left( a E \textrm{e}^{E}\right) \right)^{1/2} A, \\
@@ -161,6 +174,7 @@ with the four dimensionless parameters (see Table~\ref{tab:values})
 which control the behaviour of the laser.
 
 \section{Combining the Effects}
+\label{sec:effects}
 In this model the pulse is iteratively passed through each process, the order of which must now be considered. We are most interested in the output of the laser cavity, and so we shall start with the loss component. Next the pulse is passed though the CFBG, as well as the modulator. Finally, the pulse travels through the gain fibre to be amplified, and then we consider the effect of the nonlinearity since this is the region where the power is maximized. The pulse after one complete circuit of the laser cavity is then passed back in to restart the process. Functionally this can be denoted as
 \begin{align*}
 	\mathcal{L}(A) = F(G(M(D(L(A))))),
@@ -169,7 +183,7 @@ where $\mathcal{L}$ is one loop of the laser. A solution to this model is one in
 
 \section{Solution to the Linear Model}
 \label{sec:linear}
-In the case of $b = 0$---which shall be referred to as the linear model---a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the average model is a Gaussian, the equilibrium shape will be highly correlated to the shape of the modulation function ***, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
+In the case of $b = 0$---which shall be referred to as the linear model---a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the average model is a Gaussian, the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
 
 Consider the initial pulse
 \begin{align*}
@@ -244,21 +258,21 @@ After simplifying algebraically, we arrive at
 0 &= \sigma^6 \pm \sqrt{\sigma^8 - 16s^4(1 - \sigma^2)^2}(2 - \sigma^2), \\
 \frac{\sigma^6}{2 - \sigma^2} &= \mp \sqrt{\sigma^8 - 16s^4(1 - \sigma^2)^2}.
 \end{align*}
-As we shall see, $\sigma$ is strictly less than $1$ at equilibrium, and so, notice that the left hand side of this expression is strictly positive. Therefore, only the negative root of \eqref{eq:equilchirp} will yield a solution. After squaring each side of this expression we obtain
+As we shall see, $\sigma$ is strictly less than $1$ at equilibrium, and so, notice that the left hand side of this expression is strictly positive. Therefore, only the negative root of \eqref{eq:equilchirp} will yield a solution. Moreover, Martinez, Fork, and Gordon \cite{martinez1984} found two solutions analytically, but showed that one was unstable---consistent with experiments. After squaring each side of this expression we obtain
 \begin{align*}
 \sigma^{12} = \sigma^8 (2 - \sigma^2)^2 - 16s^4 (1 - \sigma^2)^2 (2 - \sigma^2)^2,
 \end{align*}
 which once fully simplified, yields the biquartic equation
-\begin{align*}
+\begin{align}
+\label{eq:var}
 \left( \sigma^2 \right)^4 + 4 s^4 \left( \sigma^2 \right)^3 - 20 s^4 \left( \sigma^2 \right)^2 + 32 s^4 \left( \sigma^2 \right) - 16 s^4 = 0.
-\end{align*}
+\end{align}
 Since this is a quartic in $\sigma^2$ this can be solved analytically; the (positive, real) solution is
 \begin{align}
 \label{eq:equilvar}
 \sigma^2 &= \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4} \left( 1 + s^4 \right) \right)^{1/2} - s^4 - s^2 \sqrt{4 + s^4}.
 \end{align}
-
-Limit?***
+The asymptotic expansions of the variance in the case of $s \rightarrow 0$, and $s \rightarrow \infty$ are derived in Appendix \ref{chap:asymp}. \\
 
 \subsection{Equilibrium Energy}
 From~\eqref{eq:energycond} the equilibrium energy can be found, as well as the equilibrium peak power. This relation can be simplified by squaring both sides and rearranging to give
@@ -294,3 +308,5 @@ We can now find the amplitude of the pulse as well as we have previously found t
 \begin{align}
 P = \frac{W(a E \textrm{e}^E)}{\sigma \sqrt{\pi}}.
 \end{align}
+
+-sample solution?
