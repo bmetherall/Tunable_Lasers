@@ -1,0 +1,108 @@
+% !TeX root = ../Thesis.tex
+
+\chapter{Span of Gaussians in $L^2$}
+\label{chap:gauss}
+In order to show that Gaussians span $L^2$, we shall start our analysis with the span of the Hermite polynomials in $L^2$. Typically the Hermite polynomials are recursively defined as \cite{conway, courant, teuwen}
+\begin{align*}
+H_n(x) := (-1)^n \textrm{e}^{x^2} \diff[n]{}{x} \textrm{e}^{-x^2},
+\end{align*}
+with the inner product\footnote{The complex conjugate of $g$ is omitted since the functions dealt with are real.}
+\begin{align*}
+\left< f, g \right> = \int_\mathbb{R} f g \textrm{e}^{-x^2} \df x,
+\end{align*}
+where $\textrm{e}^{-x^2}$ is the weighting function. This is so that 
+\begin{align*}
+\left< H_m(x), H_n(x) \right> = \sqrt{\pi} 2^n n! \delta_{mn}
+\end{align*}
+and, therefore, the Hermite polynomials form an orthogonal set \cite{courant, hochstrasser, kreyszig, szego, teuwen}. Consider instead, the Gaussian--Hermite polynomials
+\begin{align*}
+\Her{n}{x} &:= \textrm{e}^{-x^2/2} H_n(x),
+\end{align*}
+with the inner product
+\begin{align*}
+\left< f, g \right> = \int_\mathbb{R} f g \, \df x,
+\end{align*}
+notice that the weighting function has been absorbed into the Hermite polynomials. We shall now show that the set of Gaussian--Hermite polynomials spans $L^2$. \\
+
+\begin{theorem}
+\label{thm:hermite}
+The set of Gaussian--Hermite polynomials, $\mathcal{G} = \{ \Her{n}{x} : n \in \mathbb{N} \}$, spans $L^2$.
+\end{theorem}
+\begin{proof}
+The Gaussian--Hermite polynomials are an orthogonalization of the set $\Xi = \{x^n \textrm{e}^{-x^2/2} : n \in \mathbb{N}\}$, and therefore, have the same span \cite{kreyszig, szego}. Thus, it is sufficient to show that $\Xi$ spans $L^2$.
+Suppose there exists an $f \in L^2$ such that $\left< f, \Her{n}{x} \right> = 0$ for all $n$, or equivalently, that $\left< f, x^n \textrm{e}^{-x^2/2} \right> = 0$ for all $n$ so that it is not in the span of $\mathcal{G}$. \\
+
+Let us now consider the function \cite{courant, szego, teuwen}
+\begin{align*}
+F(z) = \frac{1}{\sqrt{2\pi}}\int_\mathbb{R} f \textrm{e}^{zx} \textrm{e}^{-x^2/2} \, \df x,
+\end{align*}
+noting that $f \textrm{e}^{zx} \textrm{e}^{-x^2/2} \in L^2$ by the Cauchy--Schwarz inequality \cite{griffel, kolmogorov}, so $F$ converges, and that $F$ is holomorphic. The first exponential can be expanded into its Maclaurin series, then with Fubini's theorem we obtain
+\begin{align*}
+F(z) = \frac{1}{\sqrt{2\pi}} \sum_{n = 0}^{\infty} \frac{z^n}{n!} \int_\mathbb{R} f x^n \textrm{e}^{-x^2/2} \, \df x.
+\end{align*}
+Recall, that by assumption
+\begin{align*}
+\int_\mathbb{R} f x^n \textrm{e}^{-x^2/2} \, \df x &= \left< f, x^n \textrm{e}^{-x^2/2} \right>, \\
+&=0,
+\end{align*}
+for all $n$ and so $F(z) \equiv 0$. We now notice that
+\begin{align*}
+0 &= F(z), \\
+&= F(i \omega), \\
+&= \FT{f \textrm{e}^{-x^2/2}},
+\end{align*}
+and now it is clear that $f \textrm{e}^{-x^2/2} = 0$ almost everywhere, therefore, $f = 0$ almost everywhere. \\
+\end{proof}
+
+Alternatively, without much difficulty it can be shown that the Gaussian--Hermite polynomials satisfy
+\begin{align}
+\label{eq:paracyl}
+\diff[2]{\Her{n}{x}}{x} - \left( x^2 - 2n - 1 \right) \Her{n}{x} = 0,
+\end{align}
+this has the form of the parabolic cylinder functions \cite{miller}, and indeed the Gaussian--Hermite polynomials can be expressed in terms of parabolic cylinder functions \cite{hochstrasser, miller}. Moreover, \ref{eq:paracyl} can also be written in Sturm--Liouville form as
+\begin{align*}
+\diff{}{x} \left( 1 \cdot \diff{\Her{n}{x}}{x} \right) + (1 - x^2) \Her{n}{x} = -2n \Her{n}{x}.
+\end{align*}
+By the spectral theorem \cite{griffel, higson, kreyszig}, this suggests that the Gaussian--Hermite polynomials form an orthogonal set with the weighting function $w(x) = 1$, and are complete in $L^2$. Using this result, we can now show that Gaussian functions also span $L^2$ with the following theorem. \\
+
+\begin{figure}[tbp]
+\begin{subfigure}{0.5\textwidth}
+\input{./Figures/GS1}
+\caption{$N = 20$, $h = 0.1$}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\input{./Figures/GS2}
+\caption{$N = 10$, $h = 0.1$}
+\end{subfigure}
+\caption{Two examples of Gaussian series.}
+\label{fig:gs}
+\end{figure}
+
+\begin{theorem}
+\label{thm:gaussian}
+Gaussians of a single variance span $L^2$.
+\end{theorem}
+\begin{proof}
+Theorem \ref{thm:hermite} showed that any square integrable function can be expressed as
+\begin{align*}
+f = \sum_{n = 0}^\infty a_n \Her{n}{x}.
+\end{align*}
+Using a similar idea to \cite{calcaterra2, calcaterra}, we shall now expand the Gaussian--Hermite polynomials into their definition
+\begin{align*}
+f = \sum_{n = 0}^\infty a_n (-1)^n \textrm{e}^{x^2/2} \diff[n]{}{x} \textrm{e}^{-x^2}.
+\end{align*}
+Finally, we can rewrite the derivatives using central differences \cite{zwillinger} so that
+\begin{align}
+f = \sum_{n = 0}^\infty a_n (-1)^n \textrm{e}^{x^2/2} \left[ \lim_{h \rightarrow 0} \frac{1}{h^n} \sum_{i = 0}^n (-1)^i \binom{n}{i} \exp\left( -\left( x + h\left( \frac{n}{2} - i \right) \right)^2 \right) \right].
+\label{eq:gs}
+\end{align}
+\end{proof}
+
+\begin{figure}[tbp]
+\input{./Figures/GaussMod}
+\caption{$N = 20$, $h = 0.1$}
+\label{fig:gaussmod}
+\end{figure}
+
+Two examples of Gaussian series from \eqref{eq:gs} are shown in Figure \ref{fig:gs}. These examples are taken from \cite{calcaterra2, calcaterra}, however, we achieve similar or better approximations with either fewer terms, or with an $h$ value an order of magnitude larger. There are two reasons for this, first, we use central difference as opposed to backwards difference yielding a convergence of $\bigO{h^2}$ instead of $\bigO{h}$. Furthermore, because \cite{calcaterra2, calcaterra} used backwards differences, the means of the Gaussians are all non-negative, whereas with central differences, our Gaussians' means are both positive and negative---this leads to smaller coefficients, and better numerical stability. Moreover, Figure \ref{fig:gaussmod} shows the Gaussian series for the modulation function in \cite{bohun, burgoyneemail}.
+
