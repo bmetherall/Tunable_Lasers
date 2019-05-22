@@ -1,9 +1,7 @@
 % !TeX root = ../Thesis.tex
-
-\chapter{Spread Due to Dispersion}
-\label{chap:disp}
-
-The effect of dispersion can be computed analytically for several input pulses using \eqref{eq:disp}. In the case of a Gaussian pulse, we make use of the transforms \cite{debnath, gradshteyn}
+%\chapter{Spread Due to Dispersion}
+%\label{chap:disp}
+The effect of dispersion can be computed analytically for input pulses using \eqref{eq:disp}. In the case of a Gaussian pulse, we make use of the transforms \cite{debnath, gradshteyn}
 \begin{align*}
 \FT{\textrm{e}^{-\eta T^2}} &= (2 \eta)^{-1/2}\textrm{e}^{-\omega^2/4\eta},& \FTi{\textrm{e}^{-\eta \omega^2}} &= (2 \eta)^{-1/2}\textrm{e}^{-T^2/4\eta}.
 \end{align*}
@@ -21,7 +19,7 @@ This can be greatly simplified by first rationalizing the denominators to give
 \begin{align*}
 D(A_1) &= \left( \frac{1 + \frac{2C s^2}{\sigma^2} + \frac{2s^2}{\sigma^2}i}{\left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2} \right)^{1/2} \exp \left( -T^2 \frac{(1 + i C)(2\sigma^2 + 4 C s^2 + 4 i s^2)}{(2\sigma^2 + 4C s^2)^2 + 16s^4} \right),
 \end{align*}
-and then by writing in polar / rectangular coordinates:
+and then by writing in polar coordinates:
 \begin{multline*}
 D(A_1) = \left( \left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2 \right)^{-1/4} \exp \left( \frac{1}{2} i \arctan \left( \frac{\frac{2s^2}{\sigma^2}}{1 + \frac{2C s^2}{\sigma^2}} \right) \right) \\
 \times \exp \left( -T^2 \frac{\sigma^2 \left[ 1 + i \left( C + (1 + C^2) \frac{2s^2}{\sigma^2} \right) \right]}{2 \left[ (\sigma^2 + 2C s^2)^2 + 4s^4 \right]} \right).
@@ -32,12 +30,17 @@ D(A_1) = \sigma \left( \left( \sigma^2 + 2C s^2 \right)^2 + 4s^4 \right)^{-1/4} 
 \times \exp \left( -T^2 \frac{\sigma^2 \left[ 1 + i \left( C + (1 + C^2) \frac{2s^2}{\sigma^2} \right) \right]}{2 \left[ (\sigma^2 + 2C s^2)^2 + 4s^4 \right]} \right).
 \end{multline*}
 From this expression it is clear that at equilibrium
-\begin{align*}
+\begin{subequations}
+\begin{align}
+\label{eq:varout}
 \widetilde{\sigma}^2 \sigma^2 &= \left( \sigma^2 + 2 C s^2 \right)^2 + 4s^4, \\
+\label{eq:chirpout}
 \widetilde{C} &= C + (1+C^2) \frac{2 s^2}{\sigma^2}, \\
+\label{eq:phase}
 \phi &= \frac{1}{2} \arctan \left( \frac{2s^2}{\sigma^2 + 2C s^2} \right), \\
 \zeta &= \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2}.
-\end{align*}
+\end{align}
+\end{subequations}
 
 The expressions for the chirp and variance can be verified with the well known relations \cite{agrawal2013, anderson, ferreira, silfvast}
 \begin{align*}
