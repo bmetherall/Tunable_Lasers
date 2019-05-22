@@ -24,7 +24,7 @@ In the first experiment the pulse is allowed to equilibrate for 40 loops of the 
 \begin{figure}[tbp]
 \centering
 \input{./Figures/LinearPlot}
-\caption{Equilibrium energy, and peak power of the pulse as a function of $s$. The thin black line is to highlight that the energy is \emph{not} linearly related to $s$.}
+\caption[Equilibrium energy, and peak power of the pulse as a function of $s$.]{Equilibrium energy, and peak power of the pulse as a function of $s$. The thin black line is to highlight that the energy is \emph{not} linearly related to $s$.}
 \label{fig:valenergy}
 \end{figure}
 
@@ -50,7 +50,7 @@ With the numerical solution yielding the expected results, we are now ready to d
 \input{./Figures/Stable_Chirp}
 \caption{Chirp}
 \end{subfigure}
-\caption{Simulation with $s = 0.15$, and $b = 2.1$ after 15 circuits.}
+\caption[Envelope, Fourier transform, and chirp of the pulse---stable case.]{Simulation with $s = 0.15$, and $b = 2.1$ after 15 circuits.}
 \label{fig:nlstable}
 \end{figure}
 With the inclusion of the nonlinearity we generally find a similar solution to the linear case. An example of this is shown in Figure \ref{fig:nlstable}. The envelope of the pulse is unsurprisingly Gaussian-esque, however, it is \emph{not} precisely Gaussian and more closely resembles a generalized Gaussian\footnote{A generalized Gaussian has the form $\exp \left(-t^\alpha \right)$, with $\alpha > 2$.}. The fact that the pulse envelope is not Gaussian is further emphasized while examining the Fourier transform of the pulse. If the pulse were a Gaussian, we would expect the Fourier transform to also be a Gaussian \cite{debnath, gradshteyn}. Instead, the magnitude of the Fourier transform has a unique Batman-like shape. This deviation suggests the nonlinearity implants higher frequency oscillations into the pulse---this will be a key observation in the coming subsections. Finally, we shall examine the derivative of the phase---essentially the chirp. Recall in Chapter \ref{chap:linear} the chirp was defined as coefficient of $-\frac{1}{2}iT^2$ in the exponential, by taking the negative of the derivative we would expect a linear function with a slope equal to the chirp. In the nonlinear case, this is what we find for moderate values of $T$. On the other hand, for $|T| > 1$ the relation begins to level off. This is in agreement with experimental results \cite{chen, rothenberg, tomlinson}. \\
@@ -64,7 +64,7 @@ We shall now take a look at perhaps the most important feature of the pulse---th
 \centering
 \begin{subfigure}{\textwidth}
 \input{./Figures/StabilityZoom}
-\caption{Centralized for more typical $s$, and $b$ values.}
+\caption{Centralized for typical $s$, and $b$ values.}
 \label{fig:energyzoom}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
@@ -72,7 +72,7 @@ We shall now take a look at perhaps the most important feature of the pulse---th
 \caption{Energy of the pulse within the $s$-$b$ plane.}
 \label{fig:energybig}
 \end{subfigure}
-\caption{Energy of the pulse at equilibrium. The energy is constant along the black lines.}
+\caption[Energy of the pulse at equilibrium.]{Energy of the pulse at equilibrium. The energy is constant along the black lines.}
 \label{fig:energy}
 \end{figure}
 
@@ -119,18 +119,18 @@ The strength of the nonlinearity is thus controlled by $b |A|^2$, where $|A|^2$ 
 \input{./Figures/Unstable_Bad_Chirp}
 \caption{Chirp}
 \end{subfigure}
-\caption{$s = 0.15$, $b = 2.15$, \textbf{Left:} 11 loops, \textbf{Right:} 16 loops}
+\caption[Envelope, Fourier transform, and chirp of the pulse---unstable case.]{$s = 0.15$, $b = 2.15$, \textbf{Left:} 11 loops, \textbf{Right:} 16 loops}
 \label{fig:break}
 \end{figure}
 
 \subsubsection{Self-Phase Modulation and Wave Breaking}
 
-The noise in the energy exhibited for moderate to large values of $b$, and small values of $s$ is a phenomenon called \emph{wave breaking} \cite{agrawal2013, anderson, finot, rothenberg, tomlinson}. Wave breaking is not limited to just optics, wave breaking occurs in areas such as plasmas, transmission lines, and fluid dynamics \cite{rothenberg}. Wave breaking occurs because the pulse begins to interfere with itself in a way called self-phase modulation \cite{agrawal2002, agrawal2013, becker}. Self-phase modulation occurs because the index of refraction is intensity dependent \cite{agrawal2002, becker, rothenberg, silfvast}, which leads to additional chirp across the pulse \cite{agrawal2013, anderson, rothenberg, silfvast}. This in turn causes higher order frequencies to be injected into the pulse \cite{agrawal2013, anderson}. These high frequencies compound with each trip around the cavity becoming parasitic very quickly---Figure \ref{fig:break} highlights this. Notice that the difference between this figure and Figure \ref{fig:nlstable} is a difference in $b$ of $0.05$---this difference could be as small as adding a few centimetres more of fibre between the gain and output coupler. The left figures show the pulse after 11 trips around the cavity, in the Fourier transform it is clear that the contributions from higher frequencies has increased---we obtain similar results as in \cite{anderson, rothenberg}. Additionally, the chirp starts losing its linearity causing it to start becoming unstable; the nature of this instability is in agreement with \cite{anderson, rothenberg}. The parasitic nature of the high frequency contributions is evident by examining the right figures. After 5 additional trips around the cavity, the envelope of the pulse is much more rippled, and the real and imaginary parts become incoherent. Moreover, the Fourier transform has no clear defined shape and has essentially become noise, and the chirp has grown to be highly oscillatory and unstable. Once the pulse has reached a state such as this, there is no turning back---the envelope, Fourier transform, and chirp never reach a steady equilibrium state. \\
+The noise in the energy exhibited for moderate to large values of $b$, and small values of $s$ is a phenomenon called \emph{wave breaking} \cite{agrawal2013, anderson, finot, rothenberg, tomlinson}. Wave breaking is not limited to just optics, wave breaking occurs in areas such as plasmas, transmission lines, and fluid dynamics \cite{rothenberg}. Wave breaking occurs because the pulse begins to interfere with itself in a way called self-phase modulation \cite{agrawal2002, agrawal2013, becker}. Self-phase modulation occurs because the index of refraction is intensity dependent \cite{agrawal2002, becker, rothenberg, silfvast}, which leads to additional chirp across the pulse \cite{agrawal2013, anderson, rothenberg, silfvast}. This in turn causes higher order frequencies to be injected into the pulse \cite{agrawal2013, anderson}. These high frequencies compound with each trip around the cavity becoming parasitic very quickly---Figure \ref{fig:break} highlights this. Notice that the difference between this figure and Figure \ref{fig:nlstable} is a difference in $b$ of $0.05$---this difference could be as small as adding a few centimetres more of fibre between the gain and output coupler. The left figures show the pulse after 11 trips around the cavity, in the Fourier transform it is clear that the contributions from higher frequencies has increased---we obtain similar results as in \cite{anderson, rothenberg}. Additionally, the chirp starts losing its linearity causing it to start becoming unstable; the nature of this instability is in agreement with \cite{anderson, rothenberg}. The parasitic nature of the high frequency contributions is evident by examining the right figures. After 5 additional trips around the cavity, the envelope of the pulse is much more rippled, and the real and imaginary parts become incoherent. Moreover, the Fourier transform has no clear structure and has essentially become noise, and the chirp has grown to be highly oscillatory and unstable. Once the pulse has reached a state such as this, there is no turning back---the envelope, Fourier transform, and chirp never reach a steady equilibrium state. \\
 
 \subsection{Convergence}
 \begin{figure}[tbp]
 \input{./Figures/Step1}
-\caption{Error of the pulse (given by \eqref{eq:error}) between iterations $99$ and $100$.}
+\caption[Error of the pulse.]{Error of the pulse (given by \eqref{eq:error}) between iterations $99$ and $100$.}
 \label{fig:error}
 \end{figure}
 
@@ -167,7 +167,7 @@ The noise in the energy exhibited for moderate to large values of $b$, and small
 \input{./Figures/Step60}
 \caption{$\Delta = 60$}
 \end{subfigure} \\
-\caption{Error for various values of $\Delta$, the colour bar and axis labels have been omitted for clarity, the scales and ranges are the same as in Figure \ref{fig:error}.}
+\caption[Error for various values of $\Delta$.]{Error for various values of $\Delta$, the colour bar and axis labels have been omitted for clarity, the scales and ranges are the same as in Figure \ref{fig:error}.}
 \label{fig:deltaerror}
 \end{figure}
 
@@ -185,11 +185,11 @@ The second cause of these errors is because some equilibrium states have a perio
 \textrm{E}_\Delta = \frac{\| |A_i| - |A_{i-\Delta}| \|_2}{\| A_{i-\Delta} \|_2},
 \label{eq:deltaerror}
 \end{align}
-to pick up equilibrium states with period $\Delta$, again with $i = 100$. Figure \ref{fig:deltaerror} shows the error for an assortment of $\Delta$ values. There are several key observations to make, first, for $\Delta = 2$ the kidney-shaped blob in the lower right corner has vanished, thus, this entire region has a periodicity of $2$. Second, for $\Delta = 3$ in the upper right corner a negative triangular-shaped structure emerges. Lastly, $\Delta \in \left\{ 5, 7, 11, 13 \right\}$ may not seem to extract any higher order periods, however, there are in fact very small striations in the lower left. Up until now the $\Delta$ values have been prime since they are the building blocks for composite numbers. However, there are two composite $\Delta$ values of interest---the first being $16$. Since $16 = 2^4$ it will pick up any periodic behaviour with orders of $2, 4, 8, 16$, which are frequently found in bifurcations. Lastly, we chose $\Delta = 60$ for a similar reason: because $60$ is highly divisible---it is an abundant number. This extracts orders such as $12$ or $30$ without having to explicitly run the calculations\footnote{In the case of $\Delta = 60$ a value of $i = 150$ is used to ensure sufficient iterations to converge.}. \\
+to pick up equilibrium states with period $\Delta$, again with $i = 100$. Figure \ref{fig:deltaerror} shows the error for an assortment of $\Delta$ values. There are several key observations to make, first, for $\Delta = 2$ the kidney-shaped blob in the lower right corner has vanished, thus, this entire region has a periodicity of $2$. Second, for $\Delta = 3$ in the upper right corner a negative triangular-shaped structure emerges. Lastly, $\Delta \in \left\{ 5, 7, 11, 13 \right\}$ may not seem to extract any higher order periods, however, there are in fact very small striations in the lower left. So far, the $\Delta$ values have been prime since they are the building blocks for composite numbers. However, there are two composite $\Delta$ values of interest---the first being $16$. Since $16 = 2^4$ it will pick up any periodic behaviour with orders of $2, 4, 8, 16$, which are frequently found in bifurcations. Lastly, we chose $\Delta = 60$ for a similar reason: because $60$ is highly divisible---it is an abundant number. This extracts orders such as $12$ or $30$ without having to explicitly run the calculations\footnote{In the case of $\Delta = 60$ a value of $i = 150$ is used to ensure sufficient iterations to converge.}. \\
 
 \begin{figure}[tbp]
 \input{./Figures/Min}
-\caption{Composite error, \eqref{eq:errorcomp}, of Figure \ref{fig:deltaerror}.}
+\caption[Composite error.]{Composite error, \eqref{eq:errorcomp}, of Figure \ref{fig:deltaerror}.}
 \label{fig:errorcomp}
 \end{figure}
 
@@ -204,7 +204,7 @@ The intriguing structure of the composite error is shown in Figure \ref{fig:erro
 \centering
 \begin{subfigure}{\textwidth}
 \input{./Figures/StabilitySwitchZoom}
-\caption{Centralized for more typical $s$, and $b$ values.}
+\caption{Centralized for typical $s$, and $b$ values.}
 \label{fig:switchzoom}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}

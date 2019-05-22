@@ -2,11 +2,11 @@
 
 \chapter{A New Model}
 \label{chap:linear}
-In this chapter we shall derive our new model and solve it analytically in the linear case. To accomplish this we shall use the ideas of the previous functional models \cite{cutler, siegman, kuizenga1970a, kuizenga1970b, kuizenga1970, martinez1984, martinez1985, burgoyne2014}. To alleviate some of the pitfalls mentioned in the previous chapter, we shall include all five processes involved in the modification of the pulse within the laser cavity (gain, nonlinearity, loss, dispersion, and modulation). In addition to this, the functional operations associated with each component will be derived from \eqref{eq:nlse}, with the exception of the modulation in which we consider the exact functional form to be determined by the laser operator. \\
-
-We shall start our analysis with the derivation of the functional operators for the five components. \\
+In this chapter we shall derive our new model and solve it analytically in the linear case. To accomplish this we shall use the ideas of the previous functional models \cite{cutler, seigman, kuizenga1970a, kuizenga1970b, kuizenga1970, martinez1984, martinez1985, burgoyne2014}. To alleviate some of the pitfalls mentioned in the previous chapter, we shall include all five processes involved in the modification of the pulse within the laser cavity (gain, nonlinearity, loss, dispersion, and modulation). In addition to this, the functional operations associated with each component will be derived from \eqref{eq:nlse}, with the exception of the modulation in which we consider the exact functional form to be determined by the laser operator. \\
 
 \section{Components}
+We shall begin our analysis with the derivation of the functional operators for the five components. \\
+
 \subsection{Gain}
 \label{chap:gain}
 Within the Er-doped gain fibre, the gain term is dominant, and equation~\eqref{eq:nlse} reduces to
@@ -14,7 +14,7 @@ Within the Er-doped gain fibre, the gain term is dominant, and equation~\eqref{e
 \label{eq:gainde}
 \pdiff{A}{z} &= \frac{1}{2} g(A),
 \end{align}
-where $g(A)$ takes the form \cite{bohun, burgoyne2014, hausbook, haus1975, haus1991, haus1992, haus2000, peng, shtyrina, silfvast, usechak, yarutkina}
+where $g(A)$ takes the form \cite{bohun, burgoyne2014, hausbook, haus1975, haus1991, haus1992, haus2000, kartner, peng, shtyrina, silfvast, usechak, yarutkina}
 \begin{align}
 \label{eq:energy}
 	g(A) &= \frac{g_0}{1 + E / \Es} A,& E &= \int_{-\infty}^\infty |A|^2 \, \df T,
@@ -33,7 +33,7 @@ adding this to its complex conjugate and integrating over $T$ gives
 \label{diffez}
 	\diff{E}{z} &= \frac{g_0 E}{1 + E / \Es}.
 \end{align}
-For $E \ll \Es$ the energy grows exponentially, whereas for $E \gg \Es$ the gain has saturated and so the growth is linear. To obtain a closed form solution, \eqref{diffez} is integrated over a gain fibre of length $z$ and assuming the energy increases from $E$ to $E_{\textrm{out}}$, then
+For $E \ll \Es$ the energy will grow exponentially, whereas for $E \gg \Es$ the gain has saturated and so the growth is linear. To obtain a closed form solution, \eqref{diffez} is integrated over a gain fibre of length $z$ and assuming the energy increases from $E$ to $E_{\textrm{out}}$, then
 \begin{align*}
 	g_0 z = \log\frac{E_{\textrm{out}}}{E} + \frac{E_{\textrm{out}}-E}{\Es},
 \end{align*}
@@ -63,7 +63,7 @@ This expression can be manipulated in a similar manner to the gain to show $\fra
 \begin{align*}
 F(A) &= A \textrm{e}^{i \gamma |A|^2 L_f},
 \end{align*}
-this is also frequently called the Kerr nonlinearity or Kerr effect after John Kerr who discovered it in 1875. As we shall see in Section \ref{chap:energy}, this is what is responsible for self-phase modulation and ultimately the degradation of the pulse \cite{desurvire, dunlop, martinez1984, tamura}.
+this is also frequently called the Kerr nonlinearity or Kerr effect after John Kerr who discovered the effect in 1875. As we shall see in Section \ref{chap:energy}, this is what is responsible for self-phase modulation and ultimately the degradation of the pulse \cite{desurvire, dunlop, martinez1984, tamura}.
 
 \subsection{Loss}
 Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. The first case is simply a scalar multiplication depending on the reflectivity of the output coupler. The loss due to absorption and scattering can be derived from \eqref{eq:nlse},
@@ -93,7 +93,7 @@ D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D(\beta_2 - \beta_3 \omega/3)/2} \FT{A}}.
 For a highly dispersive media the third order effects may need to be considered~\cite{agrawal2013, litchinitser}. However, for simplicity and because of the nature of the grating, the third order effects will be neglected \cite{agrawal2013, ferreira}---we set $\beta_3=0$ for the subsequent analysis.
 
 \subsection{Modulation}
-In the average model, the amount of modulation is characterized by the parameter $M_s$ through the term $\frac{M_s}{2}T^2 A$. In this new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
+In the master equation of mode-locking, the amount of modulation is characterized by the parameter $M_s$ through the term $\frac{M_s}{2}T^2 A$. In this new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
 \begin{align*}
 M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
 \end{align*}
@@ -183,7 +183,7 @@ where $\mathcal{L}$ is one loop of the laser. A solution to this model is one in
 
 \section{Solution to the Linear Model}
 \label{sec:linear}
-In the case of $b = 0$---which shall be referred to as the linear model---a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the average model is a Gaussian, the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
+In the case of $b = 0$---which shall be referred to as the linear model---a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the previous models were Gaussian \cite{cutler, seigman, kuizenga1970a, martinez1984, martinez1985}, the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
 
 Consider the initial pulse
 \begin{align*}
@@ -213,22 +213,15 @@ In equilibrium it must be that $A_0 = A_4 \textrm{e}^{-i \phi}$. More explicitly
 \label{eq:chirpcond}
 \frac{C}{\sigma^2} &= \frac{\widetilde{C}}{\widetilde{\sigma}^2}.
 \end{align}
+\label{eq:linsys}
 \end{subequations}
 
+\subsection{Dispersion}
+Each of these processes has a relatively straight forward effect, with the exception of dispersion.
+\input{./Appendices/Dispersion}
+
 \subsection{Equilibrium Shape}
-Each of these processes has a relatively straight forward effect, with the exception of dispersion. After dispersion, the out-going variance, $\widetilde{\sigma}^2$, can be found by computing the effect of dispersion given by \eqref{eq:disp}. This yields the relations
-\begin{subequations}
-\begin{align}
-\label{eq:varout}
-\widetilde{\sigma}^2 \sigma^2 &= \left( \sigma^2 + 2 C s^2 \right)^2 + 4s^4, \\
-\label{eq:chirpout}
-\widetilde{C} &= C + (1+C^2) \frac{2 s^2}{\sigma^2}, \\
-\label{eq:phase}
-\phi &= \frac{1}{2} \arctan \left( \frac{2s^2}{\sigma^2 + 2C s^2} \right), \\
-\zeta &= \left( \frac{\sigma}{\widetilde{\sigma}} \right)^{1/2}
-\end{align}
-\end{subequations}
-for the variance, chirp, phase shift, and spread, respectively, after the dispersive element, the full details can be found in Appendix \ref{chap:disp}. Now, the out-going variance and chirp can be eliminated from this system of equations using \eqref{eq:varcond} and \eqref{eq:chirpcond}:
+Now that the effect of dispersion is know analytically, the system \eqref{eq:linsys} can be solved. The out-going variance and chirp can be eliminated from this system of equations using \eqref{eq:varcond} and \eqref{eq:chirpcond}:
 \begin{align*}
 \widetilde{\sigma}^2 &= \frac{\sigma^2}{1 - \sigma^2}, \\
 \widetilde{C} &= C \frac{1}{1 - \sigma^2}.
@@ -272,7 +265,12 @@ Since this is a quartic in $\sigma^2$ this can be solved analytically; the (posi
 \label{eq:equilvar}
 \sigma^2 &= \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4} \left( 1 + s^4 \right) \right)^{1/2} - s^4 - s^2 \sqrt{4 + s^4}.
 \end{align}
-The asymptotic expansions of the variance in the case of $s \rightarrow 0$, and $s \rightarrow \infty$ are derived in Appendix \ref{chap:asymp}. \\
+
+\subsection{Asymptotic Expansion of the Variance}
+While \eqref{eq:equilvar} is useful, so too is the asymptotic behaviour.
+\input{./Appendices/Asymptotics}
+
+
 
 \subsection{Equilibrium Energy}
 From~\eqref{eq:energycond} the equilibrium energy can be found, as well as the equilibrium peak power. This relation can be simplified by squaring both sides and rearranging to give

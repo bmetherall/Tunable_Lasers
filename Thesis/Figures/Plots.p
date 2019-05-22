@@ -275,9 +275,9 @@ set cntrparam levels incremental 0, pi, 140
 
 set terminal epslatex color size 6in,3.7in lw 3
 
-set output './Figures/EffNL.tex'
-sp '../8000-04-01-DM.dat' u 1:2:($4*$2) w pm3d not lw 0.3
-set out
+#set output './Figures/EffNL.tex'
+#sp '../8000-04-01-DM.dat' u 1:2:($4*$2) w pm3d not lw 0.3
+#set out
 
 #unset format cb
 #set cbr [5:50]
@@ -323,7 +323,7 @@ set terminal epslatex color size 3in,2in lw 3
 
 f(x, n) = (n == 0) ? 0 : f(x, n-1) + cos(2*pi*n*x)
 
-set xl '$T$'
+set xl '$x$'
 set grid
 
 set xr [-2.5:2.5]
