@@ -61,7 +61,6 @@ set out
 
 reset
 
-
 # Errors
 set terminal epslatex color size 3in,1.78in lw 3
 #set xl '$s$'
@@ -229,17 +228,38 @@ reset
 # Parameter Space
 set xl '$s$'
 set yl rotate by 0 '$b$'
-set cbl rotate by 0 '$E$'
 load '/home/brady/Templates/Blues.p'
 set grid front
-set cbr [0:3]
 set view map
 set format x '%.1f'
-set format cb '%.1f'
 
+#set cbr [0.1:0.1001]
+#unset colorbox
+
+set palette maxcolors 2
+
+set palette defined ( 0 '#F7FBFF',\
+    	    	      1 '#084594' )
+
+#set cbtics ('Stable' 0.25, 'Unstable' 0.75)
+
+set cbtics ('' 0.25, '' 0.75)
+
+set cbl rotate by 90 'Stable \hspace{14mm} Unstable'
+
+set output './Figures/Cartoon.tex'
+sp '../8000-04-01-DM.dat' u 1:2:($3 < 0.05 ? 0 : 1) w image not lw 0.3
+set out
+
+set cbl rotate by 0 '$E$'
+
+set format cb '%.1f'
+set cbr [0:3]
 unset cl
 set contour base
 set cntrparam levels incremental 0, 0.25, 3
+
+load '/home/brady/Templates/Blues.p'
 
 #set output './Figures/Stability.tex'
 #sp '../8000-04-01-DM.dat' u 1:2:4 w pm3d not lw 0.3
@@ -346,6 +366,8 @@ set out
 set xr [-2.5:2.5]
 set yr [-1.5:1.5]
 set ytics 1
+set xtics 1
+set xl '$T$'
 
 set key above horizontal
 
@@ -356,6 +378,15 @@ p '../FT_Stable.dat' u 1:4 w l t '$|A|$', \
 set out
 
 set yr [-2:2]
+set xr [-1.5:1.5]
+
+set output './Figures/Linear_Shape.tex'
+p '../Linear_Solution.dat' u 1:4 w l t '$|A|$', \
+'../Linear_Solution.dat' u 1:2 w l dt 5 t 'Re$(A)$', \
+'../Linear_Solution.dat' u 1:3 w l dt 4 t 'Im$(A)$'
+set out
+
+set xr [-2.5:2.5]
 
 set output './Figures/Unstable_Shape.tex'
 p '../FT_Unstable.dat' u 1:4 w l t '$|A|$', \
@@ -375,14 +406,26 @@ set ytics 5
 set xl '$\omega$'
 set yl rotate by 0 '$|\widehat{A}|$'
 
+set xtics 10
+
 unset format
 
 set output './Figures/Stable_FT.tex'
 p '../FT_Stable.dat' u 5:6 w l not
 set out
 
-set yr [0:35]
+set yr [0:60]
 set ytics 10
+set xr [-15:15]
+set xtics 5
+
+set output './Figures/Linear_FT.tex'
+p '../Linear_Solution.dat' u 5:6 w l not
+set out
+
+set yr [0:35]
+set xr [-25:25]
+set xtics 10
 
 set output './Figures/Unstable_FT.tex'
 p '../FT_Unstable.dat' u 5:6 w l not
@@ -403,12 +446,26 @@ d(x,y) = (dx=x-x0, x0=x, dy=y-y0, y0=y, (dy > pi) ? (dy = dy-2*pi) : (dy), ((dy 
 set xr [-2.5:2.5]
 set yr [-20:20]
 set ytics 10
+set xtics 1
 set xl '$T$'
 set yl rotate by 0 '$-\diff{\phi}{T}$'
 
 set output './Figures/Stable_Chirp.tex'
 p '../FT_Stable.dat' u 1:(-d($1,$7)) w l not
 set out
+
+set xr [-1.5:1.5]
+set yr [-10:10]
+set ytics 5
+set xtics 1
+
+set output './Figures/Linear_Chirp.tex'
+p '../Linear_Solution.dat' u 1:(-d($1,$7)) w l not
+set out
+
+set xr [-2.5:2.5]
+set yr [-20:20]
+set ytics 10
 
 set output './Figures/Unstable_Chirp.tex'
 p '../FT_Unstable.dat' u 1:(-d($1,$7)) w l not
