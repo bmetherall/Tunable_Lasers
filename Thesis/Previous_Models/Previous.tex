@@ -8,12 +8,12 @@ The standard equation for studying nonlinear optics is the nonlinear Schr\"oding
 \begin{align*}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A.
 \end{align*}
-Here $A(z, T)$ is the complex pulse amplitude, $\beta_2 \in \mathbb{R}$ is the second-order---or group delay---dispersion, and $\gamma \in \mathbb{R}$ is the coefficient of nonlinearity or Kerr coefficient. This equation can be derived from the nonlinear wave equation for electric fields, the derivation is presented in detail in \cite{agrawal2013, ferreira}. Within the derivation comoving coordinates are used so that the reference frame propagates with the pulse at the group velocity. This is achieved with the substitution
+Here $A = A(z, T)$ is the complex pulse amplitude, $\beta_2 \in \mathbb{R}$ is the second order---or group delay---dispersion, and $\gamma \in \mathbb{R}$ is the coefficient of nonlinearity or Kerr coefficient. This equation can be derived from the nonlinear wave equation for electric fields, the derivation is presented in detail in \cite{agrawal2013, ferreira}. Within the derivation comoving coordinates are used so that the reference frame propagates with the pulse at the group velocity. This is achieved with the substitution
 \begin{align}
 \label{eq:shift}
 T = t - \frac{z}{v_g}.
 \end{align}
-In this way, $z$ defines the distance travelled by the pulse, and $T$ the time difference from the peak of the pulse. Moreover, $T = 0$ is the peak of the pulse regardless of the actual time elapsed, because of this, generally $T$ is not very large. In standard coordinates the nonlinear Schr\"odinger equation has an additional term
+In this way, $z$ defines the distance travelled by the pulse, and $T$ the time difference from the peak of the pulse. Moreover, $T = 0$ is the peak of the pulse regardless of the actual time elapsed, because of this, generally $T$ is not very large. In standard coordinates the nonlinear Schr\"odinger equation has an additional term:
 \begin{align*}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{t} + i \gamma |A|^2 A - \frac{1}{v_g} \pdiff{A}{t}.
 \end{align*}
@@ -44,9 +44,9 @@ The most common form of modulation is the sinusoid $M(T) = \frac{1}{2}\frac{M_s}
 \label{eq:meml}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A - \frac{1}{2}M_s T^2.
 \end{align}
-Commonly, in an attempt to simplify, the equation the gain assumed to be constant with $g(A) = 2g_0 \in \mathbb{R}$. As a whole no analytic solution is know for \eqref{eq:meml}, however, after additional simplifications there are three flavours of solutions. \\
+Commonly, in an attempt to simplify the equation the gain is assumed to be constant with $g(A) = 2g_0 \in \mathbb{R}$. As a whole no analytic solution is known for \eqref{eq:meml}, however, after additional simplifications there are three flavours of solutions. \\
 
-In the least complicated case, the modulation and nonlinearity are omitted giving
+In the least complicated case, the modulation and nonlinearity are both omitted giving
 \begin{align*}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \left( g_0 - \alpha \right) A.
 \end{align*}
@@ -60,9 +60,9 @@ where a similar solution is found, however, it is instead of the form of a chirp
 \end{align*}
 This can be solved using separation of variables and one finds the solutions are the Gaussian--Hermite polynomials \cite{burgoyne2014, hausbook, haus1975, haus1996, haus2000, kartner, tamura, usechak}. However, in practice only the Gaussian is stable---the higher modes quickly decay within the laser \cite{hausbook, haus1975, haus1996, haus2000}. For a more comprehensive and exhaustive history see \cite{haus2000}. \\
 
-\section{Discrete Functional Model}
+\section{Discrete Functional Models}
 While solutions to the master equation yield reasonable results, it is not necessarily representative of what happens within the laser cavity. The issue with \eqref{eq:meml} is that it assumes each process effects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this is a rather poor assumption. Within the cavity each effect is localized to its corresponding component: almost all of the dispersion happens within the CFBG, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, perhaps a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be composed together functionally to give the effect of one circuit around the cavity. This yields an algebraic equation instead of a differential one. \\
 
 Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{seigman}, which they then greatly added to the following year \cite{kuizenga1970a}. Kuizenga and Seigman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried to model passive mode-locking---mode-locking without the use of a modulator. In the absence of a modulator the nonlinearity becomes crucial to shaping the pulse. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In each of these models the effect of each block is described by a Gaussian transfer function. These transfer functions are then multiplied together to give the overall effect. \\
 
-Despite these attempts, several short-comings exist. The clearest is that none of these models have contained every block--either the nonlinearity or the modulation have been omitted. In the framework of tuneable lasers, each component plays a crucial role and the tuneable laser will not function without the inclusion of all of the components. Another key drawback is that the functional operations of some of the components are somewhat phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with their underlying physics. Finally, none of these previous models have been able to exhibit a phenomena called \emph{wave-breaking} in which the self-phase modulation (SPM) of the pulse becomes too strong, distorting and damaging the wave until it ultimately becomes unstable and unsustainable. This notion will be explained in greater detail in Chapter \ref{chap:nl}. \\
+Despite these attempts, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. In the framework of tuneable lasers, each component plays a crucial role and the tuneable laser will not function without the inclusion of all of the components. Another key drawback is that the functional operations of some of the components are somewhat phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with their underlying physics. Finally, none of these previous models have been able to exhibit a phenomena called \emph{wave-breaking} in which the self-phase modulation (SPM) of the pulse becomes too strong, distorting and damaging the wave until it ultimately becomes unstable and unsustainable. This notion will be explained in greater detail in Chapter \ref{chap:nl}. \\

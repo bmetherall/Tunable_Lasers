@@ -1,8 +1,8 @@
 % !TeX root = ../Thesis.tex
 %\chapter{Span of Gaussians in $L^2$}
 %\label{chap:gauss}
-\section{Span of Gaussians in $L^2$}
-In order to show that Gaussians span $L^2$, we shall start our analysis with the span of the Hermite polynomials in $L^2$. Typically the Hermite polynomials are recursively defined as \cite{conway, courant, teuwen}
+\section{Span of Gaussians in $L^2(\mathbb{R})$}
+In order to show that Gaussians span $L^2(\mathbb{R})$, we shall start our analysis with the span of the Hermite polynomials in $L^2(\mathbb{R})$. Typically the Hermite polynomials are recursively defined as \cite{conway, courant, teuwen}
 \begin{align*}
 H_n(x) := (-1)^n \textrm{e}^{x^2} \diff[n]{}{x} \textrm{e}^{-x^2},
 \end{align*}
@@ -12,9 +12,9 @@ with the inner product\footnote{The complex conjugate of $g$ is omitted since th
 \end{align*}
 where $\textrm{e}^{-x^2}$ is the weighting function. This is so that 
 \begin{align*}
-\left< H_m, H_n \right> = \sqrt{\pi} 2^n n! \delta_{mn}
+\left< H_m, H_n \right> = \sqrt{\pi} 2^n n! \delta_{mn},
 \end{align*}
-and, therefore, the Hermite polynomials form an orthogonal set \cite{courant, hochstrasser, kreyszig, szego, teuwen}. Consider instead, the Gaussian--Hermite polynomials
+and therefore, the Hermite polynomials form an orthogonal set \cite{courant, hochstrasser, kreyszig, szego, teuwen}. Consider instead, the Gaussian--Hermite polynomials
 \begin{align*}
 \Her{n}{x} &:= \textrm{e}^{-x^2/2} H_n(x),
 \end{align*}
@@ -22,15 +22,15 @@ with the inner product
 \begin{align*}
 \left< f, g \right> = \int_\mathbb{R} f(x) g(x) \, \df x,
 \end{align*}
-notice that the weighting function has been absorbed into the Hermite polynomials. We shall now show that the set of Gaussian--Hermite polynomials spans $L^2$. \\
+notice that the weighting function has been absorbed into the Hermite polynomials. We shall now show that the set of Gaussian--Hermite polynomials spans $L^2(\mathbb{R})$. \\
 
 \begin{theorem}
 \label{thm:hermite}
 The set of Gaussian--Hermite polynomials, $\mathcal{G}(\mathbb{R}) = \{ \Her{n}{x} : x \in \mathbb{R}, n \in \mathbb{N} \}$, spans $L^2(\mathbb{R})$.
 \end{theorem}
 \begin{proof}
-The Gaussian--Hermite polynomials are an orthogonalization of the set $\Xi = \{x^n \textrm{e}^{-x^2/2} : x \in \mathbb{R}, n \in \mathbb{N}\}$, and therefore, have the same span \cite{kreyszig, szego}. Thus, it is sufficient to show that $\Xi$ spans $L^2$.
-Suppose there exists an $f \in L^2$ such that $\left< f, \widetilde{H}_n \right> = 0$ for all $n$, or equivalently, that $\left< f, g_n \right> = 0$ for $g_n(x) = x^n \textrm{e}^{-x^2/2}$ for all $n$ so that it is not in the span of $\mathcal{G}(\mathbb{R})$. \\
+The Gaussian--Hermite polynomials are an orthogonalization of the set $\Xi = \{x^n \textrm{e}^{-x^2/2} : x \in \mathbb{R}, n \in \mathbb{N}\}$, and therefore, have the same span \cite{kreyszig, szego}. Thus, it is sufficient to show that $\Xi$ spans $L^2(\mathbb{R})$.
+Suppose there exists an $f \in L^2(\mathbb{R})$ such that $\left< f, \widetilde{H}_n \right> = 0$ for all $n$, or equivalently, that $\left< f, g_n \right> = 0$ for $g_n(x) = x^n \textrm{e}^{-x^2/2}$ for all $n$ so that it is not in the span of $\mathcal{G}(\mathbb{R})$. \\
 
 Let us now consider the function \cite{courant, szego, teuwen}
 \begin{align*}
@@ -56,7 +56,7 @@ Alternatively, without much difficulty it can be shown that the Gaussian--Hermit
 \label{eq:paracyl}
 \diff[2]{\Her{n}{x}}{x} - \left( x^2 - 2n - 1 \right) \Her{n}{x} = 0.
 \end{align}
-This has the form of the parabolic cylinder functions \cite{miller}, and indeed the Gaussian--Hermite polynomials can be expressed in terms of parabolic cylinder functions \cite{hochstrasser, miller}. Moreover, \ref{eq:paracyl} can also be written in Sturm--Liouville form as
+This has the form of the parabolic cylinder functions \cite{miller}, and indeed the Gaussian--Hermite polynomials can be expressed in terms of parabolic cylinder functions \cite{hochstrasser, miller}. Moreover, \eqref{eq:paracyl} can also be written in Sturm--Liouville form as
 \begin{align*}
 \diff{}{x} \left( 1 \cdot \diff{\Her{n}{x}}{x} \right) + (1 - x^2) \Her{n}{x} = -2n \Her{n}{x}.
 \end{align*}
@@ -97,7 +97,7 @@ f(x) = \sum_{n = 0}^\infty a_n (-1)^n \textrm{e}^{x^2/2} \left[ \lim_{h \rightar
 
 \begin{figure}[tbp]
 \input{./Figures/GaussMod}
-\caption[Gaussian series for a particular modulation function.]{$N = 20$, $h = 0.1$}
+\caption[Gaussian series for a particular modulation function.]{Gaussian series with $N = 20$, $h = 0.1$.}
 \label{fig:gaussmod}
 \end{figure}
 

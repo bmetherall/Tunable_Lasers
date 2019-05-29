@@ -134,7 +134,7 @@ set key width -2
 set output './Figures/Lim_s_0.tex'
 set grid
 p '../LinearAnalytic.dat' u 1:($4**2) t 'Analytic Variance' w l, \
-2*x - 2*x**2 t '$2 \left( s - s^2 \right)$' dt 5
+2*x - 2*x**2 t '$2 s \left( 1 - s \right)$' dt 5
 set out
 
 reset

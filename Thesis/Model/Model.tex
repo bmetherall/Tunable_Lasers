@@ -56,12 +56,12 @@ G(A;E) &= \left(\frac{E_{\textrm{out}}(L_g)}{E}\right)^{1/2}A = \left( \frac{\Es
 where $L_g$ is the length of the gain fibre.
 
 \subsection{Fibre Nonlinearity}
-The nonlinearity of the fibre arises from the parameter $\gamma$; in regions where this affect is dominant expression~\eqref{eq:nlse} becomes
+The nonlinearity of the fibre arises from the parameter $\gamma$; in regions where this effect is dominant expression~\eqref{eq:nlse} becomes
 \begin{align}
 \label{eq:fibrediff}
 	\pdiff{A}{z} - i \gamma |A|^2 A = 0.
 \end{align}
-This expression can be manipulated in a similar manner to the gain to show $\frac{\partial}{\partial z} |A|^2 = 0$, suggesting that $A(T,z) = A_0(T) e^{i \varphi(T,z)}$. Substituting this representation into~\eqref{eq:fibrediff} and setting $\varphi(T,0)=0$ gives $\varphi(T,z) = \gamma |A|^2 z$. For a fibre of length $L_f$ the effect of the nonlinearity is thus
+This expression can be manipulated in a similar manner to the gain to show $\frac{\partial}{\partial z} |A|^2 = 0$, suggesting that $A(z,T) = A_0(T) e^{i \varphi(T,z)}$. Substituting this representation into~\eqref{eq:fibrediff} and setting $\varphi(T,0)=0$ gives $\varphi(T,z) = \gamma |A|^2 z$. For a fibre of length $L_f$ the effect of the nonlinearity is thus
 \begin{align*}
 F(A) &= A \textrm{e}^{i \gamma |A|^2 L_f},
 \end{align*}
@@ -95,13 +95,13 @@ D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D(\beta_2 - \beta_3 \omega/3)/2} \FT{A}}.
 For a highly dispersive media the third order effects may need to be considered~\cite{agrawal2013, litchinitser}. However, for simplicity and because of the nature of the grating, the third order effects will be neglected \cite{agrawal2013, ferreira}---we set $\beta_3=0$ for the subsequent analysis. \\
 
 \subsection{Modulation}
-In the master equation of mode-locking, the amount of modulation is characterized by the parameter $M_s$ through the term $\frac{M_s}{2}T^2 A$. In this new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
+In the master equation of mode-locking, the amount of modulation is characterized by the parameter $M_s$ through the term $\frac{1}{2} M_s T^2 A$. In this new model, the modulation is considered to be applied externally through its action on the spectrum and for simplicity the representation is taken as the Gaussian
 \begin{align*}
 M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
 \end{align*}
 where $T_M$ is a characteristic width of the modulation. \\
 
-Despite assuming a Gaussian modulation the following solution can be generalized to any modulation function in $L^2$ since Gaussians in fact span $L^2$ as will be shown shortly. \\
+Despite assuming a Gaussian modulation the following solution can be generalized to any modulation function in $L^2(\mathbb{R})$ since Gaussians in fact span $L^2(\mathbb{R})$ as will be shown shortly. \\
 
 \input{./Appendices/Hermite}
 
@@ -186,13 +186,13 @@ where $\mathcal{L}$ is one loop of the laser. A solution to this model is one in
 
 \section{Solution to the Linear Model}
 \label{sec:linear}
-In the case of $b = 0$---which shall be referred to as the linear model---a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the previous models were Gaussian \cite{cutler, seigman, kuizenga1970a, martinez1984, martinez1985} (Section \ref{chap:meml}), the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
+In the case of $b = 0$---which shall be referred to as the linear model---a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the previous models were Gaussian \cite{cutler, seigman, kuizenga1970a, martinez1984, martinez1985} (see Section \ref{chap:meml}), the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
 
 Consider the initial pulse
 \begin{align*}
 	A_0 = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) \textrm{e}^{i \phi_0},
 \end{align*}
-where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the initial phase. After passing though the optical coupler the pulse will simply decay to $A_1 = h A_0$. The pulse then enters the CFBG, where it will maintain its Gaussian shape, however, it will spread \cite{agrawal2013, ferreira, silfvast}. This can be written as
+where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the initial phase. After passing through the optical coupler the pulse will simply decay to $A_1 = h A_0$. The pulse then enters the CFBG, where it will maintain its Gaussian shape, however, it will spread \cite{agrawal2013, ferreira, silfvast}. This can be written as
 \begin{align*}
 A_2 = \sqrt{P} h \zeta \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} \right) \textrm{e}^{i(\phi_0 + \phi)},
 \end{align*}
@@ -200,7 +200,7 @@ where $\widetilde{\sigma}^2$ denotes the resulting variance, $\widetilde{C}$ den
 \begin{align*}
 A_3 = \sqrt{P} h \zeta \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} - \frac{T^2}{2} \right) \textrm{e}^{i(\phi_0 + \phi)}.
 \end{align*}
-Finally, the pulse travels though the gain fibre where it is amplified to
+Finally, the pulse travels through the gain fibre where it is amplified to
 \begin{align*}
 A_4 = \sqrt{P} \left( \frac{W(a E \textrm{e}^E)}{E} \right)^{1/2} h \zeta \exp \left( -(1 + i \widetilde{C}) \frac{T^2}{2 \widetilde{\sigma}^2} - \frac{T^2}{2} \right) \textrm{e}^{i(\phi_0 + \phi)},
 \end{align*}
@@ -228,7 +228,7 @@ Now that the effect of dispersion is know analytically, the system \eqref{eq:lin
 \begin{align*}
 \widetilde{\sigma}^2 &= \frac{\sigma^2}{1 - \sigma^2}, & \widetilde{C} &= C \frac{1}{1 - \sigma^2}.
 \end{align*}
-Combining this first expression with \eqref{eq:varout} and expanding, we have that
+Combining this first expression with \eqref{eq:varout} and expanding, we have
 \begin{align*}
 \frac{\sigma^4}{1 - \sigma^2} = \sigma^4 + 4 C^2 s^4 + 4 C s^2 \sigma^2 + 4s^4,
 \end{align*}
@@ -265,7 +265,7 @@ Since this is a quartic in $\sigma^2$ this can be solved analytically; the (posi
 \label{eq:equilvar}
 \sigma^2 &= \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4} \left( 1 + s^4 \right) \right)^{1/2} - s^4 - s^2 \sqrt{4 + s^4}.
 \end{align}
-A sample solution for the linear model is shown in Figure \ref{fig:linear}. To reiterate, the envelope at equilibrium is Gaussian, and therefore so too is the Fourier transform. Also, the pulse is linearly chirped. \\
+A sample solution for the linear model is shown in Figure \ref{fig:linear}. To reiterate, the envelope at equilibrium is Gaussian, and therefore, so too is the Fourier transform. Also, the pulse is linearly chirped. \\
 
 \begin{figure}[tbp]
 \centering
@@ -319,7 +319,7 @@ the energy entering the optical coupler is then
 E_* &= \int_{-\infty}^\infty |G(A)|^2 \, \df T = \frac{W(a E \textrm{e}^E)}{E} \int_{-\infty}^\infty |A|^2 \, \df T = W(a E \textrm{e}^E).
 \end{align}
 
-We can now find the amplitude of the pulse as well as we have previously found the equilibrium shape. Again, from \eqref{eq:gainde}, it must be that $E_* = \sqrt{\pi} P \sigma$, or,
+We can now find the amplitude of the pulse as well, as we have previously found the equilibrium shape. Again, from \eqref{eq:gainde}, it must be that $E_* = \sqrt{\pi} P \sigma$, or,
 \begin{align}
 P = \frac{W(a E \textrm{e}^E)}{\sqrt{\pi} \sigma}.
 \end{align}
