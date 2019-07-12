@@ -17,14 +17,9 @@ D(A_1) &= \left( 1 + \frac{2C s^2}{\sigma^2} - \frac{2s^2}{\sigma^2}i \right)^{-
 \end{align*}
 This can be greatly simplified by first rationalizing the denominators to give
 \begin{align*}
-D(A_1) &= \left( \frac{1 + \frac{2C s^2}{\sigma^2} + \frac{2s^2}{\sigma^2}i}{\left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2} \right)^{1/2} \exp \left( -T^2 \frac{(1 + i C)(2\sigma^2 + 4 C s^2 + 4 i s^2)}{(2\sigma^2 + 4C s^2)^2 + 16s^4} \right),
+D(A_1) &= \left( \frac{1 + \frac{2C s^2}{\sigma^2} + \frac{2s^2}{\sigma^2}i}{\left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2} \right)^{1/2} \exp \left( -T^2 \frac{(1 + i C)(2\sigma^2 + 4 C s^2 + 4 i s^2)}{(2\sigma^2 + 4C s^2)^2 + 16s^4} \right).
 \end{align*}
-and then by writing in polar coordinates:
-\begin{multline*}
-D(A_1) = \left( \left( 1 + \frac{2C s^2}{\sigma^2} \right)^2 + \left( \frac{2s^2}{\sigma^2} \right)^2 \right)^{-1/4} \exp \left( \frac{1}{2} i \arctan \left( \frac{\frac{2s^2}{\sigma^2}}{1 + \frac{2C s^2}{\sigma^2}} \right) \right) \\
-\times \exp \left( -T^2 \frac{\sigma^2 \left[ 1 + i \left( C + (1 + C^2) \frac{2s^2}{\sigma^2} \right) \right]}{2 \left[ (\sigma^2 + 2C s^2)^2 + 4s^4 \right]} \right).
-\end{multline*}
-Finally, this can be simplified further to
+Finally, this can be simplified further to\footnote{For $a, b \in \mathbb{R}$ $\displaystyle (a + bi)^{1/2} = (a^2 + b^2)^{1/4} \exp \left( \frac{1}{2}i \arctan \left( \frac{b}{a} \right) \right)$.}
 \begin{multline*}
 D(A_1) = \sigma \left( \left( \sigma^2 + 2C s^2 \right)^2 + 4s^4 \right)^{-1/4} \exp \left( \frac{1}{2} i \arctan \left( \frac{2s^2}{\sigma^2 + 2C s^2} \right) \right) \\
 \times \exp \left( -T^2 \frac{\sigma^2 \left[ 1 + i \left( C + (1 + C^2) \frac{2s^2}{\sigma^2} \right) \right]}{2 \left[ (\sigma^2 + 2C s^2)^2 + 4s^4 \right]} \right).
@@ -42,16 +37,16 @@ From this expression it is clear that at equilibrium
 \end{align}
 \end{subequations}
 
-The expressions for the chirp and variance can be verified with the well known relations \cite{agrawal2013, anderson, ferreira, silfvast}
+The expressions for the chirp and variance can be verified by comparing to the dimensional equivalents from the literature \cite{agrawal2013, anderson, ferreira, silfvast}. One finds
 \begin{align*}
 \left( \frac{T_1}{T_0} \right)^2 &= \left( 1 + \frac{C \beta_2 z}{T_0^2} \right)^2 + \left( \frac{ \beta_2 z}{T_0^2} \right)^2,&
-\widetilde{C} &= C + (1+C^2) \frac{\beta_2 z}{T_0^2}.
+\widetilde{C} &= C + (1+C^2) \frac{\beta_2 z}{T_0^2},
 \end{align*}
-Where, within our non-dimensionalization, $T_0 = \sigma T_M$, $T_1 = \widetilde{\sigma} T_M$, $z = L_D$, and $\beta_2 z T_0^{-2} = 2s^2\sigma^{-2}$. In addition to this, the expression for $\zeta$ can be validated using conservation of energy. Within the CFBG energy is conserved, therefore,
+with the conversions $T_0 = \sigma T_M$, $T_1 = \widetilde{\sigma} T_M$, and $\beta_2 L_D T_0^{-2} = 2s^2\sigma^{-2}$. In addition to this, the expression for $\zeta$ can be validated using conservation of energy. Within the \gls{cfbg} energy is conserved, therefore,
 \begin{align*}
 \int_{-\infty}^\infty |A_1|^2 \, \df T &= \int_{-\infty}^\infty |A_2|^2 \, \df T.
 \end{align*}
-Which, after substituting the expressions, reduces to
+After substituting the expressions, reduces to
 \begin{align*}
 h^2 P \int_{-\infty}^\infty \textrm{e}^{-T^2/\sigma^2} \, \df T &= h^2 P \zeta \int_{-\infty}^\infty \textrm{e}^{-T^2/\widetilde{\sigma}^2} \, \df T.
 \end{align*}

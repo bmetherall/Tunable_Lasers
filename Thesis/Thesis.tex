@@ -4,13 +4,18 @@
 \usepackage{lipsum}
 \usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage[acronym, nomain, automake]{glossaries}
 
 % Load tikz and libraries
 \usepackage{tikz}
 \usetikzlibrary{patterns,decorations.pathreplacing}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes.arrows, fadings}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=Figures/]
+
+% Gradient
+\tikzfading[name=fade left, right color=transparent!0, left color=transparent!75]
 
 % New dots
 \pgfdeclarepatternformonly{mydots}{\pgfqpoint{-1pt}{-1pt}}{\pgfqpoint{5pt}{5pt}}{\pgfqpoint{6pt}{6pt}}%
@@ -44,6 +49,20 @@
 
 \newtheorem{theorem}{Theorem}[chapter]
 
+%List of Acronyms
+\makeglossaries
+\newacronym{cfbg}{CFBG}{chirped fibre Bragg grating}
+\newacronym{fbg}{FBG}{fibre Bragg grating}
+\newacronym{gnlse}{GNLSE}{generalized nonlinear Schr\"odinger equation}
+\newacronym{nlse}{NLSE}{nonlinear Schr\"odinger equation}
+\newacronym{led}{LED}{light emitting diode}
+\newacronym{uv}{UV}{ultraviolet}
+\newacronym{edfa}{EDFA}{Erbium-doped fibre amplifiers}
+\newacronym{spm}{SPM}{self-phase modulation}
+\newacronym{ndyag}{Nd:YAG}{Neodymium-doped Yttrium Aluminium garnet}
+\newacronym{fwhm}{FWHM}{full width at half maximum}
+\newacronym{wkb}{WKB}{Wentzel--Kramers--Brillouin}
+
 \title{A New Method of Modelling Tuneable Lasers with Functional Composition}
 \author{Brady Metherall}
 \degree{Master of Science}
@@ -60,7 +79,7 @@
 \maketitle
 
 \makeabstract{
-A new nonlinear model is proposed for tuneable lasers. Using the generalized nonlinear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each component within the laser cavity. These transformations are then composed to give the overall effect of one trip around the cavity. The linear version of this model is solved analytically, and the nonlinear version numerically. A consequence of the nonlinear nature of this model is that it is able to exhibit wave breaking which prior models could not. We highlight the rich structure of the boundary of stability for a particular plane of the parameter space.
+A new nonlinear model is proposed for tuneable lasers. Using the generalized nonlinear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then composed to give the overall effect of one trip around the cavity. We first examine the linearized version of the model which is solved analytically. Then the full nonlinear model is solved numerically. A consequence of the nonlinear nature of this model is that it is able to exhibit wave breaking which prior models could not. We highlight the rich structure of the boundary of stability for a particular plane of the parameter space.
 }
 
 \makeacknowledgements{
@@ -74,6 +93,10 @@ Lastly, I would like to thank my mom and dad, and grandparents for their endless
 {\hypersetup{linkcolor=black}
 \maketableofcontents
 }
+
+%Put list of acronyms here, and add entry for TOC
+\printglossary[type=acronym, title={List of Acronyms}]
+\addcontentsline{toc}{chapter}{\numberline{}List of Acronyms}
 
 \mainmatter
 
@@ -95,7 +118,7 @@ Lastly, I would like to thank my mom and dad, and grandparents for their endless
 \include{./Appendices/Lambert}
 %\include{./Appendices/Dispersion}
 %\include{./Appendices/Asymptotics}
-%\include{./Appendices/Hermite}
+\include{./Appendices/Hermite}
 
 \chapter{Code}
 \label{chap:code}

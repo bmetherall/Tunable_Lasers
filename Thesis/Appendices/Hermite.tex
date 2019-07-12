@@ -1,7 +1,7 @@
 % !TeX root = ../Thesis.tex
-%\chapter{Span of Gaussians in $L^2$}
-%\label{chap:gauss}
-\section{Span of Gaussians in $L^2(\mathbb{R})$}
+
+\chapter{Span of Gaussians in $L^2(\mathbb{R})$}
+\label{chap:gauss}
 In order to show that Gaussians span $L^2(\mathbb{R})$, we shall start our analysis with the span of the Hermite polynomials in $L^2(\mathbb{R})$. Typically the Hermite polynomials are recursively defined as \cite{conway, courant, teuwen}
 \begin{align*}
 H_n(x) := (-1)^n \textrm{e}^{x^2} \diff[n]{}{x} \textrm{e}^{-x^2},
@@ -12,9 +12,9 @@ with the inner product\footnote{The complex conjugate of $g$ is omitted since th
 \end{align*}
 where $\textrm{e}^{-x^2}$ is the weighting function. This is so that 
 \begin{align*}
-\left< H_m, H_n \right> = \sqrt{\pi} 2^n n! \delta_{mn},
+\left< H_m, H_n \right> = \sqrt{\pi} 2^n n! \delta_{m,n},
 \end{align*}
-and therefore, the Hermite polynomials form an orthogonal set \cite{courant, hochstrasser, kreyszig, szego, teuwen}. Consider instead, the Gaussian--Hermite polynomials
+where $\delta_{m,n}$ is the Kronecker $\delta$ function. Therefore, the Hermite polynomials form an orthogonal set \cite{courant, hochstrasser, kreyszig, szego, teuwen}. Consider instead, the Gaussian--Hermite polynomials from \eqref{eq:gaussherm}:
 \begin{align*}
 \Her{n}{x} &:= \textrm{e}^{-x^2/2} H_n(x),
 \end{align*}
@@ -48,7 +48,7 @@ for all $n$ and so $F(z) \equiv 0$. We now notice that
 \begin{align*}
 0 &= F(z) = F(i \omega) = \FT{f \textrm{e}^{-x^2/2}},
 \end{align*}
-and now it is clear that $f(x) \textrm{e}^{-x^2/2} = 0$ almost everywhere, therefore, $f(x) = 0$ almost everywhere. \\
+and now it is clear that $f(x) \textrm{e}^{-x^2/2} = 0$ almost everywhere, therefore, $f(x) = 0$ almost everywhere.
 \end{proof}
 
 Alternatively, without much difficulty it can be shown that the Gaussian--Hermite polynomials satisfy
@@ -58,7 +58,7 @@ Alternatively, without much difficulty it can be shown that the Gaussian--Hermit
 \end{align}
 This has the form of the parabolic cylinder functions \cite{miller}, and indeed the Gaussian--Hermite polynomials can be expressed in terms of parabolic cylinder functions \cite{hochstrasser, miller}. Moreover, \eqref{eq:paracyl} can also be written in Sturm--Liouville form as
 \begin{align*}
-\diff{}{x} \left( 1 \cdot \diff{\Her{n}{x}}{x} \right) + (1 - x^2) \Her{n}{x} = -2n \Her{n}{x}.
+\diff{}{x} \left( p(x) \cdot \diff{\Her{n}{x}}{x} \right) + (1 - x^2) \Her{n}{x} &= -2n \Her{n}{x}, & p(x) &= 1.
 \end{align*}
 By the spectral theorem \cite{griffel, higson, kreyszig}, this suggests that the Gaussian--Hermite polynomials form an orthogonal set with the weighting function $w(x) = 1$, and are complete in $L^2(\mathbb{R})$. Using this result, we can now show that Gaussian functions also span $L^2(\mathbb{R})$ with the following theorem. \\
 
@@ -84,7 +84,7 @@ Theorem \ref{thm:hermite} showed that any square integrable function can be expr
 \begin{align*}
 f(x) = \sum_{n = 0}^\infty a_n \Her{n}{x}.
 \end{align*}
-Using a similar idea to \cite{calcaterra2, calcaterra}, we shall now expand the Gaussian--Hermite polynomials using their definition
+Recall that $\Her{n}{x}$ has a polynomial as well as a Gaussian component. Without loss of generality we assumed the Gaussian has variance $\frac{1}{2}$ for convenience. We can effectively remove the polynomial dependence by using a similar idea to \cite{calcaterra2, calcaterra}. We shall expand the Gaussian--Hermite polynomials using their definition
 \begin{align*}
 f(x) = \sum_{n = 0}^\infty a_n (-1)^n \textrm{e}^{x^2/2} \diff[n]{}{x} \textrm{e}^{-x^2}.
 \end{align*}

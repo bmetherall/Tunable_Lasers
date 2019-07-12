@@ -28,8 +28,16 @@
 \filldraw[fill=white, draw=black] (0,4) circle (0.5cm);
 \draw[->,>=stealth] (0,4.325) arc (90:360:0.325cm);
 
+% Arrows
+\draw [->,>=stealth,domain=20:70] plot ({0.675*cos(\x)}, {0.675*sin(\x)});
+\draw [->,>=stealth,domain=110:160] plot ({0.675*cos(\x)}, {0.675*sin(\x)});
+\draw [->,>=stealth,domain=110:160] plot ({9+0.675*cos(\x)}, {2+0.675*sin(\x)});
+\draw [->,>=stealth,domain=200:250] plot ({9+0.675*cos(\x)}, {2+0.675*sin(\x)});
+\draw [->,>=stealth,domain=200:250] plot ({0.675*cos(\x)}, {4+0.675*sin(\x)});
+\draw [->,>=stealth,domain=290:340] plot ({0.675*cos(\x)}, {4+0.675*sin(\x)});
+
 % Grating
-\draw (8.5,2) -- (6.5,2) node [pos=0.5,anchor=south,yshift=0.25cm,xshift=-0.15cm] {CFBG};
+\draw (8.5,2) -- (6.5,2) node [pos=0.5,anchor=south,yshift=0.25cm,xshift=-0.15cm] {\acrshort{cfbg}};
 \foreach \i in {0,...,13}
   \draw (6.5 + \i*\i/100,1.75) -- (6.5 + \i*\i/100,2.25);
 

@@ -45,7 +45,82 @@ p '../Gaussian.dat' u 1:3 w l t 'Gaussian Series', \
 sin(x) * u(x+pi) * u(pi-x) dt 5 t '$\sin(x) \rect{\frac{x}{2\pi}}$'
 set out
 
+reset
+
 set terminal epslatex color size 6in,3.7in lw 3
+
+# Rate of Convergence
+
+set grid front
+set logscale y
+set xl '$n$'
+set yl 'Error'
+
+set key at 100, 10**-9
+
+set format y '$10^{%01T}$'
+
+set output './Figures/ROC.tex'
+p '../ROC.dat' u 1 w l t '$s = 0.025$', \
+'../ROC.dat' u 2 w l dt 5 t '$s = 0.100$', \
+'../ROC.dat' u 3 w l dt 4 t '$s = 0.175$', \
+'../ROC.dat' u 4 w l dt '__. ' t '$s = 0.250$'
+set out
+
+reset
+
+# Example Gaussian
+
+set grid front
+set xr [-3:3]
+set yr [-1:1]
+
+set xl '$T / \sigma$'
+set yl '$A / \sqrt{P}$'
+
+#set xtics (0 0, '$\sigma$' 1, '$2\sigma$' 2, '$-\sigma$' -1, '$-2\sigma$' -2, '$3\sigma$' 3, '-3$\sigma$' -3)
+
+set ytics 0.5
+
+C = 2*sqrt(2)
+s = 1.0
+
+spot = sqrt(pi / C) * s
+
+set arrow from 0, 0 to spot, 0 lc rgb 'red'
+set label '$\displaystyle \left( \frac{\pi}{C} \right)^{1/2}$' at 0.5 * spot, 0.15 center
+
+set arrow from -sqrt(2*log(2)), 0.5 to sqrt(2*log(2)), 0.5 heads lc rgb 'forest-green'
+set label '\acrshort{fwhm}' at 0, 0.55 center
+
+set samples 1000
+
+set output './Figures/Sample_Gauss.tex'
+p exp(-x**2 / (2*s**2)) t 'Envelope', \
+exp(-x**2 / (2*s**2))*cos(-x**2 * C / (2*s**2)) t 'Real Part' dt 5, \
+exp(-x**2 / (2*s**2))*sin(-x**2 * C / (2*s**2)) t 'Imag. Part' dt 4
+set out
+
+reset
+
+set parametric
+set xr [-10:10]
+set tr [-10:10]
+set grid front
+set samples 10000
+set key width -20
+
+set xl '$\eps$'
+set yl '$x$' rotate by 0
+
+f(t) = (4*(-t**3+5*t**2-8*t+4))/t**4
+
+set output './Figures/Asympt.tex'
+p 1.0 / f(t), t t '\eqref{eq:asymp}', \
+f(t), t dt 5 t '\eqref{eq:asymp2}'
+set out
+
+reset
 
 set xr [-3:3]
 set yr [-0.1:1.2]
@@ -190,7 +265,7 @@ reset
 # Variance
 set xl '$s$'
 set yr [-0.2:1]
-set xr [0:3]
+set xr [0:2.5]
 set key bottom left
 set format xy '%.1f'
 
@@ -209,13 +284,15 @@ reset
 # Power and Energy
 set xl '$s$'
 set yr [0:3]
-set xr [0:3]
+set xr [0:2.5]
 set key top right
 set format xy '%.1f'
 
 set output './Figures/LinearPlot.tex'
 set grid
-p 2.5 - x not lc 8 lw 0.3, \
+f(x) = a + b * x
+fit [0:2.5] f(x) '../Linear.dat' u 1:2 via a, b
+p f(x) not lc 8 lw 0.3, \
 '../LinearAnalytic.dat' u 1:2 t 'Analytic Energy' w l lc 1, \
 '../LinearAnalytic.dat' u 1:3 t 'Analytic Amplitude' w l lc 2 dt 5, \
 '../Linear.dat' u 1:2 t 'Energy' pt 7 lc 1, \
@@ -236,20 +313,20 @@ set format x '%.1f'
 #set cbr [0.1:0.1001]
 #unset colorbox
 
-set palette maxcolors 2
+#set palette maxcolors 2
 
-set palette defined ( 0 '#F7FBFF',\
-    	    	      1 '#084594' )
+#set palette defined ( 0 '#F7FBFF',\
+#    	    	      1 '#084594' )
 
 #set cbtics ('Stable' 0.25, 'Unstable' 0.75)
 
-set cbtics ('' 0.25, '' 0.75)
+#set cbtics ('' 0.25, '' 0.75)
 
 set cbl rotate by 90 'Stable \hspace{14mm} Unstable'
 
-set output './Figures/Cartoon.tex'
-sp '../8000-04-01-DM.dat' u 1:2:($3 < 0.05 ? 0 : 1) w image not lw 0.3
-set out
+#set output './Figures/Cartoon.tex'
+#sp '../8000-04-01-DM.dat' u 1:2:($3 < 0.05 ? 0 : 1) w image not lw 0.3
+#set out
 
 set cbl rotate by 0 '$E$'
 
@@ -261,24 +338,55 @@ set cntrparam levels incremental 0, 0.25, 3
 
 load '/home/brady/Templates/Blues.p'
 
+set arrow 2 from 0, 3 to 0.25, 3 lc rgb 'red' nohead front
+set arrow 3 from 0.25, 3 to 0.25, 0 lc rgb 'red' nohead front
+
+set label 1 '0.25' at 0.65, 32.5 front
+set label 2 '0.50' at 0.5, 25 front
+set label 3 '0.75' at 0.38, 21 front
+set label 4 '1.00' at 0.32, 15 front
+
 #set output './Figures/Stability.tex'
 #sp '../8000-04-01-DM.dat' u 1:2:4 w pm3d not lw 0.3
 #set out
-#
+
+set label 1 '1.25' at 0.65, 32.5 front
+set label 2 '1.50' at 0.52, 22.5 front
+set label 3 '1.75' at 0.41, 11 front
+set label 4 '2.00' at 0.32, 4 front
+
 #set output './Figures/StabilitySwitch.tex'
 #sp '../8000-04-01-MD.dat' u 1:2:4 w pm3d not lw 0.3
 #set out
 
+unset arrow 1
+unset arrow 2
+unset arrow 3
+unset arrow 4
+
 set format y '%.1f'
 set format x '%.2f'
+
+set label 1 '1.75' at 0.22, 2.75 front
+set label 2 '2.00' at 0.175, 1.85 front
+set label 3 '2.25' at 0.105, 0.85 front
+set label 4 '2.50' at 0.02, 0.25 front
 
 #set output './Figures/StabilityZoom.tex'
 #sp '../8000-04-01-DM-Z.dat' u 1:2:4 w pm3d not lw 0.3
 #set out
-#
+
+set label 1 '2.25' at 0.1325, 1.1 front
+set label 2 '2.50' at 0.02, 0.25 front
+unset label 3
+unset label 4
+
 #set output './Figures/StabilitySwitchZoom.tex'
 #sp '../8000-04-01-MD-Z.dat' u 1:2:4 w pm3d not lw 0.3
 #set out
+
+unset label 1
+unset label 2
 
 set cbr [0:25]
 set cbl rotate by 90 '$bE$'

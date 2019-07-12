@@ -2,35 +2,34 @@
 
 \chapter{Solution of the Nonlinear Model}
 \label{chap:nl}
-We shall now consider the nonlinear case---when $b > 0$. In this case it becomes much too difficult to obtain an analytic result. Recall from \eqref{eq:fibre} that the nonlinearity takes the form
+We shall now consider the nonlinear case---when $b > 0$. In this case it becomes impossible to obtain an analytic result. Recall from \eqref{eq:fibre} that the nonlinearity takes the form
 \begin{align*}
 F(A) &= A \textrm{e}^{i b |A|^2}.
 \end{align*}
-This is a highly nonlinear operator, and attempting to take the Fourier transform of a pulse that has under gone this transformation quickly becomes futile. Instead we must resort to a numerical solution. \\
+This is a highly nonlinear operator, and attempting to compute the Fourier transform analytically of a pulse that has undergone the transformation due to the nonlinearity is futile. Instead we must resort to a numerical solution. \\
 
 \section{Code}
-Finding the solution numerically will be done in a similar manner as with the analytic linear solution. Using Python a function is written for each component of the laser cavity given by \eqref{eq:effects}, an initial pulse is iteratively passed from function to function in the hopes that a `fixed point' is found. The full Python code can be found in Appendix \ref{chap:code}. \\
+Finding the solution numerically will be done in a similar manner as with the analytic linear solution. Using Python, a function is written for each component of the laser cavity given by \eqref{eq:effects}; an initial pulse is iteratively passed from function to function in the hopes that a fixed point is found. The full Python code can be found in Appendix~\ref{chap:code}. \\
 
 \subsection{Validation}
-Before delving into the nonlinear behaviour of the model, we wish to validate that the code is working as expected---and as a sanity test for the linear solution---by comparing the results of the simulations with $b=0$ to the results of the linear model in Chapter \ref{chap:linear}. In the case of the numerical solution, our initial conditions become somewhat important. In all of the following analysis the initial waveform is $\Gamma \sech \left( 2T \right) \textrm{e}^{i \pi / 4}$ normalized so that the initial energy is $E_0 = 0.1$; additionally, $a = 8000$, and $h = 0.04$. \\
 \begin{figure}[tbp]
 \centering
 \input{./Figures/Variance}
-\caption[Equilibrium variance, chirp, and phase shift of the pulse as a function of $s$.]{Simulation and analytic equilibrium variance, chirp, and phase shift as a function of $s$. The analytic expressions are given by \eqref{eq:equilvar}, \eqref{eq:equilchirp}, \eqref{eq:phase}, respectively.}
+\caption[Equilibrium variance, chirp, and phase shift of the pulse as a function of the dispersion parameter.]{Simulation and analytic equilibrium variance, chirp, and phase shift as a function of the dispersion parameter, $s$. The analytic expressions are given by \eqref{eq:equilvar}, \eqref{eq:equilchirp}, \eqref{eq:phase}, respectively.}
 \label{fig:var}
 \end{figure}
+Before delving into the nonlinear behaviour of the model, we wish to validate that the code is working as expected by comparing the results of the simulations with $b=0$ to the results of the linear model in Chapter \ref{chap:linear}. In the case of the numerical solution, our initial conditions become somewhat important for two reasons. First, if the energy is too high initially the nonlinear effects are too strong leading to \acrlong{spm}. Secondly, the initial waveform needs to be well behaved enough so that the Fourier transform is band limited. In all of the following analysis the initial waveform is $\Gamma \sech \left( 2T \right) \textrm{e}^{i \pi / 4}$ normalized so that the initial energy is $E_0 = 0.1$; additionally, $a = 8000$, and $h = 0.04$. \\
 
-In the first experiment the pulse is allowed to equilibrate for 40 loops of the circuit, we then compare the variance, chirp, and phase shift of the two methods. The results of this are shown in Figure \ref{fig:var}. For the most part, we see exceptional agreement between the analytic solution and numerical solution for the variance, and phase shift. However, for $s > 2.4$ the chirp from the simulations seems to erratically vary from the analytic solution. The reason for this is quite a simple one. \\
 \begin{figure}[tbp]
 \centering
 \input{./Figures/LinearPlot}
-\caption[Equilibrium energy, and peak power of the pulse as a function of $s$.]{Equilibrium energy, and peak power of the pulse as a function of $s$. The thin black line is to highlight that the energy is \emph{not} linearly dependent on $s$.}
+\caption[Equilibrium energy, and peak power of the pulse as a function of the dispersion parameter.]{Equilibrium energy, and peak power of the pulse as a function of the dispersion parameter, $s$. The thin black line is the line of best fit to highlight that the energy is \emph{not} linearly dependent on $s$.}
 \label{fig:valenergy}
 \end{figure}
 
-To investigate this behaviour, we instead turn our attention to the energy, and amplitude of the pulse at equilibrium as shown in Figure \ref{fig:valenergy}. As with Figure \ref{fig:var}, there is very good agreement between the two solutions. It is also now clear that at approximately $s = 2.5$ there is too much dispersion---the pulse is no longer sustainable. This is of course a consequence of the condition \eqref{eq:energycond}. Since the pulse effectively vanishes after this point, the chirp calculation becomes numerically unstable leading to the wild oscillations. \\
+In the first experiment the pulse is allowed to equilibrate for 40 loops of the circuit\footnote{The choice of 40 will be justified in the following section.}, we then compare the variance, chirp, and phase shift of the analytic and numerical solution. The results of this are shown in Figure \ref{fig:var}. For the most part, we see exceptional agreement between the analytic solution and numerical solution for the variance, and phase shift. However, as $s \rightarrow 2.5$ the chirp from the simulations begins to deviate from the analytic solution. The reason for this is quite a simple one. We shall turn our attention to the energy, and amplitude of the pulse at equilibrium as shown in Figure \ref{fig:valenergy}. As with Figure \ref{fig:var}, there is very good agreement between the two solutions. It is also now clear that at approximately $s = 2.5$ there is too much dispersion---the pulse is no longer sustainable. This is of course a consequence of the condition \eqref{eq:energycond}. Since the pulse effectively vanishes after this point, the chirp calculation becomes numerically unstable leading to the disagreement. \\
 
-With the numerical solution yielding the expected results, we are now ready to dive into the rich structure the nonlinearity adds.
+With the numerical solution yielding the expected results we are now ready to explore the rich structure, which the nonlinearity adds.
 
 \section{Nonlinear Model}
 \begin{figure}[tbp]
@@ -53,26 +52,31 @@ With the numerical solution yielding the expected results, we are now ready to d
 \caption[Envelope, Fourier transform, and chirp of the pulse---stable case.]{Simulation with $s = 0.15$, and $b = 2.1$ after 15 circuits.}
 \label{fig:nlstable}
 \end{figure}
-With the inclusion of the nonlinearity we generally find a similar solution to the linear case. An example of this is shown in Figure \ref{fig:nlstable}. The envelope of the pulse is unsurprisingly Gaussian-esque, however, it is \emph{not} precisely Gaussian and more closely resembles a generalized Gaussian\footnote{A generalized Gaussian has the form $\exp \left(-t^\alpha \right)$, with $\alpha > 2$.}. The fact that the pulse envelope is not Gaussian is further emphasized while examining the Fourier transform of the pulse. If the pulse were a Gaussian, we would expect the Fourier transform to also be a Gaussian \cite{debnath, gradshteyn}. Instead, the magnitude of the Fourier transform has a unique Batman-like shape. This deviation suggests the nonlinearity implants higher frequency oscillations into the pulse---this will be a key observation in the coming subsections. Finally, we shall examine the derivative of the phase---essentially the chirp. Recall in Chapter \ref{chap:linear} the chirp was defined as coefficient of $-\frac{1}{2}iT^2$ in the exponential, by taking the negative of the derivative we would expect a linear function with a slope equal to the chirp. In the nonlinear case, this is what we find for moderate values of $T$. On the other hand, for $|T| > 1$ the relation begins to level off. This is in agreement with experimental results \cite{chen, rothenberg, tomlinson}. While the nonlinear model yields similar results as the linear model (Figure \ref{fig:linear}), very interesting variations arise from the nonlinearity. \\
-
-We shall now take a look at perhaps the most important feature of the pulse---the energy. \\
+With the inclusion of the nonlinearity we generally find a similar solution to the linear case. An example of this is shown in Figure \ref{fig:nlstable}. The envelope of the pulse is unsurprisingly Gaussian-esque, however, it is \emph{not} precisely Gaussian and more closely resembles a generalized Gaussian\footnote{A generalized Gaussian has the form $\exp \left(-t^\alpha \right)$, with $\alpha > 2$.}. The fact that the pulse envelope is not Gaussian is further emphasized while examining the Fourier transform of the pulse. If the pulse were a Gaussian, we would expect the Fourier transform to also be a Gaussian \cite{debnath, gradshteyn}. Instead, the magnitude of the Fourier transform has a unique weakly bi-modal shape. This deviation suggests the nonlinearity implants higher frequency oscillations into the pulse---a key observation in the coming subsections. Finally, we shall examine the derivative of the phase---essentially the chirp. Recall in Chapter \ref{chap:linear} the chirp was defined as coefficient of $-\frac{1}{2}iT^2$ in the exponential, and by taking the negative of the derivative we would expect a linear function with a slope equal to the chirp. In the nonlinear case, we recover this linear response for moderate values of $T$. However, for $|T| > 1$ the chirp begins to saturate. This is consistent with experimental results \cite{chen, rothenberg, tomlinson}. \\
 
 \subsection{Energy}
 \label{chap:energy}
 
+\begin{figure}[tbp]
+\centering
+\input{./Figures/ROC}
+\caption{Rate of convergence as a function of number of iterations for various $s$ values, and $b = 0.5$. The error is given by \eqref{eq:error}.}
+\label{fig:roc}
+\end{figure}
+
 \begin{figure}[p]
 \centering
-\begin{subfigure}{\textwidth}
-\input{./Figures/StabilityZoom}
-\caption{Centralized for typical $s$, and $b$ values.}
-\label{fig:energyzoom}
-\end{subfigure} \\
 \begin{subfigure}{\textwidth}
 \input{./Figures/Stability}
 \caption{Energy of the pulse within the $s$-$b$ plane.}
 \label{fig:energybig}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{./Figures/StabilityZoom}
+\caption{Regime corresponding to typical $s$, and $b$ values for tuneable lasers.}
+\label{fig:energyzoom}
 \end{subfigure}
-\caption[Energy of the pulse at equilibrium.]{Energy of the pulse at equilibrium. The energy is constant along the black lines.}
+\caption[Energy of the pulse.]{Energy of the pulse after 100 cycles. The energy is constant along the black lines.}
 \label{fig:energy}
 \end{figure}
 
@@ -82,7 +86,7 @@ We shall now take a look at perhaps the most important feature of the pulse---th
 \label{fig:cartoon}
 \end{figure}
 
-The energy of the pulse is directly related to the output power of the laser, and since this is not as controllable as in a regular laser, it is of great interest. The energy of the pulse at equilibrium\footnote{The pulse is passed through each component of the laser 40 times before the energy is computed.} is shown in Figure \ref{fig:energy}. In Figure \ref{fig:energyzoom} we generally find that the energy is a smooth surface that slowly decays as $s$, and $b$ increase. In the upper left hand region of the plot this is clearly not the case. The contours show that the energy is very noisy and discontinuous. Perhaps more surprising, as shown in Figure \ref{fig:energybig}, is that this boundary appears to become periodic as $b$ increases around $s = 0.3$. These features are further highlighted in Figure \ref{fig:cartoon} by disregarding the energy and only examining whether the pulse is stable or not. \\
+The energy of the pulse is directly related to the output power of the laser, and since this is not as controllable as in a regular laser, it is of great interest. In this nonlinear case we allow the initial pulse to pass through each component 100 times instead of 40 in the linearized case. This choice can be justified by Figure \ref{fig:roc}. The pulse reaches a state in which the error no longer decreases within typically 10--20 iterations. In the linearized case we chose to iterate 40 times since this is about double the number of iterations expected. Furthermore, in the nonlinear case we extend this number further to 100 in case the nonlinearity increases the number of iterations to converge. The energy of the pulse after 100 iterations is shown in Figure \ref{fig:energy}. In Figure \ref{fig:energyzoom} we generally find that the energy is a smooth surface that slowly decays as $s$, and $b$ increase. In the upper left hand region of the plot this is clearly not the case. The contours show that the energy is very noisy with very large derivatives. Perhaps more surprising, as shown in Figure \ref{fig:energybig}, is that this boundary between periodic and aperiodic behaviour appears to become periodic (in the parameter space) as $b$ increases around $s = 0.3$. These features are further highlighted in Figure \ref{fig:cartoon} by disregarding the energy and only examining whether the pulse is invariant after additional iterations. \\
 
 % I couldn't get this to work without having blank space on like 4 pages
 
@@ -93,17 +97,19 @@ The energy of the pulse is directly related to the output power of the laser, an
 %\caption{Approximate effective nonlinearity.}
 %\label{fig:effnl}
 %\end{wrapfigure}
-\begin{figure}[tbp]
-\centering
-\input{./Figures/EffNL}
-\caption{Approximate effective nonlinearity.}
-\label{fig:effnl}
-\end{figure}
-This periodic strip can be explained from the functional nature of the nonlinearity. Recall once again that from \eqref{eq:fibre} that the nonlinearity takes the form
-\begin{align*}
-F(A) &= A \textrm{e}^{i b |A|^2}.
-\end{align*}
-The strength of the nonlinearity is thus controlled by $b |A|^2$, where $|A|^2$ is the power of the pulse. Although not the greatest, we can approximate the power of the pulse by the energy so that $b |A|^2 \sim b E$, this gives an estimate for what shall be referred to as the effective nonlinearity. Figure \ref{fig:effnl} shows the effective nonlinearity at equilibrium. Notice that as $b$ increases along the strip $0.2 < s < 0.4$, the contours become steeper and steeper. In addition, the contours have been plotted at multiples of $\pi$, and exit the boundary at approximately the same places. Thus, the reason for this periodicity is that the strength of the nonlinearity is proportional to the modulus of the effective nonlinearity---the effective nonlinearity passes through the same points repeatedly. \\
+%\begin{figure}[tbp]
+%\centering
+%\input{./Figures/EffNL}
+%\caption{Approximate effective nonlinearity.}
+%\label{fig:effnl}
+%\end{figure}
+%This periodic strip can be explained from the functional nature of the nonlinearity. Recall once again that from \eqref{eq:fibre} the nonlinearity takes the form
+%\begin{align*}
+%F(A) &= A \textrm{e}^{i b |A|^2}.
+%\end{align*}
+%This of course is periodic in $b$, however, the period of boundary of stability does not share a period of $2\pi$ because 
+
+%The strength of the nonlinearity is thus controlled by $b |A|^2$, where $|A|^2$ is the power of the pulse. Although not the greatest, we can approximate the power of the pulse by the energy so that $b |A|^2 \sim b E$, this gives an estimate for what shall be referred to as the effective nonlinearity. Figure \ref{fig:effnl} shows the effective nonlinearity. Notice that as $b$ increases along the strip $0.2 < s < 0.4$, the contours become steeper and steeper. In addition, the contours have been plotted at multiples of $\pi$, and exit the boundary at approximately the same places. Thus, the reason for this periodicity is that the strength of the nonlinearity is proportional to the modulus of the effective nonlinearity---the effective nonlinearity passes through the same points repeatedly. \\
 
 \begin{figure}[p]
 \centering
@@ -129,14 +135,15 @@ The strength of the nonlinearity is thus controlled by $b |A|^2$, where $|A|^2$ 
 \label{fig:break}
 \end{figure}
 
-\subsubsection{Self-Phase Modulation and Wave Breaking}
+\subsubsection{\glslink{spm}{Self-Phase Modulation} and Wave Breaking}
+\glsreset{spm}
 
-The noise in the energy exhibited for moderate to large values of $b$, and small values of $s$ is a phenomenon called \emph{wave breaking} \cite{agrawal2013, anderson, finot, rothenberg, tomlinson}. Wave breaking is not limited to just optics; wave breaking occurs in areas such as plasmas, transmission lines, and fluid dynamics \cite{rothenberg}. Wave breaking occurs because the pulse begins to interfere with itself in a way called self-phase modulation \cite{agrawal2002, agrawal2013, becker}. Self-phase modulation occurs because the index of refraction is intensity dependent \cite{agrawal2002, becker, rothenberg, silfvast}, which leads to additional chirp across the pulse \cite{agrawal2013, anderson, rothenberg, silfvast}. This in turn causes higher order frequencies to be injected into the pulse \cite{agrawal2013, anderson}, as we saw in Figure \ref{fig:nlstable}. These high frequencies compound with each trip around the cavity becoming parasitic very quickly---Figure \ref{fig:break} highlights this. Notice that the difference between this and Figure \ref{fig:nlstable} is a difference in $b$ of $0.05$---this difference could be as small as adding a few centimetres more of fibre between the gain and output coupler. The left figures show the pulse after 11 trips around the cavity; in the Fourier transform it is clear that the contributions from higher frequencies has increased---we obtain similar results as in \cite{anderson, rothenberg}. Additionally, the chirp starts losing its linearity causing it to start becoming unstable; the nature of this instability is again in agreement with \cite{anderson, rothenberg}. The parasitic nature of the high frequency contributions is evident by examining the right figures. After five additional trips around the cavity, the envelope of the pulse is much more rippled, and the real and imaginary parts become incoherent. Moreover, the Fourier transform has no clear structure and has essentially become noise, and the chirp has grown to be highly oscillatory and unstable. Once the pulse has reached a state such as this, there is no turning back---the envelope, Fourier transform, and chirp never reach a steady equilibrium state. \\
+The noise in the energy exhibited for moderate to large values of $b$, and small values of $s$ is a phenomenon called \emph{wave breaking} \cite{agrawal2013, anderson, finot, rothenberg, tomlinson}. Wave breaking is not limited to just optics; wave breaking occurs in areas such as plasmas, transmission lines, and fluid dynamics \cite{rothenberg}. Wave breaking occurs because the pulse begins to interfere with itself in a way called \gls{spm} \cite{agrawal2002, agrawal2013, becker}. \gls{spm} occurs because the index of refraction is intensity dependent \cite{agrawal2002, becker, rothenberg, silfvast}, which leads to additional chirp across the pulse \cite{agrawal2013, anderson, rothenberg, silfvast}. This in turn causes higher order frequencies to be injected into the pulse \cite{agrawal2013, anderson}, as we saw in Figure \ref{fig:nlstable}. These high frequencies compound with each trip around the cavity becoming parasitic very quickly---Figure \ref{fig:break} highlights this. Notice that the difference between Figure \ref{fig:nlstable} and Figure \ref{fig:break} is a difference in $b$ of $0.05$---just enough to cross the boundary---this difference could be attributed to adding a few centimetres more of fibre between the gain and output coupler. The left figures show the pulse after 11 trips around the cavity; in the Fourier transform it is clear that the contributions from higher frequencies has increased. We obtain comparable results as in the experiments \cite{anderson, rothenberg}. Additionally, the chirp starts losing its linearity causing it to start becoming unstable; the nature of this instability is again in agreement with the experiments \cite{anderson, rothenberg}. The parasitic nature of the high frequency contributions is evident by examining the right figures. After five additional trips around the cavity, the envelope of the pulse is much more rippled, and the real and imaginary parts become incoherent. Moreover, the Fourier transform has no clear structure and has essentially become noise. The chirp has grown to be highly oscillatory and unstable. Once the pulse has reached a state such as this---the envelope, Fourier transform, and chirp never reach a steady equilibrium state. \\
 
 \subsection{Convergence}
 \begin{figure}[tbp]
 \input{./Figures/Step1}
-\caption[Error of the pulse.]{Error of the pulse (given by \eqref{eq:error}) between iterations $99$ and $100$.}
+\caption[Error of the pulse envelope.]{Error of the pulse (given by \eqref{eq:error}) between iterations $99$ and $100$.}
 \label{fig:error}
 \end{figure}
 
@@ -173,7 +180,7 @@ The noise in the energy exhibited for moderate to large values of $b$, and small
 \input{./Figures/Step60}
 \caption{$\Delta = 60$}
 \end{subfigure} \\
-\caption[Error for various values of $\Delta$.]{Error for various values of $\Delta$, the colour bar and axis labels have been omitted for clarity, the scales and ranges are the same as in Figure \ref{fig:error}.}
+\caption[Error for various step sizes.]{Error for various values of $\Delta$, the colour bar and axis labels have been omitted for clarity, the scales and ranges are the same as in Figure \ref{fig:error}.}
 \label{fig:deltaerror}
 \end{figure}
 
@@ -182,16 +189,14 @@ To obtain a better understanding of how the pulse either converges to equilibriu
 \textrm{E} = \frac{\| |A_i| - |A_{i-1}| \|_2}{\| A_{i-1} \|_2},
 \label{eq:error}
 \end{align}
-where $\| \cdot \|_2$ denotes the $L^2(\mathbb{R})$ norm, which is computed numerically using the trapezoid rule. Notice as well that in the numerator we use the modulus of the pulses, again this is because we are uninterested about the phase shift between iterations. A plot of the error can be found in Figure \ref{fig:error}, with $i = 100$. \\
+where $\| \cdot \|_2$ denotes the $L^2(\mathbb{R})$ norm, which is computed numerically using the trapezoid rule ($N = 2^{12}$). Notice as well that in the numerator we use the modulus of the pulses, again this is because we are uninterested in the phase shift between iterations. A plot of the error can be found in Figure \ref{fig:error}, with $i = 100$. The standard method would be to iterate until a fixed tolerance is reached, however, there are some reasons that make a fixed number of iterations preferable---as long as a sufficient number is chosen. The main reason is that this allows us to observe a richer structure than simply whether or not the tolerance had been reached by some maximum number of iterations. Additionally, incorrectly choosing the critical tolerance could easily lead to erroneous categorizations at points. As we saw in Figure \ref{fig:roc} some values of the parameters lead to a steady, periodic state, but with an error of $\bigO{10^{-6}}$, and so, had we set the tolerance to $10^{-8}$ these points would have been labeled as unsteady. \\
 
-Unsurprisingly, the error is largest in the region where the wave breaks. As mentioned in the previous subsection, the pulse does not reach a stable state in this region. As a consequence the envelope varies violently, which leads to this large error. On the other hand, the region where the energy appeared to be stable does not have a non-zero error---there are a few reasons for this. First, because of the numerical calculation, for all intents and purposes an error less than $10^{-10}$ can be considered $0$. Understanding the other sources of these small errors requires a deeper examination. \\
-
-The second cause of these errors is because some equilibrium states have a periodicity greater than $1$, we redefine \eqref{eq:error} to be instead
+Unsurprisingly, the error is largest in the region where the wave breaks. As mentioned in the previous subsection, the pulse does not reach a stable state in this region. As a consequence the envelope varies drastically, which leads to this large error. Conversely, the region where the energy appeared to be stable still has a non-zero error. The cause of this discrepancy is because some equilibrium states have a periodicity greater than $1$, thus, we redefine \eqref{eq:error} to be instead
 \begin{align}
 \textrm{E}_\Delta = \frac{\| |A_i| - |A_{i-\Delta}| \|_2}{\| A_{i-\Delta} \|_2},
 \label{eq:deltaerror}
 \end{align}
-to pick up equilibrium states with period $\Delta$, again with $i = 100$. Figure \ref{fig:deltaerror} shows the error for an assortment of $\Delta$ values. There are several key observations to make, first, for $\Delta = 2$ the kidney-shaped blob in the lower right corner has vanished, thus, this entire region has a periodicity of $2$. Second, for $\Delta = 3$ in the upper right corner a negative triangular-shaped structure emerges. Lastly, $\Delta \in \left\{ 5, 7, 11, 13 \right\}$ may not seem to extract any higher order periods, however, there are in fact very small striations in the lower left. So far, the $\Delta$ values have been prime since they are the building blocks for composite numbers. However, there are two composite $\Delta$ values of interest---the first being $16$. Since $16 = 2^4$ it will pick up any periodic behaviour with orders of $2, 4, 8, 16$, which are frequently found in bifurcations. Lastly, we chose $\Delta = 60$ for a similar reason: because $60$ is highly divisible---it is an abundant number. This extracts orders such as $12$ or $30$ without having to explicitly run the calculations\footnote{In the case of $\Delta = 60$ a value of $i = 150$ is used to ensure sufficient iterations to converge.}. \\
+to pick up equilibrium states with period $\Delta$, again with $i = 100$. Figure \ref{fig:deltaerror} shows the error for an assortment of $\Delta$ values. There are several key observations to make, first, for $\Delta = 2$ the kidney-shaped blob in the lower right corner has vanished, thus, this entire region has a periodicity of $2$. Second, for $\Delta = 3$ in the upper right corner a negative triangular-shaped structure emerges. Lastly, $\Delta \in \left\{ 5, 7, 11, 13 \right\}$ may not seem to extract any higher order periods, however, there are in fact very small striations in the lower left. We typically chose $\Delta$ values to be prime since they are the building blocks for composite numbers. However, there are two composite $\Delta$ values of interest. The first is $16$, since $16 = 2^4$ and it will pick up any periodic behaviour with orders of $2, 4, 8, 16$. Lastly, we chose $\Delta = 60$ for a similar reason: because $60$ is highly divisible extracting orders such as $12$ or $30$ without having to explicitly run the calculations\footnote{In the case of $\Delta = 60$ a value of $i = 150$ is used to ensure sufficient iterations to converge.}. \\
 
 \begin{figure}[tbp]
 \input{./Figures/Min}
@@ -204,30 +209,34 @@ We now have the data to make a more meaningful estimate of the error between ite
 \textrm{E}_c = \min_\Delta \left\{ \textrm{E}_\Delta \right\}.
 \label{eq:errorcomp}
 \end{align}
-The intriguing structure of the composite error is shown in Figure \ref{fig:errorcomp}. Compared with the error from Figure \ref{fig:error} the lower right region is much more well behaved, that is, the error is a few orders of magnitude lower. A peculiar trait of the band between the unstable and stable regions is that within this area the pulse is in a quasi-stable state---the pulse is stable and has reached a sort of equilibrium, however, the envelope of the pulse has minute variations with no clear period. Additionally, there appears to be no periodicity of the envelope within the wave breaking region, further supporting the claim that the pulse here is completely unstable. \\
+The intriguing structure of the composite error is shown in Figure \ref{fig:errorcomp}. Compared with the error from Figure \ref{fig:error} the lower right region is much more well behaved, that is, the error is a few orders of magnitude lower. A peculiar trait of the band between the unstable and stable regions is that within this area the pulse is in a quasi-stable state---the pulse is stable and has reached a sort of equilibrium, however, the envelope of the pulse has small variations with no clear period. Additionally, there appears to be no periodicity of the envelope within the wave breaking region, further supporting the claim that the pulse here is completely unstable. \\
 
 \begin{figure}[p]
 \centering
 \begin{subfigure}{\textwidth}
-\input{./Figures/StabilitySwitchZoom}
-\caption{Centralized for typical $s$, and $b$ values.}
-\label{fig:switchzoom}
-\end{subfigure} \\
-\begin{subfigure}{\textwidth}
 \input{./Figures/StabilitySwitch}
 \caption{Energy of the pulse within the $s$-$b$ plane.}
 \label{fig:switchbig}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{./Figures/StabilitySwitchZoom}
+\caption{Regime corresponding to typical $s$, and $b$ values for tuneable lasers.}
+\label{fig:switchzoom}
 \end{subfigure}
-\caption{Energy of the pulse at equilibrium with the modulation and dispersion blocks switched.}
+\caption{Energy of the pulse after 100 cycles with the modulation and dispersion blocks switched.}
 \label{fig:switch}
 \end{figure}
 
 \subsection{Permutation of Components}
-The last item we wish to consider is the order in which the components are placed. In Section \ref{sec:effects} a brief description for the choice of the order was given. We start with the loss component since this coincides with the output; the fibre nonlinearity follows the gain since this is where it has the largest impact; and the loss follows the nonlinearity in an attempt to mitigate its effect. Therefore, the loss is first, and the gain followed by the nonlinearity are last---leaving dispersion and modulation in the middle. We chose to put the dispersion block ahead of the modulator. However, there was no real reason behind this---modulation before dispersion is equally as valid---and in this subsection we explore the effect of modulating the pulse before it passes through the CFBG. \\
+The last item we wish to consider is the order in which the components are placed. In Section \ref{sec:effects} a brief description for the choice of the order was given. We start with the loss component since this coincides with the output; the fibre nonlinearity follows the gain since this is where it has the largest impact; and the loss follows the nonlinearity in an attempt to mitigate its effect. Therefore, the loss is first, and the gain followed by the nonlinearity are last---leaving dispersion and modulation in the middle. We chose to put the dispersion block ahead of the modulator. However, there was no real reason behind this---modulation before dispersion is equally as valid---and in this subsection we explore the effect of modulating the pulse before it passes through the \gls{cfbg}. \\
 
-The result of this switch is shown in Figure \ref{fig:switch}. As a whole, unsurprisingly, we find the same behaviour and structure, however, there are some intriguing differences. Perhaps the most interesting is the small island of instability in Figure \ref{fig:switchzoom} at around $s = 0.075$, $b = 1.1$ which was not present in the other ordering. Within this island the wave is unstable and breaks, but, curiously there is a small gap between this island and the main unstable region. We find more distinctions when considering the larger area in Figure \ref{fig:switchbig}. Again, the structure and periodic nature of the boundary is similar to before, however, this boundary has shifted rightwards to a larger $s$ value. Additionally, within the unstable region the density of the contour lines is much greater---suggesting it is in some sense more chaotic and random than with the components in their original permutation. The final main difference between the two orderings, is that in this case the energy contours are no longer monotonic functions of $s$. Instead we find a parabolic shape on the top contour, and two lobes on the second contour.
+The result of this switch is shown in Figure \ref{fig:switch}. As a whole, unsurprisingly, we find the same behaviour and structure, however, there are some intriguing differences. Perhaps the most interesting is the small island of instability in Figure \ref{fig:switchzoom} at around $s = 0.075$, $b = 1.1$ which was not present in the other ordering. Within this island the wave is unstable and breaks, but, curiously there is a small gap between this island and the main unstable region. We find more distinctions when considering the larger area in Figure \ref{fig:switchbig}. Again, the structure and periodic nature of the boundary is similar to before, however, this boundary has shifted rightwards to a larger $s$ value. Additionally, within the unstable region the density of the contour lines is much greater---suggesting it is in some sense more chaotic and random than with the components in their original permutation. The final main difference between the two orderings, is that in this case the energy contours are no longer monotonic functions of $s$. Instead we find a parabolic shape on the top contour, and two lobes on the second contour. \\
 
+\section{Chapter Summary}
+In this chapter we investigated how the nonlinear solution deviates from the linear solution by including the effects of the nonlinearity. We did this numerically; First we had to validate the code by comparing to the analytic result from Chapter \ref{chap:linear}. Once the code yielded the expected results for the linearized version, we incorporated on the nonlinearity. \\
 
+We began our investigation with the quantity of most interest---the energy. The energy of the pulse at equilibrium was shown in Figure \ref{fig:energy}. Generally, the results were as expected with the exception of the left-hand region. In this region, while smooth, the derivatives of the energy were very large leading to a very rough and noisy surface. It's this region where \gls{spm} takes over and ultimately leads to the pulse becoming unstable and breaking. When considering the nonlinearity the pulse begins to interfere with itself which causes this instability. \\
 
+To better understand the stability of the pulse, we turned our attention to computing the error between consecutive iterations by \eqref{eq:error}. This showed that the relative error within the wave breaking region is of order unity. Whereas, in the stable region the error took on values between $10^{-4}$ and $10^{-16}$. This is because the pulse reached a steady state with a periodicity greater than 1, this was highlighted by computing the composite error, \eqref{eq:deltaerror}, shown in Figure \ref{fig:errorcomp}. \\
 
-
+Finally, because the components of our model do not necessarily commute with each other and the order is important, we considered the effect of swapping the dispersion and modulation components. Overall, the structure of the solutions were very similar, as we saw in Figure \ref{fig:switch}. There were two main differences---the first was that the boundary between stable and unstable has shifted to a larger value of the dispersion parameter, $s$. The second difference was that the energy, in general, was higher as in Figure \ref{fig:energy}. \\

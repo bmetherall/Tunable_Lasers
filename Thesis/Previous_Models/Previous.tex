@@ -1,68 +1,86 @@
 % !TeX root = ../Thesis.tex
 
 \chapter{Previous Modelling Efforts}
-In this chapter we shall explore the previous modelling efforts by first reviewing the classic equations used in nonlinear optics. We will then build upon this to obtain the master equation of mode-locking, where the solutions to this will briefly be reviewed before considering `discretized' functional models. \\
+In this chapter we shall explore the previous modelling efforts by first reviewing the classic equations used in nonlinear optics. We will then build upon this to obtain the master equation of mode-locking, the solutions to this will briefly be reviewed before considering discretized functional models. \\
 
-\section{Generalized Nonlinear Schr\"odinger Equation}
-The standard equation for studying nonlinear optics is the nonlinear Schr\"odinger equation (NLSE) \cite{agrawal2013, anderson, burgoyne2007, desurvire, ferreira, finot, rothenberg}
-\begin{align*}
-\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A.
-\end{align*}
-Here $A = A(z, T)$ is the complex pulse amplitude, $\beta_2 \in \mathbb{R}$ is the second order---or group delay---dispersion, and $\gamma \in \mathbb{R}$ is the coefficient of nonlinearity or Kerr coefficient. This equation can be derived from the nonlinear wave equation for electric fields, the derivation is presented in detail in \cite{agrawal2013, ferreira}. Within the derivation comoving coordinates are used so that the reference frame propagates with the pulse at the group velocity. This is achieved with the substitution
+\section{Nonlinear Optics}
+The standard equation for studying nonlinear optics---which can be derived from the nonlinear wave equation for electric fields\footnote{The derivation is presented in detail in \cite{agrawal2013, ferreira}.}---is
+\begin{align}
+\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{t} + i \gamma |A|^2 A - \frac{1}{v_g} \pdiff{A}{t}.
+\label{eq:NLoptics}
+\end{align}
+Here $A = A(z, t) : \mathbb{R}^2 \mapsto \mathbb{C}$ is the complex pulse amplitude, $\beta_2 \in \mathbb{R}$ is the second order---or group delay---dispersion, $\gamma \in \mathbb{R}$ is the coefficient of nonlinearity or Kerr coefficient, and $v_g \in \mathbb{R}^+$ is the group velocity. However, it is customary to transform \eqref{eq:NLoptics} into a comoving reference frame, this is achieved with the substitution
 \begin{align}
 \label{eq:shift}
 T = t - \frac{z}{v_g},
 \end{align}
-reminiscent of moving to a fixed frame in a free boundary problem \cite{ockendon}. In this way, $z$ defines the distance travelled by the pulse, and $T$ the time difference from the peak of the pulse. Moreover, $T = 0$ is the peak of the pulse regardless of the actual time elapsed, because of this, generally $T$ is not very large. In standard coordinates the nonlinear Schr\"odinger equation has an additional term:
-\begin{align*}
-\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{t} + i \gamma |A|^2 A - \frac{1}{v_g} \pdiff{A}{t}.
-\end{align*}
-However, under the transformation \eqref{eq:shift}, we have that $\pdiff{}{t} \mapsto \pdiff{}{T}$, and $\pdiff{}{z} \mapsto \pdiff{}{z} - \frac{1}{v_g} \pdiff{}{T}$ by chain rule, thus, cancelling out this final term. \\
-
-In practice, this equation lacks a few key terms. Thus, it is often generalized by adding amplification, loss, and higher order terms. This gives the generalized nonlinear Schr\"odinger equation (GNLSE) \cite{agrawal2013, bohun, finot, peng, shtyrina, yarutkina},
+reminiscent of moving to a fixed frame in a free boundary problem \cite{ockendon}. Now, $\pdiff{}{t} \mapsto \pdiff{}{T}$, and $\pdiff{}{z} \mapsto \pdiff{}{z} - \frac{1}{v_g} \pdiff{}{T}$ by chain rule.  Under this transformation, $z$ still defines the distance travelled by the pulse, but, $T$ now designates the time difference from the peak of the pulse for a given $z$. Moreover, $T < 0$ is the leading edge of the pulse, and $T > 0$ is the trailing edge regardless of the actual time elapsed, and because of this, generally $T$ is not very large. Furthermore, the substitution \eqref{eq:shift} cancels the final term of \eqref{eq:NLoptics}, yielding
 \begin{align}
-\label{eq:nlse}
-\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \frac{\beta_3}{6}\pdiff[3]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A,
+\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A.
+\label{eq:smallnlse}
 \end{align}
-where $\beta_3 \in \mathbb{R}$ is the third order coefficient of dispersion, $g(A)$ is an amplifying term due to the gain, and $\alpha \in \mathbb{R}$ is the loss due to scattering and absorption. \\
+Despite being physically unrelated to quantum mechanics \eqref{eq:smallnlse} is called the \gls{nlse} because of it's functional similarity \cite{agrawal2013, anderson, burgoyne2007, desurvire, ferreira, finot, rothenberg}. \\
 
-The GNLSE takes the same form as the Schr\"odinger equation with the inclusion of the cubic nonlinear term, hence its name. For this reason, it is sometimes referred to as the cubic nonlinear Schr\"odinger equation. For intensities approaching $1 \text{ GW/cm}^2$, the $\gamma$ parameter must be replaced by $\gamma_0 (1 - b_s |A|^2)$, where $b_s$ is a saturation parameter \cite{agrawal2013}, this has the addition of a quintic term to incorporate nonlinearities associated with such large powers. Furthermore, the $\beta$ terms come from a Taylor expansion of the wavenumber \cite{kartner}, that is,
+The $\beta_2$ term comes from a Taylor expansion of the wavenumber \cite{kartner}, that is,
 \begin{align*}
 k(\omega) &= k_0 + \left. \pdiff{k}{\omega}\right|_{\omega_0}(\omega - \omega_0) + \frac{1}{2} \left. \pdiff[2]{k}{\omega}\right|_{\omega_0}(\omega - \omega_0)^2 + \frac{1}{6} \left. \pdiff[3]{k}{\omega}\right|_{\omega_0}(\omega - \omega_0)^3 + \cdots \\
 &= k_0 + \frac{1}{v_g}(\omega - \omega_0) + \frac{1}{2}\beta_2 (\omega - \omega_0)^2 + \frac{1}{6}\beta_3 (\omega - \omega_0)^3 + \cdots,
 \end{align*}
-where $k_0$ is the phase shift. Typically, the third order effects must only be considered for ultrashort pulses---pulse widths less than $\sim5 \text{ ps}$---because of their large bandwidth~\cite{agrawal2013}.
+where $\omega_0$ is the central frequency of operation, $k_0 = k(\omega_0)$, and $\beta_3$ is the third order dispersive effects. Typically, these third order effects must only be considered for ultrashort pulses---pulse widths less than $\sim5 \text{ ps}$---because of their large bandwidth~\cite{agrawal2013}, or a highly dispersive media \cite{agrawal2013, litchinitser}. However, for simplicity and because of the nature of the grating, the third order effects can be neglected \cite{agrawal2013, ferreira}. \\
+
+In practice, \eqref{eq:smallnlse} lacks a few key terms. Thus, it is often generalized by adding amplification, loss, and occasionally higher order terms. This gives the \gls{gnlse} \cite{agrawal2013, bohun, finot, peng, shtyrina, yarutkina},
+\begin{align}
+\label{eq:nlse}
+\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A,
+\end{align}
+where $g(A)$ is an amplifying term due to the gain, and $\alpha \in \mathbb{R}$ is the loss due to scattering and absorption. \\
+
+%The \gls{gnlse} takes the same form as the Schr\"odinger equation with the inclusion of the cubic nonlinear term. For this reason, it is sometimes referred to as the cubic nonlinear Schr\"odinger equation.
+%For intensities approaching $1 \text{ GW/cm}^2$, the $\gamma$ parameter must be replaced by $\gamma_0 (1 - b_s |A|^2)$, where $b_s$ is a saturation parameter \cite{agrawal2013}, this has the addition of a quintic term to incorporate nonlinearities associated with such large powers. 
 
 \section{The Master Equation of Mode-Locking}
 \label{chap:meml}
-The GNLSE has many applications in nonlinear optics and fibre optic communications, however, in the context of lasers we wish to add a modulation term to ensure mode-locking, this yields the master equation of mode-locking, \cite{hausbook, haus1975, haus1986, haus1992, haus2000, kartner, tamura, usechak}
+The \gls{gnlse} has many applications in nonlinear optics and fibre optic communications, however, in the context of lasers we wish to add a modulation term to ensure mode-locking, this yields the master equation of mode-locking, \cite{hausbook, haus1975, haus1986, haus1992, haus2000, kartner, tamura1996, usechak}
 \begin{align}
-\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \frac{\beta_3}{6}\pdiff[3]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A - M(T).
+\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A - M(T).
 \end{align}
-The most common form of modulation is the sinusoid $M(T) = \frac{1}{2}\frac{M_s}{\omega_M^2} \left( 1 - \cos \left( \omega_M T \right) \right)$ \cite{hausbook, haus1975, haus1996, kartner}, and since $T$ is generally small, by \eqref{eq:shift}, we expand via it's Taylor series so that $M(T) = \frac{1}{2}M_s T^2 + \bigO{T^4}$. This brings us to the most common form of the master equation of mode-locking (neglecting the third order dispersion),
+The most common form of modulation is the sinusoid $M(T) = \frac{1}{2}\frac{M_s}{\omega_M^2} \left( 1 - \cos \left( \omega_M T \right) \right)$ \cite{hausbook, haus1975, haus1996, kartner}, where $M_s$ is the strength of modulation and $\omega_M$ is the frequency of modulation. Moreover, since $T$ is generally small, we expand via Taylor series so that $M(T) = \frac{1}{2}M_s T^2 + \bigO{T^4}$. This brings us to the most common form of the master equation of mode-locking,
 \begin{align}
 \label{eq:meml}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A - \frac{1}{2}M_s T^2.
 \end{align}
-Commonly, in an attempt to simplify the equation the gain is assumed to be constant with $g(A) = 2g_0 \in \mathbb{R}$. As a whole no analytic solution is known for \eqref{eq:meml}, however, after additional simplifications there are three flavours of solutions. \\
+Commonly, in an attempt to simplify the equation, the gain is assumed to be constant with $g(A) = 2g_0 \in \mathbb{R}$. No analytic solution is known for \eqref{eq:meml}, however, after additional simplifications there are three types of solutions. \\
 
 In the least complicated case, the modulation and nonlinearity are both omitted giving
-\begin{align*}
+\begin{align}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \left( g_0 - \alpha \right) A.
-\end{align*}
+\label{eq:disc1}
+\end{align}
 This results in a solution in the form of a hyperbolic secant \cite{haus1975, haus1986, haus1992}. On the other hand, including the nonlinearity yields
-\begin{align*}
+\begin{align}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A + \left( g_0 - \alpha \right) A,
-\end{align*}
-where a similar solution is found, however, it is instead of the form of a chirped hyperbolic secant \cite{haus1991, usechak}. Both of these are unsurprising since this reduces to the soliton solution of the NLSE \cite{ferreira}. Finally, by including the modulation term, and excluding the nonlinearity we have
-\begin{align*}
+\label{eq:disc2}
+\end{align}
+where a similar solution is found, however, it is instead of the form of a chirped hyperbolic secant \cite{haus1991, usechak}. The nature of the solutions to \eqref{eq:disc1} and \eqref{eq:disc2} is as expected. These equations are slight generalizations of \eqref{eq:smallnlse} which has a soliton solution of a hyperbolic secant \cite{ferreira}. Finally, by including the modulation term, and excluding the nonlinearity we have
+\begin{align}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \left( g_0 - \alpha \right) A - \frac{1}{2}M_s T^2.
-\end{align*}
-This can be solved using separation of variables and one finds the solutions are the Gaussian--Hermite polynomials \cite{burgoyne2014, hausbook, haus1975, haus1996, haus2000, kartner, tamura, usechak}. However, in practice only the Gaussian is stable---the higher modes quickly decay within the laser \cite{hausbook, haus1975, haus1996, haus2000}. For a more comprehensive and exhaustive history see \cite{haus2000}. \\
+\end{align}
+This can be solved using separation of variables and one finds the solutions are the Gaussian--Hermite polynomials \cite{burgoyne2014, hausbook, haus1975, haus1996, haus2000, kartner, tamura1996, usechak} defined recursively as
+\begin{align}
+\Her{n}{x} &:= (-1)^n \textrm{e}^{x^2 / 2} \diff[n]{}{x} \textrm{e}^{-x^2},
+\label{eq:gaussherm}
+\end{align}
+However, in practice only the Gaussian is stable---the higher modes quickly decay within the laser \cite{hausbook, haus1975, haus1996, haus2000}. For a more comprehensive history see \cite{haus2000}. \\
 
 \section{Discrete Functional Models}
-While solutions to the master equation yield reasonable results, it is not necessarily representative of what happens within the laser cavity. The issue with \eqref{eq:meml} is that it assumes each process effects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this is a rather poor assumption. Within the cavity each effect is localized to its corresponding component: almost all of the dispersion happens within the CFBG, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, perhaps a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be composed together functionally to give the effect of one circuit around the cavity. This yields an algebraic equation instead of a differential one. \\
+\label{sec:discrete}
+While the derivation of \eqref{eq:meml} is correct mathematically, it is not representative of what happens within the laser cavity. The issue with \eqref{eq:meml} is that it has been assumed each process affects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this is a rather poor assumption. Within the cavity each effect is localized to its corresponding component: almost all of the dispersion happens within the \gls{cfbg}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, perhaps a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be composed together to give an iterative map for the effect of one circuit around the cavity. This yields an algebraic equation instead of a differential one. \\
 
-Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{siegman}, which they then greatly added to the following year \cite{kuizenga1970a}. Kuizenga and Siegman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried to model passive mode-locking---mode-locking without the use of a modulator. In the absence of a modulator the nonlinearity becomes crucial to shaping the pulse. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In each of these models the effect of each block is described by a Gaussian transfer function. These transfer functions are then multiplied together to give the overall effect. \\
+Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, siegman}. Kuizenga and Siegman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passive mode-locking---mode-locking without the use of a modulator. In the absence of a modulator the nonlinearity becomes crucial to shaping the pulse. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In these models the effect of each block is described by a transfer function, for example
+\begin{align*}
+A_{\text{out}}(T) &= A_{\text{in}}(T) \exp \left( - \frac{\epsilon T^2}{2} \right) \textrm{e}^{i \phi_M - \alpha_M / 2}, \\
+\widehat{A_{\text{out}}}(\Omega) &= \widehat{A_{\text{in}}}(\Omega) \exp \left( \frac{i \beta_2 \Omega^2}{2} \right) \textrm{e}^{i \phi_D - \alpha_D / 2}
+\end{align*}
+for modulation and dispersion, respectively. These transfer functions are then multiplied together to give the overall effect. This is in contrast to the iterative map developed in Sections \ref{sec:comp}--\ref{sec:effects}. \\
 
-Despite these attempts, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. In the framework of tuneable lasers, each component plays a crucial role and the tuneable laser will not function without the inclusion of all of the components. Another key drawback is that the functional operations of some of the components are somewhat phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with their underlying physics. Finally, none of these previous models have been able to exhibit a phenomena called \emph{wave-breaking} in which the self-phase modulation (SPM) of the pulse becomes too strong, distorting and damaging the wave until it ultimately becomes unstable and unsustainable. This notion will be explained in greater detail in Chapter \ref{chap:nl}. \\
+Despite the development of block style models, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. In the framework of tuneable lasers, each component plays a crucial role and the tuneable laser will not function without the inclusion of all of the components. Another key drawback is that the functional operations of some of the components used in other models are somewhat phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with their underlying physics. Finally, none of these previous models have been able to exhibit a phenomena called \emph{wave-breaking} in which the \acrlong{spm} of the pulse becomes too strong, distorting and damaging the wave until it ultimately becomes unstable and unsustainable. This notion will be explored in greater detail in Chapter \ref{chap:nl}. \\

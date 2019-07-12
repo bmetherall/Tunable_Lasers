@@ -1,12 +1,12 @@
 % !TeX root = ../Thesis.tex
 %\chapter{Asymptotic Expansions of the Variance}
 %\label{chap:asymp}
-We shall investigate the nature of the solution to \eqref{eq:var} both when $s \rightarrow 0$ (a very short CFBG), as well as when $s \rightarrow \infty$ (a very long CFBG). For ease of notation, \eqref{eq:var} is rewritten as
+We shall investigate the nature of the solution to \eqref{eq:var} both when $s \rightarrow 0$ (a very short \gls{cfbg}), as well as when $s \rightarrow \infty$ (a very long \gls{cfbg}). For ease of notation, \eqref{eq:var} is rewritten as
 \begin{align}
 \label{eq:asymp}
-\frac{1}{4} x^4 = \eps \left( -x^3 + 5x^2 - 8x + 4 \right),
+\frac{1}{4} x^4 = - \eps (x - 1)(x - 2)^2,
 \end{align}
-where $x = \sigma^2$, $\eps = s^4$, and $\eps \rightarrow 0$. Additionally, suppose $x$ can be expanded as a power series in $\eps$:
+where $x = \sigma^2$, $\eps = s^4$, and $\eps \rightarrow 0$. Figure \ref{fig:asympt} shows \eqref{eq:asymp}. Additionally, suppose $x$ can be expanded as a power series in $\eps$:
 \begin{align}
 \label{eq:series}
 x = x_0 + x_1 \eps^\alpha + x_2 \eps^\beta + \cdots
@@ -23,41 +23,41 @@ In order to have dominant balance it must be that the left hand side balances wi
 \begin{align*}
 (x_1 - 2)(x_1 + 2)(x_1^2 + 4) &= 0,
 \end{align*}
-and so, $x_1 = \pm 2, \, \pm 2 i$. However, we wish $x$ to be positive and real---recall that $x = \sigma^2$---thus, we take $x_1 = 2$. Now, the next lowest order of the left hand side must be $\eps^{3\alpha + \beta} = \eps^{3/4 + \beta}$. As with the previous iteration, this must balance with the lowest order term of the $8x$. Hence, $\frac{3}{4} + \beta = 1 + \alpha = \frac{5}{4}$, thus, $\beta = \frac{1}{2}$. Now, at $\bigO{\eps^{5/4}}$,
+and so, $x_1 = \pm 2, \, \pm 2 i$. However, we require $x$ to be positive and real---recall that $x = \sigma^2$---thus, we take $x_1 = 2$. Now, the next lowest order of the left hand side must be $\eps^{3\alpha + \beta} = \eps^{3/4 + \beta}$. As with the previous iteration, this must balance with the lowest order term of the $8x$. Hence, $\frac{3}{4} + \beta = 1 + \alpha = \frac{5}{4}$, thus, $\beta = \frac{1}{2}$. Now, at $\bigO{\eps^{5/4}}$,
 \begin{align*}
 \frac{1}{4} 4 x_1^3 x_2 &= -8x_1,
 \end{align*}
 and with the choice of $x_1$, $x_2 = 2$. Combining these results gives $x = 2 \eps^{1/4} - 2 \eps^{1/2} + \bigO{\eps^{3/4}}$, or $\sigma^2 = 2 s \left( 1 - s \right) + \bigO{s^3}$,
-this is shown in Figure \ref{fig:lims0}. \\
+this is shown in Figure \ref{fig:lims0}. The choice $\eps = s^4$ was for convenience, but in retrospect, $\eps = s$ yields a cleaner, but identical, solution. \\
 \begin{figure}[tbp]
 \input{./Figures/Lim_s_0}
-\caption{Asymptotic expansion of the variance as $s \rightarrow 0$.}
+\caption[Asymptotic expansion of the variance as the dispersion parameter approaches 0.]{Asymptotic expansion of the variance as the dispersion parameter, $s$, approaches $0$.}
 \label{fig:lims0}
 \end{figure}
 
-We shall now consider the other limit, when $s \rightarrow \infty$. Using a similar substitution we instead write \eqref{eq:var} as
+We shall now consider the other limit, when the dispersion parameter, $s$, approaches $\infty$. Using a similar substitution we instead write \eqref{eq:var} as
 \begin{align}
 \label{eq:asymp2}
 \frac{1}{4} \eps x^4 = -x^3 + 5x^2 - 8x + 4,
 \end{align}
-where $x = \sigma^2$, and $\eps = s^{-4}$ instead so we still have $\eps \rightarrow 0$. Furthermore, we must make a correction to the series expansion:
+where $x = \sigma^2$, and $\eps = s^{-4}$ instead so we still have $\eps \rightarrow 0$, this is also shown in Figure~\ref{fig:asympt}. Furthermore, we must make a correction to the series expansion:
 \begin{align}
 \label{eq:series2}
 x = \eps^{-\xi} \left( x_0 + x_1 \eps^\alpha + x_2 \eps^\beta + \cdots \right).
 \end{align}
 The reason for this is because the equation is now singular---when $\eps=0$ the equation transforms from a quartic to a cubic, losing a root. As with before, we obtain dominant balance when the quartic term balances with the cubic term which occurs when $1 - 4 \xi = -3 \xi$, or $\xi = 1$. Then to $\bigO{\eps^{-3}}$, expression \eqref{eq:asymp2} gives
 \begin{align*}
-x_0^3 (x_0 + 4) &= 0,
+x_0^3 (x_0 + 4) &= 0.
 \end{align*}
-we shall choose $x_0 = 0$---since $x \geq 0$. Continuing, we obtain a dominant balance when $\alpha = 1$. So the next condition occurs at $\bigO{1}$ where
+The non-trivial solution $x_0 = -4$ gives rise to a boundary layer structure. However, this is unphysical because $x \geq 0$, leaving $x_0^3 = 0$, so this singular perturbation does not generate the boundary layer expected. Therefore, \eqref{eq:series2} reduces to a regular perturbation problem, and $\alpha$ must equal 1. The next condition occurs at $\bigO{1}$ where
 \begin{align*}
 0 = -x_1^3 + 5x_1^2 - 8x_1 + 4 = -(x_1 - 1)(x_1 - 2)^2,
 \end{align*}
-so either $x_1 = 1$ or $x_1 = 2$, we shall see in the next step that we can eliminate one of these. The next term obtains dominant balance when the left hand side balances with the linear term of the right hand side, that is, when $\beta = 2$. Now at $\bigO{\eps}$,
+so either $x_1 = 1$ or $x_1 = 2$. The next term obtains dominant balance when the left hand side balances with the linear term of the right hand side, that is, when $\beta = 2$ provided\footnote{In the case of $x_1 = 2$ we find $\beta = \frac{3}{2}$ which leads to complex roots.} $x_1 \ne 2$. Now at $\bigO{\eps}$,
 \begin{align*}
 \frac{1}{4} x_1^4 = -3x_1^2 x_2 + 5\cdot2 x_1 x_2 - 8x_2 = -x_2 (3x_1 - 4)(x_1 - 2),
 \end{align*}
-where again, the coefficients come from the binomial expansions. From this it is clear that $x_2$ is unique provided $x_1 \ne 2$ and
+where again, the coefficients come from the binomial expansions. From this it is clear that
 \begin{align*}
 x_2 &= \frac{-x_1^4}{4(3x_1 - 4)(x_1 - 2)}.
 \end{align*}
@@ -80,12 +80,13 @@ or,
 this approximation is shown in Figure \ref{fig:limsinfty}. \\
 \begin{figure}[tbp]
 \input{./Figures/Lim_s_Infty}
-\caption{Asymptotic expansion of the variance as $s \rightarrow \infty$.}
+\caption[Asymptotic expansion of the variance as the dispersion parameter approaches $\infty$.]{Asymptotic expansion of the variance as the dispersion parameter, $s$, approaches $\infty$.}
 \label{fig:limsinfty}
 \end{figure}
 
 In conclusion, the asymptotic expansions of the observables are
-\begin{align*}
+\begin{equation}
+\begin{aligned}
 \sigma^2 &=
 \begin{cases*}
 2s(1 - s) + \bigO{s^3} & $s \rightarrow 0$ \\
@@ -106,5 +107,7 @@ In conclusion, the asymptotic expansions of the observables are
 1 - \frac{1}{2}s + \frac{1}{8}s^2 + \bigO{s^3} & $s \rightarrow 0$ \\
 \frac{1}{4^{1/4}s} - \frac{3 \cdot 4^{3/4}}{32 s^5} + \bigO{s^{-9}} & $s \rightarrow \infty$.
 \end{cases*}
-\end{align*}
-The general form of these is as expected. When $s \rightarrow 0$, we effectively remove the CFBG from the cavity. This causes the pulse to be perpetually modulated, and so, the pulse approaches a $\delta$ function, and therefore, $\sigma^2 \rightarrow 0$. Moreover, since $\zeta$ is the ratio of the amplitude of the pulse before and after dispersion, $\zeta \rightarrow 1$. In the opposite extreme, $s \rightarrow \infty$, we have an incredibly long / powerful CFBG---this causes the pulse to broaden greatly, while conserving its energy. Because of this, the variance approaches unity because the shape is entirely determined by the modulation function. Additionally, $\zeta \rightarrow 0$ because the pulse becomes infinitely wide, and thus, the amplitude becomes infinitesimally small. Finally, because of the expansive nature, the chirp approaches zero because any chirp will be inflated away. \\
+\label{eq:asympt}
+\end{aligned}
+\end{equation}
+The general form of these is as expected. When $s \rightarrow 0$, we effectively remove the \gls{cfbg} from the cavity. This causes the pulse to be perpetually modulated, and so, the pulse's shape approaches a $\delta$ function, and therefore, $\sigma^2 \rightarrow 0$. Moreover, since $\zeta$ is the ratio of the amplitude of the pulse before and after dispersion, $\zeta \rightarrow 1$. In the opposite extreme, $s \rightarrow \infty$, the length / strength of the \gls{cfbg} approaches infinity---this causes the pulse to broaden greatly, while conserving its energy. Because of this, the variance approaches unity because the shape is entirely determined by the modulation function. Additionally, $\zeta \rightarrow 0$ because the pulse becomes infinitely wide, and thus, the amplitude becomes infinitesimally small. Due to the expansive nature, the chirp approaches zero because any chirp will be expanded away. \\
