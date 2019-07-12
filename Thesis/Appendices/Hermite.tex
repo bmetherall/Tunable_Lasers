@@ -88,7 +88,7 @@ Recall that $\Her{n}{x}$ has a polynomial as well as a Gaussian component. Witho
 \begin{align*}
 f(x) = \sum_{n = 0}^\infty a_n (-1)^n \textrm{e}^{x^2/2} \diff[n]{}{x} \textrm{e}^{-x^2}.
 \end{align*}
-Finally, we can rewrite the derivatives using central differences \cite{zwillinger} so that
+Finally, we can rewrite the derivatives using central differences \cite{zwillinger} so that our function can be expressed as
 \begin{align}
 f(x) = \sum_{n = 0}^\infty a_n (-1)^n \textrm{e}^{x^2/2} \left[ \lim_{h \rightarrow 0} \frac{1}{h^n} \sum_{i = 0}^n (-1)^i \binom{n}{i} \exp\left( -\left( x + h\left( \frac{n}{2} - i \right) \right)^2 \right) \right].
 \label{eq:gs}
@@ -101,5 +101,9 @@ f(x) = \sum_{n = 0}^\infty a_n (-1)^n \textrm{e}^{x^2/2} \left[ \lim_{h \rightar
 \label{fig:gaussmod}
 \end{figure}
 
-Two examples of Gaussian series from \eqref{eq:gs} are shown in Figure \ref{fig:gs}. These examples are taken from \cite{calcaterra2, calcaterra}, however, we achieve similar or better approximations with either fewer terms, or with an $h$ value an order of magnitude larger. There are two reasons for this, first, we use central difference as opposed to backwards difference yielding a convergence of $\bigO{h^2}$ instead of $\bigO{h}$. Furthermore, because \cite{calcaterra2, calcaterra} used backwards differences, the means of the Gaussians are all non-negative, whereas with central differences, our Gaussians' means are both positive and negative---this leads to smaller coefficients, and better numerical stability. Moreover, Figure \ref{fig:gaussmod} shows the Gaussian series for the modulation function in \cite{bohun, burgoyneemail}.
+Two examples of Gaussian series from \eqref{eq:gs} are shown in Figure \ref{fig:gs}. These examples are taken from \cite{calcaterra2, calcaterra}, however, we achieve similar or better approximations with either fewer terms, or with an $h$ value an order of magnitude larger. There are two reasons for this, first, we use central difference as opposed to backwards difference yielding a convergence of $\bigO{h^2}$ instead of $\bigO{h}$. Furthermore, because \cite{calcaterra2, calcaterra} used backwards differences, the means of the Gaussians are all non-negative, whereas with central differences, our Gaussians' means are both positive and negative---this leads to smaller coefficients, and better numerical stability. Moreover, Figure \ref{fig:gaussmod} shows the Gaussian series for the modulation function
+\begin{align*}
+M(T) = \frac{1}{2} \left( 1 - \cos \left( \pi \textrm{e}^{-x^2} \right) \right),
+\end{align*}
+used in \cite{bohun, burgoyneemail}.
 

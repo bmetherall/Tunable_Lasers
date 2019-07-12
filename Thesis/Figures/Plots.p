@@ -128,6 +128,7 @@ set ytics 0.2
 set xtics 1
 set key top right
 set key width -20
+set grid front
 
 set output './Figures/GaussMod.tex'
 p '../Gaussian2.dat' u 1:2 w l t 'Gaussian Series', \

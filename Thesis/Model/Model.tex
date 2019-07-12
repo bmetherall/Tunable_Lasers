@@ -72,13 +72,13 @@ This is also frequently called the Kerr nonlinearity or Kerr effect after John K
 \subsection{Loss}
 Two sources of loss exist within the laser circuit: the loss due to the output coupler and the optical loss due to absorption and scattering. The first case is simply a scalar multiplication depending on the reflectivity of the output coupler. The loss due to absorption and scattering can be derived from \eqref{eq:nlse},
 \begin{align*}
-\pdiff{A}{z} = - \alpha A.
+\pdiff{A}{z} = - \alpha A,
 \end{align*}
-Combining these two effects gives a loss that takes the form
+and gives $\textrm{e}^{-\alpha L_T}A$, which by multiplying by the amount of the signal lost to the output coupler gives
 \begin{align*}
 L(A) &= (1 - R) \textrm{e}^{- \alpha L_T}A,
 \end{align*}
-where $R$ is the reflectivity of the output coupler, and $L_T$ is the total length of the laser circuit.
+where $R$ is the reflectivity of the output coupler, and $L_T$ is the total length of the laser circuit as the effect of the losses\footnote{Depending on the experimental setup the loss may take the form $L(A) = R \textrm{e}^{- \alpha L_T}A$.}.
 
 \subsection{Dispersion}
 Within the laser cavity, the dispersion is dominated by the \gls{cfbg}. In comparison, the dispersion due to the fibre is negligible. The dispersive terms of \eqref{eq:nlse} give
@@ -90,7 +90,7 @@ and since dispersion acts in the frequency domain it is convenient to take the F
 \begin{align*}
 	\pdiff{}{z}\FT{A} &= i\frac{\omega^2}{2}\beta_2 \FT{A}.
 \end{align*}
-The effect of dispersion is then by the map
+The effect of dispersion is then given by the map
 \begin{align*}
 D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D\beta_2/2} \FT{A}},
 \end{align*}
@@ -152,12 +152,12 @@ M(A) &= \textrm{e}^{-T^2 / 2} A,
 with the four dimensionless parameters, as defined by the values in Table \ref{tab:values},
 \begin{equation}
 \begin{aligned}
-	a &= \textrm{e}^{g_0 L_g} \sim 8 \times 10^3,& \qquad h &= (1 - R) \textrm{e}^{-\alpha L} \sim 0.04\\
+	a &= \textrm{e}^{g_0 L_g} \sim 8 \times 10^3,& \qquad h &= (1 - R) \textrm{e}^{-\alpha L} \sim 0.04, \\
 	b &= \gamma L_f \frac{\Es}{T_M} \sim 1,& \qquad s &= \sqrt{\frac{\beta_2 L_D}{2 T_M^2}} \sim 0.2,
 \label{eq:ndparam}
 \end{aligned}
 \end{equation}
-which characterize the behaviour of the laser. Notice that the modulation is characterized by $T_M$, and each other process has it's own independent non-dimensional parameter.
+which characterize the behaviour of the laser. Notice that the modulation is characterized by $T_M$, and each other process has its own independent non-dimensional parameter.
 
 \begin{table}[tbp]
 \centering
@@ -193,7 +193,7 @@ where $\mathcal{L}$ is one loop of the laser. A steady solution to this model is
 
 \section{Solution to the Linear Model}
 \label{sec:linear}
-In reality the nonlinearity parameter, $b$, is of order unity by \eqref{eq:ndparam}, but we shall start our investigation with the simpler case of $b = 0$---which shall be referred to as the linear model. In this case, a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the previous models were Gaussian \cite{cutler, siegman, kuizenga1970a, martinez1984, martinez1985} (see Section \ref{chap:meml}), the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn}, dispersion will not alter the envelope. \\
+In reality the nonlinearity parameter, $b$, is of order unity by \eqref{eq:ndparam}, but we shall start our investigation with the simpler case of $b = 0$---which shall be referred to as the linear model. In this case, a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the previous models were Gaussian \cite{cutler, siegman, kuizenga1970a, martinez1984, martinez1985} (see Section \ref{chap:meml}), the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
 
 \begin{figure}[tbp]
 \centering
@@ -307,7 +307,7 @@ A sample solution for the linear model is shown in Figure \ref{fig:linear}. To r
 \caption{Plot of \eqref{eq:asymp} and \eqref{eq:asymp2} to highlight the structure.}
 \label{fig:asympt}
 \end{figure}
-While \eqref{eq:equilvar} is useful, so too is the asymptotic behaviour. The asymptotic expansion provides additional information about the structure that the full analytic expression cannot. Moveover, the expansion provides more detail about the limits, as well has the rate of convergence. Lastly, the expansion allows for simplified expressions within their domains that are much less unwieldy than those found in the previous subsections. \\
+While \eqref{eq:equilvar} is useful, so too is the asymptotic behaviour. The asymptotic expansion provides additional information about the structure that the full analytic expression cannot. Moveover, the expansion provides more detail about the limits, as well has the rate of convergence. Lastly, the expansion allows for simplified expressions within their domains that are much less unwieldy than those found in the previous subsection. \\
 
 \input{./Appendices/Asymptotics}
 
@@ -340,7 +340,7 @@ E_* &= \int_{-\infty}^\infty |G(A)|^2 \, \df T = \frac{W(a E \textrm{e}^E)}{E} \
 \label{eq:equilenergy}
 \end{align}
 
-We can now find the amplitude of the pulse as well now that the energy is know---as we have previously found the equilibrium shape. Again, from \eqref{eq:gainde}, it must be that $E_* = \sqrt{\pi} P \sigma$, or,
+We can now find the amplitude of the pulse as well now that the energy is known---as we have previously found the equilibrium shape. Again, from \eqref{eq:gainde}, it must be that $E_* = \sqrt{\pi} P \sigma$, or,
 \begin{align}
 P = \frac{W(a E \textrm{e}^E)}{\sqrt{\pi} \sigma}.
 \label{eq:equilpower}
@@ -360,7 +360,7 @@ and
 \end{align*}
 
 \section{Chapter Summary}
-In this chapter we first derived the effect each of the five components---gain, nonlinearity, loss, dispersion, and modulation---has on the incoming pulse from \eqref{eq:nlse}. Furthermore, to highlight the structure of these effects the system was non-dimensionalized. This yielded the functional maps \eqref{eq:effects} for the components, with corresponding non-dimensional parameters \eqref{eq:ndparam}. With each of the operators defined, we proceeded to compose each process, in the order most representative of a tuneable laser, to give the effect of one complete circuit around the laser cavity. \\
+In this chapter we first derived the effect each of the five components---gain, nonlinearity, loss, dispersion, and modulation---has on the incoming pulse from \eqref{eq:nlse}. Furthermore, to highlight the structure of these effects the system was non-dimensionalized. This yielded the functional maps \eqref{eq:effects} for the components, with corresponding non-dimensional parameters \eqref{eq:ndparam}. With all of the operators defined, we proceeded to compose each process, in the order most representative of a tuneable laser, to give the effect of one complete circuit around the laser cavity. \\
 
 We then sought a solution to the linearized model---having omitted the nonlinearity component. In this case, we were able to find a closed form analytic solution for the equilibrium state. To do this, we assumed the solution took the form of a linearly chirped Gaussian, \eqref{eq:A0}, which was then passed through each process map yielding \eqref{eq:A4} in the end. The fixed point of the linearized model was found by equating \eqref{eq:A0} and \eqref{eq:A4}, but, allowing a phase shift to have occured. The equilibrium variance, chirp, energy, and peak power were found to be \eqref{eq:equilvar}, \eqref{eq:equilchirp}, \eqref{eq:equilenergy}, and \eqref{eq:equilpower}, respectively. To gain a better understanding of the limiting behaviour, the asymptotic expansions were investigated. This yielded \eqref{eq:asympt} for the asymptotic expansions of the variance and chirp, and \eqref{eq:epasymp} for the energy and peak power. \\
 

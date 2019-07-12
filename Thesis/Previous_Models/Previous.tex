@@ -19,7 +19,7 @@ reminiscent of moving to a fixed frame in a free boundary problem \cite{ockendon
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A.
 \label{eq:smallnlse}
 \end{align}
-Despite being physically unrelated to quantum mechanics \eqref{eq:smallnlse} is called the \gls{nlse} because of it's functional similarity \cite{agrawal2013, anderson, burgoyne2007, desurvire, ferreira, finot, rothenberg}. \\
+Despite being physically unrelated to quantum mechanics \eqref{eq:smallnlse} is called the \gls{nlse} because of its functional similarity \cite{agrawal2013, anderson, burgoyne2007, desurvire, ferreira, finot, rothenberg}. \\
 
 The $\beta_2$ term comes from a Taylor expansion of the wavenumber \cite{kartner}, that is,
 \begin{align*}
@@ -65,7 +65,7 @@ where a similar solution is found, however, it is instead of the form of a chirp
 \begin{align}
 \pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + \left( g_0 - \alpha \right) A - \frac{1}{2}M_s T^2.
 \end{align}
-This can be solved using separation of variables and one finds the solutions are the Gaussian--Hermite polynomials \cite{burgoyne2014, hausbook, haus1975, haus1996, haus2000, kartner, tamura1996, usechak} defined recursively as
+This can be solved using separation of variables and one finds the solutions are the Gaussian--Hermite polynomials \cite{burgoyne2014, hausbook, haus1975, haus1996, haus2000, kartner, tamura1996, usechak}, defined recursively as
 \begin{align}
 \Her{n}{x} &:= (-1)^n \textrm{e}^{x^2 / 2} \diff[n]{}{x} \textrm{e}^{-x^2},
 \label{eq:gaussherm}
@@ -76,10 +76,10 @@ However, in practice only the Gaussian is stable---the higher modes quickly deca
 \label{sec:discrete}
 While the derivation of \eqref{eq:meml} is correct mathematically, it is not representative of what happens within the laser cavity. The issue with \eqref{eq:meml} is that it has been assumed each process affects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this is a rather poor assumption. Within the cavity each effect is localized to its corresponding component: almost all of the dispersion happens within the \gls{cfbg}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, perhaps a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be composed together to give an iterative map for the effect of one circuit around the cavity. This yields an algebraic equation instead of a differential one. \\
 
-Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, siegman}. Kuizenga and Siegman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passive mode-locking---mode-locking without the use of a modulator. In the absence of a modulator the nonlinearity becomes crucial to shaping the pulse. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In these models the effect of each block is described by a transfer function, for example
+Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, siegman}. Kuizenga and Siegman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passive mode-locking---mode-locking without the use of a modulator. In the absence of a modulator the nonlinearity becomes crucial to shaping the pulse. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In these models the effect of each block is described by a transfer function, for example:
 \begin{align*}
 A_{\text{out}}(T) &= A_{\text{in}}(T) \exp \left( - \frac{\epsilon T^2}{2} \right) \textrm{e}^{i \phi_M - \alpha_M / 2}, \\
-\widehat{A_{\text{out}}}(\Omega) &= \widehat{A_{\text{in}}}(\Omega) \exp \left( \frac{i \beta_2 \Omega^2}{2} \right) \textrm{e}^{i \phi_D - \alpha_D / 2}
+\widehat{A_{\text{out}}}(\Omega) &= \widehat{A_{\text{in}}}(\Omega) \exp \left( \frac{i \beta_2 \Omega^2}{2} \right) \textrm{e}^{i \phi_D - \alpha_D / 2},
 \end{align*}
 for modulation and dispersion, respectively. These transfer functions are then multiplied together to give the overall effect. This is in contrast to the iterative map developed in Sections \ref{sec:comp}--\ref{sec:effects}. \\
 

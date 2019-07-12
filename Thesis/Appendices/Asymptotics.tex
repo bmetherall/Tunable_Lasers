@@ -6,7 +6,7 @@ We shall investigate the nature of the solution to \eqref{eq:var} both when $s \
 \label{eq:asymp}
 \frac{1}{4} x^4 = - \eps (x - 1)(x - 2)^2,
 \end{align}
-where $x = \sigma^2$, $\eps = s^4$, and $\eps \rightarrow 0$. Figure \ref{fig:asympt} shows \eqref{eq:asymp}. Additionally, suppose $x$ can be expanded as a power series in $\eps$:
+where $x = \sigma^2$, $\eps = s^4$, and $\eps \rightarrow 0$. Figure \ref{fig:asympt} shows \eqref{eq:asymp} graphically. Additionally, suppose $x$ can be expanded as a power series in $\eps$:
 \begin{align}
 \label{eq:series}
 x = x_0 + x_1 \eps^\alpha + x_2 \eps^\beta + \cdots
@@ -45,7 +45,7 @@ where $x = \sigma^2$, and $\eps = s^{-4}$ instead so we still have $\eps \righta
 \label{eq:series2}
 x = \eps^{-\xi} \left( x_0 + x_1 \eps^\alpha + x_2 \eps^\beta + \cdots \right).
 \end{align}
-The reason for this is because the equation is now singular---when $\eps=0$ the equation transforms from a quartic to a cubic, losing a root. As with before, we obtain dominant balance when the quartic term balances with the cubic term which occurs when $1 - 4 \xi = -3 \xi$, or $\xi = 1$. Then to $\bigO{\eps^{-3}}$, expression \eqref{eq:asymp2} gives
+The reason for this is because \eqref{eq:asymp2} is now singular---when $\eps=0$ the equation transforms from a quartic to a cubic, losing a root. As with before, we obtain dominant balance when the quartic term balances with the cubic term which occurs when $1 - 4 \xi = -3 \xi$, or $\xi = 1$. Then to $\bigO{\eps^{-3}}$, expression \eqref{eq:asymp2} gives
 \begin{align*}
 x_0^3 (x_0 + 4) &= 0.
 \end{align*}
@@ -53,11 +53,11 @@ The non-trivial solution $x_0 = -4$ gives rise to a boundary layer structure. Ho
 \begin{align*}
 0 = -x_1^3 + 5x_1^2 - 8x_1 + 4 = -(x_1 - 1)(x_1 - 2)^2,
 \end{align*}
-so either $x_1 = 1$ or $x_1 = 2$. The next term obtains dominant balance when the left hand side balances with the linear term of the right hand side, that is, when $\beta = 2$ provided\footnote{In the case of $x_1 = 2$ we find $\beta = \frac{3}{2}$ which leads to complex roots.} $x_1 \ne 2$. Now at $\bigO{\eps}$,
+so either $x_1 = 1$ or $x_1 = 2$. The following term obtains dominant balance when the left hand side balances with the linear term of the right hand side, that is, when $\beta = 2$ provided\footnote{In the case of $x_1 = 2$ we find $\beta = \frac{3}{2}$ which leads to complex roots.} $x_1 \ne 2$. Now at $\bigO{\eps}$,
 \begin{align*}
 \frac{1}{4} x_1^4 = -3x_1^2 x_2 + 5\cdot2 x_1 x_2 - 8x_2 = -x_2 (3x_1 - 4)(x_1 - 2),
 \end{align*}
-where again, the coefficients come from the binomial expansions. From this it is clear that
+where the coefficients come from the binomial expansions. From this it is clear that
 \begin{align*}
 x_2 &= \frac{-x_1^4}{4(3x_1 - 4)(x_1 - 2)}.
 \end{align*}
@@ -69,7 +69,7 @@ Expanding one final term we find $\gamma = 3$, and to $\bigO{\eps^2}$,
 \begin{align*}
 \frac{1}{4} 4x_2 x_1^3 &= -(3x_3 x_1^2 + 3x_2^2 x_1) + 5(2x_3 x_1 + x_2^2) - 8x_3.
 \end{align*}
-Knowing the values of $x_1$, and $x_2$ this is simply an arithmetical calculation yielding $x_3 = \frac{3}{8}$. Finally,
+Knowing the values of $x_1$ and $x_2$ this is simply an arithmetical calculation yielding $x_3 = \frac{3}{8}$. Finally,
 \begin{align*}
 x &= 1 - \frac{1}{4}\eps + \frac{3}{8}\eps^2 + \bigO{\eps^3},
 \end{align*}
