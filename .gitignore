@@ -18,6 +18,10 @@
 *.md5
 *.dat
 *.nb
+*.acn
+*.acr
+*.alg
+*.ist
 /Break
 /Stable
 /Preprint/*
