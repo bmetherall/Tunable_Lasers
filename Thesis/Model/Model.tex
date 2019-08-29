@@ -2,11 +2,11 @@
 
 \chapter{A New Model}
 \label{chap:linear}
-In this chapter we shall derive our new model and solve it analytically in the linear case. To accomplish this we shall use the ideas of the previous functional models \cite{cutler, siegman, kuizenga1970a, kuizenga1970b, kuizenga1970, martinez1984, martinez1985, burgoyne2014}. To alleviate some of the pitfalls mentioned in the previous chapter, we shall include all five processes involved in the modification of the pulse within the laser cavity (gain, nonlinearity, loss, dispersion, and modulation). In addition to this, the functional operations associated with each component will be derived from \eqref{eq:nlse}, with the exception of the modulation in which we consider the exact functional form to be determined by the laser operator. \\
+In this chapter we shall derive our new model and solve it analytically in the linear case. To accomplish this we shall use the ideas presented in the previous chapter of the prior functional models \cite{cutler, siegman, kuizenga1970a, kuizenga1970b, kuizenga1970, martinez1984, martinez1985, burgoyne2014}. To alleviate some of the pitfalls mentioned in the previous chapter, we shall include all five processes involved in the modification of the pulse within the laser cavity (gain, nonlinearity, loss, dispersion, and modulation). In addition to this, the functional operations associated with each component will be derived from \eqref{eq:nlse}, with the exception of the modulation in which we consider the exact functional form to be determined by the laser operator.
 
 \section{Components}
 \label{sec:comp}
-We shall begin our analysis with the derivation of the functional operators for the five components. \\
+We shall begin our analysis with the derivation of the functional operators for the five components.
 
 \subsection{Gain}
 \label{chap:gain}
@@ -103,7 +103,7 @@ M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
 \end{align*}
 where $T_M$ is a characteristic width of the modulation. \\
 
-Despite assuming a Gaussian modulation, the solution presented in Section \ref{sec:linear} can be generalized to any modulation function in $L^2(\mathbb{R})$ since Gaussians in fact span $L^2(\mathbb{R})$ as shown in Appendix \ref{chap:gauss}. \\
+Despite assuming a Gaussian modulation, the solution presented in Section \ref{sec:linear} can be generalized to any modulation function in $L^2(\mathbb{R})$ since Gaussians in fact span $L^2(\mathbb{R})$ as shown in Appendix \ref{chap:gauss}.
 
 %\input{./Appendices/Hermite}
 
@@ -193,14 +193,13 @@ where $\mathcal{L}$ is one loop of the laser. A steady solution to this model is
 
 \section{Solution to the Linear Model}
 \label{sec:linear}
-In reality the nonlinearity parameter, $b$, is of order unity by \eqref{eq:ndparam}, but we shall start our investigation with the simpler case of $b = 0$---which shall be referred to as the linear model. In this case, a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the previous models were Gaussian \cite{cutler, siegman, kuizenga1970a, martinez1984, martinez1985} (see Section \ref{chap:meml}), the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
-
 \begin{figure}[tbp]
 \centering
 \input{./Figures/Sample_Gauss}
 \caption{Sample realization of \eqref{eq:A0}.}
 \label{fig:samplegauss}
 \end{figure}
+In reality the nonlinearity parameter, $b$, is of order unity by \eqref{eq:ndparam}, but we shall start our investigation with the simpler case of $b = 0$---which shall be referred to as the linear model. In this case, a solution can be found analytically. It is expected the solution will take the form of a Gaussian. There are a few reasons for this; the solution to the previous models were Gaussian \cite{cutler, siegman, kuizenga1970a, martinez1984, martinez1985} (see Section \ref{chap:meml}), the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn} dispersion will not alter the envelope. \\
 
 To compute $\mathcal{L}(A)$, consider the initial pulse
 \begin{align}
@@ -234,7 +233,7 @@ In equilibrium it must be that $A_0 = A_4 \textrm{e}^{-i \phi} = \mathcal{L}(A_0
 \end{align}
 \label{eq:linsys}
 \end{subequations}
-
+\vspace{-5mm}
 \subsection{Spread of the Pulse Due to Dispersion}
 Each of these processes has a relatively straight forward effect, with the exception of dispersion.
 \input{./Appendices/Dispersion}
@@ -301,12 +300,6 @@ A sample solution for the linear model is shown in Figure \ref{fig:linear}. To r
 \end{figure}
 
 \subsection{Asymptotic Expansion of the Variance}
-\begin{figure}[tbp]
-\centering
-\input{./Figures/Asympt}
-\caption{Plot of \eqref{eq:asymp} and \eqref{eq:asymp2} to highlight the structure.}
-\label{fig:asympt}
-\end{figure}
 While \eqref{eq:equilvar} is useful, so too is the asymptotic behaviour. The asymptotic expansion provides additional information about the structure that the full analytic expression cannot. Moveover, the expansion provides more detail about the limits, as well has the rate of convergence. Lastly, the expansion allows for simplified expressions within their domains that are much less unwieldy than those found in the previous subsection. \\
 
 \input{./Appendices/Asymptotics}
@@ -364,4 +357,4 @@ In this chapter we first derived the effect each of the five components---gain, 
 
 We then sought a solution to the linearized model---having omitted the nonlinearity component. In this case, we were able to find a closed form analytic solution for the equilibrium state. To do this, we assumed the solution took the form of a linearly chirped Gaussian, \eqref{eq:A0}, which was then passed through each process map yielding \eqref{eq:A4} in the end. The fixed point of the linearized model was found by equating \eqref{eq:A0} and \eqref{eq:A4}, but, allowing a phase shift to have occured. The equilibrium variance, chirp, energy, and peak power were found to be \eqref{eq:equilvar}, \eqref{eq:equilchirp}, \eqref{eq:equilenergy}, and \eqref{eq:equilpower}, respectively. To gain a better understanding of the limiting behaviour, the asymptotic expansions were investigated. This yielded \eqref{eq:asympt} for the asymptotic expansions of the variance and chirp, and \eqref{eq:epasymp} for the energy and peak power. \\
 
-With the linear model fully solved, we shall now turn our attention to the rich structure added by the full nonlinear model. \\
+With the linear model fully solved, we shall now turn our attention to the rich structure added by the full nonlinear model.

@@ -30,6 +30,12 @@ and so, $x_1 = \pm 2, \, \pm 2 i$. However, we require $x$ to be positive and re
 and with the choice of $x_1$, $x_2 = 2$. Combining these results gives $x = 2 \eps^{1/4} - 2 \eps^{1/2} + \bigO{\eps^{3/4}}$, or $\sigma^2 = 2 s \left( 1 - s \right) + \bigO{s^3}$,
 this is shown in Figure \ref{fig:lims0}. The choice $\eps = s^4$ was for convenience, but in retrospect, $\eps = s$ yields a cleaner, but identical, solution. \\
 \begin{figure}[tbp]
+\centering
+\input{./Figures/Asympt}
+\caption{Plot of \eqref{eq:asymp} and \eqref{eq:asymp2} to highlight the structure.}
+\label{fig:asympt}
+\end{figure}
+\begin{figure}[tbp]
 \input{./Figures/Lim_s_0}
 \caption[Asymptotic expansion of the variance as the dispersion parameter approaches 0.]{Asymptotic expansion of the variance as the dispersion parameter, $s$, approaches $0$.}
 \label{fig:lims0}
@@ -110,4 +116,4 @@ In conclusion, the asymptotic expansions of the observables are
 \label{eq:asympt}
 \end{aligned}
 \end{equation}
-The general form of these is as expected. When $s \rightarrow 0$, we effectively remove the \gls{cfbg} from the cavity. This causes the pulse to be perpetually modulated, and so, the pulse's shape approaches a $\delta$ function, and therefore, $\sigma^2 \rightarrow 0$. Moreover, since $\zeta$ is the ratio of the amplitude of the pulse before and after dispersion, $\zeta \rightarrow 1$. In the opposite extreme, $s \rightarrow \infty$, the length / strength of the \gls{cfbg} approaches infinity---this causes the pulse to broaden greatly, while conserving its energy. Because of this, the variance approaches unity because the shape is entirely determined by the modulation function. Additionally, $\zeta \rightarrow 0$ because the pulse becomes infinitely wide, and thus, the amplitude becomes infinitesimally small. Due to the expansive nature, the chirp approaches zero because any chirp will be expanded away. \\
+The general form of these is as expected. When $s \rightarrow 0$, we effectively remove the \gls{cfbg} from the cavity. This causes the pulse to be perpetually modulated, and so, the pulse's shape approaches a $\delta$ function, and therefore, $\sigma^2 \rightarrow 0$. Moreover, since $\zeta$ is the ratio of the amplitude of the pulse before and after dispersion, $\zeta \rightarrow 1$. In the opposite extreme, $s \rightarrow \infty$, the length / strength of the \gls{cfbg} approaches infinity---this causes the pulse to broaden greatly, while conserving its energy. Because of this, the variance approaches unity because the shape is entirely determined by the modulation function. Additionally, $\zeta \rightarrow 0$ because the pulse becomes infinitely wide, and thus, the amplitude becomes infinitesimally small. Due to the expansive nature, the chirp approaches zero because any chirp will be expanded away.

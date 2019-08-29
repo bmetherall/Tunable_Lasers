@@ -1,4 +1,4 @@
-\documentclass[oneside, nocoat]{UOIT_Thesis}
+\documentclass[]{UOIT_Thesis}
 
 \usepackage{wrapfig}
 \usepackage{lipsum}
@@ -68,6 +68,15 @@
 \degree{Master of Science}
 \faculty{Science}
 \program{Modelling and Computational Science}
+\newdate{defense}{4}{07}{2019}
+\defense{\displaydate{defense}}
+\chair{Faisal Qureshi}
+\supervisor{Sean Bohun}
+\committee{Greg Lewis}{Anatoli Chkrebtii}
+\examiner{Iain Moyles, York University}
+
+\newdate{date}{16}{07}{2019}
+\date{\displaydate{date}}
 
 %\let\originalcite\cite
 %\renewcommand{\cite}[1]{\mbox{\originalcite{#1}}}
@@ -77,6 +86,8 @@
 \frontmatter
 \pagenumbering{roman} 
 \maketitle
+
+\makeexaminfo{}
 
 \makeabstract{
 A new nonlinear model is proposed for tuneable lasers. Using the generalized nonlinear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then composed to give the overall effect of one trip around the cavity. We first examine the linearized version of the model which is solved analytically. Then the full nonlinear model is solved numerically. A consequence of the nonlinear nature of this model is that it is able to exhibit wave breaking which prior models could not. We highlight the rich structure of the boundary of stability for a particular plane of the parameter space.
@@ -89,6 +100,10 @@ Lastly, I would like to thank my mom and dad, and grandparents for their endless
 }
 
 \makedeclaration
+
+\makecontributions{
+A condensed version of the work described in this thesis has been published on the arXiv \cite{metherall}.
+}
 
 {\hypersetup{linkcolor=black}
 \maketableofcontents
