@@ -4,7 +4,7 @@
 *.auxlock
 *.gnuploterrors
 *.gz
-/Paper/gnuplottex
+Papers/Early_Notes/*
 *.bbl
 *.bcf
 *.blg
@@ -24,12 +24,13 @@
 *.ist
 /Break
 /Stable
-/Preprint/*
+Papers/ArXiv/*
 /Thesis/Figures/*.pdf
 /Thesis/Figures/*.eps
 /Thesis/Figures/*.tex
-!/Preprint/ms.pdf
-!/Preprint/ms.tex
+!/Papers/Early_Notes/Paper.pdf
+!/Papers/ArXiv/ms.pdf
+!/Papers/ArXiv/ms.tex
 Coat*
 *.cls
 Pages
