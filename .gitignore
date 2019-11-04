@@ -1,4 +1,5 @@
 /References
+/Thesis_Docs
 *.log
 *.aux
 *.auxlock
@@ -22,6 +23,8 @@ Papers/Early_Notes/*
 *.acr
 *.alg
 *.ist
+*.bst
+*.idx
 /Break
 /Stable
 Papers/ArXiv/*
