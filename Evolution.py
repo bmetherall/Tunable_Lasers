@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-N = 4
-x = np.linspace(-3,3,35)
+N = 6
+x = np.linspace(-3,3,350)
 
 plt.ion()
 fig = plt.figure()
@@ -31,7 +31,7 @@ for h in np.linspace(1, 0.5, N, endpoint = False):
 	fig.canvas.flush_events()
 
 	np.savetxt(f, np.vstack((x, t * np.ones(len(x)), y)).T)
-	f.write('\n')
+	f.write('\n\n')
 	t += 1
 
 #time.sleep(1)
@@ -45,7 +45,7 @@ for s in np.linspace(0.81, 2.593, N, endpoint = False):
 	fig.canvas.flush_events()
 
 	np.savetxt(f, np.vstack((x, t * np.ones(len(x)), y)).T)
-	f.write('\n')
+	f.write('\n\n')
 	t += 1
 
 #time.sleep(1)
@@ -59,7 +59,7 @@ for m in np.linspace(0, 1, N, endpoint = False):
 	fig.canvas.flush_events()
 
 	np.savetxt(f, np.vstack((x, t * np.ones(len(x)), y)).T)
-	f.write('\n')
+	f.write('\n\n')
 	t += 1
 
 #time.sleep(1)
@@ -73,7 +73,7 @@ for a in np.linspace(1, 3.578, N+1):
 	fig.canvas.flush_events()
 
 	np.savetxt(f, np.vstack((x, t * np.ones(len(x)), y)).T)
-	f.write('\n')
+	f.write('\n\n')
 	t += 1
 
 f.close()
