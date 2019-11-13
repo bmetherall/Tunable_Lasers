@@ -4,7 +4,7 @@
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{xcolor,graphicx}
-%\usepackage[subfolder,cleanup]{gnuplottex}
+\usepackage[subfolder,cleanup]{gnuplottex}
 %\usepackage{amsthm}
 %\usepackage{enumitem}
 %\usepackage{wrapfig}
@@ -269,6 +269,42 @@ P = \frac{W(a E \textrm{e}^E)}{\sqrt{\pi} \sigma}.
 \label{eq:equilpower}
 \end{align}
 
+
+\begin{figure*}
+\centering
+\begin{gnuplot}[terminal=epslatex, terminaloptions={color size 6in,3.7in lw 3}]
+load '/home/brady/Templates/YGB.p'
+#set format x '%.1f'
+#set format y '%.1f'
+set format z '%.1f'
+set format cb '%.1f'
+set grid
+set yl '$T$'
+set zl '$|A|$'
+set cbtics 0.2
+set ztics 0.2
+
+set yr [-2.5:2.5]
+
+set xtics ('Loss' 2, 'Disp.' 6, 'Mod.' 10, 'Gain' 14)
+
+set xtics center offset 0,-0.5
+
+set xyplane 0
+
+set view 45,325,1.25
+set pm3d
+set pm3d interpolate 5,5
+
+#set contour surface
+unset cl
+unset colorbox
+
+sp '../../Evolution.dat' u 2:1:3 w l lw 0.3 lc 8 not
+\end{gnuplot}
+\caption{}
+\label{fig:}
+\end{figure*}
 
 
 \section{}
