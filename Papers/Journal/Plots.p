@@ -72,12 +72,53 @@ set lmargin at screen 0.13
 set rmargin at screen 0.79
 
 
-set out 'Conv.tex'
+#set out 'Conv.tex'
 
-p 'Converge.dat' u 1:2:3 w image not, \
-'Contours.dat' u 1:2 w l lc 8 lw 0.2 not
+#p 'Converge.dat' u 1:2:3 w image not, \
+#'Contours.dat' u 1:2 w l lc 8 lw 0.2 not
 
-set out
+#set out
+
+
+
+reset
+
+load 'YGB.p'
+#set format x '%.1f'
+#set format y '%.1f'
+set format cb '%.2f'
+set grid front
+set yl 'Number of Round Trips'
+set xl '$T$'
+set cbl rotate by 0 '$|A|$'
+
+set cbr [0:1.5]
+set xr [-2:2]
+set yr [0:36]
+set cbtics 0.25
+set xtics 1
+set ytics 6
+
+set view map
+set contour base
+set cntrparam levels incremental 0,0.25,1.5
+
+unset cl
+
+#set table 'ContoursBreak.dat'
+#sp 'Break.dat' u 1:2:3 w l not
+#unset table
+
+set lmargin at screen 0.13
+set rmargin at screen 0.79
+
+
+#set out 'Break.tex'
+
+#p 'Break.dat' u 1:2:3 w image not, \
+#'ContoursBreak.dat' u 1:2 w l lc 8 lw 0.2 not
+
+#set out
 
 
 
