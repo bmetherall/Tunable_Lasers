@@ -1,5 +1,6 @@
 using FFTW
 using LambertW
+using PyPlot
 
 function fftfreq(n)
 	# Same as np.fft.fftfreq
@@ -40,43 +41,44 @@ end
 
 function Disp(A, x, s = 0.1)
 	F = fft(A)
+	F = F .* (abs.(F) .> 10^-12)
 	dw = pi / x[end]
 	w = fftfreq(length(A)) * length(A) * dw
 	return ifft(F .* exp.(1im * w.^2 * s^2))
 end
 
-function Loop(A, x, dx, s, b)
-	A = Loss(A)
-	A = Disp(A, x, s)
-	A = Mod(A, x)
-	A = Gain(A, Energy(A, dx))
-	A = Fibre(A, b)
+function Loop(A, x, dx, s, b, N = 1)
+	for i in 1:N
+		A = Loss(A)
+		A = Disp(A, x, s)
+		A = Mod(A, x)
+		A = Gain(A, Energy(A, dx))
+		A = Fibre(A, b)
+	end
 	return A
 end
 
-x = -2:2^-18:2
-A = 1.0 ./ cosh.(x)
 
 
-
-
-
-#N = 60 # Number of loops of the circuit
-#p = 2**16 # Number of points in the discretization
-#width = 8 # Size of window
-#E0 = 0.1 # Initial energy
+N = 60 # Number of loops of the circuit
+p = 2^18 # Number of points in the discretization
+width = 8 # Size of window
+E0 = 0.1 # Initial energy
 
 # Initialization
-#T = np.linspace(-width, width, p, endpoint = False)
-#dx = T[1] - T[0]
-#A0 = 1 / np.cosh(2 * T) * np.exp(1j * np.pi / 4)
-#A0 = np.sqrt(E0 / Energy(A0, dx)) * A0 # Normalize
-#E = np.zeros(N)
-#data = np.zeros((2 * N, p))
-#A = A0
+x = LinRange(-width, width, p)
+dx = x[2] - x[1]
+A0 = 1.0 ./ cosh.(2 * x) * exp(1im * pi / 4.0)
+A0 = sqrt(E0 / Energy(A0, dx)) * A0 # Normalize
 
+A = A0
 
+A = Loop(A, x, dx, 0.1, 1.59, 30)
 
+plot(x, abs.(A))
+plot(x, real.(A))
+plot(x, imag.(A))
+show()
 
 
 
