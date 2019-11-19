@@ -1,4 +1,9 @@
 set terminal epslatex color size 3.5in,2.15in lw 3 standalone font ',10'
+
+############################
+# 3D plot
+
+
 load 'YGB.p'
 #set format x '%.1f'
 #set format y '%.1f'
@@ -31,9 +36,9 @@ set multiplot
 
 set size 1,1.2
 
-sp 'EBig.dat' u ($2*0.1):1:3 w pm3d not, \
-'Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
-'Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
+#sp 'EBig.dat' u ($2*0.1):1:3 w pm3d not, \
+#'Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
+#'Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
 
 unset multiplot
 
@@ -41,6 +46,9 @@ set out
 
 
 reset
+
+#######################
+# Converging
 
 load 'YGB.p'
 #set format x '%.1f'
@@ -82,6 +90,8 @@ set rmargin at screen 0.79
 
 
 reset
+#########################
+# Breaking
 
 load 'YGB.p'
 #set format x '%.1f'
@@ -120,6 +130,91 @@ set rmargin at screen 0.79
 
 #set out
 
+
+reset
+#################################
+# Error plot
+
+load 'YGB.p'
+
+set grid
+
+set xl '$s$'
+set yl rotate by 0 '$b$'
+set cbl 'Error'
+
+set xtics 0.1
+set cbtics 10**4
+unset mcbtics
+set format x '%.1f'
+set format cb '$10^{%01T}$'
+
+set cbr [10**-16:1]
+
+set lmargin at screen 0.12
+set rmargin at screen 0.78
+set bmargin at screen 0.2
+
+
+set logscale cb
+
+set view map
+
+set out 'ParamSpaceErr.tex'
+sp 'Results18.dat' u 1:2:3 w image not
+set out
+
+
+
+reset
+
+############################
+# Energy plot
+
+load 'YGB.p'
+
+f(x,y) = y < 0.1 ? x : -1
+
+set grid front
+
+set xl '$s$'
+set yl rotate by 0 '$b$'
+set cbl 'Energy'
+
+set xtics 0.1
+set format x '%.1f'
+set format cb '%.1f'
+
+set xr [0:0.4]
+set yr [0:10]
+
+set lmargin at screen 0.12
+set rmargin at screen 0.82
+set bmargin at screen 0.2
+
+set view map
+unset surface
+set contour
+set cntrparam levels incremental 0,0.25,3.0
+
+unset cl
+
+set label 1 rotate by -8 '\footnotesize{2.25}' at 0.14, 0.75 front
+set label 2 rotate by -10 '\footnotesize{2.00}' at 0.25, 1.2 front
+set label 3 rotate by -26 '\footnotesize{1.75}' at 0.25, 3 front
+set label 4 rotate by -22.5 '\footnotesize{1.50}' at 0.35, 3.5 front
+set label 5 rotate by -45 '\footnotesize{1.25}' at 0.33, 7.3 front
+set label 6 rotate by -52.5 '\footnotesize{1.00}' at 0.365, 9.7 front
+
+# This doesnt seem to work for some reason, but it works in the terminal
+#set table 'EnergyContours.dat'
+#sp 'Results18.dat' u 1:2:(f($5, $3)) w l not
+#unset table
+
+set out 'ParamSpaceEnergy.tex'
+p 'Results18.dat' u 1:2:5 w image not, \
+'EnergyContours.dat' u 1:2 w l lc 8 lw 0.2 not
+set out
 
 
 
