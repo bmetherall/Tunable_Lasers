@@ -17,8 +17,8 @@ end
 # I couldn't find this anywhere surprisingly
 @everywhere function trapz(y, dx)::Float64
 	s = 0.0
-    s += sum(y[2:end-1])
-    s += (y[1] + y[end]) / 2.0
+	s += sum(y[2:end-1])
+	s += (y[1] + y[end]) / 2.0
 	return s * dx
 end
 
@@ -35,7 +35,7 @@ end
 end
 
 @everywhere function Mod(A, x)
-	return @. exp(-x^2 / 2) * A	
+	return @. exp(-x^2 / 2) * A
 end
 
 @everywhere function Fibre(A, b::Float64 = 1.0)
@@ -69,39 +69,39 @@ end
 
 # Compute solution on a grid
 function Solve(A0, n::Int64, m::Int64, numloops::Int64, fname = "Results.dat")
-    """
-    Comptues 2-norm error, Inf-norm error, Energy, Variance, and Kurtosis within the s-b plane.
-    """
-    f = open(fname, "w");
-
-    s = LinRange(0.0, 0.4, n)
-    b = LinRange(0.0, 10.0, m)
-    
-    for k in 1:m # b loop
-        println(k)
-        z = SharedArray{Float64, 2}((n, 7))
-        @sync @distributed for j in 1:n # s loop
-            A = A0
-            A = Loop(A, x, dx, s[j], b[k], numloops - 1)
-            old = abs.(A)
-            A = Loop(A, x, dx, s[j], b[k])
-            new = abs.(A)
-            
-            # Compute quantities
-            err2 = sqrt(trapz((new - old).^2, dx) / trapz(abs2.(A), dx))
-            errinf = maximum(abs.(new - old))
-            sigma = trapz(x.^2 .* new, dx) / trapz(new, dx)
-            kurt = trapz(x.^4 .* new, dx) / trapz(x.^2 .* new, dx)
-            energy = Energy(new, dx)
-            
-            # Build array of values
-            z[j,:] = [s[j] b[k] err2 errinf energy sigma kurt / sigma]
-        end
-        # Write data to file
-        writedlm(f, z)
-        println(f, "")
-    end
-    close(f)
+	"""
+	Comptues 2-norm error, Inf-norm error, Energy, Variance, and Kurtosis within the s-b plane.
+	"""
+	f = open(fname, "w");
+	
+	s = LinRange(0.0, 0.4, n)
+	b = LinRange(0.0, 10.0, m)
+	
+	for k in 1:m # b loop
+		println(k)
+		z = SharedArray{Float64, 2}((n, 7))
+		@sync @distributed for j in 1:n # s loop
+			A = A0
+			A = Loop(A, x, dx, s[j], b[k], numloops - 1)
+			old = abs.(A)
+			A = Loop(A, x, dx, s[j], b[k])
+			new = abs.(A)
+			
+			# Compute quantities
+			err2 = sqrt(trapz((new - old).^2, dx) / trapz(abs2.(A), dx))
+			errinf = maximum(abs.(new - old))
+			sigma = trapz(x.^2 .* new, dx) / trapz(new, dx)
+			kurt = trapz(x.^4 .* new, dx) / trapz(x.^2 .* new, dx)
+			energy = Energy(new, dx)
+			
+			# Build array of values
+			z[j,:] = [s[j] b[k] err2 errinf energy sigma kurt / sigma]
+		end
+		# Write data to file
+		writedlm(f, z)
+		println(f, "")
+	end
+	close(f)
 end
 
 # Parameters
@@ -122,5 +122,5 @@ Loop(A0, x, dx, 0.1, 1.0, 2); # Compile
 
 Solve(A0, 2, 2, 2) # Compile
 
-@time Solve(A0, n, m, numloops, "ResultsHack18.dat")
+@time Solve(A0, n, m, numloops, "Test.dat")
 
