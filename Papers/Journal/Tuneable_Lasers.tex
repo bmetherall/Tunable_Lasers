@@ -54,7 +54,7 @@
 
 \section{Introduction}
 \label{sec:intro}
-A tuneable laser has the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun, burgoyne2010, yamashita}. Tuneable lasers simultaneously lase at all frequencies within this bandwidth. This tuneability is quite useful and has applications in spectroscopy and high resolution imaging such as coherent anti-Stokes Raman spectroscopy and optical coherence tomography \cite{bohun, burgoyne2014, yamashita}, as well as communications and diagnostics of ultra fast processes \cite{silfvast}. A typical tuneable ring laser cavity is shown in Figure \ref{fig:cavity}.
+A tuneable laser has the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun, burgoyne2010, yamashita}. Tuneable lasers simultaneously lase at all frequencies within this bandwidth. This tuneability leads to applications in spectroscopy and high resolution imaging, such as coherent anti-Stokes Raman spectroscopy and optical coherence tomography \cite{bohun, burgoyne2014, yamashita}, as well as communications and diagnostics of ultra fast processes \cite{silfvast}. A typical tuneable ring laser cavity is shown in Figure \ref{fig:cavity}.
 
 \subsection{Wave Breaking}
 
@@ -65,21 +65,19 @@ The standard equation for studying nonlinear optics is the nonlinear Schr\"oding
 	\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A.
 	\label{eq:smallnlse}
 \end{align}
-Here $A = A(T, z) : \mathbb{R}^2 \mapsto \mathbb{C}$ is the complex pulse amplitude, $\beta_2 \in \mathbb{R}$ is the second order dispersion, and $\gamma \in \mathbb{R}$ is the coefficient of nonlinearity. In practice, \eqref{eq:smallnlse} lacks a few key terms, thus, it is often generalized by adding amplification, loss, and occasionally higher order terms. This gives the generalized nonlinear Schr\"{o}dinger equation (GNLSE) \cite{agrawal2013, bohun, finot, peng, shtyrina, yarutkina},
+Here $A = A(T, z) : \mathbb{R}^2 \mapsto \mathbb{C}$ is the complex pulse amplitude, $\beta_2 \in \mathbb{R}$ is the second order dispersion, and $\gamma \in \mathbb{R}$ is the coefficient of nonlinearity. In practice, the NLSE, \eqref{eq:smallnlse}, lacks a few key terms, thus, it is often generalized by adding amplification, loss, and occasionally higher order terms. These additions give the generalized nonlinear Schr\"{o}dinger equation (GNLSE) \cite{agrawal2013, bohun, finot, peng, shtyrina, yarutkina},
 	\begin{align}
 	\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A,
 	\label{eq:nlse}
 \end{align}
-where $g(A)$ is an amplifying term due to the gain, and $\alpha \in \mathbb{R}$ is the loss due to scattering and absorption.
+where $g(A)$ is an amplifying term due to the gain, and $\alpha \in \mathbb{R}^+$ is the loss due to scattering and absorption.
 
-
-
-The GNLSE has many applications in nonlinear optics and fibre optic communications, however, in the context of lasers typically a modulation term to ensure mode-locking, this yields the master equation of mode-locking, \cite{hausbook, haus1975, haus1986, haus1992, haus2000, tamura1996, usechak}
+The GNLSE has many applications in nonlinear optics and fibre optic communications, however, in laser physics typically a modulation term is also added to ensure mode-locking, this yields the master equation of mode-locking \cite{hausbook, haus1975, haus1986, haus1992, haus2000, tamura1996, usechak},
 \begin{align}
 	\pdiff{A}{z} &= - i \frac{\beta_2}{2}\pdiff[2]{A}{T} + i \gamma |A|^2 A + \frac{1}{2}g(A) A - \alpha A - M(T).
 	\label{eq:meml}
 \end{align}
-No analytic solution is known for \eqref{eq:meml}---even after making the assumptions that the gain is constant, and the modulation is quadratic \cite{hausbook, haus1975, haus1996}. However, by neglecting terms of \eqref{eq:meml} analytic solutions can be found \cite{burgoyne2014, haus1975, haus1986, haus1991, haus1992, haus1996, tamura1996, usechak}. Furthermore, see Haus \cite{haus2000} for a comprehensive history of the theory of mode-locked lasers.
+No analytic solution is known for \eqref{eq:meml}---even after making the assumptions that the gain is constant, and the modulation is quadratic \cite{hausbook, haus1975, haus1996}. However, by neglecting certain terms of \eqref{eq:meml} analytic solutions can be found \cite{burgoyne2014, haus1975, haus1986, haus1991, haus1992, haus1996, tamura1996, usechak}. Furthermore, see Haus \cite{haus2000} for a comprehensive description and history of the theory of mode-locked lasers.
 
 \begin{figure}[tbp]
 	\centering
@@ -90,16 +88,16 @@ No analytic solution is known for \eqref{eq:meml}---even after making the assump
 
 \subsection{Discrete Models}
 \label{sec:discrete}
-Unfortunately, \eqref{eq:meml} is not completely representative of the underlying physics within our laser cavity. In the derivation of \eqref{eq:meml} it is assumed each process affects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this is a rather poor assumption. Within the cavity each effect is localized to its corresponding component: almost all of the dispersion happens within the CFBG \cite{agrawal2002}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be functionally composed together to give an iterative map for the effect of one round trip of the cavity. This ultimately transforms the differential equation into an algebraic equation.
+Unfortunately, the master equation, \eqref{eq:meml}, is not completely representative of the underlying physics within our laser cavity. In the derivation of \eqref{eq:meml} it is assumed each process affects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this can be a poor assumption. Within the cavity, each effect is localized to its corresponding component: almost all of the dispersion happens within the chirped fibre Bragg grating (CFBG) \cite{agrawal2002}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be functionally composed together to give an iterative map for the effect of one round trip of the cavity. This ultimately transforms the differential equation into an algebraic equation.
 
-Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, siegman}. Kuizenga and Siegman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passively mode-locked lasers. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In each of these models the effect of each block is described by a transfer function.
+Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, kuizenga1970b, kuizenga1970, siegman}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passively mode-locked lasers. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In each of these models the effect of each block is described by a transfer function.
 
-Despite the development of these block style models, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. In the framework of tuneable lasers, each component plays a crucial role and the tuneable laser will not function correctly without the inclusion of all of the components. Another key drawback is that the functional operations of some of the components used in their models are phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with the underlying physics. Finally, none of these previous models have been able to exhibit wave breaking.
+Despite the development of these block style models, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. Each component of a tuneable plays a crucial role and the laser will not function correctly without the inclusion of all of the components. Another drawback is that the functional operations of some of the components used in their models are phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with the underlying physics. Finally, none of these previous models have been able to exhibit wave breaking.
 
 
 \section{Model Derivation}
 \label{sec:model}
-Using the idea presented Section \ref{sec:discrete} we derive our model from \eqref{eq:nlse}; however, in the case of the modulation we consider the exact functional form to be determined by the laser operator. To accomplish this, we neglect all terms but one of the right side of \eqref{eq:nlse} and solve the simplified differential equation. This is reasonable since the gain, loss, dispersion, modulation, and nonlinear effects are localized to one section of the laser cavity.
+Using the idea of a discrete model presented Section \ref{sec:discrete}, we derive our model from the GNLSE, \eqref{eq:nlse}; however, in the case of the modulation we consider the exact functional form to be determined by the laser operator. To accomplish this, we neglect all terms but one of the right side of \eqref{eq:nlse} and solve the simplified differential equation. This is a reasonable assumption since the gain, loss, dispersion, modulation, and nonlinear effects are localized to only one section of the laser cavity.
 
 To proceed we must choose the form of the amplification term, $g(A)$. We assume the gain has the form
 \begin{align}
@@ -108,7 +106,7 @@ To proceed we must choose the form of the amplification term, $g(A)$. We assume 
 \end{align}
 where $g_0$ is a small signal gain, $E$ is the energy of the pulse, and $\Es$ is the energy at which the gain begins to saturate \cite{bohun, burgoyne2014, haus1975, hausbook, haus1992, haus2000, haus1991, kartner, peng, shtyrina, silfvast, usechak, yarutkina}. This leads to
 \begin{align}
-	G(A;E) &= \left( \frac{\Es}{E} W \left( \frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 L_g} \right) \right)^{1/2} A
+	G(A) &= \left( \frac{\Es}{E} W \left( \frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 L_g} \right) \right)^{1/2} A
 \end{align}
 for the amplification of the pulse within the Er-doped fibre. Continuing this process for the loss, dispersion, and nonlinearity yields
 \begin{align}
@@ -116,7 +114,7 @@ for the amplification of the pulse within the Er-doped fibre. Continuing this pr
 	D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D\beta_2/2} \FT{A}}, \\
 	F(A) &= A \textrm{e}^{i \gamma |A|^2 L_f},
 \end{align}
-where $R$ is the reflectivity of the output coupler\footnote{Depending on the layout of the laser cavity the loss may instead take the form $L(A) = R \textrm{e}^{- \alpha L_T}A$.}, $L_T$ is the total length of the laser circuit, $L_D$ is the length of the dispersive medium, $L_f$ is the length of fibre, and where $\mathcal{F}$ denotes the Fourier transform. Finally, we must assume a form for the modulation. The modulation is considered to be applied externally in which ever way the operator sees fit. For simplicity the representation is taken as the Gaussian
+where $R$ is the reflectivity of the output coupler\footnote{Depending on the layout of the laser cavity the loss may instead take the form $L(A) = R \textrm{e}^{- \alpha L_T}A$.}, $L_T$ is the total length of the laser circuit, $L_D$ is the length of the dispersive medium, $L_f$ is the length of fibre between the amplifier and the output coupler, and where $\mathcal{F}$ denotes the Fourier transform. Finally, we must assume a form for the modulation. The modulation is considered to be applied externally in which ever way the operator sees fit. For simplicity the representation is taken as the Gaussian
 \begin{align}
 	M(A) &= \textrm{e}^{-T^2 / 2 T_M^2} A,
 \end{align}
@@ -130,7 +128,7 @@ The structure of each process of the laser can be better understood by re-scalin
 Revisiting each process map shows each process has a characteristic non-dimensional parameter. The new mappings---after dropping the tildes---are
 \begin{equation}
 	\begin{aligned}
-		G(A) &= \left(E^{-1} W \left( a E \textrm{e}^{E}\right) \right)^{1/2} A, & F(A) &= A \textrm{e}^{i b |A|^2} \\
+		G(A) &= \left(E^{-1} W \left( a E \textrm{e}^{E}\right) \right)^{1/2} A, & F(A) &= A \textrm{e}^{i b |A|^2}, \\
 		D(A) &= \FTi{\textrm{e}^{i s^2 \omega^2} \FT{A}}, & L(A) &= h A, \\
 		M(A) &= \textrm{e}^{-T^2 / 2} A,
 		\label{eq:effects}
@@ -144,7 +142,7 @@ with the four dimensionless parameters,
 		\label{eq:ndparam}
 	\end{aligned}
 \end{equation}
-which characterize the behaviour of the laser. Nominal values for \eqref{eq:ndparam} can be found in \cite{agrawal2002, agrawal2013, bohun, burgoyne2014, burgoyneemail, finot, li, litchinitser, peng, shtyrina, tamura1993, tamura1996, tomlinson, usechak, yamashita, yarutkina}. Notice that the modulation is only characterized by $T_M$, and each other process has its own associated independent non-dimensional parameter.
+which characterize the behaviour of the laser. Nominal values for the parameters, \eqref{eq:ndparam}, can be found in \cite{agrawal2002, agrawal2013, bohun, burgoyne2014, burgoyneemail, finot, li, litchinitser, peng, shtyrina, tamura1993, tamura1996, tomlinson, usechak, yamashita, yarutkina}. Notice that the modulation is only characterized by $T_M$, and each other process has its own associated independent non-dimensional parameter.
 
 % Table of parameter values
 % \begin{table*}[tbp]
@@ -176,15 +174,15 @@ which characterize the behaviour of the laser. Nominal values for \eqref{eq:ndpa
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Evo}
-	\caption{Evolution of the envelope during one round trip of the cavity. The pulse decays due to the output coupler, is dispersed by the CFBG, is modulated by the modulator, and finally amplified by the gain fibre (the nonlinearity does not alter the envelope). Note that this is not to scale.}
+	\caption{Evolution of the envelope during one round trip of the cavity at equilibrium. The pulse decays due to the output coupler, dispersed by the CFBG, modulated by the modulator, and finally amplified by the gain fibre (the envelope is unaltered by the nonlinearity). Note that this is for visualization only, the durations are not to scale.}
 	\label{fig:cavityevo}
 \end{figure}
 
-Now that we have the algebraic effect of each section of the cavity, we are ready to compose each map together to give the effect of one round trip of the cavity. We must now consider the order of the components. As we are most interested in the output of the laser cavity, we shall start with the loss. We then pass the pulse through the CFBG followed by the modulator. The pulse then travels through the Er-doped fibre to be amplified, and finally we consider the effect of the nonlinearity. The nonlinearity must immediately follow the gain since this is the section of the cavity where the pulse has the highest energy, and by \eqref{eq:effects} the effect of the nonlinearity is proportional to the energy. Note that is this model, the permutation of the components is indeed important as the operators do not, in general, commute---this is in contrast to the models described in Section \ref{sec:discrete}. Moreover, we prefer the loss to follow the gain and nonlinearity as we wish to mitigate the length over which the nonlinearity has an effect, and maximize the output power. Functionally we denote one round trip of the cavity by
+Now that we have the algebraic effect of each section of the cavity, we are ready to compose each map together to give the effect of one round trip of the cavity. Thus, we must now consider the order of the components. As we are most interested in the output of the laser cavity, we shall start with the loss. We then pass the pulse through the CFBG followed by the modulator. The pulse then travels through the Er-doped fibre to be amplified, and finally we consider the effect of the nonlinearity. The nonlinearity must immediately follow the gain---this is the section of the cavity where the pulse is most energetic, and hence, has the largest effect. Note, the permutation of the other components is indeed important as the operators do not, in general, commute---this is in contrast to the models described in Section \ref{sec:discrete}. Moreover, we prefer the loss to follow the gain and nonlinearity as we wish to minimize the length over which the nonlinearity has an effect, and maximize the output power. Functionally we denote one round trip of the cavity by
 \begin{align}
 	\mathcal{L}(A) = F(G(M(D(L(A))))).
 \end{align}
- The pulse after one complete circuit of the laser cavity is then returned back into cavity to restart the process. A steady solution to this model is one in which the envelope and chirp are unchanged after traversing every component in the cavity---we are uninterested in the phase. That is, such that $\mathcal{L}(A) = A \textrm{e}^{i \phi}$---for some $\phi \in \mathbb{R}$. In Figure \ref{fig:cavityevo} we can see an example of the evolution of the envelope of the pulse during one round trip of the cavity.
+ The pulse after one complete circuit of the laser cavity is then returned back into the cavity to restart the process. A steady solution to this model is one in which the envelope and chirp are unchanged after traversing every component in the cavity---we are uninterested in the phase. That is, such that $\mathcal{L}(A) = A \textrm{e}^{i \phi}$---for some $\phi \in \mathbb{R}$. In Figure \ref{fig:cavityevo} we can see an example of the evolution of the envelope of the pulse during one round trip of the cavity.
 
 \section{Results}
 
@@ -202,43 +200,44 @@ Now that we have the algebraic effect of each section of the cavity, we are read
 
 
 \section{Linear Solution}
-In the case $b = 0$ a solution can be found analytically. We expect the solution will have the form of a Gaussian. There are a few reasons for this; the solution to the models presented in \cite{cutler, siegman, kuizenga1970a, martinez1984, martinez1985} were Gaussian, the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn}.
+By neglecting the effoct of the nonlinearity, that is, $b = 0$, a solution can be found analytically. We assume the solution will have the form of a chirped Gaussian. There are a few reasons for this; the solution to the models presented in \cite{cutler, siegman, kuizenga1970a, martinez1984, martinez1985} were Gaussian, the equilibrium shape will be highly correlated to the shape of the modulation function, and since a Gaussian is a fixed point of the Fourier transform \cite{gradshteyn}.
 
 To compute $\mathcal{L}(A)$, consider the pulse
 \begin{align}
 	A = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) \textrm{e}^{i \phi_0},
 	\label{eq:A0}
 \end{align}
-where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the initial phase. This form is chosen because it resembles the envelope and linear chirping found by experiment ***cite. Having neglected the effect of the nonlinearity $\mathcal{L}(A)$ can be found analytically from the process mappings \eqref{eq:effects}. By assuming the pulse in \eqref{eq:A0} is in equilibrium, we find that the variance must satisfy
+where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the initial phase. This form is chosen because it resembles the envelope and linear chirping found by experiment ***cite. 
+
+To compute $\mathcal{F}(A)$, given the initial pulse \eqref{eq:A0}, we iteratively compute the effect of each process map from \eqref{eq:effects}. Now, by equating $\mathcal{F}(A)$ and $A \textrm{e}^{i \phi}$ we obtain a system of equations. In particular, 
 \begin{align}
-	\sigma^8 + 4 s^4 \sigma^6 - 20 s^4 \sigma^4 + 32 s^4 \sigma^2 - 16 s^4 = 0.
-	\label{eq:var}
+	\sigma^8 + 4 s^4 \sigma^6 - 20 s^4 \sigma^4 + 32 s^4 \sigma^2 - 16 s^4 = 0, \label{eq:var} \\
+	C = .
+	\label{eq:chirp}
 \end{align}
-As this expression is a quartic in $\sigma^2$ it has an analytic solution, namely,
+
+As \eqref{eq:var} is a quartic in $\sigma^2$ it has an analytic solution, namely,
 \begin{equation}
 	\begin{split}
 		\sigma^2 = \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4} \left( 1 + s^4 \right) \right)^{1/2} & \\
-		- s^4 - s^2 & \sqrt{4 + s^4}.
+		- s^4 - s^2 & \sqrt{4 + s^4},
 		\label{eq:equilvar}
 	\end{split}
 \end{equation}
-Moreover, by asymptotically expanding \eqref{eq:var} we find the useful relations
+which can readily be used to find the chirp, $C$. By asymptotically expanding \eqref{eq:var} we find the useful relations
 \begin{align}
 	\sigma^2 &\sim
 	\begin{cases}
 		2s(1 - s) + \bigO{s^3} & s \rightarrow 0 \\
-		1 - \frac{1}{4}s^{-4} + \frac{3}{8}s^{-8} + \bigO{s^{-12}} & s \rightarrow \infty.
-	\end{cases}
-\end{align}
-Additionally, from the variance we can determine the behaviour of the chirp to be
-\begin{align}
+		1 - \frac{1}{4}s^{-4} + \frac{3}{8}s^{-8} + \bigO{s^{-12}} & s \rightarrow \infty,
+	\end{cases} \\
 	C &\sim
 	\begin{cases}
 		1 - s + \frac{1}{2}s^2 + \bigO{s^3} & s \rightarrow 0 \\
 		\frac{1}{2}s^{-2} - \frac{3}{8}s^{-6} + \bigO{s^{-10}} & s \rightarrow \infty.
 	\end{cases}
 \end{align}
-The equilibrium energy and peak power can be computed from \label{eq:energy} to give
+The equilibrium energy and peak power can be found by conservation of energy to give
 \begin{align}
 	E = \frac{h^2 \left( 1 - \sigma^2 \right)^{1/2}}{1 - h^2 \left( 1 - \sigma^2 \right)^{1/2}} \log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right),
 \end{align}
