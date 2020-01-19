@@ -54,7 +54,7 @@
 
 \section{Introduction}
 \label{sec:intro}
-A tuneable laser has the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun, burgoyne2010, yamashita}. Tuneable lasers simultaneously lase at all frequencies within this bandwidth. This tuneability leads to applications in spectroscopy and high resolution imaging, such as coherent anti-Stokes Raman spectroscopy and optical coherence tomography \cite{bohun, burgoyne2014, yamashita}, as well as communications and diagnostics of ultra fast processes \cite{silfvast}. A typical tuneable ring laser cavity is shown in Figure \ref{fig:cavity}.
+A tuneable laser has the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun, burgoyne2010, yamashita}. Tuneable lasers simultaneously lase at all frequencies within this bandwidth. This tuneability leads to applications in spectroscopy and high resolution imaging, such as coherent anti-Stokes Raman spectroscopy and optical coherence tomography \cite{bohun, burgoyne2014, yamashita}, as well as communications and diagnostics of ultrafast processes \cite{silfvast}. A typical tuneable ring laser cavity is shown in Figure \ref{fig:cavity}.
 
 \subsection{Wave Breaking}
 
@@ -207,14 +207,14 @@ To compute $\mathcal{L}(A)$, consider the pulse
 	A = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) \textrm{e}^{i \phi_0},
 	\label{eq:A0}
 \end{align}
-where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the initial phase. This form is chosen because it resembles the envelope and linear chirping found by experiment ***cite. 
+where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the initial phase. This form is chosen because it resembles the envelope and linear chirping found by experiment ***cite.
 
-To compute $\mathcal{F}(A)$, given the initial pulse \eqref{eq:A0}, we iteratively compute the effect of each process map from \eqref{eq:effects}. Now, by equating $\mathcal{F}(A)$ and $A \textrm{e}^{i \phi}$ we obtain a system of equations. In particular, 
-\begin{align}
+To compute $\mathcal{F}(A)$, given the initial pulse \eqref{eq:A0}, we iteratively compute the effect of each process map from \eqref{eq:effects}. Now, by equating $\mathcal{F}(A)$ and $A \textrm{e}^{i \phi}$ we obtain a system of equations. In particular,
+\begin{gather}
 	\sigma^8 + 4 s^4 \sigma^6 - 20 s^4 \sigma^4 + 32 s^4 \sigma^2 - 16 s^4 = 0, \label{eq:var} \\
-	C = .
+	C = \frac{\sigma^4 \pm \sqrt{\sigma^8 - 16 s^4 \left( 1 - \sigma^2 \right)^2}}{4 s^2 \left( 1 - \sigma^2 \right)}.
 	\label{eq:chirp}
-\end{align}
+\end{gather}
 
 As \eqref{eq:var} is a quartic in $\sigma^2$ it has an analytic solution, namely,
 \begin{equation}

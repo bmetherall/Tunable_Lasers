@@ -4,7 +4,7 @@ set terminal epslatex color size 3.5in,2.15in lw 3 standalone font ',10'
 # 3D plot
 
 
-load 'YGB.p'
+load 'BGY.p'
 #set format x '%.1f'
 #set format y '%.1f'
 set format z '%.1f'
@@ -30,7 +30,7 @@ unset colorbox
 
 set lmargin 6.25
 
-set out 'Evo.tex'
+#set out 'Evo.tex'
 
 set multiplot
 
@@ -42,7 +42,7 @@ set size 1,1.2
 
 unset multiplot
 
-set out
+#set out
 
 
 reset
@@ -50,7 +50,7 @@ reset
 #######################
 # Converging
 
-load 'YGB.p'
+load 'BGY.p'
 #set format x '%.1f'
 #set format y '%.1f'
 set format cb '%.2f'
@@ -93,7 +93,7 @@ reset
 #########################
 # Breaking
 
-load 'YGB.p'
+load 'BGY.p'
 #set format x '%.1f'
 #set format y '%.1f'
 set format cb '%.2f'
@@ -127,7 +127,6 @@ set rmargin at screen 0.79
 
 #p 'Break.dat' u 1:2:3 w image not, \
 #'ContoursBreak.dat' u 1:2 w l lc 8 lw 0.2 not
-
 #set out
 
 
@@ -135,7 +134,7 @@ reset
 #################################
 # Error plot
 
-load 'YGB.p'
+load 'BGY.p'
 
 set grid
 
@@ -160,9 +159,9 @@ set logscale cb
 
 set view map
 
-set out 'ParamSpaceErr.tex'
-sp 'Results18.dat' u 1:2:3 w image not
-set out
+#set out 'ParamSpaceErr.tex'
+#sp 'Results18.dat' u 1:2:3 w image not
+#set out
 
 
 
@@ -171,7 +170,7 @@ reset
 ############################
 # Energy plot
 
-load 'YGB.p'
+load 'BGY.p'
 
 f(x,y) = y < 0.1 ? x : -1
 
@@ -211,29 +210,7 @@ set label 6 rotate by -52.5 '\footnotesize{1.00}' at 0.365, 9.7 front
 #sp 'Results18.dat' u 1:2:(f($5, $3)) w l not
 #unset table
 
-set out 'ParamSpaceEnergy.tex'
-p 'Results18.dat' u 1:2:5 w image not, \
-'EnergyContours.dat' u 1:2 w l lc 8 lw 0.2 not
-set out
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#set out 'ParamSpaceEnergy.tex'
+#p 'Results18.dat' u 1:2:5 w image not, \
+#'EnergyContours.dat' u 1:2 w l lc 8 lw 0.2 not
+#set out
