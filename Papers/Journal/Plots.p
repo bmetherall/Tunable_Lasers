@@ -1,4 +1,4 @@
-set terminal epslatex color size 3.5in,2.15in lw 3 standalone font ',10'
+set terminal epslatex color size 3.5in,2.15in lw 3 standalone font 10
 
 ############################
 # 3D plot
@@ -32,7 +32,7 @@ set lmargin 6.25
 
 #set out 'Evo.tex'
 
-set multiplot
+#set multiplot
 
 set size 1,1.2
 
@@ -40,7 +40,7 @@ set size 1,1.2
 #'Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
 #'Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
 
-unset multiplot
+#unset multiplot
 
 #set out
 
@@ -214,3 +214,93 @@ set label 6 rotate by -52.5 '\footnotesize{1.00}' at 0.365, 9.7 front
 #p 'Results18.dat' u 1:2:5 w image not, \
 #'EnergyContours.dat' u 1:2 w l lc 8 lw 0.2 not
 #set out
+
+reset
+
+############################
+# Switched Energy plot
+
+load 'BGY.p'
+
+f(x,y) = y < 0.1 ? x : -1
+
+set grid front
+
+set xl '$s$'
+set yl rotate by 0 '$b$'
+set cbl 'Energy'
+
+set xtics 0.1
+set format x '%.1f'
+set format cb '%.1f'
+
+set xr [0:0.4]
+set yr [0:10]
+set cbr [0:3]
+
+set lmargin at screen 0.12
+set rmargin at screen 0.82
+set bmargin at screen 0.2
+
+set view map
+unset surface
+set contour
+set cntrparam levels incremental 0,0.25,3.0
+
+unset cl
+
+set label 1 rotate by -14 '\footnotesize{2.25}' at 0.15, 1.12 front
+set label 2 rotate by -35 '\footnotesize{2.00}' at 0.265, 3.77 front
+#set label 3 rotate by 0 '\footnotesize{1.75}' at 0.25, 3 front
+
+# This doesnt seem to work for some reason, but it works in the terminal
+#set table 'EnergyContoursSwitch.dat'
+#sp 'ResultsSwitch.dat' u 1:2:(f($5, $3)) w l not
+#unset table
+
+#set out 'ParamSpaceEnergySwitch.tex'
+#p 'ResultsSwitch.dat' u 1:2:5 w image not, \
+#'EnergyContoursSwitch.dat' u 1:2 w l lc 8 lw 0.2 not
+#set out
+
+reset
+
+############################
+# Example Gaussian
+
+set grid
+set xr [-3:3]
+set yr [-1:1]
+
+set lmargin at screen 0.14
+set rmargin at screen 0.98
+set tmargin at screen 0.96
+
+set format y '%.1f'
+
+set key horizontal bottom
+
+set xl '$T / \sigma$'
+set yl offset 2 '$A / \sqrt{P}$'
+
+#set xtics (0 0, '$\sigma$' 1, '$2\sigma$' 2, '$-\sigma$' -1, '$-2\sigma$' -2, '$3\sigma$' 3, '-3$\sigma$' -3)
+
+set ytics 0.5
+
+C = 2*sqrt(2)
+s = 1.0
+
+spot = sqrt(pi / C) * s
+
+set arrow from 0, 0 to spot, 0 lc rgb 'red'
+set label '$\displaystyle \left( \frac{\pi}{C} \right)^{1/2}$' at 0.35 * spot, 0.2 center
+
+set samples 1000
+
+set output './Sample_Gauss.tex'
+p exp(-x**2 / (2*s**2)) t 'Envelope', \
+exp(-x**2 / (2*s**2))*cos(-x**2 * C / (2*s**2)) t 'Real Part' dt 5, \
+exp(-x**2 / (2*s**2))*sin(-x**2 * C / (2*s**2)) t 'Imag. Part' dt 4
+set out
+
+reset

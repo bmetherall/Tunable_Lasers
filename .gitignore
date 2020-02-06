@@ -25,6 +25,9 @@ Papers/Early_Notes/*
 *.ist
 *.bst
 *.idx
+*.fls
+*.fdb*
+*.eps
 /Break
 /Stable
 Papers/ArXiv/*
