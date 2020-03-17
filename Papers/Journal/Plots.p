@@ -298,9 +298,49 @@ set label '$\displaystyle \left( \frac{\pi}{C} \right)^{1/2}$' at 0.35 * spot, 0
 set samples 1000
 
 set output './Sample_Gauss.tex'
-p exp(-x**2 / (2*s**2)) t 'Envelope', \
-exp(-x**2 / (2*s**2))*cos(-x**2 * C / (2*s**2)) t 'Real Part' dt 5, \
-exp(-x**2 / (2*s**2))*sin(-x**2 * C / (2*s**2)) t 'Imag. Part' dt 4
+	p exp(-x**2 / (2*s**2)) t 'Envelope', \
+		exp(-x**2 / (2*s**2))*cos(-x**2 * C / (2*s**2)) t 'Real Part' dt 5, \
+		exp(-x**2 / (2*s**2))*sin(-x**2 * C / (2*s**2)) t 'Imag. Part' dt 4
 set out
 
+## Chirp and Fourier Transform
 reset
+
+d(x,y) = (dx=x-x0, x0=x, dy=y-y0, y0=y, (dy > pi) ? (dy = dy-2*pi) : (dy), ((dy < -pi)) ? (dy = dy+2*pi) : (dy), dy/dx)
+
+x0 = NaN
+y0 = NaN
+
+set grid
+set xr [-2:2]
+set yr [-18:18]
+
+set ytics 6
+set xtics 1
+
+set xl '$T$'
+set yl 'Chirp' offset 1.5
+
+set x2r [-30:30]
+
+set x2l '$\omega - \omega_0$'
+set y2l '$|\mathcal{F} \{ A \}|$ (AU)' offset -2
+
+set x2tics 15
+set x2tics border
+set y2tics border
+
+set format y2 '$%1.1f$'
+
+set key at 1, 16.5
+set key horizontal
+set key width -2
+set key samplen 3
+
+set lmargin at screen 0.13
+set rmargin at screen 0.85
+
+set output 'ChirpFT.tex'
+	p 'Features.dat' u 1:(-d($1,$7)) w l t 'Chirp', \
+		'Features.dat' u 5:($6 / 12120) w l dt 5 axes x2y2 t 'Intensity'
+set out
