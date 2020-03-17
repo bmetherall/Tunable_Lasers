@@ -44,14 +44,15 @@ end
 
 @everywhere function Disp(A, x, s::Float64 = 0.1, b::Float64 = 1.0)
 	F = fft(A)
+	dw = pi / x[end]
+	w = fftfreq(length(A)) * length(A) * dw
+
 	c = b + 15 * s
 	if c >= 6 # Shenanigans
 		F = @. F * (abs(F) > 10^(1 + 0.6 * c - 15.6))
 	else
 		F = @. F * (abs(F) > 10^-11)
 	end
-	dw = pi / x[end]
-	w = fftfreq(length(A)) * length(A) * dw
 	return ifft(@. F * exp(1im * w^2 * s^2))
 end
 
@@ -67,16 +68,27 @@ end
 	return A
 end
 
+@everywhere function LoopSwitch(A, x, dx, s::Float64, b::Float64, N::Int64 = 1)
+	for i in 1:N
+		A = Loss(A)
+		A = Mod(A, x)
+		A = Disp(A, x, s, b)
+		A = Gain(A, Energy(A, dx))
+		A = Fibre(A, b)
+	end
+	return A
+end
+
 # Compute solution on a grid
 function Solve(A0, n::Int64, m::Int64, numloops::Int64, fname = "Results.dat")
 	"""
 	Comptues 2-norm error, Inf-norm error, Energy, Variance, and Kurtosis within the s-b plane.
 	"""
 	f = open(fname, "w");
-	
+
 	s = LinRange(0.0, 0.4, n)
 	b = LinRange(0.0, 10.0, m)
-	
+
 	for k in 1:m # b loop
 		println(k)
 		z = SharedArray{Float64, 2}((n, 7))
@@ -86,14 +98,14 @@ function Solve(A0, n::Int64, m::Int64, numloops::Int64, fname = "Results.dat")
 			old = abs.(A)
 			A = Loop(A, x, dx, s[j], b[k])
 			new = abs.(A)
-			
+
 			# Compute quantities
 			err2 = sqrt(trapz((new - old).^2, dx) / trapz(abs2.(A), dx))
 			errinf = maximum(abs.(new - old))
 			sigma = trapz(x.^2 .* new, dx) / trapz(new, dx)
 			kurt = trapz(x.^4 .* new, dx) / trapz(x.^2 .* new, dx)
 			energy = Energy(new, dx)
-			
+
 			# Build array of values
 			z[j,:] = [s[j] b[k] err2 errinf energy sigma kurt / sigma]
 		end
@@ -105,22 +117,22 @@ function Solve(A0, n::Int64, m::Int64, numloops::Int64, fname = "Results.dat")
 end
 
 # Parameters
-p = 2^18 # Number of points in the discretization
+p = 2^16 # Number of points in the discretization
 width = 8 # Size of window
 E0 = 0.1 # Initial energy
-n = 501 # Number in s
-m = 301 # Number in b
-numloops = 100
+n = 151 # Number in s
+m = 101 # Number in b
+numloops = 25
 
 # Initialization
 x = LinRange(-width, width, p)
 dx = x[2] - x[1]
-A0 = 1.0 ./ cosh.(2 * x) * exp(1im * pi / 4.0)
+#A0 = 1.0 ./ cosh.(2 * x) * exp(1im * pi / 4.0)
+A0 = exp.(-(x .- 0.5).^2 ./ (2 * 0.05^2))
 A0 = sqrt(E0 / Energy(A0, dx)) * A0 # Normalize
 
 Loop(A0, x, dx, 0.1, 1.0, 2); # Compile
 
 Solve(A0, 2, 2, 2) # Compile
 
-@time Solve(A0, n, m, numloops, "Test.dat")
-
+@time Solve(A0, n, m, numloops, "ResultsDelta.dat")
