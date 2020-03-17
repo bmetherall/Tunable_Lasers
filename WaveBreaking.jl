@@ -44,7 +44,7 @@ end
 
 @everywhere function Disp(A, x, s::Float64 = 0.1)
 	F = fft(A)
-	F = @. F * (abs(F) > 10^-12)
+	F = @. F * (abs(F) > 10^-9)
 	dw = pi / x[end]
 	w = fftfreq(length(A)) * length(A) * dw
 	return ifft(@. F * exp(1im * w^2 * s^2))
@@ -72,10 +72,10 @@ function Solve(A0, n::Int64, m::Int64, numloops::Int64, fname = "Results.dat")
     s = LinRange(0.0, 0.25, n)
     b = LinRange(0.0, 3.0, m)
     
-    for k in 1:n # b loop
+    for k in 1:m # b loop
         println(k)
         z = SharedArray{Float64, 2}((n, 7))
-        @sync @distributed for j in 1:m # s loop
+        @sync @distributed for j in 1:n # s loop
             A = A0
             A = Loop(A, x, dx, s[j], b[k], numloops - 1)
             old = abs.(A)
@@ -103,9 +103,9 @@ end
 p = 2^16 # Number of points in the discretization
 width = 8 # Size of window
 E0 = 0.1 # Initial energy
-n = 21 # Number in s
-m = 21 # Number in b
-numloops = 30
+n = 501 # Number in s
+m = 326 # Number in b
+numloops = 100
 
 # Initialization
 x = LinRange(-width, width, p)
@@ -117,5 +117,5 @@ Loop(A0, x, dx, 0.1, 1.0, 2); # Compile
 
 Solve(A0, 2, 2, 2) # Compile
 
-@time Solve(A0, n, m, numloops)
+@time Solve(A0, n, m, numloops, "Results16.dat")
 
