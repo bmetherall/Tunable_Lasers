@@ -41,3 +41,8 @@ Coat*
 *.cls
 Pages
 Diff.py
+*.save
+*.ilg
+*.ind
+*/gnuplottex/
+/Papers/Journal/*converted*

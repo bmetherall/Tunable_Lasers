@@ -55,9 +55,11 @@
 
 \section{Introduction}
 \label{sec:intro}
-A tuneable laser has the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun2015, burgoyne2010, yamashita2009}. Tuneable lasers simultaneously lase at all frequencies within this bandwidth. This tuneability leads to applications such as optical coherence tomography \cite{bohun2015, burgoyne2014, yamashita2009}, coherent anti-Stokes Raman spectroscopy \cite{burgoyne2014}, deep tissue multi-photon microscopy \cite{chung2017, liu2017}, and diagnostics of ultrafast processes \cite{burgoyne2014, silfvast2004}. A typical tuneable ring laser cavity is shown in Figure \ref{fig:cavity}.
+Tuneable lasers have the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun2015, burgoyne2010, yamashita2009} and simultaneously lase at all frequencies within this bandwidth in short pulses. This tuneability leads to applications such as optical coherence tomography \cite{bohun2015, burgoyne2014, yamashita2009}, coherent anti-Stokes Raman spectroscopy \cite{burgoyne2014}, deep tissue multi-photon microscopy \cite{chung2017, liu2017}, and diagnostics of ultrafast processes \cite{burgoyne2014, silfvast2004}. Tuneable lasers are usually constructed in a ring with five components: an output coupler, chirped fibre Bragg grating (CFBG), modulator, Er-doped fibre, and a pump laser. A typical tuneable ring laser cavity is depicted in Figure \ref{fig:cavity}. Due to the high power and short duratino of the pulses, the Kerr nonlinearity becomes crucial to the dynamics within the cavity.
 
-The nonlinearity causes several effects to arise within the laser cavity due to the interplay of dispersion, modulation, and the nonlinearity \cite{bohun2015, coen1997, lapre2019, shao2019, woodward2018}. The effect of most interest for this paper is optical wave breaking which causes the leading edge of a pulse to be red shifted, and the trailing edge blue shifted\footnote{In a normally dispersive optical fibre.} to the point that a shock is developed \cite{anderson1992, rothenberg1989a, rothenberg1989b, tomlinson1984, tomlinson1985}. The frequency shifts cause the pulse to become rectangular in the frequency domain with a linear chirp over most of the pulse. Wave breaking manifests from self-phase modulation (SPM) which is a direct effect of the nonlinearity in which the pulse interferes with itself. This interference generates new frequencies which induces the rectangular profile \cite{agrawal2013, mollenauer1980, woodward2018}. Modulation instablility is another effect that will be of interest that typically arises in the anomolous dispersion regime. However, in the presence of multiple pulses modulation instability can emerge in the normal dispersion regime as well through cross-phase modulation (XPM) and four-wave mixing (FWM) \cite{agrawal1987, agrawal1989, agrawal2013, haelterman1992}. Modulation instability causes a wave to break into short pulses, and can cause a laser to lose mode-locking \cite{agrawal1987, coen1997, haelterman1992}. Within a ring laser cavity wave breaking and modulation instability can become parasitic leading to an unstable and unsustainable pulse. This gives rise to the need of understanding the rich landscape of the parameter space, and determining design principles to guarantee the ring laser is stable and sustainable \cite{bohun2015, burgoyneemail, finot2008, lapre2019, woodward2018}.
+The nonlinearity causes several effects to arise within the laser cavity due to the interplay of dispersion, modulation, and the nonlinearity \cite{bohun2015, coen1997, lapre2019, shao2019, woodward2018}. The effect of most interest for this paper is optical wave breaking which causes the leading edge of a pulse to be red shifted, and the trailing edge blue shifted\footnote{In the anomalous dispersion regime, the effect is reversed.} to the point that a shock is developed \cite{anderson1992, rothenberg1989a, rothenberg1989b, tomlinson1984, tomlinson1985}. The shift in frequencies cause the pulse to become rectangular in the frequency domain with a linear chirp over most of the pulse. Wave breaking manifests from self-phase modulation (SPM) which is a direct effect of the nonlinearity causing the pulse to interfere with itself. This interference generates new frequencies which induces the rectangular profile \cite{agrawal2013, mollenauer1980, woodward2018}. Modulation instablility is another effect that will be of interest that typically arises in the anomalous dispersion regime. However, in the presence of multiple pulses modulation instability can emerge in the normal dispersion regime as well through cross-phase modulation (XPM) and four-wave mixing (FWM) \cite{agrawal1987, agrawal1989, agrawal2013, haelterman1992}. Modulation instability causes a wave to break into short pulses, and can cause a laser to lose coherence \cite{agrawal1987, coen1997, haelterman1992}. Within a ring laser cavity wave breaking and modulation instability can become parasitic leading to an unstable and unsustainable pulse. This gives rise to the need of understanding the rich landscape of the parameter space, and determining design principles to guarantee the ring laser is stable and sustainable \cite{bohun2015, burgoyneemail, finot2008, lapre2019, woodward2018}.
+
+*** Paragraph explaining method / results / layout
 
 \section{Modelling Efforts}
 \label{sec:modelling}
@@ -89,27 +91,36 @@ No analytic solution is known for \eqref{eq:meml}---even after making the assump
 
 \subsection{Discrete Models}
 \label{sec:discrete}
-Unfortunately, the master equation, \eqref{eq:meml}, is not completely representative of the underlying physics within our laser cavity. In the derivation of \eqref{eq:meml} it is assumed each process affects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this can be a poor assumption. Within the cavity, each effect is localized to its corresponding component: almost all of the dispersion happens within the chirped fibre Bragg grating (CFBG) \cite{agrawal2002}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be functionally composed together to give an iterative map for the effect of one round trip of the cavity. This ultimately transforms the differential equation into an algebraic equation.
+Unfortunately, the master equation, \eqref{eq:meml}, is not completely representative of the underlying physics within our laser cavity. In the derivation of \eqref{eq:meml} it is assumed each process affects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this can be a poor assumption. Within the cavity, each effect is localized to its corresponding component: almost all of the dispersion happens within the CFBG \cite{agrawal2002}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, a better model is one where we consider a simplified version of the master equation, \eqref{eq:meml}, for each component. Solving these simplified differential equations yields an algebraic expression for the effect of each individual component. The relations can then be functionally composed to give an iterative map for the effect of one round trip of the cavity.
 
 Such a method was first proposed in 1955 by Cutler \cite{cutler1955} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, kuizenga1970b, kuizenga1970, siegman1969}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passively mode-locked lasers. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In each of these models the effect of each block is described by a transfer function.
 
-Despite the development of these block style models, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. Each component of a tuneable plays a crucial role and the laser will not function correctly without the inclusion of all of the components. Another drawback is that the functional operations of some of the components used in their models are phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with the underlying physics. Finally, none of these previous models have been able to exhibit wave breaking.
+Despite the development of these block style models, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. Each component of a tuneable plays a crucial role and the laser will not function correctly without the inclusion of all of the components. Another drawback is that the functional operations of some of the components used in their models are phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with the underlying physics. Finally, none of these previous models have been able to fully exhibit the instabilities described in Section \ref{sec:intro}.
 
 
 \section{Model Derivation}
 \label{sec:model}
-Using the idea of a discrete model presented Section \ref{sec:discrete}, we derive our model from the GNLSE, \eqref{eq:nlse}; however, in the case of the modulation we consider the exact functional form to be determined by the laser operator. To accomplish this, we neglect all terms but one of the right side of \eqref{eq:nlse} and solve the simplified differential equation. This is a reasonable assumption since the gain, loss, dispersion, modulation, and nonlinear effects are localized to only one section of the laser cavity.
+Using the idea of a discrete model presented Section \ref{sec:discrete}, we derive our model from the GNLSE, \eqref{eq:nlse}; however, in the case of the modulation we consider the exact functional form to be determined by the laser operator. To accomplish this we follow the method described in Section \ref{sec:discrete}; we neglect all terms but one on the right side of \eqref{eq:nlse} and solve the simplified differential equations.
 
 To proceed we must choose the form of the amplification term, $g(A)$. We assume the gain has the form
 \begin{align}
 	g(A) &= \frac{g_0}{1 + E / \Es},& E &= \int_{-\infty}^\infty |A|^2 \, \df T,
 	\label{eq:energy}
 \end{align}
-where $g_0$ is a small signal gain, $E$ is the energy of the pulse, and $\Es$ is the energy at which the gain begins to saturate \cite{bohun2015, burgoyne2014, haus1975, haus1984, haus1992, haus2000, haus1991, kartner2005, peng2018, shtyrina2017, silfvast2004, usechak2005, yarutkina2013}. This leads to
+where $g_0$ is a small signal gain, $E$ is the energy of the pulse, and $\Es$ is the energy at which the gain begins to saturate \cite{haus1984, shtyrina2017, silfvast2004}. This reduces the GNLSE, \eqref{eq:nlse}, to
+\begin{align}
+	\pdiff{A}{z} &= \frac{g_0 A}{2 \left( 1 + E / \Es \right)}.
+\end{align}
+By assuming $E(0) = E$ and $E(L_g) = E_{\text{out}}$, we find the energy after amplification is
+\begin{align}
+	\label{eq:engain}
+	E_{\text{out}} &= \Es W \left( \frac{E}{\Es} \textrm{e}^{E / \Es} \textrm{e}^{g_9 L_g} \right),
+\end{align}
+where $W$ is the Lambert $W$ function \cite{corless1996}. Rewriting \eqref{eq:engain} in terms of the pulse gives
 \begin{align}
 	G(A) &= \left( \frac{\Es}{E} W \left( \frac{E}{\Es} \textrm{e}^{E/\Es} \textrm{e}^{g_0 L_g} \right) \right)^{1/2} A
 \end{align}
-for the amplification of the pulse within the Er-doped fibre. Continuing this process for the loss, dispersion, and nonlinearity yields
+for the amplification of the pulse within the Er-doped fibre. Repeating this process for the loss, dispersion, and nonlinearity yields
 \begin{align}
 	L(A) &= (1 - R) \textrm{e}^{- \alpha L_T}A, \\
 	D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D\beta_2/2} \FT{A}}, \\
@@ -184,7 +195,7 @@ Now that we have the algebraic effect of each section of the cavity, we are read
 \begin{align}
 	\mathcal{L}(A) = F(G(M(D(L(A))))).
 \end{align}
- The pulse after one complete circuit of the laser cavity is then returned back into the cavity to restart the process. A steady solution to this model is one in which the envelope and chirp are unchanged after traversing every component in the cavity---we are uninterested in the phase. That is, such that $\mathcal{L}(A) = A \textrm{e}^{i \phi}$---for some $\phi \in \mathbb{R}$. In Figure \ref{fig:cavityevo} we can see an example of the evolution of the envelope of the pulse during one round trip of the cavity.
+ The pulse after one complete circuit of the laser cavity is then returned back into the cavity to restart the process. A steady solution to this model is one in which the envelope and chirp are unchanged after traversing every component in the cavity---we are uninterested in the phase. That is, such that $\mathcal{L}(A) = A \textrm{e}^{i \phi}$---for some $\phi \in \mathbb{R}$. An example of the evolution of the envelope during one round trip of the laser cavity can be found in Figure \ref{fig:cavityevo}.
 
 \section{Results}
 We split the results into two subsections. In the following subsection we investigate the low nonlinearity limit, and in Section \ref{sec:nlresults} we look at the full nonlinear model.
@@ -252,13 +263,25 @@ Our linearized model indeed exhibits the same form as previous linear models. Ho
 In this iterative scheme---as well as within the laboratory---we must specify the input pulse shape. The most common form is a hyperbolic secant \cite{coen1997, finot2008, mitschke1986, rothenberg1989b, tomlinson1984}, which we assume has the exact form
 \begin{align}
 	A_0 = \Gamma \sech \left( 2 T \right) \textrm{e}^{i \pi / 4},
+	\label{eq:nlA0}
 \end{align}
-where $\Gamma$ is a normalizing factor chosen so the pulse has an initial energy of $E_0 = 0.1$.
+where $\Gamma$ is a normalizing factor chosen so the pulse has an initial energy of $E_0 = 0.1$, unless specified otherwise. We plot the evolution of a pulse through the cavity in Figure \ref{fig:evolution}. We find very different behaviour in these two examples despite very similar parameters. In Figure \ref{fig:convevo} the input pulse is very noisy, but, sheds off the left lobe and reaches an equilibrium state quickly after. In the opposite extreme, Figure \ref{fig:breakevo} has the smooth initial pulse given in \eqref{eq:nlA0}, however, the nonlinearity causes the pulse to pulsate or `breathe'. This effect compounds with each round trip, which ultimately results in the degradation of the pulse into an unusable and unrecoverable state. The only difference between these two realizations, besides the initial pulse shape, is the value of the nonlinearity parameter, $b$.
 
 
+stability
 
-xpm \cite{agrawal2013, agrawal1987, agrawal1989}
+instability
 
+energy
+
+error
+
+permutation
+
+
+chirp / chirp Saturation
+
+shape / kurtosis
 
 
 \begin{figure}[tb]
@@ -266,19 +289,59 @@ xpm \cite{agrawal2013, agrawal1987, agrawal1989}
 	\begin{subfigure}{\columnwidth}
 		\centering
 		\includegraphics{Conv}
-		\caption{Example of a pulse stabilizing from a seemingly random initial pulse shape ($s = 0.1$, $b = 1.0$, $E_0 = 0.1$, $a = 8000$, $h = 0.04$).}
+		\caption{Example of a pulse stabilizing from a seemingly random initial pulse shape ($b = 1.0$).}
 		\label{fig:convevo}
 	\end{subfigure} \\
 	\begin{subfigure}{\columnwidth}
 		\centering
 		\includegraphics{Break}
-		\caption{Example of a pulse destabilizing from a hyperbolic secant initial pulse ($s = 0.1$, $b = 1.6$, $E_0 = 0.1$, $a = 8000$, $h = 0.04$).}
+		\caption{Example of a pulse destabilizing from a hyperbolic secant initial pulse ($b = 1.6$).}
 		\label{fig:breakevo}
 	\end{subfigure}
-	\caption{Two extremes of the evolution of a pulse.}
+	\caption{Two extremes of the evolution of a pulse ($s = 0.1$, $E_0 = 0.1$, $a = 8000$, $h = 0.04$).}
 	\label{fig:evolution}
 \end{figure}
 
+
+
+
+
+\newpage
+
+In the nonlinear case, we recover this linear response for moderate values of $T$. However, for $|T| > 1$ the chirp begins to saturate. This is consistent with the experimental results \cite{chen, rothenberg, tomlinson}.
+
+
+
+Wave breaking is not limited to just optics; wave breaking occurs in areas such as plasmas, transmission lines, and fluid dynamics \cite{rothenberg}. Wave breaking occurs because the pulse begins to interfere with itself in a way called SPM \cite{agrawal2002, agrawal2013, becker}. SPM occurs because the index of refraction is intensity dependent \cite{agrawal2002, becker, rothenberg, silfvast}, which leads to additional chirp across the pulse \cite{agrawal2013, anderson, rothenberg, silfvast}. This in turn causes higher order frequencies to be injected into the pulse \cite{agrawal2013, anderson},
+
+
+We obtain comparable results as in the experiments \cite{anderson, rothenberg}
+
+
+To obtain a better understanding of how the pulse either converges to equilibrium, or diverges to wave breaking, we shall examine the difference between the envelopes of consecutive iterations. More precisely, we compute the error by
+\begin{align}
+	\textrm{E} = \frac{\| |A_i| - |A_{i-1}| \|_2}{\| A_{i-1} \|_2},
+	\label{eq:error}
+\end{align}
+where $\| \cdot \|_2$ denotes the $L^2(\mathbb{R})$ norm, which is computed numerically using the trapezoid rule ($N = 2^{18}$).
+
+
+he standard method would be to iterate until a fixed tolerance is reached, however, there are some reasons that make a fixed number of iterations preferable---as long as a sufficient number is chosen. The main reason is that this allows us to observe a richer structure than simply whether or not the tolerance had been reached by some maximum number of iterations. Additionally, incorrectly choosing the critical tolerance could easily lead to erroneous categorizations at points.
+
+The last item we wish to consider is the order in which the components are placed.
+
+
+
+xpm \cite{agrawal2013, agrawal1987, agrawal1989}
+
+
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics{ChirpFT}
+	\caption{}
+	\label{fig:chirpft}
+\end{figure}
 
 
 \begin{figure}[tbp]
@@ -308,52 +371,6 @@ xpm \cite{agrawal2013, agrawal1987, agrawal1989}
 \section{Conclusion}
 
 
-\clearpage
-\newpage
-
-
-
-
-\section{Nonlinear Solution}
-We now consider the nonlinear case---when $b > 0$. In this case it becomes impossible to obtain an analytic result. Recall from \eqref{eq:effects} that the nonlinearity is a highly nonlinear operator, and attempting to compute the Fourier transform analytically of a pulse that has undergone this transformation is futile. Instead we resort to a numerical solution.
-
-With the inclusion of the nonlinearity we generally find a similar solution to the linear case. An example of this is shown in Figure \ref{fig:nlstable}.
-
-Instead, the magnitude of the Fourier transform has a unique weakly bi-modal shape. This deviation suggests the nonlinearity implants higher frequency oscillations into the pulse---a key observation in the coming subsections. Finally, we shall examine the derivative of the phase---essentially the chirp.
-
- In the nonlinear case, we recover this linear response for moderate values of $T$. However, for $|T| > 1$ the chirp begins to saturate. This is consistent with the experimental results \cite{chen, rothenberg, tomlinson}.
-
-
-The noise in the energy exhibited for moderate to large values of $b$, and small values of $s$ is a phenomenon called \emph{wave breaking} \cite{agrawal2013, anderson, finot, rothenberg, tomlinson}. Wave breaking is not limited to just optics; wave breaking occurs in areas such as plasmas, transmission lines, and fluid dynamics \cite{rothenberg}. Wave breaking occurs because the pulse begins to interfere with itself in a way called SPM \cite{agrawal2002, agrawal2013, becker}. SPM occurs because the index of refraction is intensity dependent \cite{agrawal2002, becker, rothenberg, silfvast}, which leads to additional chirp across the pulse \cite{agrawal2013, anderson, rothenberg, silfvast}. This in turn causes higher order frequencies to be injected into the pulse \cite{agrawal2013, anderson}, as we saw in Figure \ref{fig:nlstable}. These high frequencies compound with each trip around the cavity becoming parasitic very quickly---Figure \ref{fig:break} highlights this. Notice that the difference between Figure \ref{fig:nlstable} and Figure \ref{fig:break} is a difference in $b$ of $0.05$---just enough to cross the boundary---this difference could be attributed to adding a few centimetres more of fibre between the gain and output coupler. \\
-
-The left figures show the pulse after 11 trips around the cavity; in the Fourier transform it is clear that the contributions from higher frequencies has increased. We obtain comparable results as in the experiments \cite{anderson, rothenberg}. Additionally, the chirp starts losing its linearity causing it to start becoming unstable; the nature of this instability is again in agreement with the experiments \cite{anderson, rothenberg}. The parasitic nature of the high frequency contributions is evident by examining the right figures. After five additional trips around the cavity, the envelope of the pulse is much more rippled, and the real and imaginary parts become incoherent. Moreover, the Fourier transform has no clear structure and has essentially become noise. The chirp has grown to be highly oscillatory and unstable. Once the pulse has reached a state such as this, the envelope, Fourier transform, and chirp never reach a steady equilibrium state.
-
-
-
-
-To obtain a better understanding of how the pulse either converges to equilibrium, or diverges to wave breaking, we shall examine the difference between the envelopes of consecutive iterations. More precisely, we compute the error by
-\begin{align}
-	\textrm{E} = \frac{\| |A_i| - |A_{i-1}| \|_2}{\| A_{i-1} \|_2},
-	\label{eq:error}
-\end{align}
-where $\| \cdot \|_2$ denotes the $L^2(\mathbb{R})$ norm, which is computed numerically using the trapezoid rule ($N = 2^{18}$). Notice as well that in the numerator we use the modulus of the pulses, again this is because we are uninterested in the phase shift between iterations. A plot of the error can be found in Figure \ref{fig:error}, with $i = 100$. The standard method would be to iterate until a fixed tolerance is reached, however, there are some reasons that make a fixed number of iterations preferable---as long as a sufficient number is chosen. The main reason is that this allows us to observe a richer structure than simply whether or not the tolerance had been reached by some maximum number of iterations. Additionally, incorrectly choosing the critical tolerance could easily lead to erroneous categorizations at points.
-
-Unsurprisingly, the error is largest in the region where the wave breaks. As mentioned in the previous subsection, the pulse does not reach a stable state in this region. As a consequence the envelope varies drastically, which leads to this large error.
-
-
-
-
-The last item we wish to consider is the order in which the components are placed. In Section \ref{sec:effects} a brief description for the choice of the order was given. We start with the loss component since this coincides with the output; the fibre nonlinearity follows the gain since this is where it has the largest impact; and the loss follows the nonlinearity in an attempt to mitigate its effect. Therefore, the loss is first, and the gain followed by the nonlinearity are last---leaving dispersion and modulation in the middle. We chose to put the dispersion block ahead of the modulator. However, there was no real reason behind this---modulation before dispersion is equally as valid---and in this subsection we explore the effect of modulating the pulse before it passes through the CFBG. \\
-
-The result of this switch is shown in Figure \ref{fig:switch}. As a whole, unsurprisingly, we find the same behaviour and structure, however, there are some intriguing differences. Again, the structure and periodic nature of the boundary is similar to before, however, this boundary has shifted rightwards to a larger $s$ value. Additionally, within the unstable region the density of the contour lines is much greater---suggesting it is in some sense more chaotic and random than with the components in their original permutation. The final main difference between the two orderings, is that in this case the energy contours are no longer monotonic functions of $s$. Instead we find a parabolic shape on the top contour, and two lobes on the second contour. \\
-
-
-
-
-
-
-\section{Conclusion}
-Within this paper we developed a new nonlinear model for tuneable lasers. In order to better represent the underlying physics within the laser cavity the nonlinear Schr\"{o}dinger equation was reduced to simpler differential equations for each component of the laser. This led to a functional map that defines the effect of each component on a particular input pulse. These processes were then composed together to give an iterative mapping of the whole laser cavity. In a future publication we shall show the results obtained by this iterative mapping as well as discuss the dynamics exhibited by this model---including wave-breaking---to predict the conditions under which the pulse is stable and sustainable.
 
 
 \bibliography{Ref}

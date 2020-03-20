@@ -324,7 +324,7 @@ set yl 'Chirp' offset 1.5
 set x2r [-30:30]
 
 set x2l '$\omega - \omega_0$'
-set y2l '$|\mathcal{F} \{ A \}|$ (AU)' offset -2
+set y2l 'Intensity (AU)' offset -2
 
 set x2tics 15
 set x2tics border
