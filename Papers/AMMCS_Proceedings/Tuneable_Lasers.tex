@@ -80,29 +80,25 @@
 %
 \maketitle
 
-\abstract*{
-	A new nonlinear model is proposed for tuneable lasers. Using the generalized nonlinear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then composed to give the overall effect of one trip around the cavity. We examine the full nonlinear model which is solved numerically. A consequence of the nonlinear nature of this model is that it is able to exhibit wave breaking which prior models could not. We highlight the rich structure of the boundary of stability for a particular plane of the parameter space.
-}
-
 \abstract{
-	A new nonlinear model is proposed for tuneable lasers. Using the generalized nonlinear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then composed to give the overall effect of one trip around the cavity.
+	A new nonlinear model is proposed for tuneable lasers. Using the generalized nonlinear Schr\"{o}dinger equation as a starting point, expressions for the transformations undergone by the pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then composed to give the overall effect of one trip around the cavity. This is in contrast to solving the generalized nonlinear Schr\"{o}dinger equation which treats the processes as continuous.
 }
 
 \section{Introduction}
 \label{sec:intro}
-A tuneable laser has the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun, burgoyne2010, yamashita}. Tuneable lasers simultaneously lase at all frequencies within this bandwidth. This tuneability is quite useful and has applications in spectroscopy and high resolution imaging such as coherent anti-Stokes Raman spectroscopy and optical coherence tomography \cite{bohun, burgoyne2014, yamashita}, as well as communications and diagnostics of ultra fast processes \cite{silfvast}. A typical tuneable laser cavity is shown in Figure \ref{fig:cavity}. In contrast to a standard laser, a tuneable laser contains two additional components, namely, a chirped fibre Bragg grating (CFBG), and a modulator.
+A tuneable laser has the ability to vary the frequency of its output by up to about 100 nanometres \cite{bohun, burgoyne2010, yamashita}. Tuneable lasers simultaneously lase at all frequencies within this bandwidth. This tuneability is quite useful and has applications in spectroscopy and high resolution imaging such as coherent anti-Stokes Raman spectroscopy and optical coherence tomography \cite{bohun, burgoyne2014, yamashita}, as well as communications and diagnostics of ultra fast processes \cite{silfvast}. A typical tuneable laser cavity can be seen in Figure \ref{fig:cavity}. In contrast to a standard laser, a tuneable laser contains two additional components, namely, a chirped fibre Bragg grating (CFBG), and a modulator.
 
 \begin{figure}[tbp]
 	\centering
 	\input{Cavity}
-	\caption{Typical cavity of a fibre based tuneable laser. The laser pulses travel clockwise around each loop.}
+	\caption{Typical cavity of a fibre based tuneable laser. The laser pulses travel clockwise around each loop. The pulses iteratively pass through each component successively.}
 	\label{fig:cavity}
 \end{figure}
 A CFBG is a length of optical fibre where the refractive index oscillates along its length \cite{ferreira}, and therefore, can act as a reflective filter \cite{agrawal2002, alazzawi, ferreira, starodoumov}. Due to the oscillatory nature, light with the corresponding wavelength will be reflected when the Bragg condition is satisfied \cite{agrawal2002, alazzawi, becker, ferreira, silfvast, starodoumov}. The spacial variation of the refractive index effectively creates a spacial dependence on the Bragg condition, causing most wavelengths to be reflected by a CFBG, but with each wavelength satisfying the Bragg condition at a different spacial location\footnote{Note that a monotonic chirping ensures that the spacial dependence of the Bragg condition is continuous with respect to the frequency.}. A consequence of this is that a time delay is created between wavelengths---this causes the pulse to disperse and broaden.
 
 The modulator serves the purpose of reshaping the pulse. Without it, the pulse will repeatedly widen due to the CFBG---the modulator ensures the pulse is band limited by altering the envelope. 
 
-\section{Modelling Efforts}
+\section{Previous Modelling Efforts}
 \label{sec:modelling}
 The standard equation for studying nonlinear optics is the nonlinear Schr\"odinger equation (NLSE)\footnote{The NLSE can be derived from the nonlinear wave equation for electric fields; this derivation is presented in detail in \cite{agrawal2013, ferreira}.},
 \begin{align}
@@ -129,19 +125,27 @@ where $M(T)$ is the modulation function. The solutions of three simplifications 
 \end{itemize}
 For a more comprehensive history see \cite{haus2000}.
 
-\subsection{Discrete Models}
-While the derivation of \eqref{eq:meml} is correct mathematically, it is not representative of what happens within the laser cavity. The issue with \eqref{eq:meml} is that it has been assumed each process affects the pulse continuously within the cavity. As highlighted by Figure \ref{fig:cavity}, this is a rather poor assumption. Within the cavity each effect is localized to its corresponding component: almost all of the dispersion happens within the CFBG \cite{agrawal2002}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, perhaps a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be functionally composed together to give an iterative map for the effect of one circuit around the cavity. This transforms the differential equation into an algebraic equation.
+\subsection{Discrete Component Models}
+While the derivation of \eqref{eq:meml} is sound mathematically, it is not representative of what happens within the laser cavity. The issue with \eqref{eq:meml} is that it has been assumed each process affects the pulse continuously within the cavity; for example, the pulse is amplified regardless of if it is in the Erbium-doped fibre. As highlighted by Figure \ref{fig:cavity}, this is a rather poor assumption. Within the cavity each effect is localized to its corresponding component: almost all of the dispersion happens within the CFBG \cite{agrawal2002}, the pulse is only amplified within the Erbium-doped fibre, etc. Thus, a better model is one where \eqref{eq:meml} is broken down into the individual components giving the effect of each `block' of the cavity. Each of the blocks can then be functionally composed together to give an iterative map for the effect of one circuit around the cavity. This transforms the differential equation into an algebraic equation.
+%\begin{figure}[tbp]
+%	\centering
+%	\input{Block}
+%	\caption{Simplification of Figure \ref{fig:cavity}. Each component of the laser cavity has an associated functional operator. As a pulse transits around the cavity, the output of one functional operator becomes the input of the next.}
+%	\label{fig:block}
+%\end{figure}
 
-Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, siegman}. Kuizenga and Siegman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passively mode-locked lasers. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In these models the effect of each block is described by a transfer function.
+Such a method was first proposed in 1955 by Cutler \cite{cutler} while analyzing a microwave regenerative pulse generator. This method was adapted for mode-locked lasers in 1969 by Siegman and Kuizenga \cite{kuizenga1970a, siegman}. Kuizenga and Siegman also had success experimentally validating their model \cite{kuizenga1970b, kuizenga1970}. The effects of the nonlinearity would not be considered until Martinez, Fork, and Gordon \cite{martinez1984, martinez1985} tried modelling passively mode-locked lasers. This issue has recently been readdressed by Burgoyne \cite{burgoyne2014} in the literature for tuneable lasers. In these models the effect of each component is described by a transfer function.
 
-Despite the development of these block style models, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. In the framework of tuneable lasers, each component plays a crucial role and the tuneable laser will not function correctly without the inclusion of all of the components. Another key drawback is that the functional operations of some of the components used in their models are phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with the underlying physics. Finally, none of these previous models have been able to exhibit a phenomena called \emph{wave-breaking} in which the self-phase modulation of the pulse becomes too strong, distorting and damaging the wave until it ultimately becomes unstable and unsustainable.
+These discrete component models differ from the often used split-step Fourier method (see \cite{agrawal2013, taha1984}). The split-step Fourier method is a numerical technique used for solving nonlinear partial differential equations, such as \eqref{eq:smallnlse}. The method considers the linear and nonlinear terms separately and has a half integration step for both parts---in a manner similar to the leap-frog algorithm\footnote{Also known as velocity Verlet in molecular dynamics, the St\"{o}rmer method in astronomy, and further names in other areas \cite{hairer2006}.}. Therefore, in the case of the NLSE, the dispersion and nonlinearity are still treated as continuous processes. However, in discrete component models the entire effect of each component is computed at once and the output of one component becomes the input for the following component, instead of alternating between the components in small integration steps. In this way, discrete component models are able to account for the geometry of a laser cavity, and indeed altering the permutation of the components gives rise to different dynamics.
+
+Despite the development of discrete component models, several short-comings exist. The clearest is that none of these models have contained every block---either the nonlinearity or the modulation have been omitted. In the framework of tuneable lasers, each component plays a crucial role and the tuneable laser will not function correctly without the inclusion of all the components. Another key drawback is that the functional operations of some of the components used in their models are phenomenological. While these functions are chosen based on the observed output, they are not necessarily consistent with the underlying physics. Finally, none of these previous models have been able to exhibit a phenomenon called \emph{modulation instability} in which the self-phase modulation of the pulse becomes too strong, distorting and damaging the wave until it ultimately becomes unstable and unsustainable.
 
 \section{A New Model}
 \label{sec:newmodel}
-Using the ideas presented in the previous section of the prior functional models \cite{burgoyne2014, cutler, kuizenga1970a, kuizenga1970b, kuizenga1970, martinez1984, martinez1985, siegman} we shall derive a new model from \eqref{eq:nlse}---with the exception of the modulation in which we consider the exact functional form to be determined by the laser operator.
+Using the ideas presented in the previous section of the prior functional models \cite{burgoyne2014, cutler, kuizenga1970a, kuizenga1970b, kuizenga1970, martinez1984, martinez1985, siegman} we shall derive a new model from \eqref{eq:nlse}---with the exception of modulation in which we consider the exact functional form to be determined by the laser operator.
 
 \subsection{Components}
-We shall determine the effect each component has on the pulse by solving \eqref{eq:nlse} while only considering the dominant term within each section of the cavity.
+We shall determine the effect each component has on the pulse by solving \eqref{eq:nlse} while only considering the dominant term within each section of the cavity, and neglecting the others.
 
 \subsubsection{Gain}
 Within the Er-doped gain fibre, the gain term is dominant, and equation \eqref{eq:nlse} reduces to
@@ -177,7 +181,7 @@ Expression \eqref{eq:nlse} leads to exponential decay due to the scattering and 
 \begin{align}
 	L(A) &= (1 - R) \textrm{e}^{- \alpha L_T}A,
 \end{align}
-where $R$ is the reflectivity of the output coupler, and $L_T$ is the total length of the laser circuit as the effect of the losses\footnote{Depending on the layout of the laser cavity the loss may take the form $L(A) = R \textrm{e}^{- \alpha L_T}A$ instead.}.
+where $R$ is the reflectivity of the output coupler, and $L_T$ is the total length of the laser circuit, as the effect of the losses\footnote{Depending on the layout of the laser cavity the loss may take the form $L(A) = R \textrm{e}^{- \alpha L_T}A$ instead.}.
 
 \subsubsection{Dispersion}
 Considering only the dispersive terms of \eqref{eq:nlse}, one obtains
@@ -189,7 +193,7 @@ The effect of dispersion is then given by the map
 \begin{align}
 D(A) &= \FTi{\textrm{e}^{i \omega^2 L_D\beta_2/2} \FT{A}},
 \end{align}
-where $L_D$ is the length of the dispersive medium, and $\mathcal{F}$ denotes the Fourier transform.
+where $L_D$ is the characteristic length of the dispersive medium, and $\mathcal{F}$ denotes the Fourier transform.
 
 \subsubsection{Modulation}
 In this model, the modulation is considered to be applied externally in which ever way the operator sees fit. For simplicity the representation is taken as the Gaussian
@@ -247,14 +251,14 @@ which characterize the behaviour of the laser. Notice that the modulation is onl
 
 \subsection{Combining the Effects of Each Block of the Model}
 \label{sec:effects}
-In this model the pulse is iteratively passed through each process, the order of which must now be considered. We are most interested in the output of the laser cavity, and so we shall start with the loss component. Next the pulse is passed though the CFBG, as well as the modulator. Finally, the pulse travels through the gain fibre to be amplified, and then we consider the effect of the nonlinearity since this is the region where the power is maximal. Note that in general the functional operators of the components do not commute, and therefore the order of the components is indeed important---in contrast to the previous models. This is especially the case of dispersion as realized through the Fourier transform. Functionally this can be denoted as
+In this model the pulse is iteratively passed through each process, the order of which must now be considered. We are most interested in the output of the laser cavity, and so we shall start with the loss component. Next the pulse is passed though the CFBG, as well as the modulator. Finally, the pulse travels through the gain fibre to be amplified, and then we consider the effect of the nonlinearity since this is the region where the power is maximal. Note that in general the functional operators of the components do not commute, and therefore the order of the components is indeed important---in contrast to previous models. This is especially the case of dispersion as realized through the Fourier transform. Functionally this can be denoted as
 \begin{align}
 	\mathcal{L}(A) = F(G(M(D(L(A))))),
 \end{align}
 where $\mathcal{L}$ denotes one loop of the laser. The pulse after one complete circuit of the laser cavity is then passed back in to restart the process. A steady solution to this model is one in which the envelope and chirp are unchanged after traversing every component in the cavity---we are uninterested in the phase. That is, such that $\mathcal{L}(A) = A \textrm{e}^{i \phi}$---for some $\phi \in \mathbb{R}$.
 
 \section{Conclusion}
-Within this paper we developed a new nonlinear model for tuneable lasers. In order to better represent the underlying physics within the laser cavity the nonlinear Schr\"{o}dinger equation was reduced to simpler differential equations for each component of the laser. This led to a functional map that defines the effect of each component on a particular input pulse. These processes were then composed together to give an iterative mapping of the whole laser cavity. In a future publication we shall show the results obtained by this iterative mapping as well as discuss the dynamics exhibited by this model---including wave-breaking---to predict the conditions under which the pulse is stable and sustainable.
+Within this paper we developed a nonlinear model for tuneable lasers. In order to better represent the underlying physics within the laser cavity the nonlinear Schr\"{o}dinger equation was reduced to simpler differential equations for each component of the laser. This led to a functional map that defines the effect of each component on a particular input pulse. These processes were then composed together to give an iterative mapping of the whole laser cavity. In a future publication we shall show the results obtained by this iterative mapping as well as discuss the dynamics exhibited by this model---including modulation instability---to predict the conditions under which the pulse is stable and sustainable.
 
 \bibliography{Ref}
 
