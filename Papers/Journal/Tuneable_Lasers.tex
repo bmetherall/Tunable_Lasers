@@ -39,7 +39,7 @@
 
 \bibliographystyle{ieeetr}
 
-\title{}
+\title{Predicting stability of a tuneable ring laser with an iterative model}
 \author{B. Metherall \and C. S. Bohun}
 
 \begin{document}
@@ -48,7 +48,7 @@
 	\begin{@twocolumnfalse}
 		\maketitle
 		\begin{abstract}
-
+			We propose a nonlinear iterative map for tuneable ring lasers. Using the generalized nonlinear Schr\"odinger equation, expressions for the transformations undergone by the laser pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then iteratively composed to give the overall effect of one round trip of the cavity. We first examine the linear version of the model which we solve analytically. Then the full nonlinear model is investigated numerically. The nonlinear model is able to exhibit wave breaking as well as modulation instability. We highlight the rich landscape and sharp divide for a particular plane of the parameter space.
 		\end{abstract}
 	\end{@twocolumnfalse}
 ]
@@ -60,6 +60,13 @@ Tuneable lasers have the ability to vary the frequency of its output by up to ab
 The nonlinearity causes several effects to arise within the laser cavity due to the interplay of dispersion, modulation, and the nonlinearity \cite{bohun2015, coen1997, lapre2019, shao2019, woodward2018}. The two effects of most interest for this paper are optical wave breaking, and modulation instability. Wave breaking causes the leading edge of a pulse to be red shifted, and the trailing edge blue shifted (in the anomalous dispersion regime, the effect is reversed) to the point that a shock is developed \cite{anderson1992, rothenberg1989a, rothenberg1989b, tomlinson1984, tomlinson1985}. The shift in frequencies cause the pulse to become rectangular in the frequency domain with a linear chirp over most of the pulse. In optics, wave breaking manifests from self-phase modulation (SPM) which is a direct effect of the nonlinearity causing the pulse to interfere with itself. This interference generates new frequencies which induces the rectangular profile \cite{agrawal2013, mollenauer1980, woodward2018}. Outside of optics, wave breaking occurs in other areas with nonlinear waves such as plasmas, heat propagation, transmission lines, and fluid dynamics \cite{rothenberg1989b}. Modulation instability is another effect that will be of interest that typically arises in the anomalous dispersion regime. However, in the presence of multiple pulses modulation instability can emerge in the normal dispersion regime as well through cross-phase modulation (XPM) and four-wave mixing (FWM) \cite{agrawal1987, agrawal1989, agrawal2013, haelterman1992}. Modulation instability causes a wave to break into short pulses, and can cause a laser to lose coherence \cite{agrawal1987, coen1997, haelterman1992}. Within a ring laser cavity wave breaking and modulation instability can become parasitic leading to an unstable and unsustainable pulse. This gives rise to the need of understanding the rich landscape of the parameter space, and determining design principles to guarantee the ring laser is stable and sustainable \cite{bohun2015, burgoyneemail, finot2008, lapre2019, woodward2018}.
 
 In Section \ref{sec:modelling}, we briefly review previous mathematical models for the evolution of laser pulses, then we derive our own model in Section \ref{sec:model}. We then examine the results of our model in Section \ref{sec:results}---first solving the model analytically assuming the absence of the nonlinearity, then numerically solving the full nonlinear model. Finally, the concluding thoughts and possible directions of future work are given in Section \ref{sec:conclusion}.
+
+\begin{figure}[tbp]
+	\centering
+	\input{Cavity}
+	\caption{Typical cavity of a fibre ring tuneable laser \cite{burgoyne2014, chung2017, lapre2019, shao2019, tang2014}. The laser pulses travel clockwise around each loop.}
+	\label{fig:cavity}
+\end{figure}
 
 \section{Modelling Efforts}
 \label{sec:modelling}
@@ -74,13 +81,6 @@ Here $A = A(T, z) : \mathbb{R}^2 \mapsto \mathbb{C}$ is the complex pulse amplit
 	\label{eq:nlse}
 \end{align}
 where $g(A)$ is an amplifying term due to the gain, and $\alpha \in \mathbb{R}^+$ is the loss due to scattering and absorption.
-
-\begin{figure}[tbp]
-	\centering
-	\input{Cavity}
-	\caption{Typical cavity of a fibre ring tuneable laser \cite{burgoyne2014, chung2017, lapre2019, shao2019, tang2014}. The laser pulses travel clockwise around each loop.}
-	\label{fig:cavity}
-\end{figure}
 
 The GNLSE has many applications in nonlinear optics and fibre optic communications, however, in laser physics typically a modulation term is also added to ensure mode-locking, this yields the master equation of mode-locking \cite{haus1984, haus1975, haus1986, haus1992, haus2000, tamura1996, usechak2005},
 \begin{align}
