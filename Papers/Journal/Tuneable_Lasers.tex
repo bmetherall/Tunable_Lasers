@@ -1,17 +1,20 @@
-\documentclass[10pt,twocolumn,a4paper]{article}
+\documentclass[9pt,twocolumn,twoside]{osajnl}
+%% Please use 11pt if submitting to AOP
+% \documentclass[11pt,twocolumn,twoside]{osajnl}
+
+\journal{josab} % Choose journal (ao, aop, josaa, josab, ol, optica, pr)
+
+% See template introduction for guidance on setting shortarticle option
+\setboolean{shortarticle}{false}
+% true = letter / tutorial
+% false = research / review article
+% (depending on journal).
 
 \usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage{geometry}
 \usepackage{xcolor,graphicx}
-%\usepackage[subfolder,cleanup]{gnuplottex}
-%\usepackage{amsthm}
-%\usepackage{enumitem}
-%\usepackage{wrapfig}
-\usepackage{subcaption}
-%\usepackage{hyperref}
 \usepackage{tikz}
-\usepackage{cite}
+%\usepackage{cite}
 
 \usetikzlibrary{patterns,decorations.pathreplacing}
 \usetikzlibrary{arrows.meta}
@@ -30,28 +33,36 @@
 \newcommand{\FTi}[1]{\mathcal{F}^{-1}\left\{ #1 \right\}}
 \newcommand{\Her}[2]{\widetilde{H}_{#1} \left( #2 \right)}
 \DeclareMathOperator{\sech}{sech}
-%\newcommand{\eps}{\varepsilon}
-%\newcommand{\rect}[1]{\textrm{rect}\left( #1 \right)}
 
 \providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}}
 
-\newgeometry{margin=1.25cm}
-
-\bibliographystyle{ieeetr}
-
 \title{Predicting stability of a tuneable ring laser with an iterative model}
-\author{B. Metherall \and C. S. Bohun}
+
+\author[1]{B. Metherall}
+\author[2,*]{C. S. Bohun}
+
+\affil[1]{Mathematical Institute, University of Oxford, Woodstock Rd, Oxford, UK}
+\affil[2]{University of Ontario Institute of Technology, 2000 Simcoe St, Oshawa, ON, Canada}
+
+\affil[*]{Corresponding author: sean.bohun@uoit.ca}
+
+%% To be edited by editor
+% \dates{Compiled \today}
+
+%\ociscodes{(140.3490) Lasers, distributed feedback; (060.2420) Fibers, polarization-maintaining;(060.3735) Fiber Bragg gratings.}
+
+%% To be edited by editor
+% \doi{\url{http://dx.doi.org/10.1364/XX.XX.XXXXXX}}
+
+\begin{abstract}
+	We propose a nonlinear iterative map for tuneable ring lasers. Using the generalized nonlinear Schr\"odinger equation, expressions for the transformations undergone by the laser pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then iteratively composed to give the overall effect of one round trip of the cavity. We first examine the linear version of the model which we solve analytically. Then the full nonlinear model is investigated numerically. The nonlinear model is able to exhibit wave breaking as well as modulation instability. We highlight the rich landscape and sharp divide for a particular plane of the parameter space.
+\end{abstract}
+
+\setboolean{displaycopyright}{true}
 
 \begin{document}
 
-\twocolumn[
-	\begin{@twocolumnfalse}
-		\maketitle
-		\begin{abstract}
-			We propose a nonlinear iterative map for tuneable ring lasers. Using the generalized nonlinear Schr\"odinger equation, expressions for the transformations undergone by the laser pulse are derived for each of the five components (gain, loss, dispersion, modulation, and nonlinearity) within the laser cavity. These transformations are then iteratively composed to give the overall effect of one round trip of the cavity. We first examine the linear version of the model which we solve analytically. Then the full nonlinear model is investigated numerically. The nonlinear model is able to exhibit wave breaking as well as modulation instability. We highlight the rich landscape and sharp divide for a particular plane of the parameter space.
-		\end{abstract}
-	\end{@twocolumnfalse}
-]
+\maketitle
 
 \section{Introduction}
 \label{sec:intro}
@@ -157,28 +168,28 @@ with the four dimensionless parameters,
 which characterize the behaviour of the laser. Nominal values for the parameters, \eqref{eq:ndparam}, can be found in \cite{agrawal2002, agrawal2013, bohun2015, burgoyne2014, burgoyneemail, finot2008, li1998, litchinitser1997, peng2018, shtyrina2017, tamura1993, tamura1996, tomlinson1984, usechak2005, yamashita2009, yarutkina2013}. Notice that the modulation is only characterized by $T_M$, and each other process has its own associated independent non-dimensional parameter.
 
 % Table of parameter values
-% \begin{table*}[tbp]
-% 	\centering
-% 	\begin{tabular}{lcll}
-% 		\hline\noalign{\smallskip}
-% 		Parameter & Symbol & Value & Sources \\
-% 		\hline\noalign{\smallskip}
-% 		Absorption of Fibre & $\alpha$ & $10^{-4}$--$0.3\text{ m}^{-1}$  & \cite{burgoyneemail, shtyrina, tomlinson, usechak, yarutkina} \\
-% 		Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ & \cite{agrawal2002, agrawal2013, burgoyne2014, litchinitser, peng, yarutkina} \\
-% 		Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ & \cite{agrawal2013, finot, usechak, yarutkina} \\
-% 		Grating Dispersion & $\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ & \cite{agrawal2002, agrawal2013, burgoyne2014, li} \\
-% 		Length of Cavity & $L_T$ & $10$--$100 \text{ m}$ & \cite{burgoyneemail, peng, tamura1996} \\
-% 		Length of Fibre & $L_f$ & $0.15$--$1 \text{ m}$ & \cite{burgoyneemail} \\
-% 		Length of Gain Fibre & $L_g$ & $2$--$3 \text{ m}$ & \cite{burgoyne2014, peng, shtyrina, tamura1993, yarutkina} \\
-% 		Modulation Time & $T_M$ & $15$--$150 \text{ ps}$ & \cite{bohun, burgoyneemail, burgoyne2014} \\
-% 		Reflectivity of Optical Coupler & $R$ & $0.1$--$0.9$ & \cite{burgoyneemail, li, peng,  tamura1993, tamura1996, yamashita} \\
-% 		Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ & \cite{burgoyneemail, usechak, yarutkina} \\
-% 		Small Signal Gain & $g_0$ & $1$--$10 \text{ m}^{-1}$ & \cite{burgoyneemail, yarutkina} \\
-% 		\noalign{\smallskip}\hline
-% 	\end{tabular}
-% 	\caption{Range of variation of various parameters.}
-% 	\label{tab:values}
-% \end{table*}
+ \begin{table*}[tbp]
+ 	\centering
+ 	\begin{tabular}{lcll}
+ 		\hline\noalign{\smallskip}
+ 		Parameter & Symbol & Value & Sources \\
+ 		\hline\noalign{\smallskip}
+ 		Absorption of Fibre & $\alpha$ & $10^{-4}$--$0.3\text{ m}^{-1}$  & \cite{burgoyneemail, shtyrina2017, tomlinson1984, usechak2005, yarutkina2013} \\
+ 		Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ & \cite{agrawal2002, agrawal2013, burgoyne2014, litchinitser1997, peng2018, yarutkina2013} \\
+ 		Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ & \cite{agrawal2013, finot2008, usechak2005, yarutkina2013} \\
+ 		Grating Dispersion & $\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ & \cite{agrawal2002, agrawal2013, burgoyne2014, li1998} \\
+ 		Length of Cavity & $L_T$ & $10$--$100 \text{ m}$ & \cite{burgoyneemail, peng2018, tamura1996} \\
+ 		Length of Fibre & $L_f$ & $0.15$--$1 \text{ m}$ & \cite{burgoyneemail} \\
+ 		Length of Gain Fibre & $L_g$ & $2$--$3 \text{ m}$ & \cite{burgoyne2014, peng2018, shtyrina2017, tamura1993,yarutkina2013} \\
+ 		Modulation Time & $T_M$ & $15$--$150 \text{ ps}$ & \cite{bohun2015, burgoyneemail, burgoyne2014} \\
+ 		Reflectivity of Optical Coupler & $R$ & $0.1$--$0.9$ & \cite{burgoyneemail, li1998, peng2018,  tamura1993, tamura1996, yamashita2009} \\
+ 		Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ & \cite{burgoyneemail, usechak2005, yarutkina2013} \\
+ 		Small Signal Gain & $g_0$ & $1$--$10 \text{ m}^{-1}$ & \cite{burgoyneemail, yarutkina2013} \\
+ 		\noalign{\smallskip}\hline
+ 	\end{tabular}
+ 	\caption{Range of variation of various parameters.}
+ 	\label{tab:values}
+ \end{table*}
 
 \subsection{Combining the Effects}
 \label{sec:effects}
