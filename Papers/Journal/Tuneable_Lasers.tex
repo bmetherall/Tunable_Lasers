@@ -10,7 +10,10 @@
 % false = research / review article
 % (depending on journal).
 
+\usepackage{subcaption}
 \usepackage{tikz}
+
+\renewcommand{\topfraction}{.9}
 
 \usetikzlibrary{patterns,decorations.pathreplacing}
 \usetikzlibrary{arrows.meta}
@@ -196,7 +199,7 @@ which characterize the behaviour of the laser. Nominal values for the parameters
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Figures/Evo}
-	\caption{Evolution of the envelope during one round trip of the cavity at equilibrium. The pulse decays due to the output coupler, disperses due to the CFBG, is modulated by the modulator, and finally, is amplified by the gain fibre (the envelope is unaltered by the nonlinearity). Note that the $x$ axis is not to scale.}
+	\caption{Evolution of the envelope during one round trip of the cavity at equilibrium. The pulse decays due to the output coupler, disperses due to the CFBG, is modulated by the modulator, and finally, is amplified by the gain fibre (the envelope is unaltered by the nonlinearity). Note, the $z$ axis is not to scale.}
 	\label{fig:cavityevo}
 \end{figure}
 
@@ -278,8 +281,20 @@ where $\Gamma$ is a normalizing factor chosen so the pulse has the initial energ
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics{Figures/ChirpFT}
-	\caption{Chirp and Fourier transform at equilibrium (500 round trips) seeded by \eqref{eq:nlA0} ($a = 8 \times 10^3$, $h = 0.04$, $b = 1.0$, $s = 0.2$, and $E_0 = 0.1$).}
+	\begin{subfigure}{\columnwidth}
+		\centering
+		\includegraphics{Figures/Chirp}
+		\caption{Chirp}
+		\label{fig:}
+	\end{subfigure} \\
+	\vspace{3mm}
+	\begin{subfigure}{\columnwidth}
+		\centering
+		\includegraphics{Figures/FT}
+		\caption{Chirp}
+		\label{fig:}
+	\end{subfigure}
+	\caption{Chirp and Fourier transform at equilibrium (500 round trips) initiated by \eqref{eq:nlA0} ($a = 8 \times 10^3$, $h = 0.04$, $b = 1.0$, $s = 0.2$, and $E_0 = 0.1$).}
 	\label{fig:chirpft}
 \end{figure}
 
