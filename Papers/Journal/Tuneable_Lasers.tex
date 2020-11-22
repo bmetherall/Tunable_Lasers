@@ -76,7 +76,7 @@ Several effects arise within the cavity due to the interplay of dispersion, modu
 	\label{fig:cavity}
 \end{figure}
 
-In Section \ref{sec:modelling}, we briefly review previous mathematical models for the evolution of laser pulses, then we derive our own model in Section \ref{sec:model}. We then examine the results of our model in Section \ref{sec:results}---first solving the model analytically assuming the absence of the nonlinearity, then numerically solving the full nonlinear model. Finally, the concluding thoughts and possible directions of future work are given in Section \ref{sec:conclusion}.
+In this paper, we will build an iterative map model for the evolution of a laser pulse as it travels though the cavity. In Section \ref{sec:modelling}, we will briefly review previous mathematical models for ring lasers. Then, we will present our own iterative map model in Section \ref{sec:model}, as well as non-dimensionalize the model and introduce four dimensionless parameters that govern the dynamics of the system. We will then examine the results of our model in Section \ref{sec:results}---first solving the model analytically, by assuming the absence of the nonlinearity, then numerically solving the full nonlinear model. We will identify a sharp boundary in the parameter space separating the region of stability, and the region where modulation instability degrades the pulse. Finally, the concluding thoughts and possible ideas for future work are given in Section \ref{sec:conclusion}.
 
 \section{Modelling Efforts}
 \label{sec:modelling}
@@ -144,28 +144,27 @@ where $R$ is the reflectivity of the output coupler (depending on the layout of 
 where $T_M$ is the characteristic width of the modulation. This assumption is not particularly restrictive. Calcaterra and Boldt have shown that Gaussians can form a basis for $L^2(\mathbb{R})$ \cite{calcaterra2008a}. Therefore, we can approximate any modulation function in $L^2(\mathbb{R})$ by a sum of \eqref{eq:modform}.
 
 \subsection{Non-Dimensionalization}
-The structure of each process of the laser can be better understood by re-scaling the time, energy, and amplitude by the convenient scalings:
+Non-dimensionalization is a technique used in mathematical modelling to better understand the relative importance of different processes within a system. In essence, we scale all variables by typical values of the system based on the geometry and boundary conditions (see, for example, \cite{howison2005}). Doing so `factors' the dimensional units out of the problem, leaving only dimensionless equations with dimensionless parameters. The magnitude of the dimensionless parameters characterizes the dominant dynamics of the system---much like how fluid flow can be described with only the Reynolds number. The structure of each process in the laser can be better understood by re-scaling the time, energy, and amplitude by the convenient scalings:
 \begin{align}
 	T &= T_M \widetilde{T},& E &= \Es \widetilde{E},& A &= \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}.
 \end{align}
-Revisiting the process maps, \eqref{eq:gainform}--\eqref{eq:modform}, shows each process has a characteristic non-dimensional parameter. The new mappings---after dropping the tildes---are
+
+Revisiting the process maps \eqref{eq:gainform}--\eqref{eq:modform} yields the new, non-dimensional, mappings---after dropping the tildes---
+\begin{align}
+	G(A) &= \left(E^{-1} W \left( a E \textrm{e}^{E}\right) \right)^{1/2} A, & F(A) &= A \exp( i b |A|^2), \nonumber \\
+	D(A) &= \FTi{\exp( i s^2 \omega^2 ) \FT{A}}, & L(A) &= h A, \label{eq:effects} \\
+	M(A) &= \exp( -T^2 / 2 ) A, \nonumber
+\end{align}
+with the four dimensionless parameters, as defined by the values in Table \ref{tab:values},
 \begin{equation}
 	\begin{aligned}
-		G(A) &= \left(E^{-1} W \left( a E \textrm{e}^{E}\right) \right)^{1/2} A, & F(A) &= A \exp( i b |A|^2), \\
-		D(A) &= \FTi{\exp( i s^2 \omega^2 ) \FT{A}}, & L(A) &= h A, \\
-		M(A) &= \exp( -T^2 / 2 ) A,
-		\label{eq:effects}
-	\end{aligned}
-\end{equation}
-with the four dimensionless parameters,
-\begin{equation}
-	\begin{aligned}
-		a &= \exp( g_0 L_g ) \sim 8 \times 10^3,& \qquad h &= (1 - R) \textrm{e}^{-\alpha L} \sim 0.04, \\
-		b &= \gamma L_f \frac{\Es}{T_M} \sim 1,& \qquad s &= \sqrt{\frac{\beta_2 L_D}{2 T_M^2}} \sim 0.2,
+		a &= \exp( g_0 L_g ) \sim 8 \times 10^3, & 
+		h &= (1 - R) \exp( - \alpha L_T) \sim 0.04, \\
+		b &= \gamma L_f \frac{\Es}{T_M} \sim 1, & s &= \left( \frac{\beta_2 L_D}{2 T_M^2} \right)^{1/2} \sim 0.2.
 		\label{eq:ndparam}
 	\end{aligned}
 \end{equation}
-which characterize the behaviour of the laser. Nominal values for the parameters, \eqref{eq:ndparam}, can be found in \cite{agrawal2002, agrawal2013, bohun2015, burgoyne2014, burgoyneemail, finot2008, li1998, litchinitser1997, peng2018, shtyrina2017, tamura1993, tamura1996, tomlinson1984, usechak2005, yamashita2009, yarutkina2013}. Notice that the modulation is only characterized by $T_M$, and each other process has its own associated independent non-dimensional parameter.
+Here, $a$ is a measure of the strength of the gain fibre, $h$ is the loss due to absorption and the output coupler, $b$ is the ratio of the frequency shift due to the Kerr nonlinearity to the width of the pulse, and $s$ is the ratio of the effectiveness of the CFBG to the width of the pulse. Furthermore, notice that in this non-dimensional form, the modulation has no associated parameter, and each of the other processes in \eqref{eq:ndparam} have their own independent, non-dimensional parameter.
 
 % Table of parameter values
  \begin{table*}[tbp]
@@ -215,18 +214,6 @@ We split the results into two subsections. In the following subsection we invest
 \subsection{Linear Solution}
 By neglecting the effect of the nonlinearity, that is, $b = 0$, a solution can be found analytically. We proceed by assuming the solution will take the form of a chirped Gaussian. There are a few reasons for this; the solution to the models presented in \cite{cutler1955, siegman1969, kuizenga1970a, martinez1984, martinez1985} were Gaussian, the equilibrium shape will be highly correlated to the modulation function, and since a Gaussian is a fixed point of the Fourier transform. Furthermore, this form is chosen because it resembles the envelope and linear chirp expected from the literature \cite{burgoyne2014, haus1975, haus1996, haus2000, usechak2005}.
 
-First, consider the pulse
-\begin{align}
-	A = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) \textrm{e}^{i \phi_0},
-	\label{eq:A0}
-\end{align}
-where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the initial phase. This initial pulse is depicted in Fig. \ref{fig:samplegauss}. To compute $\mathcal{L}(A)$, given the initial pulse \eqref{eq:A0}, we iteratively compute the effect of each map in \eqref{eq:effects}. Now, by equating $\mathcal{L}(A)$ and $A \textrm{e}^{i \phi}$ we obtain a system of equations. In particular,
-\begin{gather}
-	\sigma^8 + 4 s^4 \sigma^6 - 20 s^4 \sigma^4 + 32 s^4 \sigma^2 - 16 s^4 = 0, \label{eq:var} \\
-	C = \frac{\sigma^4 \pm \sqrt{\sigma^8 - 16 s^4 \left( 1 - \sigma^2 \right)^2}}{4 s^2 \left( 1 - \sigma^2 \right)}.
-	\label{eq:chirp}
-\end{gather}
-
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Figures/Sample_Gauss}
@@ -234,7 +221,32 @@ where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $
 	\label{fig:samplegauss}
 \end{figure}
 
-As \eqref{eq:var} is a quartic in $\sigma^2$ it has an analytic solution, namely,
+Consider the pulse
+\begin{align}
+	A = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) \textrm{e}^{i \phi_0},
+	\label{eq:A0}
+\end{align}
+where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the phase (Fig. \ref{fig:samplegauss}). By computing $\mathcal{L}(A)$ using \eqref{eq:order}, and equating to $A \textrm{e}^{i \phi}$, we obtain the conditions
+\begin{align}
+	\frac{\sigma^4}{1 - \sigma^2} &= (\sigma^2 + 2 C s^2)^2 + 4 s^4, \label{eq:sigrelation} \\
+	\frac{C}{1 - \sigma^2} &= C + 2 \frac{s^2}{\sigma^2} (1 + C^2), \label{eq:chirprelation} \\
+	1 &= \frac{W(a E \textrm{e}^E)}{E} h^2 (1 - \sigma^2)^{1/2} \label{eq:energyrelation}
+\end{align}
+for \eqref{eq:A0} to be in equilibrium. Manipulating \eqref{eq:sigrelation} and \eqref{eq:chirprelation} we acquire the simpler relations
+\begin{gather}
+	\sigma^8 + 4 s^4 \sigma^6 - 20 s^4 \sigma^4 + 32 s^4 \sigma^2 - 16 s^4 = 0, \label{eq:var} \\
+	C = \frac{\sigma^4 \pm \left( \sigma^8 - 16 s^4 \left( 1 - \sigma^2 \right)^2 \right)^{1/2}}{4 s^2 \left( 1 - \sigma^2 \right)}.
+	\label{eq:chirp}
+\end{gather}
+The equilibrium energy can be found from \eqref{eq:energyrelation}, using the properties of the Lambert $W$ function, giving
+\begin{align}
+	E = \frac{h^2 \left( 1 - \sigma^2 \right)^{1/2}}{1 - h^2 \left( 1 - \sigma^2 \right)^{1/2}} \log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right).
+\end{align}
+
+
+
+
+\eqref{eq:var} has an analytic solution, as it is a quartic in $\sigma^2$. Namely,
 \begin{equation}
 	\begin{split}
 		\sigma^2 = \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4} \left( 1 + s^4 \right) \right)^{1/2} & \\
@@ -256,9 +268,7 @@ which can readily be used to find the chirp, $C$. However, by asymptotically exp
 	\end{cases}
 \end{align}
 The equilibrium energy and peak power can be found by conservation of energy to give
-\begin{align}
-	E = \frac{h^2 \left( 1 - \sigma^2 \right)^{1/2}}{1 - h^2 \left( 1 - \sigma^2 \right)^{1/2}} \log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right),
-\end{align}
+
 and
 \begin{align}
 	P = \frac{W(a E \textrm{e}^E)}{\sqrt{\pi} \sigma},
