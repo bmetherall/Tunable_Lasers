@@ -12,6 +12,7 @@
 
 \usepackage{subcaption}
 \usepackage{tikz}
+\usepackage{mathtools}
 
 \usetikzlibrary{patterns,decorations.pathreplacing}
 \usetikzlibrary{arrows.meta}
@@ -120,14 +121,14 @@ where $g_0$ is a small signal gain, $E$ is the energy of the pulse, and $\Es$ is
 \begin{align}
 	\pdiff{A}{z} &= \frac{g_0 A}{2 \left( 1 + E / \Es \right)}.
 \end{align}
-By assuming the incoming energy is $E$ and the energy after travelling through the gain fibre of length $L_g$ is $E_{\text{out}}$, we find the energy after amplification is
+By assuming the energy entering the gain fibre is $E_g$ and the energy after travelling through the gain fibre of length $L_g$ is $E_{\text{out}}$, we find the energy after amplification is
 \begin{align}
 	\label{eq:engain}
-	E_{\text{out}} &= \Es W \left( \frac{E}{\Es} \exp( E / \Es ) \exp( g_0 L_g ) \right),
+	E_{\text{out}} &= \Es W \left( \frac{E_g}{\Es} \exp( E_g / \Es ) \exp( g_0 L_g ) \right),
 \end{align}
 where $W$ is the Lambert $W$ function. Rewriting \eqref{eq:engain} in terms of the pulse gives
 \begin{align}
-	G(A) &= \left( \frac{\Es}{E} W \left( \frac{E}{\Es} \exp( E / \Es ) \exp( g_0 L_g ) \right) \right)^{1/2} A
+	G(A) &= \left( \frac{\Es}{E_g} W \left( \frac{E_g}{\Es} \exp( E_g / \Es ) \exp( g_0 L_g ) \right) \right)^{1/2} A
 	\label{eq:gainform}
 \end{align}
 for the amplification of the pulse within the Er-doped fibre. Repeating this process for the loss, dispersion, and nonlinearity yields
@@ -141,7 +142,7 @@ where $R$ is the reflectivity of the output coupler (depending on the layout of 
 	M(A) &= \exp( -T^2 / 2 T_M^2 ) A,
 	\label{eq:modform}
 \end{align}
-where $T_M$ is the characteristic width of the modulation. This assumption is not particularly restrictive. Calcaterra and Boldt have shown that Gaussians can form a basis for $L^2(\mathbb{R})$~\cite{calcaterra2008a}. Therefore, we can approximate any modulation function in $L^2(\mathbb{R})$ by a sum of \eqref{eq:modform}.
+where $T_M$ is the characteristic width of the modulation. This assumption is not particularly restrictive. Calcaterra and Boldt~\cite{calcaterra2008a} have shown that a sum of Gaussian functions can approximate any square integrable function. Therefore, our solution extends to any continuous, bounded modulation function.
 
 Saturable Absorber \cite{lapre2019, meng2020}
 
@@ -153,7 +154,7 @@ Non-dimensionalization is a technique used in mathematical modelling to better u
 
 Revisiting the process maps \eqref{eq:gainform}--\eqref{eq:modform} yields the new, non-dimensional, mappings---after dropping the tildes---
 \begin{align}
-	G(A) &= \left(E^{-1} W \left( a E \textrm{e}^{E}\right) \right)^{1/2} A, & F(A) &= A \exp( i b |A|^2), \nonumber \\
+	G(A) &= \left(E_g^{-1} W \left( a E_g \textrm{e}^{E_g}\right) \right)^{1/2} A, & F(A) &= A \exp( i b |A|^2), \nonumber \\
 	D(A) &= \FTi{\exp( i s^2 \omega^2 ) \FT{A}}, & L(A) &= h A, \label{eq:effects} \\
 	M(A) &= \exp( -T^2 / 2 ) A, \nonumber
 \end{align}
@@ -171,23 +172,24 @@ Here, $a$ is a measure of the strength of the gain fibre, $h$ is the loss due to
 % Table of parameter values
 \begin{table*}[tbp]
 	\centering
-	\caption{Range of variation of various parameters.}
+	\caption{Range of parameter values (taken from~\cite{agrawal2013, burgoyne2014, burgoyneemail, tamura1996, usechak2005}).}
  	\label{tab:values}
- 	\begin{tabular}{lcll}
+ 	\begin{tabular}{clll}
 		\hline\noalign{\smallskip}
-		Parameter & Symbol & Value & Sources \\
+		Symbol & Parameter & Value & Units \\
 		\hline\noalign{\smallskip}
-		Absorption of Fibre & $\alpha$ & $10^{-4}$--$0.3\text{ m}^{-1}$  &~\cite{burgoyneemail, shtyrina2017, tomlinson1984, usechak2005} \\
-		Fibre Dispersion & $\beta_2^f$ & $-50$--$50 \text{ ps}^2/ \text{km}$ &~\cite{agrawal2002, agrawal2013, burgoyne2014} \\
-		Fibre Nonlinearity & $\gamma$ & $0.001$--$0.01 \text{ W}^{-1} \text{m}^{-1}$ &~\cite{agrawal2013, finot2008, usechak2005} \\
-		Grating Dispersion & $\beta_2^g L_D$ & $10$--$2000 \text{ ps}^2$ &~\cite{agrawal2002, agrawal2013, burgoyne2014} \\
-		Length of Cavity & $L_T$ & $10$--$100 \text{ m}$ &~\cite{burgoyneemail, tamura1996} \\
-		Length of Fibre & $L_f$ & $0.15$--$1 \text{ m}$ &~\cite{burgoyneemail} \\
-		Length of Gain Fibre & $L_g$ & $2$--$3 \text{ m}$ &~\cite{burgoyne2014, shtyrina2017} \\
-		Modulation Time & $T_M$ & $15$--$150 \text{ ps}$ &~\cite{bohun2015, burgoyneemail, burgoyne2014} \\
-		Reflectivity of Optical Coupler & $R$ & $0.1$--$0.9$ &~\cite{burgoyneemail, tamura1996, yamashita2009} \\
-		Saturation Energy & $\Es$ & $10^3$--$10^4 \text{ pJ}$ &~\cite{burgoyneemail, usechak2005} \\
-		Small Signal Gain & $g_0$ & $1$--$10 \text{ m}^{-1}$ &~\cite{burgoyneemail} \\
+		$\alpha$ & Absorption of fibre & $10^{-4}$--$0.3$ & m$^{-1}$ \\
+		$\beta_2^f$ & Fibre dispersion & $-50$--$50$ & ps$^2$/km \\
+		$\gamma$ & Fibre nonlinearity & $0.001$--$0.01$ & W$^{-1}$ m$^{-1}$ \\
+		$\beta_2^g L_D$ & Grating dispersion & $10$--$2000$ & ps$^2$ \\
+		$L_T$ & Length of cavity & $10$--$100$ & m \\
+		\vspace*{-2mm} $L_f$ & Length of fibre between & $0.15$--$1$ & m \\
+		& gain and output coupler & & \\
+		$L_g$ & Length of gain fibre & $2$--$3$ & m \\
+		$T_M$ & Modulation Time & $15$--$150$ & ps \\
+		$R$ & Reflectivity of optical coupler & $0.1$--$0.9$ & -- \\
+		$\Es$ & Saturation energy & $10^3$--$10^4$ & pJ \\
+		$g_0$ & Small signal gain &  $1$--$10$ & m$^{-1}$ \\
 		\noalign{\smallskip}\hline
 	\end{tabular}
 \end{table*}
@@ -232,7 +234,7 @@ where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $
 \begin{align}
 	\frac{\sigma^4}{1 - \sigma^2} &= (\sigma^2 + 2 C s^2)^2 + 4 s^4, \label{eq:sigrelation} \\
 	\frac{C}{1 - \sigma^2} &= C + 2 \frac{s^2}{\sigma^2} (1 + C^2), \label{eq:chirprelation} \\
-	1 &= \frac{W(a E \textrm{e}^E)}{E} h^2 (1 - \sigma^2)^{1/2} \label{eq:energyrelation}
+	1 &= \frac{W(a E_g \textrm{e}^{E_g})}{E_g} h^2 (1 - \sigma^2)^{1/2} \label{eq:energyrelation}
 \end{align}
 for \eqref{eq:A0} to be in equilibrium. Manipulating \eqref{eq:sigrelation} and \eqref{eq:chirprelation} we are able to eliminate the chirp, and find an expression in terms of $\sigma$ only, that is,
 \begin{align}
@@ -251,7 +253,7 @@ Additionally, we find the chirp to be
 	C = \frac{\sigma^4 \pm \left( \sigma^8 - 16 s^4 \left( 1 - \sigma^2 \right)^2 \right)^{1/2}}{4 s^2 \left( 1 - \sigma^2 \right)},
 	\label{eq:chirp}
 \end{align}
-in terms of $s$ and $\sigma^2$. Moreover, we can obtain the energy of the pulse entering the gain fibre from \eqref{eq:energyrelation}, and thus, the equilibrium energy at the output coupler. Doing so gives
+in terms of $s$ and $\sigma^2$. Moreover, we can obtain the energy of the pulse entering the gain fibre, $E_g$, from \eqref{eq:energyrelation}, and thus, the equilibrium energy at the output coupler. Doing so gives
 \begin{align}
 	E &= \frac{\log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}{1 - h^2 \left( 1 - \sigma^2 \right)^{1/2}}.
 	\label{eq:analenergy}
@@ -266,7 +268,7 @@ The nature of \eqref{eq:var}--\eqref{eq:analpower} makes it difficult to work wi
 \begin{align}
 	\sigma^2 &\sim 2s(1 - s) + \bigO{s^3}, \\
 	C &\sim 1 - s + \frac{1}{2}s^2 + \bigO{s^3}, \\
-	E &\sim \frac{\log (a h^2)}{1 - h^2} - \frac{1}{1 - h^2} \left( 1 + \frac{h^2 \log(a h^2)}{1 - h^2}  \right) s + \bigO{s^2}, \\
+	E &\sim \frac{\log (a h^2)}{1 - h^2} - \frac{1}{1 - h^2} \left( 1 + \frac{h^2 \log(a h^2)}{1 - h^2}  \right) s + \bigO{s^2}, \label{eq:maxenergy} \\
 	P &\sim \frac{\log(ah^2)}{\sqrt{2 \pi}(1 - h^2)} s^{-1/2} + \bigO{s^{1/2}},
 \end{align}
 in the case $s \rightarrow 0$. And,
@@ -328,10 +330,14 @@ In Fig.~\ref{fig:chirpft} we show the chirp and Fourier transform of the pulse \
 
 We now turn our attention to a more quantitative analysis, and characterize the stability of a laser by exploring the parameter space. We focus on the $s$--$b$ plane in particular since $a$ and $h$ effect only the amplitude of the pulse, whereas the interplay of dispersion and nonlinearity give rise to the instabilities. Additionally, as mentioned, a conservative initial energy will effect the dynamics much less than a more intense pulse since the nonlinearity will be negligible while coming to equilibrium. To identify the stability of a pulse we examine the relative change in the pulse's envelope between consecutive round trips of the cavity. We compute this error by
 \begin{align}
-	\Delta = \frac{\| |A_i| - |A_{i-1}| \|_2}{\| A_{i-1} \|_2},
+	\Delta = \frac{\| |\mathcal{L}^n(A_0)| - |\mathcal{L}^{n-1}(A_0)| \|_2}{\| \mathcal{L}^{n-1}(A_0) \|_2},
 	\label{eq:error}
 \end{align}
-where $\| \cdot \|_2$ denotes the $L^2(\mathbb{R})$ norm, and $i$ is chosen to be sufficiently large to guarantee the pulse reaches equilibrium or degrades due to modulation instability---we use $i = 500$ in our experiments. We take the modulus of the pulse since we are only interested in the evolution of the envelope because of the methods used experimentally. We plot the error in Fig.~\ref{fig:error}. It is clear the parameter space is split into two distinct regions, divided by an incredibly sharp and complex boundary. In the upper-left region the error is $\bigO{1}$; here, the nonlinearity is too strong, and the SPM induces modulation instability. In the lower-right region we find the opposite behaviour---the pulse reaches an equilibrium state and is stable. The increase in dispersion, coupled with modulation, allows the laser to balance the nonlinear effects. The error in this region is on the order of machine precision, or slightly higher due to the discretization.
+where
+\begin{align}
+	\| f \|_2^2 \coloneqq \int_{-\infty}^\infty |f|^2 \, \df T,
+\end{align}
+and $n$ is chosen to be sufficiently large to guarantee the pulse reaches equilibrium or degrades due to modulation instability---we use $n = 500$ in our experiments. We take the modulus of the pulse since we are only interested in the evolution of the envelope because of the methods used experimentally. We plot the error in Fig.~\ref{fig:error}. It is clear the parameter space is split into two distinct regions, divided by an incredibly sharp and complex boundary. In the upper-left region the error is $\bigO{1}$; here, the nonlinearity is too strong, and the SPM induces modulation instability. In the lower-right region we find the opposite behaviour---the pulse reaches an equilibrium state and is stable. The increase in dispersion, coupled with modulation, allows the laser to balance the nonlinear effects. The error in this region is on the order of machine precision, or slightly higher due to the discretization.
 
 \begin{figure}[tbp]
 	\centering
@@ -340,12 +346,7 @@ where $\| \cdot \|_2$ denotes the $L^2(\mathbb{R})$ norm, and $i$ is chosen to b
 	\label{fig:error}
 \end{figure}
 
-Also of interest is the energy of the pulse at equilibrium. We compute the energy using \eqref{eq:energy}, or equivalently 
-\begin{align}
-	E &= \| A_i \|_2^2.
-	\label{eq:energy2norm}
-\end{align}
-Recall from \eqref{eq:order}, this energy is immediately before passing through the output coupler, and so the energy of each pulse emitted by the laser is $(1 - h^2) E$, and $h^2 E$ remains in the cavity. We plot the energy, \eqref{eq:energy2norm}, in the $s$--$b$ plane in Fig.~\ref{fig:energy}. Unsurprisingly, we find the same sharp boundary as we saw in Fig.~\ref{fig:error}. In the unstable region (upper-left) the energy is relatively small. Since the pulse is not sustainable in this region it is not able to foster prominent modes, thus, the intensity is low across the entire pulse. In the stable region (lower-right) we find that the energy smoothly decays as both $b$ and $s$ increase, with the contours being hyperbolic-esque. As $s$ increases, more energy is lost due to modulation since the tails of the pulse become larger. Similarly, as $b$ increases, high frequencies generated by SPM are reduced by our choice of modulation function. From this, we find that a more energetic laser requires weaker dispersion, however, the nonlinearity must be correspondingly low, otherwise modulation instability will destroy the pulse.
+Also of interest is the energy of the pulse at equilibrium, which we compute numerically by \eqref{eq:energy}. Recall from \eqref{eq:order}, this energy is immediately before passing through the output coupler, and so the energy of each pulse emitted by the laser is $(1 - h^2) E$, and $h^2 E$ remains in the cavity. We plot the energy in the $s$--$b$ plane in Fig.~\ref{fig:energy}. Unsurprisingly, we find the same sharp boundary as we saw in Fig.~\ref{fig:error}. In the unstable region (upper-left) the energy is relatively small. Since the pulse is not sustainable in this region it is not able to foster prominent modes, thus, the intensity is low across the entire pulse. In the stable region (lower-right) we find that the energy smoothly decays as both $b$ and $s$ increase, with the contours being hyperbolic-esque. As $s$ increases, more energy is lost due to modulation since the tails of the pulse become larger. Similarly, as $b$ increases, high frequencies generated by SPM are reduced by our choice of modulation function. From this, we find that a more energetic laser requires weaker dispersion, however, the nonlinearity must be correspondingly low, otherwise modulation instability will destroy the pulse. Moreover, the maximum energy, which occurs in the limit that both $s$ and $b$ go to zero, is slightly larger than 2.5. With our choice of parameters, \eqref{eq:maxenergy} predicts an energy of 2.55 at the origin, inline with Fig.~\ref{fig:energy}.
 
 \begin{figure}[tbp]
 	\centering
@@ -354,7 +355,7 @@ Recall from \eqref{eq:order}, this energy is immediately before passing through 
 	\label{fig:energy}
 \end{figure}
 
-Finally, we briefly investigate the effect the order of the components has on the dynamics. In Section~\ref{sec:model}\ref{sec:effects} we justified the order of the gain, nonlinearity, and loss, but, just assumed dispersion preceded modulation. Here, we consider the effect of swapping the dispersion and modulation components. The energy landscape (Fig.~\ref{fig:energyswitch}) is as we would expect. In the previous case of having modulation following dispersion, more energy is removed from the pulse tails. Whereas, having modulation first, more of this energy remains in the cavity. This has the effect of making the laser more powerful than in the previous case, which in turn increases the size of the unstable region. Comparing with Fig.~\ref{fig:energy}, the unstable upper-left region spreads farther rightward, and the energy is larger in the stable region---especially farther away from the origin.
+Finally, we briefly investigate the effect the order of the components has on the dynamics. In Section~\ref{sec:model}\ref{sec:effects} we justified the order of the gain, nonlinearity, and loss, but, just assumed dispersion preceded modulation. Here, we consider the effect of swapping the dispersion and modulation components. The energy landscape (Fig.~\ref{fig:energyswitch}) is as we would expect. In the previous case of having modulation following dispersion, more energy is removed from the pulse tails. Whereas, having modulation first, more of this energy remains in the cavity. This has the effect of making the laser more powerful than in the previous case, which in turn increases the size of the unstable region. Comparing with Fig.~\ref{fig:energy}, the unstable upper-left region spreads farther rightward, and the energy is larger in the stable region---especially farther away from the origin. Lastly, once again, the energy at the origin is somewhat larger than 2.5, as predicted by \eqref{eq:maxenergy}.
 
 \begin{figure}[tbp]
 	\centering
