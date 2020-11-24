@@ -137,14 +137,16 @@ for the amplification of the pulse within the Er-doped fibre. Repeating this pro
 	D(A) &= \FTi{\exp( i \omega^2 L_D\beta_2/2 ) \FT{A}}, \\
 	F(A) &= A \exp( i \gamma |A|^2 L_f ),
 \end{align}
-where $R$ is the reflectivity of the output coupler (depending on the layout of the laser cavity the loss may instead take the form $L(A) = R \exp( - \alpha L_T )A$), $L_T$ is the total length of the laser circuit, $L_D$ is the length of the dispersive medium, $L_f$ is the length of fibre between the amplifier and the output coupler, and $\mathcal{F}$ denotes the Fourier transform. Finally, we must consider the modulation. The modulation is considered to be applied externally in which ever way the operator sees fit. For simplicity the representation is taken as the Gaussian
+where $R$ is the reflectivity of the output coupler (depending on the layout of the laser cavity the loss may instead take the form $L(A) = R \exp( - \alpha L_T )A$), $L_T$ is the total length of the laser circuit, $L_D$ is the length of the dispersive medium, $L_f$ is the length of fibre between the amplifier and the output coupler, and $\mathcal{F}$ denotes the Fourier transform. Finally, we must consider the modulation. Here, we assume the pulse is modulated by an electro-optic modulator. This gives the freedom of choosing the profile of the modulation how ever the operator sees fit. For simplicity the representation is taken as the Gaussian
 \begin{align}
 	M(A) &= \exp( -T^2 / 2 T_M^2 ) A,
 	\label{eq:modform}
 \end{align}
-where $T_M$ is the characteristic width of the modulation. This assumption is not particularly restrictive. Calcaterra and Boldt~\cite{calcaterra2008a} have shown that a sum of Gaussian functions can approximate any square integrable function. Therefore, our solution extends to any continuous, bounded modulation function.
-
-Saturable Absorber \cite{lapre2019, meng2020}
+where $T_M$ is the characteristic width of the modulation. This assumption is not particularly restrictive. Calcaterra and Boldt~\cite{calcaterra2008a} have shown that a sum of Gaussian functions can approximate any square integrable function. Therefore, our solution extends to any continuous, bounded modulation function. Additionally, it is common to use a saturable absorber in place of a modulator. In this case, \eqref{eq:modform} can freely be replaced by~\cite{lapre2019, meng2020}
+\begin{align}
+	S(A) &= 1 - \frac{q_0}{1 + |A|^2 / P_\text{sat}},
+\end{align}
+where $q_0$ is the modulation depth, $|A|^2$ is the instantaneous power of the pulse, and $P_\text{sat}$ is the saturation power.
 
 \subsection{Non-Dimensionalization}
 Non-dimensionalization is a technique used in mathematical modelling to better understand the relative importance of different processes within a system. In essence, we scale all variables by typical values of the system based on the geometry and boundary conditions (see, for example,~\cite{howison2005}). Doing so `factors' the dimensional units out of the problem, leaving only dimensionless equations with dimensionless parameters. The magnitude of the dimensionless parameters characterizes the dominant dynamics of the system---much like how fluid flow can be described with only the Reynolds number. The structure of each process in the laser can be better understood by re-scaling the time, energy, and amplitude by the convenient scalings:
@@ -221,7 +223,7 @@ By neglecting the effect of the nonlinearity, that is, $b = 0$, a solution can b
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Figures/Sample_Gauss}
-	\caption{Solution to the linear model given by \eqref{eq:A0}.}
+	\caption{Linearly chirped Gaussian pulse, \eqref{eq:A0}.}
 	\label{fig:samplegauss}
 \end{figure}
 
@@ -250,7 +252,7 @@ As \eqref{eq:var} is a quartic in $\sigma^2$, it has an analytic solution, namel
 \end{equation}
 Additionally, we find the chirp to be
 \begin{align}
-	C = \frac{\sigma^4 \pm \left( \sigma^8 - 16 s^4 \left( 1 - \sigma^2 \right)^2 \right)^{1/2}}{4 s^2 \left( 1 - \sigma^2 \right)},
+	C = \frac{\sigma^4 - \left( \sigma^8 - 16 s^4 \left( 1 - \sigma^2 \right)^2 \right)^{1/2}}{4 s^2 \left( 1 - \sigma^2 \right)},
 	\label{eq:chirp}
 \end{align}
 in terms of $s$ and $\sigma^2$. Moreover, we can obtain the energy of the pulse entering the gain fibre, $E_g$, from \eqref{eq:energyrelation}, and thus, the equilibrium energy at the output coupler. Doing so gives
@@ -286,33 +288,33 @@ Our linearized model indeed exhibits a solution of the same form as previous lin
 
 \subsection{Nonlinear Solution and Instability}
 \label{sec:nlresults}
-In this iterative scheme---as well as within the laboratory---we must specify the input pulse shape. One of the most common form is a hyperbolic secant~\cite{coen1997, finot2008, rothenberg1989b, tomlinson1984}, which we assume has the exact form
+In this iterative map model---as well as within the laboratory---we must specify the input pulse. One of the most common forms is a hyperbolic secant~\cite{coen1997, finot2008, rothenberg1989b, tomlinson1984}, which we assume has the exact form
 \begin{align}
 	A_0 = \Gamma \sech \left( 2 T \right) \textrm{e}^{i \pi / 4},
 	\label{eq:nlA0}
 \end{align}
-where $\Gamma$ is a normalizing factor chosen so the pulse has the initial energy $E_0$, which we take as $E_0 = 0.1$, unless specified otherwise.
+where $\Gamma$ is a normalizing factor chosen so the pulse has the initial energy $E_0$, which we take as $E_0 = 0.1$, unless specified otherwise. Using \eqref{eq:nlA0} as a seed, we simulate the pulse as it travels around the cavity using $2^{18}$ points, and a time span of 16.
 
 \begin{figure}[tbp]
 	\centering
 	\begin{subfigure}{\columnwidth}
 		\centering
 		\includegraphics{Figures/Chirp}
-		\caption{Chirp}
-		\label{fig:}
+		\caption{Chirp.}
+		\label{fig:chirp}
 	\end{subfigure} \\
 	\vspace{3mm}
 	\begin{subfigure}{\columnwidth}
 		\centering
 		\includegraphics{Figures/FT}
-		\caption{Chirp}
-		\label{fig:}
+		\caption{Fourier transform.}
+		\label{fig:ft}
 	\end{subfigure}
-	\caption{Chirp and Fourier transform at equilibrium (500 round trips) initiated by \eqref{eq:nlA0} ($a = 8 \times 10^3$, $h = 0.04$, $b = 1.0$, $s = 0.2$, and $E_0 = 0.1$).}
+	\caption{Chirp and Fourier transform at equilibrium (500 round trips) initiated by \eqref{eq:nlA0} for two values of $b$, the nonlinearity parameter ($a = 8 \times 10^3$, $h = 0.04$, $s = 0.2$, and $E_0 = 0.1$).}
 	\label{fig:chirpft}
 \end{figure}
 
-In Fig.~\ref{fig:chirpft} we show the chirp and Fourier transform of the pulse \eqref{eq:nlA0} once it has reached equilibrium for the nominal parameter values given in \eqref{eq:ndparam}. In this nonlinear case, we find that the equilibrium pulse is no longer Gaussian---as evidenced by the Fourier transform. Notice that compared to the linear case, higher frequency modes are introduced due to the nonlinearity giving a bi-modal appearance. Moreover, we find the pulse is linearly chirped near the peak, but, in the tails, $|T| > 1$, the chirp begins to saturate---consistent with the experimental results~\cite{chen2008, rothenberg1989b, tomlinson1985}. As the nonlinearity parameter, $b$, is increased, the two lobes in the Fourier transform become more pronounced and the tails decay more sharply indicating wave breaking. However, once a critical point is reached SPM plays a more substantial role, leading to modulation instability. This phenomenon is highlighted in Fig.~\ref{fig:breakevo}. By increasing the nonlinearity, and decreasing the dispersion we find the pulse begins to `breathe'. During the first two dozen round trips of the cavity, the SPM compounds and becomes too parasitic to the pulse. This in turn induces modulation instability, and degrades the pulse, until the pulse is no longer stable or sustainable. On the other hand, having a more moderate value of $b$, the pulse is able to equilibrate even with a less favourable, random, initial pulse (Fig.~\ref{fig:convevo}), as in~\cite{meng2020}. The pulse is able to shed the initial left lobe ($T = -1 / 2$) because of dispersion and modulation, and a central lobe ($T = 0$) is formed and is able to grow due to the gain medium. This then allows the pulse to come to equilibrium very quickly. Furthermore, since the intensity of the initial pulse is relatively small, the effect of SPM is negligible during the first few round trips which allows the laser to select preferable modes. The preferable modes then get amplified which stabilizes the pulse. From this, it is clear the initial shape of the pulse is much less important than the initial energy of the pulse, $E_0$, or the strength of the nonlinearity, $b$.
+In Fig.~\ref{fig:chirpft} we show the chirp and Fourier transform of the pulse \eqref{eq:nlA0} once it has reached equilibrium for the nominal parameter values given in \eqref{eq:ndparam}, and an additional $b$ value. In this nonlinear case, we find that the equilibrium pulse is no longer Gaussian---as evidenced by the Fourier transforms. Notice that compared to the linear case, higher frequency modes are introduced due to the nonlinearity, giving a bi-modal appearance. Moreover, we find the pulse is linearly chirped near the peak, but, in the tails, $|T| > 1$, the chirp begins to saturate---consistent with the experimental results~\cite{chen2008, rothenberg1989b, tomlinson1985}. As the nonlinearity parameter, $b$, is increased, the chirp increases more sharply across the pulse, and saturates at a larger value. Also, the two lobes in the Fourier transform become more pronounced and further apart, and the pulse becomes more rectangular. However, after a critical point, SPM plays a more substantial role, leading to modulation instability. This phenomenon is highlighted in Fig.~\ref{fig:breakevo}. By increasing the nonlinearity, and decreasing the dispersion we find the pulse begins to `breathe'. During the first two dozen round trips of the cavity, the SPM compounds and becomes too parasitic to the pulse. This in turn induces modulation instability, and degrades the pulse, until the pulse is no longer stable or sustainable. On the other hand, having a more moderate value of $b$, the pulse is able to equilibrate even with a less favourable, random, initial pulse (Fig.~\ref{fig:convevo}), as in~\cite{meng2020}. The pulse is able to shed the initial left lobe ($T = -1 / 2$) because of dispersion and modulation, and a central lobe ($T = 0$) is formed and is able to grow due to the gain medium. This then allows the pulse to come to equilibrium very quickly. Furthermore, since the intensity of the initial pulse is relatively small, the effect of SPM is negligible during the first few round trips which allows the laser to select preferable modes. The preferable modes then get amplified which stabilizes the pulse. From this, it is clear the initial shape of the pulse is much less important than the initial energy of the pulse, $E_0$, or the strength of the nonlinearity, $b$.
 
 \begin{figure}[tbp]
 	\centering
