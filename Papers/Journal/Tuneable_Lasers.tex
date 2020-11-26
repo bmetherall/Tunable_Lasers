@@ -220,6 +220,24 @@ By neglecting the effect of the nonlinearity, that is, $b = 0$, a solution can b
 	\label{fig:samplegauss}
 \end{figure}
 
+\begin{figure*}[tbp]
+	\centering
+	\begin{subfigure}{\columnwidth}
+		\centering
+		\includegraphics{Figures/Chirp}
+		\caption{Chirp.}
+		\label{fig:chirp}
+	\end{subfigure} %
+	\begin{subfigure}{\columnwidth}
+		\centering
+		\includegraphics{Figures/FT}
+		\caption{Fourier transform.}
+		\label{fig:ft}
+	\end{subfigure}
+	\caption{Chirp and Fourier transform at equilibrium (500 round trips) initiated by \eqref{eq:nlA0} for two values of $b$, the nonlinearity parameter ($a = 8 \times 10^3$, $h = 0.04$, $s = 0.2$, and $E_0 = 0.1$).}
+	\label{fig:chirpft}
+\end{figure*}
+
 Consider the pulse
 \begin{align}
 	A = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) \textrm{e}^{i \phi_0},
@@ -259,24 +277,6 @@ By equating the energy of the pulse in \eqref{eq:A0} and \eqref{eq:analenergy}, 
 	\label{eq:analpower}
 \end{align}
 
-\begin{figure*}[tbp]
-	\centering
-	\begin{subfigure}{\columnwidth}
-		\centering
-		\includegraphics{Figures/Chirp}
-		\caption{Chirp.}
-		\label{fig:chirp}
-	\end{subfigure} %
-	\begin{subfigure}{\columnwidth}
-		\centering
-		\includegraphics{Figures/FT}
-		\caption{Fourier transform.}
-		\label{fig:ft}
-	\end{subfigure}
-	\caption{Chirp and Fourier transform at equilibrium (500 round trips) initiated by \eqref{eq:nlA0} for two values of $b$, the nonlinearity parameter ($a = 8 \times 10^3$, $h = 0.04$, $s = 0.2$, and $E_0 = 0.1$).}
-	\label{fig:chirpft}
-\end{figure*}
-
 The nature of \eqref{eq:var}--\eqref{eq:analpower} makes it difficult to work with. However, by asymptotically expanding \eqref{eq:var}--\eqref{eq:analpower} in terms of the dispersion parameter, $s$, we find the simpler relations
 \begin{align}
 	\sigma^2 &\sim 2s(1 - s) + \bigO{s^3}, \\
@@ -306,6 +306,8 @@ In this iterative map model---as well as within the laboratory---we must specify
 \end{align}
 where $\Gamma$ is a normalizing factor chosen so the pulse has the initial energy $E_0$, which we take as $E_0 = 0.1$, unless specified otherwise. Using \eqref{eq:nlA0} as a seed, we simulate the pulse as it travels around the cavity using $2^{18}$ points, and a time span of 16.
 
+In Fig.~\ref{fig:chirpft} we show the chirp and Fourier transform of the pulse \eqref{eq:nlA0} once it has reached equilibrium for the nominal parameter values given in \eqref{eq:ndparam}, and an additional $b$ value. In this nonlinear case, we find that the equilibrium pulse is no longer Gaussian---as evidenced by the Fourier transforms. Notice that compared to the linear case, higher frequency modes are introduced due to the nonlinearity, giving a bi-modal appearance. Moreover, we find the pulse is linearly chirped near the peak, but, in the tails, $|T| > 1$, the chirp begins to saturate---consistent with the experimental results~\cite{chen2008, rothenberg1989b, tomlinson1985}. As the nonlinearity parameter, $b$, is increased, the chirp increases more sharply across the pulse, and saturates at a larger value. Also, the two lobes in the Fourier transform become more pronounced and further apart, and the pulse becomes more rectangular. However, after a critical point, SPM plays a more substantial role, leading to modulation instability. This phenomenon is highlighted in Fig.~\ref{fig:breakevo}. By increasing the nonlinearity, and decreasing the dispersion we find the pulse begins to `breathe'. During the first two dozen round trips of the cavity, the SPM compounds and becomes too parasitic to the pulse. This in turn induces modulation instability, and degrades the pulse, until the pulse is no longer stable or sustainable. On the other hand, having a more moderate value of $b$, the pulse is able to equilibrate even with a less favourable, random, initial pulse (Fig.~\ref{fig:convevo}), as in~\cite{meng2020}. The pulse is able to shed the initial left lobe ($T = -1 / 2$) because of dispersion and modulation, and a central lobe ($T = 0$) is formed and is able to grow due to the gain medium. This then allows the pulse to come to equilibrium very quickly. Furthermore, since the intensity of the initial pulse is relatively small, the effect of SPM is negligible during the first few round trips which allows the laser to select preferable modes. The preferable modes then get amplified which stabilizes the pulse. From this, it is clear the initial shape of the pulse is much less important than the initial energy of the pulse, $E_0$, or the strength of the nonlinearity, $b$.
+
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Figures/Break}
@@ -319,8 +321,6 @@ where $\Gamma$ is a normalizing factor chosen so the pulse has the initial energ
 	\caption{Example of a pulse coming to equilibrium from noise ($a = 8 \times 10^3$, $h = 0.04$, $b = 1.0$, $s = 0.1$, and $E_0 = 0.1$).}
 	\label{fig:convevo}
 \end{figure}
-
-In Fig.~\ref{fig:chirpft} we show the chirp and Fourier transform of the pulse \eqref{eq:nlA0} once it has reached equilibrium for the nominal parameter values given in \eqref{eq:ndparam}, and an additional $b$ value. In this nonlinear case, we find that the equilibrium pulse is no longer Gaussian---as evidenced by the Fourier transforms. Notice that compared to the linear case, higher frequency modes are introduced due to the nonlinearity, giving a bi-modal appearance. Moreover, we find the pulse is linearly chirped near the peak, but, in the tails, $|T| > 1$, the chirp begins to saturate---consistent with the experimental results~\cite{chen2008, rothenberg1989b, tomlinson1985}. As the nonlinearity parameter, $b$, is increased, the chirp increases more sharply across the pulse, and saturates at a larger value. Also, the two lobes in the Fourier transform become more pronounced and further apart, and the pulse becomes more rectangular. However, after a critical point, SPM plays a more substantial role, leading to modulation instability. This phenomenon is highlighted in Fig.~\ref{fig:breakevo}. By increasing the nonlinearity, and decreasing the dispersion we find the pulse begins to `breathe'. During the first two dozen round trips of the cavity, the SPM compounds and becomes too parasitic to the pulse. This in turn induces modulation instability, and degrades the pulse, until the pulse is no longer stable or sustainable. On the other hand, having a more moderate value of $b$, the pulse is able to equilibrate even with a less favourable, random, initial pulse (Fig.~\ref{fig:convevo}), as in~\cite{meng2020}. The pulse is able to shed the initial left lobe ($T = -1 / 2$) because of dispersion and modulation, and a central lobe ($T = 0$) is formed and is able to grow due to the gain medium. This then allows the pulse to come to equilibrium very quickly. Furthermore, since the intensity of the initial pulse is relatively small, the effect of SPM is negligible during the first few round trips which allows the laser to select preferable modes. The preferable modes then get amplified which stabilizes the pulse. From this, it is clear the initial shape of the pulse is much less important than the initial energy of the pulse, $E_0$, or the strength of the nonlinearity, $b$.
 
 We now turn our attention to a more quantitative analysis, and characterize the stability of a laser by exploring the parameter space. We focus on the $s$--$b$ plane in particular since $a$ and $h$ effect only the amplitude of the pulse, whereas the interplay of dispersion and nonlinearity give rise to the instabilities. Additionally, as mentioned, a conservative initial energy will effect the dynamics much less than a more intense pulse since the nonlinearity will be negligible while coming to equilibrium. To identify the stability of a pulse we examine the relative change in the pulse's envelope between consecutive round trips of the cavity. We compute this error by
 \begin{align}
