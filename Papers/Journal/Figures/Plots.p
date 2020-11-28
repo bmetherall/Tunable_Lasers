@@ -332,8 +332,11 @@ set rmargin at screen 0.98
 set tmargin at screen 0.96
 
 #set output 'Chirp.tex'
-#	p '../Data/ChirpFT1.dat' u 1:(-d($1,$7)) w l t '$b = 1.0$', \
-#	'../Data/ChirpFT4.dat' u 1:(-d($1,$7)) w l dt 5 t '$b = 4.0$'
+
+#p '../Data/ChirpFT0.dat' u 1:(-d($1,$7)) w l t '$b = 0.0$', \
+#	'../Data/ChirpFT1.dat' u 1:(-d($1,$7)) w l dt 5 t '$b = 1.0$', \
+#	'../Data/ChirpFT4.dat' u 1:(-d($1,$7)) w l dt 4 t '$b = 4.0$'
+
 #set out
 
 reset
@@ -343,12 +346,12 @@ reset
 
 set grid
 
-set xr [-20:20]
+set xr [-15:15]
 
 set xl '$\omega$'
 set yl '$\left| \mathcal{F} \{ A \} \right|$ (AU)' offset 0.5,0
 
-set xtics 10
+set xtics 5
 
 set key top left
 
@@ -358,7 +361,12 @@ set lmargin at screen 0.15
 set rmargin at screen 0.98
 set tmargin at screen 0.96
 
-#set output 'FT.tex'
-#	p '../Data/ChirpFT1.dat' u 5:($6 / 4140) w l t '$b=1.0$', \
-#		'../Data/ChirpFT4.dat' u 5:($6 / 4140) w l dt 5 t '$b=4.0$'
-#set out
+set samples 500
+
+set output 'FT.tex'
+
+p '../Data/ChirpFT0.dat' u 5:($6 / 7889) w l smooth csplines t '$b=0.0$', \
+	'../Data/ChirpFT1.dat' u 5:($6 / 7889) w l smooth csplines dt 5 t '$b=1.0$', \
+	'../Data/ChirpFT4.dat' u 5:($6 / 7889) w l smooth csplines dt 4 t '$b=4.0$'
+
+set out
