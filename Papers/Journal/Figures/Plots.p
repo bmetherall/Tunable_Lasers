@@ -363,10 +363,10 @@ set tmargin at screen 0.96
 
 set samples 500
 
-set output 'FT.tex'
+#set output 'FT.tex'
 
-p '../Data/ChirpFT0.dat' u 5:($6 / 7889) w l smooth csplines t '$b=0.0$', \
-	'../Data/ChirpFT1.dat' u 5:($6 / 7889) w l smooth csplines dt 5 t '$b=1.0$', \
-	'../Data/ChirpFT4.dat' u 5:($6 / 7889) w l smooth csplines dt 4 t '$b=4.0$'
+#p '../Data/ChirpFT0.dat' u 5:($6 / 7889) w l smooth csplines t '$b=0.0$', \
+#	'../Data/ChirpFT1.dat' u 5:($6 / 7889) w l smooth csplines dt 5 t '$b=1.0$', \
+#	'../Data/ChirpFT4.dat' u 5:($6 / 7889) w l smooth csplines dt 4 t '$b=4.0$'
 
-set out
+#set out
