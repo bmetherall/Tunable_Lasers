@@ -89,8 +89,7 @@
 \RequirePackage[labelfont={bf,sf},%
                 labelsep=period,%
                 figurename=Fig.,%
-                singlelinecheck=off,%
-                justification=RaggedRight]{caption}
+                singlelinecheck=off]{caption}
 \@ifpackagelater{newfloat}{2019/08/28}{}{%
   \RequirePackage{wrapfig} % For author photos and bios for AOP articles
 }
