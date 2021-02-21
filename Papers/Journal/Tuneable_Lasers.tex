@@ -66,14 +66,14 @@
 
 \section{Introduction}
 \label{sec:intro}
-Dispersion-tuned actively mode-locked lasers are an active area of optics research since they have a wide range of applications. These lasers can have ultrashort pulses, as short as 50 femtoseconds \cite{chung2017}, and the ability to tune their output frequency rapidly over a range of over 100 nm~\cite{bohun2015, burgoyne2010, chung2017, yamashita2009}. The capability to alter the operating frequency makes tuneable lasers particularly useful for imaging applications, such as optical coherence tomography~\cite{bohun2015, burgoyne2014, yamashita2009}, coherent anti-Stokes Raman spectroscopy~\cite{burgoyne2014}, and deep tissue multi-photon microscopy~\cite{chung2017}, as well as sensing and measuring of other ultrafast processes~\cite{burgoyne2014, silfvast2004, oktem2010}. Tuneable lasers are usually constructed in a ring with five main components: an optical coupler, chirped fibre Bragg grating (CFBG), modulator (or saturable absorber), Er-doped fibre, and pump laser. A typical ring laser cavity is depicted in Fig.~\ref{fig:cavity}. The Kerr nonlinearity plays a crucial role in the dynamics within the cavity due to the high power and ultrashort duration of the pulses.
+Dispersion-tuned actively mode-locked lasers are an active area of optics research since they have a wide range of applications. These lasers can have ultrashort pulses, as short as 50 femtoseconds \cite{chung2017}, and the ability to tune their output frequency rapidly over a range of over 100 nm~\cite{bohun2015, burgoyne2010, chung2017, yamashita2009}. The capability to alter the operating frequency makes tuneable lasers particularly useful for imaging applications, such as optical coherence tomography~\cite{bohun2015, burgoyne2014, yamashita2009}, coherent anti-Stokes Raman spectroscopy~\cite{burgoyne2014}, and deep tissue multi-photon microscopy~\cite{chung2017}, as well as sensing and measuring of other ultrafast processes~\cite{burgoyne2014, silfvast2004, oktem2010}. Tuneable lasers are usually constructed in a ring with five main components: an optical coupler, chirped fibre Bragg grating (CFBG), modulator (or saturable absorber), gain fibre (usually doped with Er), and pump laser. A typical ring laser cavity is depicted in Fig.~\ref{fig:cavity}. The Kerr nonlinearity plays a crucial role in the dynamics within the cavity due to the high power and ultrashort duration of the pulses.
 
 Several effects arise within the cavity due to the interplay of dispersion, modulation, and the nonlinearity~\cite{bohun2015, coen1997, lapre2019, meng2020, oktem2010, shao2019, woodward2018}. The two effects of most interest for us are wave breaking, and modulation instability. Wave breaking causes the leading edge of a pulse to redshift, and the trailing edge to blueshift (the effect reverses in the anomalous dispersion regime) to the point a shock develops~\cite{anderson1992, rothenberg1989a, rothenberg1989b, tomlinson1984, tomlinson1985}. The frequency shift causes the pulse to become more rectangular in the frequency domain, with a linear chirp over most of the pulse, saturating at the leading and trailing edge. In optics, wave breaking arises from self-phase modulation (SPM), which is a direct effect of the Kerr nonlinearity, causing the pulse to interfere with itself. New frequencies are then generated such that a rectangular profile is induced~\cite{agrawal2013, woodward2018}. Modulation instability---which typically arises in the anomalous dispersion regime---is the other effect that will be of interest. However, in the presence of multiple frequencies, modulation instability can emerge in the normal dispersion regime as well through cross-phase modulation and four-wave mixing~\cite{agrawal1987, agrawal2013, haelterman1992}. Modulation instability causes a pulse to degrade into multiple much shorter, less intense, pulses and can cause a laser to lose coherence~\cite{agrawal1987, coen1997, haelterman1992}. Outside of optics, wave breaking and modulation instability occur in other areas with nonlinear waves and dispersive media such as plasma physics, heat propagation, transmission lines, and fluid dynamics~\cite{coen1997, rothenberg1989b}. Within a ring laser cavity, wave breaking and modulation instability can become parasitic leading to an unstable and unsustainable pulse. Understanding the rich landscape of the parameter space is important for determining design principles to guarantee the ring laser is stable and sustainable~\cite{bohun2015, burgoyneemail, finot2008, lapre2019, woodward2018}.
 
 \begin{figure}[tbp]
 	\centering
 	\input{Cavity}
-	\caption{Common cavity of a fibre ring laser~\cite{burgoyne2014, chung2017, lapre2019, shao2019}. The pump laser travels clockwise around the left-hand loop (red arrows) energizing the Er-doped fibre. The main laser travels clockwise around the right-hand loop (blue arrows), with most of the pulse exiting the cavity through the optical coupler.}
+	\caption{Common cavity of a fibre ring laser~\cite{burgoyne2014, chung2017, lapre2019, shao2019}. The pump laser travels clockwise around the left-hand loop (red arrows) energizing the Er-doped gain fibre. The main laser travels clockwise around the right-hand loop (blue arrows), with most of the pulse exiting the cavity through the optical coupler.}
 	\label{fig:cavity}
 \end{figure}
 
@@ -89,22 +89,22 @@ Here, $A = A(T, z)$ is the complex pulse envelope, $T$ is co-moving time, $z$ is
 \end{align}
 where $g(A)$ is an amplifying term owing to the gain fibre, and $\alpha$ is the loss due to scattering and absorption.
 
-The GNLSE, \eqref{eq:nlse}, has been applied in nonlinear optics and fibre optic communications. However, \eqref{eq:nlse} is regularly generalized even further to include a modulation term. The resulting equation is referred to as the master equation of mode-locking (see \cite{haus1975, haus1984, haus2000, tamura1996, usechak2005}), or sometimes as the Ginzburg--Landau equation. Owing to the nonlinear term in \eqref{eq:nlse} and the often non-trivial form of $g(A)$, as well as the possible addition of a modulation term, no analytic solution is known to the master equation or to \eqref{eq:nlse}. A comprehensive description of the theory and history of mode-locking lasers is presented in Haus~\cite{haus2000}. While the GNLSE well represents the dynamics in, say, a single optical fibre, \eqref{eq:nlse} is not entirely representative of the underlying physics within a laser cavity such as Fig. \ref{fig:cavity}. The derivation of \eqref{eq:nlse} assumes that each process affects the pulse continuously within the cavity. Therefore, the GNLSE, and generalizations, can be thought of as an `average' model for lasers---this assumption breaks down if the pulse undergoes large changes during any one round trip. Often, this assumption does not hold because of the specialized, discrete components.
+The GNLSE, \eqref{eq:nlse}, has been applied in nonlinear optics~\cite{agrawal2013} and fibre optic communications~\cite{agrawal2002}. However, \eqref{eq:nlse} is regularly generalized even further to include a modulation term. The resulting equation is referred to as the master equation of mode-locking (see \cite{haus1975, haus1984, haus2000, tamura1996, usechak2005}), or sometimes as the Ginzburg--Landau equation. Owing to the nonlinear term in \eqref{eq:nlse} and the often non-trivial form of $g(A)$, as well as the possible addition of a modulation term, no analytic solution is known to the master equation or to \eqref{eq:nlse}. A comprehensive description of the theory and history of mode-locking lasers is presented in Haus~\cite{haus2000}. While the GNLSE well represents the dynamics in, say, a single optical fibre, \eqref{eq:nlse} is not entirely representative of the underlying physics within a laser cavity such as Fig. \ref{fig:cavity}. The derivation of \eqref{eq:nlse} assumes that each process affects the pulse continuously within the cavity. Therefore, the GNLSE, and generalizations, can be thought of as an `average' model for lasers---the assumption of continuously effecting the pulse breaks down if the pulse undergoes large changes during any one round trip. Often, this assumption does not hold because of the specialized, discrete components.
 
-In this paper, we will build an iterative map model for the evolution of a laser pulse as the pulse travels through the cavity. In Section~\ref{sec:model}, we will briefly review previous iterative map models, then, we will derive our own iterative map model from \eqref{eq:nlse}. We will then non-dimensionalize the model and introduce four dimensionless parameters that govern the dynamics of the system. We will then examine the results of our model in Section~\ref{sec:results}---first solving the model analytically by assuming the absence of the nonlinearity, then numerically solving the full nonlinear model. We will identify a sharp boundary in the parameter space separating the region of stability, and the region where modulation instability degrades the pulse. Finally, our concluding thoughts and ideas for possible future work are given in Section~\ref{sec:conclusion}.
-
-\section{Iterative Map Model}
-\label{sec:model}
-To resolve some of the issues with an `average' model, using separate GNLSEs for each component and region in the laser is common. Iteratively passing the pulse from one GNLSE to the next \cite{lapre2019, meng2020, oktem2010, woodward2018}. This method allows for better encapsulation of specific dynamics introduced by each component. The main drawback of this method is the extreme computational expense since a nonlinear equation must be numerically solved for every segment for each of the hundreds of round trips in a given simulation. We can alleviate this computational expense by noticing each effect is localized to a corresponding component in the cavity: virtually all of the dispersion happens within the CFBG~\cite{agrawal2002}, the pulse is amplified only within the Er-doped fibre, \emph{et cetera}. Therefore, we can drastically simplify each of the GNLSEs into a form we can solve analytically. Using analytic maps instead of numerically solving a GNLSE reduces the computational cost, while maintaining the benefit of reflecting the specific geometry of a component-wise simulation.
+To resolve some of the issues with an `average' model, each component and region in the laser is modelled with a separate GNLSE. The solution of one GNLSE is used as the initial condition for the GNLSE for the next component~\cite{lapre2019, meng2020, oktem2010, woodward2018}. An iterative map model allows for better encapsulation of specific dynamics introduced by each component. The main drawback of this method is the extreme computational expense since a nonlinear equation must be numerically solved for every segment for each of the hundreds of round trips in a given simulation. We can alleviate this computational expense by noticing each effect is localized to a corresponding component in the cavity: a majority of the loss is due to the optical coupler, virtually all of the dispersion happens within the CFBG~\cite{agrawal2002}, the pulse is only modulated by the modulator, and, the pulse is amplified only within the Er-doped gain fibre. Therefore, we can drastically simplify each of the GNLSEs into a form we can solve analytically. Using analytic maps instead of numerically solving a GNLSE reduces the computational cost, while maintaining the benefit of reflecting the specific geometry of a component-wise simulation.
 
 Iterative map methods have been used for optics since 1955 when Cutler~\cite{cutler1955} analyzed a microwave regenerative pulse generator. Siegman and Kuizenga~\cite{kuizenga1970a, kuizenga1970b, kuizenga1970, siegman1969} adapted Cutler's method for both AM and FM mode-locked lasers in 1969, and Martinez \emph{et al.}~\cite{martinez1984, martinez1985} incorporated the nonlinearity while modelling passively mode-locked lasers. A linear iterative method was used for dispersion-tuned actively mode-locked lasers recently by Burgoyne \emph{et al.}~\cite{burgoyne2014}. Each of these models used a prescribed transfer function to describe the effect each component has on the pulse. While the transfer functions are chosen suitably to have the effect observed in the laboratory, the transfer functions are phenomenologically chosen, and not necessarily obtained directly from the underlying physics. Furthermore, these methods have not included the effect of every component, lacking the imperative interactions of dispersion, modulation, and nonlinearity---hindering their models to exhibit modulation instability.
 
-We derive our own iterative map model for the evolution of a pulse through a laser cavity by solving a reduced GNLSE for each component in the cavity---except modulation, which we consider to be applied externally by an electro-optic modulator. Within the gain fibre, we assume all other effects are negligible. Any dispersion, for example, in the gain fibre pales in comparison to the dispersion introduced by the CFBG. Thus, we neglect the dispersion (as well as loss and nonlinearity by the same argument) in the gain fibre, allowing us to simplify \eqref{eq:nlse} to
+In this paper, we will build an iterative map model for the evolution of a laser pulse as the pulse travels through the cavity. In Section~\ref{sec:model}, we will derive our own iterative map model from \eqref{eq:nlse}. We will then non-dimensionalize the model and introduce four dimensionless parameters that govern the dynamics of the system. We will then examine the results of our model in Section~\ref{sec:results}---first solving the model analytically by assuming the absence of the nonlinearity, then numerically solving the full nonlinear model. We will identify a sharp boundary in the parameter space separating the region of stability, and the region where modulation instability degrades the pulse. Finally, our concluding thoughts and ideas for possible future work are given in Section~\ref{sec:conclusion}.
+
+\section{Iterative Map Model}
+\label{sec:model}
+We derive our own iterative map model for the evolution of a pulse through a laser cavity by solving a reduced GNLSE for each component in the cavity---except modulation, which we consider to be applied externally by an electro-optic modulator. Starting with the gain component, we reduce \eqref{eq:nlse} to 
 \begin{align}
-	\pdiff{A}{z} &= \frac{1}{2}g(A)A.
+	\pdiff{A}{z} &= \frac{1}{2}g(A)A,
 	\label{eq:gainexample}
 \end{align}
-To proceed, we assume the gain has the form
+by assuming all other effects are negligible. Once again, our assumption is justified by the localization of each effect to its corresponding component, allowing us to simplify \eqref{eq:nlse} to \eqref{eq:gainexample} in the gain fibre. To proceed, we assume the gain has the form
 \begin{align}
 	g(A) &= \frac{g_0}{1 + E / \Es},
 	\label{eq:gainform}
@@ -117,35 +117,58 @@ where $g_0$ is a small signal gain, $E$ is the energy of the pulse, defined as
 and $\Es$ is the energy that the gain begins to saturate~\cite{haus1984, shtyrina2017, silfvast2004}, which depends on the power of the pump laser. With the choice of $g(A)$ given in \eqref{eq:gainform}, \eqref{eq:gainexample} becomes
 \begin{align}
 	\pdiff{A}{z} &= \frac{g_0 A}{2 \left( 1 + E / \Es \right)}.
+	\label{eq:pdiffgain}
 \end{align}
-By assuming the energy entering the gain fibre is $E_g$ and the energy after travelling through the gain fibre of length $L_g$ is $E_{\text{out}}$, we find the energy after amplification is
+Multiplying \eqref{eq:pdiffgain} by the complex conjugate of $A$, we have
+\begin{align}
+	\overline{A} \pdiff{A}{z} &= \frac{g_0}{2 \left( 1 + E / \Es \right)} |A|^2.
+	\label{eq:pdiffgain2}
+\end{align}
+By adding \eqref{eq:pdiffgain2} and the complex conjugate of \eqref{eq:pdiffgain2}, and then integrating over the pulse, we have
+\begin{align}
+	\diff{E}{z} &= \frac{g_0 E}{1 + E / \Es}.
+	\label{eq:energyde}
+\end{align}
+By assuming the energy entering the gain fibre is $E_g$ and the energy after travelling through the gain fibre of length $L_g$ is $E_{\text{out}}$, we integrate \eqref{eq:energyde} to find the energy after amplification is
 \begin{align}
 	\label{eq:engain}
 	E_{\text{out}} &= \Es W \left( \frac{E_g}{\Es} \exp \left( \frac{E_g}{\Es} \right) \exp( g_0 L_g ) \right),
 \end{align}
-where $W$ is the Lambert $W$ function. Moreover, as the gain will amplify the pulse without changing the envelope, the pulse after travelling through the gain fibre can be expressed as
+where $W$ is the Lambert $W$ function. Moreover, as the gain will amplify the pulse without changing the shape of the envelope, the pulse after travelling through the gain fibre can be expressed as
 \begin{align}
 	G(A) &= \mathcal{G} A.
+	\label{eq:ampfact}
 \end{align}
 Then,
 \begin{align}
 	\mathcal{G}^2 E_g &= E_\text{out}
-	\label{eq:ampfact}
 \end{align}
 by \eqref{eq:energy}, \eqref{eq:engain} and \eqref{eq:ampfact}, therefore,
 \begin{align}
-	G(A) &= \left( \frac{\Es}{E_g} W \left( \frac{E_g}{\Es} \exp \left( \frac{E_g}{\Es} \right) \exp( g_0 L_g ) \right) \right)^{1/2} A
-	\label{eq:gainform}
+	G(A) &= \left( \frac{E_\text{out}}{E_g} \right)^{1/2} A, \\
+	&=	\left( \frac{\Es}{E_g} W \left( \frac{E_g}{\Es} \exp \left( \frac{E_g}{\Es} \right) \exp( g_0 L_g ) \right) \right)^{1/2} A \label{eq:dimgain}
 \end{align}
-for the amplification of the pulse after the Er-doped fibre.
+for the amplification of the pulse after the Er-doped gain fibre.
 
-Repeating the same procedure for the loss, dispersion, and nonlinearity yields
+Repeating the same procedure for the nonlinearity, loss, and dispersion components yields
 \begin{align}
-	L(A) &= (1 - R) \exp( - \alpha L_T )A, \\
-	D(A) &= \FTi{\exp( i \omega^2 \beta_2 L_D/2 ) \FT{A}}, \\
-	F(A) &= A \exp( i \gamma |A|^2 L_f ),
+	\pdiff{A}{z} &= i \gamma |A|^2 A, \label{eq:nlde} \\
+	\pdiff{A}{z} &= - \alpha A,  \label{eq:lossde} \\
+	\pdiff{A}{z} &= - i \frac{\beta_2}{2} \pdiff[2]{A}{T} \label{eq:dispde}
 \end{align}
-where $R$ is the reflectivity of the optical coupler, $L_T$ is the total length of fibre in the cavity, $L_D$ is the `length' of the dispersive medium, $L_f$ is the length of fibre between the amplifier and the optical coupler, and $\mathcal{F}$ denotes the Fourier transform.
+as the reduced versions of \eqref{eq:nlse}, respectively. Solving \eqref{eq:nlde} over a length of fibre $L_f$, we find the effect of the fibre nonlinearity is
+\begin{align}
+	F(A) &= A \exp \left( i \gamma |A|^2 L_f \right). \label{eq:dimnl}
+\end{align}
+Similarly, the effect of the loss is
+\begin{align}
+	L(A) &= (1 - R) \exp( - \alpha L_T )A, \label{eq:dimloss}
+\end{align}
+where $L_T$ is the total length of fibre in the cavity, $R$ is the reflectivity of the optical coupler, and the $(1 - R)$ term  is the loss to the output of the laser. The effect of dispersion is obtained by solving \eqref{eq:dispde} over the `length' of the dispersive medium, $L_D$,
+\begin{align}
+	D(A) &= \FTi{\exp( i \omega^2 \beta_2 L_D / 2 ) \FT{A}}, \label{eq:dimdisp}
+\end{align}
+where, $\mathcal{F}$ denotes the Fourier transform.
 
 Finally, we consider the modulation. Here, we assume the pulse is modulated by an electro-optic modulator. For simplicity, the form is taken as the Gaussian
 \begin{align}
@@ -158,27 +181,52 @@ where $T_M$ is the characteristic width of the modulation. This assumption is no
 \end{align}
 where $q_0$ is the modulation depth, $|A|^2$ is the instantaneous power of the pulse, and $P_\text{sat}$ is the saturation power.
 
+\subsection{Combining the Component Maps}
+\label{sec:effects}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics{Figures/Evo}
+	\caption{Evolution of the envelope during one round trip of the cavity at equilibrium. The pulse decays because of the optical coupler, disperses because of the CFBG, is modulated by the modulator, and finally, is amplified by the gain fibre (the envelope is unaltered by the nonlinearity). Note, the $z$ axis is not to scale.}
+	\label{fig:cavityevo}
+\end{figure}
+
+Now that we have the algebraic effect of each component of the cavity, we are ready to take the composition of the maps to give the effect of one round trip of the cavity. Unlike the models described in Section \ref{sec:intro}, the order of our components is important since the maps in \eqref{eq:dimgain}, and \eqref{eq:dimnl}--\eqref{eq:modform} do not necessarily commute with each other.
+
+The geometry of a particular laser will dictate the order of the process maps. However, we assume the construction of the laser is as shown in Fig.~\ref{fig:cavity}. The effect of the nonlinearity will be maximal after the pulse passes through the gain fibre---the pulse is most energetic after being amplified by the gain. Thus, we take the nonlinearity component to follow the gain. Similarly, we want the loss component to directly follow the nonlinearity in an attempt to minimize the effect the nonlinearity has on the pulse. All that remains is the dispersion and modulation components. For now, let us assume the CFBG precedes the modulator. Finally, we assume the loss component is our starting point since the loss corresponds to the optical coupler, and thus, allows us to more easily compare our results with experiments. More precisely, let
+\begin{align}
+	\mathcal{L}(A) = F(G(M(D(L(A)))))
+	\label{eq:order}
+\end{align}
+denote one complete round trip of the cavity. Since a ring laser is cyclic in nature, we use the result of one round trip as the input pulse for the next round trip---restarting the process. We continually repeat this procedure until the envelope and chirp of the pulse reach equilibrium, or the pulse succumbs to modulation instability. The phase change is uninteresting to us, as the phase cannot easily be measured experimentally. An illustration of the evolution of the envelope during one round trip of the laser cavity can be found in Fig.~\ref{fig:cavityevo}.
+
 \subsection{Non-Dimensionalization}
-Non-dimensionalization is a technique used in mathematical modelling to better understand the relative importance of different processes within a system. In essence, we scale all variables by typical values, based on the geometry and boundary conditions (see, for example,~\cite{howison2005}). Doing so `factors' the dimensional units out of the problem---leaving only dimensionless equations with dimensionless parameters. The relative magnitudes of the dimensionless parameters characterize the dominant dynamics---like how the Reynolds number describes fluid flow. Each process in the laser can be better understood by re-scaling the time, energy, and amplitude by the convenient scalings:
+Non-dimensionalization is a technique used in mathematical modelling to better understand the relative importance of different processes within a system. In essence, we scale all variables by typical values, based on the geometry and boundary conditions (see, for example,~\cite{howison2005}). Doing so `factors' the dimensional units out of the problem---leaving only dimensionless equations with dimensionless parameters. The relative magnitudes of the dimensionless parameters characterize the dominant dynamics---like how the Reynolds number describes fluid flow. Each process in the laser can be better understood by re-scaling the time, energies, and amplitude by the convenient scalings:
 \begin{align}
 	T &= T_M \widetilde{T},& E &= \Es \widetilde{E},& A &= \left( \frac{\Es}{T_M} \right)^{1/2} \widetilde{A}.
 \end{align}
 
 We find the non-dimensional mappings (after dropping the tildes) are
-\begin{align}
-	G(A) &= \left(E_g^{-1} W \left( a E_g \textrm{e}^{E_g}\right) \right)^{1/2} A, & F(A) &= \exp( i b |A|^2) A, \nonumber \\
-	D(A) &= \FTi{\exp( i s^2 \omega^2 ) \FT{A}}, & L(A) &= h A, \label{eq:effects} \\
-	M(A) &= \exp( -T^2 / 2 ) A.\, \nonumber
-\end{align}
+\begin{equation}
+	\begin{aligned}
+		G(A) &= \left(E_g^{-1} W \left( a E_g \textrm{e}^{E_g}\right) \right)^{1/2} A,\\
+		F(A) &= \exp \left( i b |A|^2 \right) A, \\
+		L(A) &= h A, \\
+		D(A) &= \FTi{\exp \left( i s^2 \omega^2 \right) \FT{A}}, \\
+		M(A) &= \exp \left( -T^2 / 2 \right) A.
+	\end{aligned}
+	\label{eq:effects}
+\end{equation}
 where we have introduced four dimensionless parameters, namely
 \begin{equation}
+	\hspace*{-1mm}
 	\begin{aligned}
 		a &= \exp( g_0 L_g ) \sim 8 \times 10^3, & 
 		b &= \gamma L_f \frac{\Es}{T_M} \sim 1, \\
-		s &= \left( \frac{\beta_2 L_D}{2 T_M^2} \right)^{1/2} \sim 0.2, &
-		h &= (1 - R) \exp( - \alpha L_T) \sim 0.04, \\		
-		\label{eq:ndparam}
+		h &= (1 - R) \exp( - \alpha L_T) \sim 0.04, &
+		s &= \left( \frac{\beta_2 L_D}{2 T_M^2} \right)^{1/2} \sim 0.2,	
 	\end{aligned}
+	\label{eq:ndparam}
 \end{equation}
 and we have estimated their sizes using values in Table~\ref{tab:values}. The dimensionless parameter $a$ is a measure of the strength of the gain fibre, $b$ is the frequency shift because of the Kerr nonlinearity, $s$ is the ratio of the effectiveness of the CFBG to the width of the pulse, and $h$ is the total loss due to absorption and the optical coupler. We note that each expression in \eqref{eq:effects} depends on one dimensionless parameter, except the modulation which is parameter free.
 
@@ -205,31 +253,12 @@ and we have estimated their sizes using values in Table~\ref{tab:values}. The di
 	\end{tabular}
 \end{table*}
 
-\subsection{Combining the Component Maps}
-\label{sec:effects}
-
-\begin{figure}[tbp]
-	\centering
-	\includegraphics{Figures/Evo}
-	\caption{Evolution of the envelope during one round trip of the cavity at equilibrium. The pulse decays because of the optical coupler, disperses because of the CFBG, is modulated by the modulator, and finally, is amplified by the gain fibre (the envelope is unaltered by the nonlinearity). Note, the $z$ axis is not to scale.}
-	\label{fig:cavityevo}
-\end{figure}
-
-Now that we have the algebraic effect of each section of the cavity, we are ready to take the composition of the maps to give the effect of one round trip of the cavity. Unlike the models described in the beginning of this section, the order of our components is important since the maps in \eqref{eq:effects} do not necessarily commute with each other.
-
-The geometry of a particular laser will dictate the order of the process maps. However, we assume the construction of the laser is as shown in Fig.~\ref{fig:cavity}. The effect of the nonlinearity will be maximal after the pulse passes through the gain fibre---after the gain is where the pulse is most energetic. Thus, we take the nonlinearity component to follow the gain. Similarly, we want the loss component to directly follow the nonlinearity in an attempt to minimize the effect the nonlinearity has on the pulse. All that remains is the dispersion and modulation components. For now, let us assume the CFBG precedes the modulator. Finally, we assume the loss component is our starting point since the loss corresponds to the optical coupler, and thus, allows us to more easily compare our results with experiments. More precisely, let
-\begin{align}
-	\mathcal{L}(A) = F(G(M(D(L(A)))))
-	\label{eq:order}
-\end{align}
-denote one complete round trip of the cavity. Since a ring laser is cyclic in nature, we use the result of one round trip as the input pulse for the next round trip---restarting the process. We continually repeat this procedure until the envelope and chirp of the pulse reach equilibrium, or the pulse succumbs to modulation instability. The phase change is uninteresting to us, as \eqref{eq:effects} does not modify the phase in a meaningful way, and since the phase cannot easily be measured experimentally. An example of the evolution of the envelope during one round trip of the laser cavity can be found in Fig.~\ref{fig:cavityevo}.
-
 \section{Results}
 \label{sec:results}
-We split the results into two subsections. In the following subsection we investigate the small nonlinearity limit, and in Section~\ref{sec:results}\ref{sec:nlresults} we explore the full nonlinear model.
+We split the results into two subsections. First, we investigate the small nonlinearity limit ($b \ll 1$), and then we explore the full nonlinear model.
 
 \subsection{Linear Solution}
-By neglecting the effect of the nonlinearity, that is, taking $b = 0$, a solution can be found analytically. We proceed by assuming a fixed point solution will take the form of a linearly chirped Gaussian. The reasons for this assumption are that the solution to the models presented in~\cite{cutler1955, siegman1969, kuizenga1970a, martinez1984, martinez1985} were Gaussian, the equilibrium shape will correlate to the modulation function, and a Gaussian is a fixed point of the Fourier transform. Furthermore, we choose a linearly chirped Gaussian because it resembles the envelope, and linear chirp expected from the literature~\cite{burgoyne2014, haus1975, haus1996, haus2000, usechak2005}.
+We neglect the effect of the nonlinearity, that is, we take $b \ll 1$. We proceed by assuming a fixed point solution will take the form of a linearly chirped Gaussian, and our aim is to find the variance, chirp, and energy of the pulse. The reasons for this assumption are that the solution to the models presented in~\cite{cutler1955, siegman1969, kuizenga1970a, martinez1984, martinez1985} were Gaussian, the equilibrium shape will correlate to the modulation function, and a Gaussian is a fixed point of the Fourier transform. Furthermore, we choose a linearly chirped Gaussian because it resembles the envelope, and linear chirp expected from the literature~\cite{burgoyne2014, haus1975, haus1996, haus2000, usechak2005}.
 
 \begin{figure}[tbp]
 	\centering
@@ -256,12 +285,12 @@ By neglecting the effect of the nonlinearity, that is, taking $b = 0$, a solutio
 	\label{fig:chirpft}
 \end{figure*}
 
-Consider the pulse
+We consider the pulse given by
 \begin{align}
 	A = \sqrt{P} \exp \left( -(1 + iC) \frac{T^2}{2 \sigma^2} \right) \exp(i \phi_0),
 	\label{eq:A0}
 \end{align}
-where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the phase (Fig.~\ref{fig:samplegauss}). By computing \eqref{eq:A0} after one round trip, and solving $\mathcal{L}(A) = A \textrm{e}^{i \phi}$, a tedious manipulation yields the conditions
+where $P$ is the peak power, $C$ is the chirp, $\sigma^2$ is the variance, and $\phi_0$ is the phase; the pulse is shown in Fig.~\ref{fig:samplegauss}. By computing \eqref{eq:A0} after one round trip, and solving $\mathcal{L}(A) = A \textrm{e}^{i \phi}$, tedious manipulations yield the conditions
 \begin{align}
 	\frac{\sigma^4}{1 - \sigma^2} &= (\sigma^2 + 2 C s^2)^2 + 4 s^4, \label{eq:sigrelation} \\
 	\frac{C}{1 - \sigma^2} &= C + 2 \frac{s^2}{\sigma^2} (1 + C^2), \label{eq:chirprelation} \\
@@ -272,7 +301,7 @@ for \eqref{eq:A0} to be in equilibrium. Using \eqref{eq:sigrelation} and \eqref{
 	\sigma^8 + 4 s^4 \sigma^6 - 20 s^4 \sigma^4 + 32 s^4 \sigma^2 - 16 s^4 = 0.
 	\label{eq:var}
 \end{align}
-\eqref{eq:var} has the analytic solution
+\eqref{eq:var} has the positive, real, analytic solution
 \begin{equation}
 	\begin{split}
 		\sigma^2 = \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4} \left( 1 + s^4 \right) \right)^{1/2} & \\
@@ -285,11 +314,27 @@ Substituting \eqref{eq:equilvar} into \eqref{eq:chirprelation}, we find the chir
 	C = \frac{\sigma^4 - \left( \sigma^8 - 16 s^4 \left( 1 - \sigma^2 \right)^2 \right)^{1/2}}{4 s^2 \left( 1 - \sigma^2 \right)}.
 	\label{eq:chirp}
 \end{align}
-We obtain the energy of the pulse entering the gain fibre, $E_g$, from \eqref{eq:energyrelation} and, thus, the equilibrium energy at the optical coupler, is
+We obtain the energy of the pulse entering the gain fibre, $E_g$, from \eqref{eq:energyrelation}:
 \begin{align}
-	E &= \frac{\log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}{1 - h^2 \left( 1 - \sigma^2 \right)^{1/2}}.
+	E_g &= \frac{h^2 \left( 1 - \sigma^2 \right)^{1/2} \log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}{h^2 \left( 1 - \sigma^2 \right)^{1/2} - 1}
+\end{align}
+and, thus, the equilibrium energy at the optical coupler, is
+\begin{align}
+	E &= W \left( a E_g \textrm{e}^{E_g} \right) \\
+	&= \frac{\log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}{1 - h^2 \left( 1 - \sigma^2 \right)^{1/2}}.
 	\label{eq:analenergy}
 \end{align}
+The argument of the logarithm in \eqref{eq:analenergy} gives us the condition
+\begin{align}
+	a h^2 (1 - \sigma^2)^{1/2} > 1
+	\label{eq:energycond}
+\end{align}
+for the pulse to be sustainable.
+
+
+
+
+
 Equating the energy of the pulse in \eqref{eq:A0} and \eqref{eq:analenergy}, we find the peak power to be
 \begin{align}
 	P &= \frac{\log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}{\sqrt{\pi} \sigma \left( 1 - h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}.
@@ -303,16 +348,7 @@ The form of \eqref{eq:equilvar}--\eqref{eq:analpower} make the expressions diffi
 	E &\sim \frac{\log (a h^2)}{1 - h^2} - \frac{1}{1 - h^2} \left( 1 + \frac{h^2 \log(a h^2)}{1 - h^2}  \right) s + \bigO{s^2}, \label{eq:maxenergy} \\
 	P &\sim \frac{\log(ah^2)}{\sqrt{2 \pi}(1 - h^2)} s^{-1/2} + \bigO{s^{1/2}},
 \end{align}
-in the limit $s \rightarrow 0$. And,
-\begin{align}
-	\sigma^2 &\sim 1 - \frac{1}{4}s^{-4} + \bigO{s^{-8}}, \label{eq:siginfty}\\
-	C &\sim \frac{1}{2}s^{-2} + \bigO{s^{-6}},
-\end{align}
-in the case $s \rightarrow \infty$. We have no asymptotic expansion of the energy or peak power in the limit $s \rightarrow \infty$ since the pulse loses too much energy because of dispersion and modulation. The gain is not powerful enough to balance the energy lost. The argument of the logarithm in \eqref{eq:analenergy} gives us a condition for the pulse to be sustainable. Expanding the requirement $a h^2 (1 - \sigma^2)^{1/2} > 1$, from \eqref{eq:analenergy}, using \eqref{eq:siginfty} (for a simple approximation), we find 
-\begin{align}
-	s^* = \left( \frac{a h^2}{2} \right)^{1/2}
-\end{align}
-is the maximum value of $s$ to facilitate a sustainable pulse.
+in the limit $s \rightarrow 0$. The expansions in the limit $s \rightarrow \infty$ are given in Appendix \ref{sec:largedisp}.
 
 Our linear model indeed exhibits a solution of the same form as previous linear models. However, by including the effect of the nonlinearity, we uncover the rich interplay between dispersion, modulation, and nonlinearity.
 
@@ -385,8 +421,22 @@ Expanding upon the ideas originally proposed by Cutler~\cite{cutler1955}, and Ku
 
 Analyzing the nonlinear model analytically using an asymptotic expansion for small values of the nonlinearity parameter, $b$, is of interest. Doing so will provide insight to how the nonlinearity impacts the linear solution to better understand the manifestation of wave breaking and modulation instability. Furthermore, a more detailed analysis of crossing the boundary between stability and instability may provide valuable insight for mechanisms that trigger the instability.
 
-\section*{Acknowledgement.}
+\appendix
+\section{Large Dispersion Limit}
+\label{sec:largedisp}
+In the large dispersion limit, we have $s \rightarrow \infty$, and
+\begin{align}
+	\sigma^2 &\sim 1 - \frac{1}{4}s^{-4} + \bigO{s^{-8}}, \label{eq:siginfty} \\
+	C &\sim \frac{1}{2}s^{-2} + \bigO{s^{-6}}.
+\end{align}
+We have no asymptotic expansion of the energy or peak power in the limit $s \rightarrow \infty$ since the pulse loses too much energy because of dispersion and modulation. The gain is not powerful enough to balance the energy lost. Expanding the requirement in \eqref{eq:energycond} using \eqref{eq:siginfty}, we find 
+\begin{align}
+	s^* = \left( \frac{a h^2}{2} \right)^{1/2}
+	\label{eq:maxs}
+\end{align}
+is the maximum value of $s$ to facilitate a sustainable pulse.
 
+\section*{Acknowledgement.}
 Portions of this work were presented at The V AMMCS International Conference in 2019, ``A new method of modelling tuneable lasers with functional composition'' \cite{metherallammcs}. BM acknowledges the support provided by the EPSRC Centre for Doctoral Training in Industrially Focused Mathematical Modelling (EP/L015803/1). The authors would like to thank C. Breward for critical reading of the manuscript.
 
 \section*{Disclosures.}
