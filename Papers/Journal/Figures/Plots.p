@@ -25,22 +25,18 @@ set view 45,325
 
 unset colorbox
 
-#set out 'Evo.tex'
+set out 'Evo.tex'
+	set multiplot
+		set lmargin at screen 0.26
+		set rmargin at screen 0.86
+		set bmargin at screen 0.30
+		set tmargin at screen 0.99
 
-#set multiplot
-
-set lmargin at screen 0.26
-set rmargin at screen 0.86
-set bmargin at screen 0.30
-set tmargin at screen 0.99
-
-#sp '../Data/EBig.dat' u ($2*0.1):1:3 w pm3d not, \
-#'../Data/Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
-#'../Data/Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
-
-#unset multiplot
-
-#set out
+		sp '../Data/EBig.dat' u ($2*0.1):1:3 w pm3d not, \
+			'../Data/Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
+			'../Data/Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
+	unset multiplot
+set out
 
 reset
 
@@ -294,16 +290,16 @@ s = 1.0
 
 spot = sqrt(pi / C) * s
 
-set arrow from 0, 0 to spot, 0 lc rgb 'red'
+set arrow from 0, 0 to spot, 0 lc rgb 'blue'
 set label '$\displaystyle \left( \frac{\pi}{C} \right)^{1/2}$' at 0.35 * spot, 0.2 center
 
 set samples 1000
 
-#set output './Sample_Gauss.tex'
-#	p exp(-x**2 / (2*s**2)) t 'Envelope', \
-#		exp(-x**2 / (2*s**2))*cos(-x**2 * C / (2*s**2)) t 'Real Part' dt 5, \
-#		exp(-x**2 / (2*s**2))*sin(-x**2 * C / (2*s**2)) t 'Imag. Part' dt 4
-#set out
+# set output './Sample_Gauss.tex'
+# 	p exp(-x**2 / (2*s**2)) t 'Envelope', \
+# 		exp(-x**2 / (2*s**2))*cos(-x**2 * C / (2*s**2)) t 'Real Part' dt '-', \
+# 		exp(-x**2 / (2*s**2))*sin(-x**2 * C / (2*s**2)) t 'Imag. Part' dt '.' lc 7
+# set out
 
 reset
 
@@ -331,13 +327,11 @@ set lmargin at screen 0.15
 set rmargin at screen 0.98
 set tmargin at screen 0.96
 
-#set output 'Chirp.tex'
-
-#p '../Data/ChirpFT0.dat' u 1:(-d($1,$7)) w l t '$b = 0.0$', \
-#	'../Data/ChirpFT1.dat' u 1:(-d($1,$7)) w l dt 5 t '$b = 1.0$', \
-#	'../Data/ChirpFT4.dat' u 1:(-d($1,$7)) w l dt 4 t '$b = 4.0$'
-
-#set out
+# set output 'Chirp.tex'
+# 	p '../Data/ChirpFT0.dat' every 16 u 1:(-d($1,$7)) w l t '$b = 0.0$', \
+# 		'../Data/ChirpFT1.dat' every 16 u 1:(-d($1,$7)) w l dt '-' t '$b = 1.0$', \
+# 		'../Data/ChirpFT4.dat' every 16 u 1:(-d($1,$7)) w l dt '.' lc 7 smooth unique t '$b = 4.0$'
+# set out
 
 reset
 
@@ -363,10 +357,8 @@ set tmargin at screen 0.96
 
 set samples 500
 
-#set output 'FT.tex'
-
-#p '../Data/ChirpFT0.dat' u 5:($6 / 7889) w l smooth csplines t '$b=0.0$', \
-#	'../Data/ChirpFT1.dat' u 5:($6 / 7889) w l smooth csplines dt 5 t '$b=1.0$', \
-#	'../Data/ChirpFT4.dat' u 5:($6 / 7889) w l smooth csplines dt 4 t '$b=4.0$'
-
-#set out
+# set output 'FT.tex'
+# 	p '../Data/ChirpFT0.dat' u 5:($6 / 7889) w l smooth csplines t '$b=0.0$', \
+# 		'../Data/ChirpFT1.dat' u 5:($6 / 7889) w l smooth csplines dt '-' t '$b=1.0$', \
+# 		'../Data/ChirpFT4.dat' u 5:($6 / 7889) w l smooth csplines dt '.' lc 7 t '$b=4.0$'
+# set out
