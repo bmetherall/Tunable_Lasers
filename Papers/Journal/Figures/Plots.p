@@ -25,18 +25,18 @@ set view 45,325
 
 unset colorbox
 
-set out 'Evo.tex'
-	set multiplot
-		set lmargin at screen 0.26
-		set rmargin at screen 0.86
-		set bmargin at screen 0.30
-		set tmargin at screen 0.99
+#set out 'Evo.tex'
+#	set multiplot
+#		set lmargin at screen 0.26
+#		set rmargin at screen 0.86
+#		set bmargin at screen 0.30
+#		set tmargin at screen 0.99
 
-		sp '../Data/EBig.dat' u ($2*0.1):1:3 w pm3d not, \
-			'../Data/Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
-			'../Data/Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
-	unset multiplot
-set out
+#		sp '../Data/EBig.dat' u ($2*0.1):1:3 w pm3d not, \
+#			'../Data/Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
+#			'../Data/Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
+#	unset multiplot
+#set out
 
 reset
 
