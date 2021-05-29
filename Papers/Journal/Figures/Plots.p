@@ -73,6 +73,7 @@ unset cl
 # 	sp '../Data/EBig.dat' u 1:($2*0.1):($3**2) w l not
 # unset table
 
+<<<<<<< HEAD
 set lmargin at screen 0.13
 set rmargin at screen 0.79
 
@@ -80,6 +81,20 @@ set rmargin at screen 0.79
 # 	p '../Data/EBig.dat' u 1:($2*0.1):($3**2) w image not, \
 # 		'../Data/ContoursEvo.dat' u 1:2 w l lc 8 lw 0.2 not
 # set out
+=======
+#set out 'Evo.tex'
+#	set multiplot
+#		set lmargin at screen 0.26
+#		set rmargin at screen 0.86
+#		set bmargin at screen 0.30
+#		set tmargin at screen 0.99
+
+#		sp '../Data/EBig.dat' u ($2*0.1):1:3 w pm3d not, \
+#			'../Data/Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
+#			'../Data/Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
+#	unset multiplot
+#set out
+>>>>>>> 76b94f68d4d3fce2e3381c0114e160f733dedd40
 
 reset
 
