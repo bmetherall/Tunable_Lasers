@@ -1,8 +1,7 @@
+using Distributed
 @everywhere using FFTW
 @everywhere using LambertW
 @everywhere using DelimitedFiles
-#using PyPlot
-using Distributed
 @everywhere using SharedArrays
 
 @everywhere function fftfreq(n::Int)
@@ -131,8 +130,8 @@ dx = x[2] - x[1]
 A0 = exp.(-(x .- 0.5).^2 ./ (2 * 0.05^2))
 A0 = sqrt(E0 / Energy(A0, dx)) * A0 # Normalize
 
-Loop(A0, x, dx, 0.1, 1.0, 2); # Compile
+# Loop(A0, x, dx, 0.1, 1.0, 2); # Compile
 
-Solve(A0, 2, 2, 2) # Compile
+# Solve(A0, 2, 2, 2) # Compile
 
-@time Solve(A0, n, m, numloops, "ResultsDelta.dat")
+# @time Solve(A0, n, m, numloops, "ResultsDelta.dat")
