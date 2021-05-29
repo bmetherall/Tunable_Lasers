@@ -3,40 +3,83 @@ set terminal epslatex color size 8.40cm,5.45cm lw 3 standalone font 9 header '\u
 ############################
 # 3D plot
 
+# load 'BGY.p'
+# #set format x '%.1f'
+# #set format y '%.1f'
+# set format z '%.1f'
+# set grid
+# set xl '$z$' offset screen 0.02,-0.02
+# set yl '$T$' offset screen 0.02,0
+# set zl '$|A|^2$' offset screen 0.05,0
+# set ztics 0.5 offset 0.5
+
+# set yr [-2.5:2.5]
+
+# set xtics ('Loss' 3, 'Disp.' 9, 'Mod.' 15, 'Gain' 21)
+
+# set xtics center offset 0,-0.5
+
+# set xyplane 0
+
+# set view 45,325
+
+# unset colorbox
+
+# set out 'Evo.tex'
+# 	set multiplot
+# 		set lmargin at screen 0.26
+# 		set rmargin at screen 0.86
+# 		set bmargin at screen 0.30
+# 		set tmargin at screen 0.99
+
+# 		sp '../Data/EBig.dat' u ($2*0.1):1:($3**2) w pm3d not, \
+# 			'../Data/Shell1.dat' u 2:1:($3**2) w l lw 0.2 lc 8 not, \
+# 			'../Data/Shell2.dat' u ($2*0.1):1:($3**2) w l lw 0.2 lc 8 not
+# 	unset multiplot
+# set out
+
+# reset
+
 load 'BGY.p'
 #set format x '%.1f'
 #set format y '%.1f'
-set format z '%.1f'
-set grid
-set xl '$z$' offset screen 0.02,-0.02
-set yl '$T$' offset screen 0.02,0
-set zl '$|A|$' offset screen 0.05,0
-set ztics 0.5 offset 0.5
+# set format cb '%.1f'
+set format cb '$10^{%T}$'
+set grid front
+set yl '$z$' offset 1,0
+set xl '$T$'
+set cbl rotate by 0 '$|A|^2$'
 
-set yr [-2.5:2.5]
+set xr [-1.5:1.5]
+set cbr [0.01:1]
 
-set xtics ('Loss' 3, 'Disp.' 9, 'Mod.' 15, 'Gain' 21)
+set xtics 1
+set ytics ('Loss' 6, 'Disp.' 12, 'Mod.' 18, 'Gain' 24) rotate by 90
+set ytics center offset -0.5, graph -0.125
 
-set xtics center offset 0,-0.5
+set cbtics offset -0.5,0
 
-set xyplane 0
+set logscale z
+set logscale cb
 
-set view 45,325
+set view map
+set contour base
+set cntrparam levels discrete 0.001, 0.00158489, 0.00251189, 0.00398107, 0.00630957, 0.01, 0.01584893, 0.02511886, 0.03981072, 0.06309573, 0.1, 0.15848932, 0.25118864, 0.39810717, 0.63095734, 1
 
-unset colorbox
+unset cl
 
-set out 'Evo.tex'
-	set multiplot
-		set lmargin at screen 0.26
-		set rmargin at screen 0.86
-		set bmargin at screen 0.30
-		set tmargin at screen 0.99
+# unset surface
+# set table '../Data/ContoursEvo.dat'
+# 	sp '../Data/EBig.dat' u 1:($2*0.1):($3**2) w l not
+# unset table
 
-		sp '../Data/EBig.dat' u ($2*0.1):1:3 w pm3d not, \
-			'../Data/Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
-			'../Data/Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
-	unset multiplot
-set out
+set lmargin at screen 0.13
+set rmargin at screen 0.79
+
+# set out 'Evo.tex'
+# 	p '../Data/EBig.dat' u 1:($2*0.1):($3**2) w image not, \
+# 		'../Data/ContoursEvo.dat' u 1:2 w l lc 8 lw 0.2 not
+# set out
 
 reset
 
@@ -46,38 +89,37 @@ reset
 load 'BGY.p'
 #set format x '%.1f'
 #set format y '%.1f'
-set format cb '%.2f'
+set format cb '%.1f'
 set grid front
 set yl 'Number of Round Trips'
 set xl '$T$'
-set cbl rotate by 0 '$|A|$'
+set cbl rotate by 0 '$|A|^2$'
 
-set cbr [0:1.5]
-set xr [-2:2]
+set cbr [0:2.5]
+set xr [-1.5:1.5]
 set yr [0:36]
-set cbtics 0.25
+set cbtics 0.5
 set xtics 1
 set ytics 6
 
 set view map
 set contour base
-set cntrparam levels incremental 0,0.25,1.5
+set cntrparam levels incremental 0,0.25,2.5
 
 unset cl
 
-#set table 'Contours.dat'
-#sp 'Converge.dat' u 1:2:3 w l not
-#unset table
+# unset surface
+# set table '../Data/Contours.dat'
+# 	sp '../Data/Converge.dat' u 1:2:($3**2) w l not
+# unset table
 
 set lmargin at screen 0.13
-set rmargin at screen 0.79
+set rmargin at screen 0.81
 
-#set out 'Conv.tex'
-
-#p '../Data/Converge.dat' u 1:2:3 w image not, \
-#'../Data/Contours.dat' u 1:2 w l lc 8 lw 0.2 not
-
-#set out
+# set out 'Conv.tex'
+# 	p '../Data/Converge.dat' u 1:2:($3**2) w image not, \
+# 		'../Data/Contours.dat' u 1:2 w l lc 8 lw 0.2 not
+# set out
 
 reset
 #########################
@@ -86,39 +128,37 @@ reset
 load 'BGY.p'
 #set format x '%.1f'
 #set format y '%.1f'
-set format cb '%.2f'
+set format cb '%.1f'
 set grid front
 set yl 'Number of Round Trips'
 set xl '$T$'
-set cbl rotate by 0 '$|A|$'
+set cbl rotate by 0 '$|A|^2$'
 
-set cbr [0:1.5]
-set xr [-2:2]
+set cbr [0:2.5]
+set xr [-1.5:1.5]
 set yr [0:36]
-set cbtics 0.25
+set cbtics 0.5
 set xtics 1
 set ytics 6
 
 set view map
 set contour base
-set cntrparam levels incremental 0,0.25,1.5
+set cntrparam levels incremental 0,0.25,2.5
 
 unset cl
 
-#set table 'ContoursBreak.dat'
-#sp 'Break.dat' u 1:2:3 w l not
-#unset table
+# unset surface
+# set table '../Data/ContoursBreak.dat'
+# 	sp '../Data/Break.dat' u 1:2:($3**2) w l not
+# unset table
 
 set lmargin at screen 0.13
-set rmargin at screen 0.79
+set rmargin at screen 0.81
 
-
-#set out 'Break.tex'
-
-#p '../Data/Break.dat' u 1:2:3 w image not, \
-#'../Data/ContoursBreak.dat' u 1:2 w l lc 8 lw 0.2 not
-
-#set out
+# set out 'Break.tex'
+# 	p '../Data/Break.dat' u 1:2:($3**2) w image not, \
+# 		'../Data/ContoursBreak.dat' u 1:2 w l lc 8 lw 0.2 not
+# set out
 
 reset
 #################################
@@ -341,11 +381,13 @@ reset
 set grid
 
 set xr [-15:15]
+set yr [10**-3:1]
 
 set xl '$\omega$'
-set yl '$\left| \mathcal{F} \{ A \} \right|$ (AU)' offset 0.5,0
+set yl '$\left| \mathcal{F} \{ A \} \right|^2$ (AU)' offset 0.5,0
 
 set xtics 5
+set ytics 0.2
 
 set key top left
 
@@ -358,7 +400,7 @@ set tmargin at screen 0.96
 set samples 500
 
 # set output 'FT.tex'
-# 	p '../Data/ChirpFT0.dat' u 5:($6 / 7889) w l smooth csplines t '$b=0.0$', \
-# 		'../Data/ChirpFT1.dat' u 5:($6 / 7889) w l smooth csplines dt '-' t '$b=1.0$', \
-# 		'../Data/ChirpFT4.dat' u 5:($6 / 7889) w l smooth csplines dt '.' lc 7 t '$b=4.0$'
+# 	p '../Data/ChirpFT0.dat' u 5:($6 / 7889)**2 w l smooth csplines t '$b = 0.0$', \
+# 		'../Data/ChirpFT1.dat' u 5:($6 / 7889)**2 w l smooth csplines dt '-' t '$b = 1.0$', \
+# 		'../Data/ChirpFT4.dat' u 5:($6 / 7889)**2 w l smooth csplines dt '.' lc 7 t '$b = 4.0$'
 # set out
