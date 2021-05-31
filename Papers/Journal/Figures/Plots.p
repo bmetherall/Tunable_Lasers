@@ -73,7 +73,6 @@ unset cl
 # 	sp '../Data/EBig.dat' u 1:($2*0.1):($3**2) w l not
 # unset table
 
-<<<<<<< HEAD
 set lmargin at screen 0.13
 set rmargin at screen 0.79
 
@@ -81,20 +80,6 @@ set rmargin at screen 0.79
 # 	p '../Data/EBig.dat' u 1:($2*0.1):($3**2) w image not, \
 # 		'../Data/ContoursEvo.dat' u 1:2 w l lc 8 lw 0.2 not
 # set out
-=======
-#set out 'Evo.tex'
-#	set multiplot
-#		set lmargin at screen 0.26
-#		set rmargin at screen 0.86
-#		set bmargin at screen 0.30
-#		set tmargin at screen 0.99
-
-#		sp '../Data/EBig.dat' u ($2*0.1):1:3 w pm3d not, \
-#			'../Data/Shell1.dat' u 2:1:3 w l lw 0.2 lc 8 not, \
-#			'../Data/Shell2.dat' u ($2*0.1):1:3 w l lw 0.2 lc 8 not
-#	unset multiplot
-#set out
->>>>>>> 76b94f68d4d3fce2e3381c0114e160f733dedd40
 
 reset
 
@@ -419,3 +404,34 @@ set samples 500
 # 		'../Data/ChirpFT1.dat' u 5:($6 / 7889)**2 w l smooth csplines dt '-' t '$b = 1.0$', \
 # 		'../Data/ChirpFT4.dat' u 5:($6 / 7889)**2 w l smooth csplines dt '.' lc 7 t '$b = 4.0$'
 # set out
+
+reset
+
+#########################
+# Energy vs Round Trips
+
+set grid
+
+set yr [0:2.5]
+
+set xl 'Number of Round Trips'
+set yl '$E$' offset 1,0
+
+set key bottom right maxrows 2 width -8
+
+set format y '$%1.1f$'
+
+set lmargin at screen 0.15
+set rmargin at screen 0.97
+set tmargin at screen 0.96
+
+set xr [0:500]
+
+# set output 'EnergyTime.tex'
+# 	p '../Data/EnergyTime.dat' u 1:2 w l t '\footnotesize $s = 0.20$, $b = 1.0$', \
+# 		'' u 1:3 w l t '\footnotesize $s = 0.10$, $b = 2.0$', \
+# 		'' u 1:4 w l lc 7 t '\footnotesize $s = 0.15$, $b = 4.0$', \
+# 		'' u 1:5 w l lc 3 t '\footnotesize $s = 0.35$, $b = 6.0$'
+# set out
+
+reset
