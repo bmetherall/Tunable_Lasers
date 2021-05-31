@@ -115,8 +115,21 @@ function Solve(A0, n::Int64, m::Int64, numloops::Int64, fname = "Results.dat")
 	close(f)
 end
 
+function energy_plot(A, x, dx, s, b, N)
+	res = zeros(N)
+
+	for i in 1:N
+		A = Loop(A, x, dx, s, b)
+		res[i] = Energy(A, dx)
+	end
+
+	display(plot(x, abs.(A)))
+
+	return 1:N, res	
+end
+
 # Parameters
-p = 2^16 # Number of points in the discretization
+p = 2^12 # Number of points in the discretization
 width = 8 # Size of window
 E0 = 0.1 # Initial energy
 n = 151 # Number in s
@@ -126,8 +139,8 @@ numloops = 25
 # Initialization
 x = LinRange(-width, width, p)
 dx = x[2] - x[1]
-#A0 = 1.0 ./ cosh.(2 * x) * exp(1im * pi / 4.0)
-A0 = exp.(-(x .- 0.5).^2 ./ (2 * 0.05^2))
+A0 = 1.0 ./ cosh.(2 * x) * exp(1im * pi / 4.0)
+#A0 = exp.(-(x .- 0.5).^2 ./ (2 * 0.05^2))
 A0 = sqrt(E0 / Energy(A0, dx)) * A0 # Normalize
 
 # Loop(A0, x, dx, 0.1, 1.0, 2); # Compile
