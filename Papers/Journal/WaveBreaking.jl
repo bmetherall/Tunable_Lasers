@@ -116,16 +116,18 @@ function Solve(A0, n::Int64, m::Int64, numloops::Int64, fname = "Results.dat")
 end
 
 function energy_plot(A, x, dx, s, b, N)
-	res = zeros(N)
+	res = zeros(N+1)
 
-	for i in 1:N
+	res[1] = Energy(A, dx)
+
+	for i in 2:N+1
 		A = Loop(A, x, dx, s, b)
 		res[i] = Energy(A, dx)
 	end
 
-	display(plot(x, abs.(A)))
+	# display(plot(x, abs.(A)))
 
-	return 1:N, res	
+	return 0:N, res	
 end
 
 # Parameters
@@ -148,3 +150,10 @@ A0 = sqrt(E0 / Energy(A0, dx)) * A0 # Normalize
 # Solve(A0, 2, 2, 2) # Compile
 
 # @time Solve(A0, n, m, numloops, "ResultsDelta.dat")
+
+_, y1 = energy_plot(A0, x, dx, 0.2, 1.0, 500)
+_, y2 = energy_plot(A0, x, dx, 0.1, 2.0, 500)
+_, y3 = energy_plot(A0, x, dx, 0.15, 4.0, 500)
+_, y4 = energy_plot(A0, x, dx, 0.35, 6.0, 500)
+
+writedlm("EnergyTime.dat", [0:500 y1 y2 y3 y4])
