@@ -10,6 +10,14 @@
 % false = research / review article
 % (depending on journal).
 
+% 2020-12-22: Backmatter sections should use smaller font
+% size, including run-in headings \bmsection.
+\newenvironment{backmatter}{%
+  \small%
+  \newcommand{\bmsection}[1]{\par\medskip\noindent{\bfseries ##1.\enspace}}%
+}{}
+
+
 \usepackage{subcaption}
 \usepackage{tikz}
 \usepackage{mathtools}
@@ -425,7 +433,7 @@ Finally, we briefly investigate the affect the order of the components has on th
 
 \section{Conclusion}
 \label{sec:conclusion}
-Expanding upon the ideas originally proposed by Cutler~\cite{cutler1955}, and Kuizenga and Siegman~\cite{kuizenga1970, kuizenga1970a, siegman1969}, we developed a nonlinear iterative map model for tuneable ring lasers. We recovered linearly chirped Gaussian solutions in the case of a Gaussian modulation function when omitting the nonlinearity. Moreover, the solution of the linear model extends to any continuous function with compact support when using the results of~\cite{calcaterra2008a}. In contrast, with the inclusion of the nonlinearity, we were able to recover wave breaking and modulation instability, and found a sharp boundary of stability. These instabilities have been demonstrated in a laboratory setting~\cite{agrawal2013, anderson1992, finot2008, rothenberg1989b, tomlinson1985}, but, have proven difficult to predict with simple mathematical models~\cite{meng2020}. We have shown a simple iterative map model is able to reproduce complicated instabilities arising naturally from the interplay between dispersion, modulation, and nonlinear effects. Our model easily adapts to specific laser geometries, and to more complicated models of individual components. For example, incorporating a frequency dependence in the gain function, or model a saturable absorber instead of a Gaussian electro-optic modulator.
+Expanding upon the ideas originally proposed by Cutler~\cite{cutler1955}, and Kuizenga and Siegman~\cite{kuizenga1970, kuizenga1970a, siegman1969}, we developed a nonlinear iterative map model for tuneable ring lasers. We recovered linearly chirped Gaussian solutions in the case of a Gaussian modulation function when omitting the nonlinearity. Moreover, the solution of the linear model extends to any continuous function with compact support when using the results of~\cite{calcaterra2008a}. In contrast, with the inclusion of the nonlinearity, we found an unstable region in the $s$--$b$ plane, with a sharp boundary separating the stable and unstable regions. Predicting the conditions under which a tuneable ring laser is unstable has proven difficult with simple mathematical models~\cite{meng2020}. We have shown a simple iterative map model is able to reproduce complicated instabilities arising naturally from the interplay between dispersion, modulation, and nonlinear effects. Our model easily adapts to specific laser geometries, and to more complicated models of individual components. For example, incorporating a frequency dependence in the gain function, or model a saturable absorber instead of a Gaussian electro-optic modulator.
 
 Analyzing the nonlinear model analytically using an asymptotic expansion for small values of the nonlinearity parameter, $b$, is of interest. Doing so will provide insight to how the nonlinearity impacts the linear solution to better understand the manifestation of wave breaking and modulation instability. Furthermore, a more detailed analysis of crossing the boundary between stability and instability may provide valuable insight for mechanisms that trigger the instability.
 
@@ -444,11 +452,18 @@ We have no asymptotic expansion of the energy or peak power in the limit $s \rig
 \end{align}
 is the maximum value of $s$ to facilitate a sustainable pulse.
 
-\section*{Acknowledgement.}
-Portions of this work were presented at The V AMMCS International Conference in 2019, ``A new method of modelling tuneable lasers with functional composition'' \cite{metherallammcs}. BM acknowledges the support provided by the EPSRC Centre for Doctoral Training in Industrially Focused Mathematical Modelling (EP/L015803/1). The authors would like to thank C. Breward for critical reading of the manuscript.
+\begin{backmatter}
+	\bmsection{Funding}
+	
+	\bmsection{Acknowledgement}
+	Portions of this work were presented at The V AMMCS International Conference in 2019, ``A new method of modelling tuneable lasers with functional composition'' \cite{metherallammcs}. BM acknowledges the support provided by the EPSRC Centre for Doctoral Training in Industrially Focused Mathematical Modelling (EP/L015803/1). The authors would like to thank C. Breward for critical reading of the manuscript.
 
-\section*{Disclosures.}
-The authors declare no conflicts of interest.
+	\bmsection{Disclosures}
+	The authors declare no conflicts of interest.
+
+	\bmsection{Data Availability}
+	Data underlying the results presented in this paper are not publicly available at this time but may be obtained from the authors upon reasonable request.
+\end{backmatter}
 
 \bibliography{Ref}
 
