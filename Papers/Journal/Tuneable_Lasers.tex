@@ -17,7 +17,6 @@
   \newcommand{\bmsection}[1]{\par\medskip\noindent{\bfseries ##1.\enspace}}%
 }{}
 
-
 \usepackage{subcaption}
 \usepackage{tikz}
 \usepackage{mathtools}
@@ -45,6 +44,9 @@
 \providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}} % Big O notation
 
 \DeclareMathOperator{\sech}{sech}
+
+\renewcommand{\topfraction}{.75}
+\renewcommand{\floatpagefraction}{.8}
 
 \title{Predicting instabilities of a tuneable ring laser with an iterative map model}
 
@@ -204,15 +206,8 @@ The geometry of a particular laser will dictate the order of the process maps. H
 \end{align}
 denote one complete round trip of the cavity. Since a ring laser is cyclic in nature, we use the result of one round trip as the input pulse for the next round trip---restarting the process. We continually repeat this procedure until the envelope and chirp of the pulse reach equilibrium, or the pulse becomes unstable. The phase change is uninteresting to us, as the phase cannot easily be measured experimentally. An illustration of the evolution of the envelope during one round trip of the laser cavity can be found in Fig.~\ref{fig:cavityevo}.
 
-\begin{figure}[tbp]
-	\centering
-	\includegraphics{Figures/Evo}
-	\caption{Evolution of the envelope during one round trip of the cavity. The pulse decays because of the optical coupler, disperses because of the CFBG, is modulated by the modulator, and finally, is amplified by the gain fibre (the envelope is unaltered by the nonlinearity). Note, the $z$ axis is not to scale.}
-	\label{fig:cavityevo}
-\end{figure}
-
 % Table of parameter values
-\begin{table*}[!b]
+\begin{table*}[tbp]
 	\centering
 	\caption{Range of parameter values (taken from~\cite{agrawal2013, burgoyne2014, burgoyneemail, tamura1996, usechak2005}).}
  	\label{tab:values}
@@ -233,6 +228,13 @@ denote one complete round trip of the cavity. Since a ring laser is cyclic in na
 		\noalign{\smallskip}\hline
 	\end{tabular}
 \end{table*}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics{Figures/Evo}
+	\caption{Evolution of the envelope during one round trip of the cavity. The pulse decays because of the optical coupler, disperses because of the CFBG, is modulated by the modulator, and finally, is amplified by the gain fibre (the envelope is unaltered by the nonlinearity). Note, the $z$ axis is not to scale.}
+	\label{fig:cavityevo}
+\end{figure}
 
 \subsection{Non-Dimensionalization}
 Non-dimensionalization is a technique used in mathematical modelling to better understand the relative importance of different processes within a system. In essence, we scale all variables by typical values based on the geometry and boundary conditions (see, for example,~\cite{howison2005}). Doing so `factors' the dimensional units out of the problem---leaving only dimensionless equations with dimensionless parameters. The relative magnitudes of the dimensionless parameters characterize the dominant dynamics---comparable to how the Reynolds number describes fluid flow. Each process in the laser can be better understood by scaling the time, energy, and amplitude by the convenient factors:
@@ -266,37 +268,58 @@ and we have estimated their sizes using values in Table~\ref{tab:values}.
 
 Each expression in \eqref{eq:effects} contains a single parameter that characterizes the device. The parameter governing the modulation, the time $T_M$, does not appear in $M(A)$, but is used to define the relative strength of the other devices. The gain is characterized by $a$, a measure of the energy added by the gain fibre; the Kerr nonlinearity by $b$, prescribing the frequency shift; the total loss by $h$, includes absorption and the optical coupler; and the dispersion by $s$, specifying the effectiveness of the CFBG to the width of the pulse.
 
+
+
+
+To further justify the decoupling of the GNSLE into an iterative map, \eqref{eq:nlse} can be written in a dimensionless form where the characteristic time, length, and amplitude are taken to be $T_M$, $L$, and $P_0^{1/2}$, respectively. Letting
+\begin{align}
+	T &= T_M \widetilde{T}, & z &= L \widetilde{z}, & A &= P_0^{1/2} \widetilde{A},
+\end{align}
+\eqref{eq:nlse} becomes
+\begin{align}
+	\pdiff{\widetilde{A}}{\widetilde{z}} = \frac{-i \, \textrm{sgn}(\beta_2) L}{L_\textrm{disp}} \pdiff[2]{\widetilde{A}}{\widetilde{T}} + i \frac{L}{L_\textrm{NL}} |\widetilde{A}|^2 \widetilde{A} + \frac{1}{2}g_0 L \, \widetilde{g}(\widetilde{A}) \widetilde{A} - \alpha L \widetilde{A},
+	\label{eq:ndgnlse}
+\end{align}
+where
+\begin{equation}
+	\begin{gathered}
+		\widetilde{g}(\widetilde{A}) = \left( 1 + \frac{P_0 T_M}{\Es} \int_{-\infty}^\infty |\widetilde{A}|^2 \, \df \widetilde{T} \right)^{-1}, \\
+		L_\textrm{disp} = \frac{T_M^2}{|\beta_2|}, \hspace{2cm} L_\textrm{NL} = \frac{1}{\gamma P_0}.
+	\end{gathered}
+\end{equation}
+The dispersion length $L_\textrm{disp}$, and the nonlinear length $L_\textrm{NL}$, are identified in~\cite{agrawal2013} as length scales over which either the dispersive, or nonlinear, effects dominate the evolution of a pulse.
+
+For the gain, the characteristic quantity is $g_0 L$, and within the gain fibre $g_0 L = \bigO{10^1}$. Outside this domain, $g_0 L = \bigO{10^{-3}}$, reflecting the small amount of gain in these other regions. A similar argument can be made for the attenuation factor $-\alpha L$ by considering the output coupler to be analogous to additional length of fibre. The dispersion-dominant regime is characterized by the condition~\cite{agrawal2013}
+\begin{align}
+	\frac{L_\textrm{disp}}{L_\textrm{NL}} = \frac{\gamma P_0 T_M^2}{|\beta_2|} \ll 1.
+\end{align}
+This condition is attained in regions with relatively low pulse power, and a large value of $|\beta_2|$. The nonlinearity-dominant regime corresponds to $L_\textrm{disp} / L_\textrm{NL} \gg 1$, with a much larger pulse power, and small value of $|\beta_2|$. For a single-mode silicon fibre $|\beta_2| \sim 20$ ps$^2$/km, illustrating that the effective dispersion, $|\beta_2| L$, varies by a factor of $10^4$ from inside to outside the dispersive~region.
+
+We show in Table \ref{tab:NDparams} an order of magnitude estimate of the size of each of the non-dimensional parameters in \eqref{eq:ndgnlse}. Within each of the four regions we find that one parameter (highlighted) dominates the three others, further justifying the proposed decoupling process.
+
+% Table of relative dynamics
+\begin{table}[tbp]
+	\centering
+	\caption{Relative size of loss, dispersion, gain, and nonlinearity in each section of the cavity.}
+ 	\label{tab:NDparams}
+ 	\begin{tabular}{ccccc}
+		\hline
+		Parameter \hspace*{-1mm} & Loss & Dispersion & Gain & Fibre \\
+		\hline\noalign{\smallskip}
+		$\alpha L$ & \color{color2}$\bigO{10^{-1}}$ & $\bigO{10^{-3}}$ & $\bigO{10^{-3}}$ & $\bigO{10^{-3}}$ \\
+		$L / L_\text{disp}$ & $\bigO{10^{-3}}$ & \color{color2}$\bigO{10^{-1}}$ & $\bigO{10^{-3}}$ & $\bigO{10^{-3}}$ \\
+		$g_0 L$ & $\bigO{10^{-4}}$ & $\bigO{10^{-4}}$ & \color{color2}$\bigO{10^{1}}$ & $\bigO{10^{-4}}$ \\
+		$L / L_\text{NL}$ & $\bigO{10^{-3}}$ & $\bigO{10^{-3}}$ & $\bigO{10^{-3}}$ & \color{color2}$\bigO{10^{0}}$ \\
+		\noalign{\smallskip}\hline
+	\end{tabular}
+\end{table}
+
 \section{Results}
 \label{sec:results}
 We split the results into two subsections. First, we investigate the small nonlinearity limit ($b \ll 1$), and then we explore the full nonlinear model.
 
 \subsection{Linear Solution}
 We neglect the effect of the nonlinearity, that is, we take $b \ll 1$. Proceeding by assuming a fixed point solution in the representation of a linearly chirped Gaussian, our aim is to find the variance, chirp, and energy of the pulse. The reasons for this assumption are that the solution to the models presented in~\cite{cutler1955, siegman1969, kuizenga1970a, martinez1984, martinez1985} were Gaussian, the equilibrium shape will correlate to the modulation function, and a Gaussian is a fixed point of the Fourier transform. Furthermore, we choose a linearly chirped Gaussian because it resembles the envelope, and linear chirp expected from the literature~\cite{burgoyne2014, haus1975, haus1996, haus2000, usechak2005}.
-
-\begin{figure}[tbp]
-	\centering
-	\includegraphics{Figures/Sample_Gauss}
-	\caption{Graph of the linearly chirped Gaussian pulse given by \eqref{eq:A0} with $\phi_0 = 0$.}
-	\label{fig:samplegauss}
-\end{figure}
-
-\begin{figure*}[tbp]
-	\centering
-	\begin{subfigure}{\columnwidth}
-		\centering
-		\includegraphics{Figures/Chirp}
-		\caption{Chirp.}
-		\label{fig:chirp}
-	\end{subfigure} \hfill
-	\begin{subfigure}{\columnwidth}
-		\centering
-		\includegraphics{Figures/FT}
-		\caption{Fourier transform.}
-		\label{fig:ft}
-	\end{subfigure}
-	\caption{Chirp and Fourier transform at equilibrium (after 500 round trips) initiated by \eqref{eq:nlA0} for three values of $b$, the nonlinearity parameter ($a = 8 \times 10^3$, $h = 0.04$, $s = 0.2$, and $E_0 = 0.1$).}
-	\label{fig:chirpft}
-\end{figure*}
 
 We consider the pulse, shown in Figure \ref{fig:samplegauss}, given by
 \begin{align}
@@ -344,6 +367,32 @@ The argument of the logarithm in \eqref{eq:analenergy} gives us the condition
 \end{align}
 for the pulse to be sustainable.
 
+\begin{figure}[tbp]
+	\centering
+	\includegraphics{Figures/Sample_Gauss}
+	\caption{Graph of the linearly chirped Gaussian pulse given by \eqref{eq:A0} with $\phi_0 = 0$.}
+	\label{fig:samplegauss}
+\end{figure}
+
+\begin{figure*}[tbp]
+	\centering
+	\begin{subfigure}{\columnwidth}
+		\centering
+		\includegraphics{Figures/Chirp}
+		\caption{Chirp.}
+		\label{fig:chirp}
+	\end{subfigure} \hfill
+	\begin{subfigure}{\columnwidth}
+		\centering
+		\includegraphics{Figures/FT}
+		\caption{Fourier transform.}
+		\label{fig:ft}
+	\end{subfigure}
+	\caption{Chirp and Fourier transform at equilibrium (after 500 round trips) initiated by \eqref{eq:nlA0} for three values of $b$, the nonlinearity parameter ($a = 8 \times 10^3$, $h = 0.04$, $s = 0.2$, and $E_0 = 0.1$).}
+	\label{fig:chirpft}
+\end{figure*}
+
+
 Equating the energy of the pulse given by \eqref{eq:A0} and \eqref{eq:analenergy}, we find the peak power to be
 \begin{align}
 	P &= \frac{\log \left( a h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}{\sqrt{\pi} \sigma \left( 1 - h^2 \left( 1 - \sigma^2 \right)^{1/2} \right)}.
@@ -372,8 +421,6 @@ Here, $\Gamma$ is a normalizing factor chosen so the pulse has the initial energ
 
 In Fig.~\ref{fig:chirpft} we show the chirp and Fourier transform of the pulse \eqref{eq:nlA0} after reaching equilibrium for the nominal parameter values given in \eqref{eq:ndparam}, and two additional $b$ values. In the nonlinear case, we find the equilibrium pulse is no longer Gaussian---as evidenced by the Fourier transforms. Notice, in comparison to the linear case, the nonlinearity introduces higher frequency modes, giving a bi-modal distribution. Moreover, we find the pulse is linearly chirped near the peak, but, in the tails, $|T| \gtrsim 1$, the chirp begins to saturate---consistent with the experimental results~\cite{chen2008, rothenberg1989b, tomlinson1985}. As the nonlinearity parameter, $b$, increases, the chirp increases more sharply across the pulse, and saturates at a larger value. Also, the two peaks in the Fourier transform become more pronounced and further apart, and the Fourier transform of the pulse becomes more rectangular. However, after a critical point, SPM plays a more substantial role, leading to instability.
 
-Fig.~\ref{fig:breakevo} highlights the instability. By decreasing the dispersion compared to Fig.~\ref{fig:chirpft}, we find the pulse begins to `breathe'. During the first two dozen round trips of the cavity the SPM compounds and becomes detrimental to the pulse. In turn, the pulse starts to become unstable and further degrades, until the pulse is no longer stable or sustainable. On the other hand, having a more moderate value of $b$, the pulse is able to equilibrate even with a less favourable, random, initial pulse (Fig.~\ref{fig:convevo}), as in~\cite{meng2020}. The pulse is able to shed the initial left lobe ($T \approx -1 / 2$) because of dispersion and modulation, and a central lobe ($T \approx 0$) forms, which is able to grow because of the gain medium. The central lobe then allows the pulse to come to equilibrium quickly. Furthermore, since the intensity of the initial pulse is small relative to the saturation energy, the effect of SPM is negligible during the first few round trips, allowing the laser to select preferable modes. The preferable modes then get amplified, stabilizing the pulse. Evidently, the initial shape of the pulse is much less important than the initial energy of the pulse, or the strength of the nonlinearity.
-
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Figures/Break}
@@ -381,11 +428,20 @@ Fig.~\ref{fig:breakevo} highlights the instability. By decreasing the dispersion
 	\label{fig:breakevo}
 \end{figure}
 
+Fig.~\ref{fig:breakevo} highlights the instability. By decreasing the dispersion compared to Fig.~\ref{fig:chirpft}, we find the pulse begins to `breathe'. During the first two dozen round trips of the cavity the SPM compounds and becomes detrimental to the pulse. In turn, the pulse starts to become unstable and further degrades, until the pulse is no longer stable or sustainable. On the other hand, having a more moderate value of $b$, the pulse is able to equilibrate even with a less favourable, random, initial pulse (Fig.~\ref{fig:convevo}), as in~\cite{meng2020}. The pulse is able to shed the initial left lobe ($T \approx -1 / 2$) because of dispersion and modulation, and a central lobe ($T \approx 0$) forms, which is able to grow because of the gain medium. The central lobe then allows the pulse to come to equilibrium quickly. Furthermore, since the intensity of the initial pulse is small relative to the saturation energy, the effect of SPM is negligible during the first few round trips, allowing the laser to select preferable modes. The preferable modes then get amplified, stabilizing the pulse. Evidently, the initial shape of the pulse is much less important than the initial energy of the pulse, or the strength of the nonlinearity.
+
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Figures/Conv}
 	\caption{Example of a pulse coming to equilibrium from noise ($a = 8 \times 10^3$, $h = 0.04$, $b = 1.0$, $s = 0.1$, and $E_0 = 0.1$).}
 	\label{fig:convevo}
+\end{figure}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics{Figures/ParamSpaceErr}
+	\caption{Relative error of a pulse's envelope between round trips 499 and 500 ($a = 8 \times 10^3$, $h = 0.04$, and $E_0 = 0.1$).}
+	\label{fig:error}
 \end{figure}
 
 We now turn our attention to a more quantitative analysis, and characterize the stability of a laser by exploring the parameter space. We focus on the $s$--$b$ plane in particular, since $a$ and $h$ affect only the amplitude of the pulse, whereas the interactions of dispersion and nonlinearity give rise to the instabilities. We examine the relative change in the pulse's envelope between consecutive round trips of the cavity to identify stability. We compute the error as
@@ -398,13 +454,6 @@ where
 	\| f \|_2^2 \coloneqq \int_{-\infty}^\infty |f|^2 \, \df T,
 \end{align}
 and we choose $n$ to be sufficiently large to guarantee the pulse reaches equilibrium or deteriorates because of the instability---we use $n = 500$ in our experiments. We take the modulus of the pulse since we are interested in the evolution of only the envelope because of the auto-correlation methods used for experimental measurements. We plot the error in Fig.~\ref{fig:error}. Two distinct regions split the parameter space, divided by an incredibly sharp, and complicated boundary. In the upper-left region, the error is $\bigO{1}$; here, the nonlinearity is too strong, and the instability is induced by SPM. In the lower-right region we find the opposite behaviour---the pulse reaches an equilibrium state and is stable to within machine precision. The increase in dispersion, coupled with modulation, allows the laser to balance the nonlinear effects. 
-
-\begin{figure}[tbp]
-	\centering
-	\includegraphics{Figures/ParamSpaceErr}
-	\caption{Relative error of a pulse's envelope between round trips 499 and 500 ($a = 8 \times 10^3$, $h = 0.04$, and $E_0 = 0.1$).}
-	\label{fig:error}
-\end{figure}
 
 \begin{figure}[tbp]
 	\centering
@@ -422,18 +471,18 @@ Also of interest is the energy of the pulse at equilibrium, which we compute num
 	\label{fig:energytime}
 \end{figure}
 
+Finally, we briefly investigate the affect the order of the components has on the dynamics. In Section~\ref{sec:model}\ref{sec:effects}, we justified the order of the gain, nonlinearity, and loss, but, just assumed dispersion preceded modulation. Now we consider the effect of swapping the dispersion and modulation components. The overall structure of the energy landscape (Fig.~\ref{fig:energyswitch}) is the same as in Fig.~\ref{fig:energy}. In the previous case, with modulation following dispersion, more energy is removed from the pulse tails. Whereas, having modulation first, more energy remains in the cavity. The additional energy makes the laser more powerful than in the previous case, which in turn increases the size of the unstable region. Comparing with Fig.~\ref{fig:energy}, the unstable upper-left region spreads farther to the right and upward, and the energy is larger in the stable region, especially away from the origin. Once again, the energy at the origin is 2.5487, as we are effectively removing the CFBG in the limit $s \rightarrow 0$.
+
+\section{Conclusion}
+\label{sec:conclusion}
+Expanding upon the ideas originally proposed by Cutler~\cite{cutler1955}, and Kuizenga and Siegman~\cite{kuizenga1970, kuizenga1970a, siegman1969}, we developed a nonlinear iterative map model for tuneable ring lasers. We recovered linearly chirped Gaussian solutions in the case of a Gaussian modulation function when omitting the nonlinearity. Moreover, the solution of the linear model extends to any continuous function with compact support when using the results of~\cite{calcaterra2008a}. In contrast, with the inclusion of the nonlinearity, we found an unstable region in the $s$--$b$ plane, with a sharp boundary separating the stable and unstable regions. Predicting the conditions under which a tuneable ring laser is unstable has proven difficult with simple mathematical models~\cite{meng2020}. We have shown a simple iterative map model is able to reproduce complicated instabilities arising naturally from the interplay between dispersion, modulation, and nonlinear effects. Our model easily adapts to specific laser geometries, and to more complicated models of individual components. For example, incorporating a frequency dependence in the gain function, or model a saturable absorber instead of a Gaussian electro-optic modulator.
+
 \begin{figure}[tbp]
 	\centering
 	\includegraphics{Figures/ParamSpaceEnergySwitch}
 	\caption{Energy of the pulse after 500 round trips with dispersion and modulation swapped ($a = 8 \times 10^3$, $h = 0.04$, and $E_0 = 0.1$).}
 	\label{fig:energyswitch}
 \end{figure}
-
-Finally, we briefly investigate the affect the order of the components has on the dynamics. In Section~\ref{sec:model}\ref{sec:effects}, we justified the order of the gain, nonlinearity, and loss, but, just assumed dispersion preceded modulation. Now we consider the effect of swapping the dispersion and modulation components. The overall structure of the energy landscape (Fig.~\ref{fig:energyswitch}) is the same as in Fig.~\ref{fig:energy}. In the previous case, with modulation following dispersion, more energy is removed from the pulse tails. Whereas, having modulation first, more energy remains in the cavity. The additional energy makes the laser more powerful than in the previous case, which in turn increases the size of the unstable region. Comparing with Fig.~\ref{fig:energy}, the unstable upper-left region spreads farther to the right and upward, and the energy is larger in the stable region, especially away from the origin. Once again, the energy at the origin is 2.5487, as we are effectively removing the CFBG in the limit $s \rightarrow 0$.
-
-\section{Conclusion}
-\label{sec:conclusion}
-Expanding upon the ideas originally proposed by Cutler~\cite{cutler1955}, and Kuizenga and Siegman~\cite{kuizenga1970, kuizenga1970a, siegman1969}, we developed a nonlinear iterative map model for tuneable ring lasers. We recovered linearly chirped Gaussian solutions in the case of a Gaussian modulation function when omitting the nonlinearity. Moreover, the solution of the linear model extends to any continuous function with compact support when using the results of~\cite{calcaterra2008a}. In contrast, with the inclusion of the nonlinearity, we found an unstable region in the $s$--$b$ plane, with a sharp boundary separating the stable and unstable regions. Predicting the conditions under which a tuneable ring laser is unstable has proven difficult with simple mathematical models~\cite{meng2020}. We have shown a simple iterative map model is able to reproduce complicated instabilities arising naturally from the interplay between dispersion, modulation, and nonlinear effects. Our model easily adapts to specific laser geometries, and to more complicated models of individual components. For example, incorporating a frequency dependence in the gain function, or model a saturable absorber instead of a Gaussian electro-optic modulator.
 
 Analyzing the nonlinear model analytically using an asymptotic expansion for small values of the nonlinearity parameter, $b$, is of interest. Doing so will provide insight to how the nonlinearity impacts the linear solution to better understand the manifestation of wave breaking and the instability. Furthermore, a more detailed analysis of crossing the boundary between stability and instability may provide valuable insight for mechanisms that trigger the instability.
 
