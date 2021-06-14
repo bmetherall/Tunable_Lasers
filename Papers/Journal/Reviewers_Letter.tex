@@ -1,0 +1,169 @@
+\documentclass[12pt,twoside,letterpaper]{article}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx,epsfig,color,pstricks}
+\usepackage{amsmath}
+\usepackage{latexsym,amssymb}
+% \usepackage{gensymb}
+\usepackage{units}
+\usepackage{hyperref}
+
+\usepackage{caption}
+\usepackage{mwe}
+
+% sget page layout parameters (two sides)
+\newlength{\defaultheadheight}
+\setlength{\defaultheadheight}{\headheight}
+\newlength{\defaultheadsep}
+\setlength{\defaultheadsep}{\headsep}
+
+% set page layout parameters (two sides)
+\textwidth 7.0in
+\textheight 9.75in
+\hoffset -0.25in 
+\voffset -0.75in
+\topmargin 0in
+\headheight \defaultheadheight
+\headsep 0.16in
+\footskip=0in
+\oddsidemargin 0in 
+\evensidemargin 0in %22pt default
+%\evensidemargin 0.34in %22pt default
+\raggedbottom
+
+\DeclareMathOperator{\prob}{Prob}
+\DeclareMathOperator{\pv}{PV}
+\DeclareMathOperator{\sech}{sech}
+
+%differentiation
+\makeatletter
+\providecommand*{\diff}%
+  {\@ifnextchar^{\DIfF}{\DIfF^{}}}
+\def\DIfF^#1{%
+  \mathop{\mathrm{\mathstrut d}}%
+    \nolimits^{#1}\gobblespace}
+\def\gobblespace{%
+  \futurelet\diffarg\opspace}
+\def\opspace{%
+  \let\DiffSpace\!%
+  \ifx\diffarg(%
+    \let\DiffSpace\relax
+  \else
+    \ifx\diffarg[%
+      \let\DiffSpace\relax
+  \else
+    \ifx\diffarg\{%
+      \let\DiffSpace\relax
+    \fi\fi\fi\DiffSpace}
+
+\providecommand*{\deriv}[3][]{%          % \deriv[]{u}{x}
+  \frac{\diff^{#1}#2}{\diff #3^{#1}}}
+%\providecommand*{\deriv}[3][]{\frac{\diff^{#1}}{\diff #3^{#1}}#2}
+\providecommand*{\pd}[3][]{\frac{\partial^{#1}#2}{\partial #3^{#1}}}
+\providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}}
+\providecommand{\littleO}[1]{\ensuremath{\mathop{}\mathopen{}o\mathopen{}\left(#1\right)}}
+
+% Special code to use the double bracket without loading the whole stmry package
+\DeclareSymbolFont{stmry}{U}{stmry}{m}{n}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{b}{n}
+\DeclareMathDelimiter\llbracket{\mathopen}{stmry}{"4A}{stmry}{"71}
+\DeclareMathDelimiter\rrbracket{\mathclose}{stmry}{"4B}{stmry}{"79}
+
+\begin{document}
+
+\newcounter{mychapter}
+\setcounter{mychapter}{1}
+%\renewcommand{\labelenumi}{\textbf{\arabic{mychapter}.\arabic{enumi}}}
+
+\pagenumbering{arabic}
+%\setcounter{page}{1}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0.1pt}
+
+\fancyhead[L]{Review of \textit{Predicting instabilities of a tuneable ring laser with an\\
+iterative map model} by Metherall \& Bohun}
+\fancyhead[R]{Response to referee}
+
+~\vspace{\baselineskip}
+
+The authors would like to thank the reviewer for their kind words and suggested improvements to the proposed manuscript. We are grateful for the insight provided by this referee, and their comments have significantly strengthened the work. The initial comments reflect on a number of weaknesses in this document, and we will address these first. For clarity, we repeat these initial comment here.
+
+\begin{quote}
+    In this submission by Metherall and Bohun, they developed a nonlinear iterative map model for tunable ring lasers. This discrete (split-step) method significantly reduce the computation cost comparing with solving the full GNLSE for each fiber iteratively. However, my major concern is that to what extend is the method used in the manuscript valid. As was pointed out by the authors, the method is quite similar to that used in Ref.~[5] which had a negligible nonlinear effect and were validated experimentally.
+
+    The model in the manuscript includes the nonlinear effect. It is well known that nonlinear effects can interact simultaneously with dispersion and gain. However, these effects are considered separately in the method used by the authors. It is not clear whether the approximations and assumptions made in the manuscript are physically reliable. I would suggest the authors validating their method by comparing with numerical results calculated from the complete propagation equation (GNLSE) sequentially for each components in the cavity at typical system parameters. Otherwise, it is hard to know if the method makes sense in fiber laser modellings. A comparison may also shed some light on how to arrange the order of the components which has been shown to be important (by comparing Figs.~8 and 9) in the discrete model.
+\end{quote}
+
+To further justify the decoupling of the GNLSE, as proposed, Eq.~(2) is written in dimensionless form. This allows the identification of both a dispersion length scale and a nonlinear length scale in correspondence with the classical analysis found in Ref.~[18]. As in  Ref.~[18], a condition is identified which characterizes the dispersion-dominant regime (low power, and large value of $|\beta_2|$) and the nonlinear-dominant regime (high power, and small value of $|\beta_2|$) of the laser pulse. The complete analysis of the relative size of the loss, dispersion, gain, and nonlinearity in each section of the cavity is summarized in a new table, Table 2. From the relative order of magnitude estimates, it is further illustrated that within each of the four regions, one parameter dominates the other three.
+
+\vspace{\baselineskip}
+
+Below are the remaining remarks and the changes made to the manuscript to 
+address a variety of issues.
+
+\vspace{\baselineskip}
+\noindent
+\textbf{Other comments:}
+
+\begin{itemize}
+    \item[{(1)}]
+    I suggest the authors be a bit careful to use the terminology ``modulation instability'' in explaining the results shown in Fig.~5. Modulation instability is well defined concept in physics. I didn't see any clear sign of modulation instabilities in the current results. Modulation instabilities usually manifest itself by significant sidebands in the spectrum (for example, please see Refs.~[9--10, 18] in the manuscript, Opt.~Lett.~27, 482--484 (2002) and Opt.~Express 17, 21497--21508 (2009)). Actually, there are many mechanisms that can cause instabilities in fiber lasers (for example see, Phys.~Rev.~E 63, 056602 and Opt.~Lett.~39, 1362--1365 (2014)). If the authors have enough evidence to prove that the instabilities shown in the manuscript is indeed from the modulation instability, please clarify it in details. Otherwise, I would suggest not use this terminology to avoid misleading.
+
+    \begin{quote}
+        We agree with the referee, and all mentions of `modulation instability' have been removed from the manuscript.
+    \end{quote}
+
+    \item[{(2)}]
+    Since the authors are investigating lasers in the manuscript, it may be better to show the intensity instead of the amplitude of the pulse in Figs.~2--6, as was commonly done in the community.
+
+    \begin{quote}
+        Figure 2, and Figures 4--6 have been changed to show the intensity instead of the amplitude. No change was made to Figure 3 since we actually want the waveform for that, including the real and imaginary parts. The style of Figure 2 was completely reworked to accommodate this.
+    \end{quote}
+
+    \item[{(3)}]
+    In Fig.~1, the left loop for the pump is quite strange for me. Why the intracavity laser was fed back to the pump? It is also uncommon to use a circulator for coupling pump into the cavity. I would suggest replacing the two circulators with a WDM as was commonly in other literatures (which is also the case in the experiments).
+
+    \begin{quote}
+        Figure 1 has been fixed as suggested by the referee by replacing the two circulators with a WDM. 
+    \end{quote}
+
+    \item[{(4)}]
+    The acronyms in Fig.~1 should be defined explicitly in the caption.
+
+    \begin{quote}
+        Done as indicated.
+    \end{quote}
+
+    \item[{(5)}]
+    In the context below Eq.~(26), ``$\sigma^2$ is the variance''. It may be better to say `$\sigma$' the half width of the pulse (at 1/e intensity) as in  Ref.~[18].
+
+    \begin{quote}
+        Changed $\sigma$ as indicated by the reviewer.
+    \end{quote}
+
+    \item[{(6)}]
+    In Figs.~8 and 9, the pulse energies at a single roundtrip (i.e., roundtrip 500 in the manuscript) were used. But the pulse energy usually changes significantly over roundtrips in the unstable regime. Is it also true for the results shown in the manuscript? If so, I would suggest use an average value over a certain range of roundtrips, or please show another plot for a typical pulse energy evolution over roundtrips for the unstable regime.
+
+    \begin{quote}
+        Figure 9 has been added to show the energy as a function of the number of round trips. In addition, the following text was added to Section 3B: Nonlinear Solution and Instability.
+
+        \vspace{\baselineskip}
+
+        ``Moreover, we show in Fig.~9 the energy variation of four pulses during the $500$ round trips. In particular, we plot two pulses in the stable region (purple and blue) and two pulses in the unstable region (green and red). Each of the pulses, again, has an initial energy of $E_0 = 0.1$, and after about a dozen round trips the energy is approximately $1.25$ in the case of the $s = 0.35$, $b = 6.0$, and approximately $2$ in the other three cases. The two examples in the stable region quickly reach equilibrium, and their energy remains constant for the remaining round trips. However, for the examples in the unstable region the pulses lose a considerable amount of their energy and the pulse begins to degrade. The energy of the pulses varies by up to 25\% between consecutive round trips. A pulse in the unstable region undergoes large transformations with each round trip leading to the error we saw in Fig.~7, as well as the energy variation in Fig.~9.''
+    \end{quote}
+
+    \item[{(7)}]
+    In the conclusion paragraph, it was claimed that ``In contrast, with the inclusion of the nonlinearity, we were able to recover wave breaking and modulation instability, and found a sharp boundary of stability. These instabilities have been demonstrated in a laboratory setting [13, 15, 17, 18, 22], but, have proven difficult to predict with simple mathematical models [11]''. I don't think it appropriate to relate the dynamics in the manuscript to that in Refs.~[13, 15, 17, 18, 22]. The dissipative (gain and loss) and feedback nature of the laser in the manuscript seems to be different from the single-pass dynamics in Refs.~[13, 15, 17, 18, 22].
+
+    \begin{quote}
+        We agree with the referee and thank them for this insight. This comparison has been removed.
+    \end{quote}
+\end{itemize}
+
+Finally, a number of small grammatical changes were made to the manuscript. These were
+identified on the final reading.
+\end{document}
+
+
