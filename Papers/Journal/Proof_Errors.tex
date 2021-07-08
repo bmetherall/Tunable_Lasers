@@ -1,0 +1,151 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+%\usepackage[subfolder,cleanup]{gnuplottex}
+%\usepackage{amsthm}
+%\usepackage{enumitem}
+%\usepackage{wrapfig}
+%\usepackage{subcaption}
+%\usepackage{hyperref}
+%\usepackage{tikz}
+
+% Nicer brackets for operators
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+% Math operators
+\providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}}
+
+% Macros
+\newcommand{\diff}[3][\hspace{-0.5pt}]{\frac{\textrm{d}^{#1}#2}{\textrm{d}{#3}^{#1}}}
+\newcommand{\pdiff}[3][\hspace{-0.5pt}]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}}
+\newcommand{\df}{\, \textrm{d}}
+%\newcommand{\eps}{\varepsilon}
+
+% Row colouring in tables
+%\usepackage[table]{xcolor}
+%\rowcolors{2}{gray!25}{white}
+
+% Margin size
+\newgeometry{margin=2cm}
+
+% Reference style
+%\bibliographystyle{ieeetr}
+
+\title{Predicting instabilities of a tunable ring laser with \\
+an iterative map model \\ \Large Requested Revisions}
+\author{Brady Metherall \and C. Sean Bohun}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Below are our responses to the queries, and additional requested revisions to the proofs.
+
+\section{Queries}
+\begin{enumerate}
+	\item AU: Your submitted paper listed two e-mails. Please let us know the sole corresponding author. You also have the option of listing no corresponding author at all, in which case both of the e-mail addresses can be listed with the ``e-mail:" label.
+	\begin{quote}
+		List both e-mail addresses.
+	\end{quote}
+	\item AU: Please check the callout to Appendix 5 in this sentence, as no such section exists in this paper: ``The expansions in the limit $s \rightarrow \infty$ are given in Appendix 5."
+	\begin{quote}
+		The sentence should read ``The expansions in the limit $s \rightarrow \infty$ are given in Appendix A."
+	\end{quote}
+	\item AU: Please check the section number in this sentence, as no Section 22.1 appears in this paper: ``In Section 22.1, we justified the order of the gain, nonlinearity..."
+	\begin{quote}
+		The sentence should read ``In Section 2A, we justified the order of the gain, nonlinearity...".
+	\end{quote}
+	\item AU: The funding information for this article has been generated using the information you provided to OSA at the time of article submission. Please check it carefully. If any information needs to be corrected or added, please provide the full name of the funding organization/institution as provided in the CrossRef Open Funder Registry (https://search.crossref.org/funding).
+	\begin{quote}
+		The funding information is fine.
+	\end{quote}
+	\item AU: The Data Availability Statement for this article has been generated automatically. Please check it carefully. If any information needs to be corrected or added, please provide us with an updated statement.
+	\begin{quote}
+		The Data Availability Statement is fine.
+	\end{quote}
+	\item AU: Please update Ref.~[37].
+	\begin{quote}
+		The updated reference is:
+
+		C. Calcaterra, “Linear Combinations of Gaussians with a Single Variance are Dense in $L^2$ ,” in Proceedings of the World Congress on Engineering, vol. II, 2008.
+
+		\begin{verbatim}
+			@inproceedings{calcaterra2008,
+				author    = {C. Calcaterra},
+				title     = {{Linear Combinations of Gaussians with a Single Variance
+				are Dense in $L^2$}},
+				booktitle = {Proceedings of the World Congress on Engineering},
+				volume    = {II},
+				year      = {2008},
+			}
+		\end{verbatim}
+	\end{quote}
+\end{enumerate}
+
+
+
+
+\section{Punctuation}
+\begin{itemize}
+	\item Add comma on line 31 after `\ldots\ multiphoton microscopy [1]'.
+	\item Add comma on line 62 after `\ldots\ Schr\"odinger equation'.
+	\item Add comma on line 71 after `\ldots\ (GNLSE) [2,18,20--23]'.
+	\item Add comma on line 101 after `\ldots\ for every segment'.
+	\item Add comma on line 169 after `\ldots\ and therefore'.
+	\item Enclose `$E_g$' in commas on line 314.
+	\item Add comma on line 345 after `\ldots\ given in Eq.~(25)'.
+	\item Change `$s - b$' to `$s$--$b$' on lines 380 and 465 (italicized s, en-dash, italicized b).
+\end{itemize}
+
+\section{Grammar and style}
+\begin{itemize}
+	\item Add `model' to line 132 to read `\ldots\ our own iterative map model from \ldots'.
+	\item Change line 3 of Fig.~2 caption to read `\ldots\ the modulator, and finally, is amplified \ldots' or `\ldots\ the modulator, and finally is amplified \ldots'.
+	\item Change `Ps$^2$' to `ps$^2$' in line 2 of Table 1.
+	\item Add `relative' to line 256 to read `\ldots\ the CFBG relative to the width \ldots'.
+	\item Change `Figure 5' to `Fig.~5' on line 359.
+	\item Hyphenate `upper left' and `lower right' on lines 408 and 411 (or remove hyphenation on lines 394, 396, and 451).
+	\item Capitalize `Theory' on line 588.
+	\item Capitalize `Experimental' on line 591.
+\end{itemize}
+
+\section{Spacing}
+\begin{itemize}
+	\item Remove indents on lines 64, 158, 159, 161, 168, 179, 261, 263, 274, 311, 312, 317, 339, and 488.
+	\item Remove blank lines 170, 174, 175, 306, 307, 316, 326, 327, 328, and 487.
+	\item Add horizontal space between equations in equation 23, and 26.
+	\item Fix short hanging singular word on lines 152, 199, 242, 246, 266, and 310.
+\end{itemize}
+
+\section{Alignment}
+\begin{itemize}
+	\item Align equations 12 and 13; 14, 15, and 16; 25; 38 and 39; 42, 43, and 45; 49 and 50.
+	\item Vertically centre the labels for equations 24, 27, 28, and 35.
+	\item Left justify `Description' column in Table 1.
+	\item Move second line of equations 27, and 35 further right.
+	\item Centre align the two lines of equation 28.
+	\item Align Fig.~6 and Fig.~8.
+\end{itemize}
+
+
+\section{Miscellaneous}
+\begin{itemize}
+	\item Fix size of parentheses in equations 17, 19, 20, 24, 31, 32, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 49, and 50; and line 193.
+	\item Change font in sub-captions of Fig.~4 to match rest of document.
+	\item Change `$\partial 2$' to `$\partial^2$' in first line of equation 27.
+	\item Change `$\mathcal{O}$' to upper-case / full size on lines 268 and 269.
+	\item Re-highlight the diagonal entries of Table 2, or remove the reference on line 283.
+	\item Move Fig.~9 to previous page under Fig.~8.
+	\item Insert `BM acknowledges the support provided by the EPSRC Centre for Doctoral Training in Industrially Focused Mathematical Modelling.' to line 499 after `\ldots\ [41].'.
+\end{itemize}
+
+%\bibliography{Ref}
+
+\end{document}
