@@ -1,0 +1,80 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+%\usepackage[subfolder,cleanup]{gnuplottex}
+%\usepackage{amsthm}
+%\usepackage{enumitem}
+%\usepackage{wrapfig}
+%\usepackage{subcaption}
+%\usepackage{hyperref}
+%\usepackage{tikz}
+
+% Nicer brackets for operators
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+\newcommand{\Es}{E_{\textrm{sat}}} % Saturation energy
+
+% Math operators
+\providecommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}\mathcal{O}\mathopen{}\left(#1\right)}}
+
+% Macros
+\newcommand{\diff}[3][\hspace{-0.5pt}]{\frac{\textrm{d}^{#1}#2}{\textrm{d}{#3}^{#1}}}
+\newcommand{\pdiff}[3][\hspace{-0.5pt}]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}}
+\newcommand{\df}{\, \textrm{d}}
+%\newcommand{\eps}{\varepsilon}
+
+% Row colouring in tables
+%\usepackage[table]{xcolor}
+%\rowcolors{2}{gray!25}{white}
+
+% Margin size
+\newgeometry{margin=2cm}
+
+% Reference style
+%\bibliographystyle{ieeetr}
+
+\title{Predicting instabilities of a tunable ring laser with \\
+an iterative map model \\ \Large Requested Revisions v2}
+\author{Brady Metherall \and C. Sean Bohun}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{itemize}
+	\item Align $b=$ with $s=$ in equation 25.
+	\item The second lines of equations 27 and 35 should be further right, for example:
+	\begin{equation}
+		\begin{gathered}
+		\sigma^2 = \sqrt{2} s \left( s^6 + 3s^2 + \sqrt{4 + s^4} \left( 1 + s^4 \right) \right)^{1/2} \\
+		\hspace{15mm} - s^4 - s^2 \sqrt{4 + s^4}.
+		\end{gathered}
+	\end{equation}
+	\item The two lines of equation 28 should be centred:
+	\begin{equation}
+		\begin{gathered}
+			\widetilde{g}(\widetilde{A}) = \left( 1 + \frac{P_0 T_M}{\Es} \int_{-\infty}^\infty |\widetilde{A}|^2 \, \df \widetilde{T} \right)^{-1}, \\
+			L_\textrm{disp} = \frac{T_M^2}{|\beta_2|}, \quad L_\textrm{NL} = \frac{1}{\gamma P_0}.
+		\end{gathered}
+	\end{equation}
+	\item The font size in equations 27 and 28 seems to have been reduced, please return to the normal~size.
+	\item Align figures 7 and 9.
+	\item Most of the $\exp$, $\log$, $W$, and $\mathcal{O}$ seem to have additional space before the parenthesis, please remove the extra space. For example, compare the $W \left( a E_g \textrm{e}^{E_g} \right)$ terms in equations 33 and 38.
+\end{itemize}
+
+\noindent Please correct the size of the parentheses for:
+\begin{itemize}
+	\item Exponential on second line of equation 24.
+	\item Logarithm in equation 37.
+	\item $\exp \left( g_0 L_g \right)$ in equation 9, 13, 25.
+	\item $\mathcal{O}$ in paragraph above equation 29 (two instances), and in Table 2.
+\end{itemize}
+I assume the additional space after the $\exp$ and such is a consequence of increasing the size of the parentheses. Please ensure the above changes do not add additional spacing.
+
+\end{document}
