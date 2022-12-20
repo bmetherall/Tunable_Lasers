@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+% Light
+\fill[red, path fading=fade left] (-3,-0.75/2.0) rectangle (3,0.75/2.0); % Gain
+\fill[red, fill opacity=0.25] (-4,-0.75/2.0) rectangle (-3,0.75/2.0); % Left
+\fill[red] (3,-0.75/2.0) rectangle (4,0.75/2.0); % Right
+\fill[red] (4,-0.2) rectangle (6,0.2); % Right
+
+\draw[fill=Goldenrod] (-4,1) rectangle (-3.8,-1); % Left
+\fill[pattern=north west lines, pattern color=Goldenrod] (3.8,-0.2) rectangle (4,0.2); % Right Mid
+\draw[fill=Goldenrod] (3.8,0.2) rectangle (4,1); % Right Top
+\draw[fill=Goldenrod] (3.8,-0.2) rectangle (4,-1); % Right Bottom
+\draw[pattern=mydots, pattern color=Purple] (-3,-0.75) rectangle (3,0.75); % Gain
+\draw (-4,1) -- (4,1); % Top
+\draw (-4,-1) -- (4,-1); % Bottom
+
+% Labels
+\draw[->, >=stealth, thick] (3.5,-1.5) -- (3.9,-0.75) node[pos=-0.3] {Partially Reflecting Mirror};
+\draw[->, >=stealth, thick] (-3.5,-1.5) -- (-3.9,-0.75) node[pos=-0.3] {Mirror};
+\draw[->, >=stealth, thick] (-1,-1.43) -- (-1,-0.5) node[pos=-0.3] {Gain Medium};
+\draw[->, >=stealth, thick] (5,1.2) -- (5.5,0) node[pos=-0.3] {Laser Output};
+\draw[->, >=stealth, thick] (0,1.2) -- (-3.5,0);
+\draw[->, >=stealth, thick] (0,1.2) -- (3.5,0);
+\draw (0,1.5) node {Laser Light};
+\end{tikzpicture}
